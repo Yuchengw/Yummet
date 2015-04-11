@@ -1,0 +1,13 @@
+[2015-04-02 18:18:24,152][INFO ][node                     ] [Ikthalon] version[1.4.4], pid[6890], build[c88f77f/2015-02-19T13:05:36Z]
+[2015-04-02 18:18:24,152][INFO ][node                     ] [Ikthalon] initializing ...
+[2015-04-02 18:18:24,155][INFO ][plugins                  ] [Ikthalon] loaded [], sites []
+[2015-04-02 18:18:25,876][INFO ][node                     ] [Ikthalon] initialized
+[2015-04-02 18:18:25,876][INFO ][node                     ] [Ikthalon] starting ...
+[2015-04-02 18:18:25,982][INFO ][transport                ] [Ikthalon] bound_address {inet[/0:0:0:0:0:0:0:0:9304]}, publish_address {inet[/10.0.0.23:9304]}
+[2015-04-02 18:18:25,995][INFO ][discovery                ] [Ikthalon] elasticsearch/PsKJTBU9QV2U0PvuqFAytg
+[2015-04-02 18:18:29,027][INFO ][cluster.service          ] [Ikthalon] detected_master [Brainchild][on1JivhVTg2MukwCi9BwNg][yuchengslave-slave][inet[/10.0.0.23:9300]], added {[logstash-yuchengslave-slave-25370-4012][faluE1VrRG62aCZDzByNdQ][yuchengslave-slave][inet[/10.0.0.23:9302]]{client=true, data=false},[Brainchild][on1JivhVTg2MukwCi9BwNg][yuchengslave-slave][inet[/10.0.0.23:9300]],[logstash-yuchengslave-slave-25204-4010][YNVJWF76T26KUggvs7VDFg][yuchengslave-slave][inet[/10.0.0.23:9301]]{client=true, data=false},[logstash-yuchengslave-slave-25472-4010][gDIzHdwNQVGKGAzmFH1UZg][yuchengslave-slave][inet[/10.0.0.23:9303]]{client=true, data=false},}, reason: zen-disco-receive(from master [[Brainchild][on1JivhVTg2MukwCi9BwNg][yuchengslave-slave][inet[/10.0.0.23:9300]]])
+[2015-04-02 18:18:29,121][INFO ][http                     ] [Ikthalon] bound_address {inet[/0:0:0:0:0:0:0:0:9201]}, publish_address {inet[/10.0.0.23:9201]}
+[2015-04-02 18:18:29,121][INFO ][node                     ] [Ikthalon] started
+[2015-04-02 18:30:15,181][INFO ][cluster.service          ] [Ikthalon] removed {[logstash-yuchengslave-slave-25370-4012][faluE1VrRG62aCZDzByNdQ][yuchengslave-slave][inet[/10.0.0.23:9302]]{client=true, data=false},}, reason: zen-disco-receive(from master [[Brainchild][on1JivhVTg2MukwCi9BwNg][yuchengslave-slave][inet[/10.0.0.23:9300]]])
+[2015-04-02 18:30:15,233][INFO ][cluster.service          ] [Ikthalon] removed {[logstash-yuchengslave-slave-25204-4010][YNVJWF76T26KUggvs7VDFg][yuchengslave-slave][inet[/10.0.0.23:9301]]{client=true, data=false},}, reason: zen-disco-receive(from master [[Brainchild][on1JivhVTg2MukwCi9BwNg][yuchengslave-slave][inet[/10.0.0.23:9300]]])
+[2015-04-02 18:30:15,236][INFO ][cluster.service          ] [Ikthalon] removed {[logstash-yuchengslave-slave-25472-4010][gDIzHdwNQVGKGAzmFH1UZg][yuchengslave-slave][inet[/10.0.0.23:9303]]{client=true, data=false},}, reason: zen-disco-receive(from master [[Brainchild][on1JivhVTg2MukwCi9BwNg][yuchengslave-slave][inet[/10.0.0.23:9300]]])
