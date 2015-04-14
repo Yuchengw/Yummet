@@ -1,0 +1,3603 @@
+diff --git a/Web/eclipse-workspaces/main-platform/.classpath b/Web/eclipse-workspaces/main-platform/.classpath
+new file mode 100644
+index 0000000..83dd2f4
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/.classpath
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<classpath>
++	<classpathentry kind="src" output="target/classes" path="src/main/java">
++		<attributes>
++			<attribute name="optional" value="true"/>
++			<attribute name="maven.pomderived" value="true"/>
++		</attributes>
++	</classpathentry>
++	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
++		<attributes>
++			<attribute name="optional" value="true"/>
++			<attribute name="maven.pomderived" value="true"/>
++		</attributes>
++	</classpathentry>
++	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
++		<attributes>
++			<attribute name="maven.pomderived" value="true"/>
++		</attributes>
++	</classpathentry>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
++		<attributes>
++			<attribute name="maven.pomderived" value="true"/>
++		</attributes>
++	</classpathentry>
++	<classpathentry kind="output" path="target/classes"/>
++</classpath>
+diff --git a/Web/eclipse-workspaces/main-platform/.project b/Web/eclipse-workspaces/main-platform/.project
+new file mode 100644
+index 0000000..77945c6
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/.project
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<projectDescription>
++	<name>main-platform</name>
++	<comment></comment>
++	<projects>
++	</projects>
++	<buildSpec>
++		<buildCommand>
++			<name>org.eclipse.wst.common.project.facet.core.builder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++		<buildCommand>
++			<name>org.eclipse.jdt.core.javabuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++		<buildCommand>
++			<name>org.eclipse.m2e.core.maven2Builder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++	</buildSpec>
++	<natures>
++		<nature>org.eclipse.jdt.core.javanature</nature>
++		<nature>org.eclipse.m2e.core.maven2Nature</nature>
++		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
++	</natures>
++</projectDescription>
+diff --git a/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.core.resources.prefs b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.core.resources.prefs
+new file mode 100644
+index 0000000..f9fe345
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.core.resources.prefs
+@@ -0,0 +1,4 @@
++eclipse.preferences.version=1
++encoding//src/main/java=UTF-8
++encoding//src/test/java=UTF-8
++encoding/<project>=UTF-8
+diff --git a/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.jdt.core.prefs b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.jdt.core.prefs
+new file mode 100644
+index 0000000..5d105e8
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.jdt.core.prefs
+@@ -0,0 +1,100 @@
++eclipse.preferences.version=1
++org.eclipse.jdt.core.compiler.annotation.inheritNullAnnotations=disabled
++org.eclipse.jdt.core.compiler.annotation.missingNonNullByDefaultAnnotation=ignore
++org.eclipse.jdt.core.compiler.annotation.nonnull=org.eclipse.jdt.annotation.NonNull
++org.eclipse.jdt.core.compiler.annotation.nonnullbydefault=org.eclipse.jdt.annotation.NonNullByDefault
++org.eclipse.jdt.core.compiler.annotation.nullable=org.eclipse.jdt.annotation.Nullable
++org.eclipse.jdt.core.compiler.annotation.nullanalysis=disabled
++org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
++org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
++org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
++org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
++org.eclipse.jdt.core.compiler.compliance=1.8
++org.eclipse.jdt.core.compiler.debug.lineNumber=generate
++org.eclipse.jdt.core.compiler.debug.localVariable=generate
++org.eclipse.jdt.core.compiler.debug.sourceFile=generate
++org.eclipse.jdt.core.compiler.problem.annotationSuperInterface=warning
++org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
++org.eclipse.jdt.core.compiler.problem.autoboxing=ignore
++org.eclipse.jdt.core.compiler.problem.comparingIdentical=warning
++org.eclipse.jdt.core.compiler.problem.deadCode=warning
++org.eclipse.jdt.core.compiler.problem.deprecation=warning
++org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode=disabled
++org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod=disabled
++org.eclipse.jdt.core.compiler.problem.discouragedReference=warning
++org.eclipse.jdt.core.compiler.problem.emptyStatement=ignore
++org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
++org.eclipse.jdt.core.compiler.problem.explicitlyClosedAutoCloseable=ignore
++org.eclipse.jdt.core.compiler.problem.fallthroughCase=ignore
++org.eclipse.jdt.core.compiler.problem.fatalOptionalError=disabled
++org.eclipse.jdt.core.compiler.problem.fieldHiding=ignore
++org.eclipse.jdt.core.compiler.problem.finalParameterBound=warning
++org.eclipse.jdt.core.compiler.problem.finallyBlockNotCompletingNormally=warning
++org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
++org.eclipse.jdt.core.compiler.problem.hiddenCatchBlock=warning
++org.eclipse.jdt.core.compiler.problem.includeNullInfoFromAsserts=disabled
++org.eclipse.jdt.core.compiler.problem.incompatibleNonInheritedInterfaceMethod=warning
++org.eclipse.jdt.core.compiler.problem.incompleteEnumSwitch=warning
++org.eclipse.jdt.core.compiler.problem.indirectStaticAccess=ignore
++org.eclipse.jdt.core.compiler.problem.localVariableHiding=ignore
++org.eclipse.jdt.core.compiler.problem.methodWithConstructorName=warning
++org.eclipse.jdt.core.compiler.problem.missingDefaultCase=ignore
++org.eclipse.jdt.core.compiler.problem.missingDeprecatedAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingEnumCaseDespiteDefault=disabled
++org.eclipse.jdt.core.compiler.problem.missingHashCodeMethod=ignore
++org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotation=ignore
++org.eclipse.jdt.core.compiler.problem.missingOverrideAnnotationForInterfaceMethodImplementation=enabled
++org.eclipse.jdt.core.compiler.problem.missingSerialVersion=warning
++org.eclipse.jdt.core.compiler.problem.missingSynchronizedOnInheritedMethod=ignore
++org.eclipse.jdt.core.compiler.problem.noEffectAssignment=warning
++org.eclipse.jdt.core.compiler.problem.noImplicitStringConversion=warning
++org.eclipse.jdt.core.compiler.problem.nonExternalizedStringLiteral=ignore
++org.eclipse.jdt.core.compiler.problem.nonnullParameterAnnotationDropped=warning
++org.eclipse.jdt.core.compiler.problem.nullAnnotationInferenceConflict=error
++org.eclipse.jdt.core.compiler.problem.nullReference=warning
++org.eclipse.jdt.core.compiler.problem.nullSpecViolation=error
++org.eclipse.jdt.core.compiler.problem.nullUncheckedConversion=warning
++org.eclipse.jdt.core.compiler.problem.overridingPackageDefaultMethod=warning
++org.eclipse.jdt.core.compiler.problem.parameterAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.possibleAccidentalBooleanAssignment=ignore
++org.eclipse.jdt.core.compiler.problem.potentialNullReference=ignore
++org.eclipse.jdt.core.compiler.problem.potentiallyUnclosedCloseable=ignore
++org.eclipse.jdt.core.compiler.problem.rawTypeReference=warning
++org.eclipse.jdt.core.compiler.problem.redundantNullAnnotation=warning
++org.eclipse.jdt.core.compiler.problem.redundantNullCheck=ignore
++org.eclipse.jdt.core.compiler.problem.redundantSpecificationOfTypeArguments=ignore
++org.eclipse.jdt.core.compiler.problem.redundantSuperinterface=ignore
++org.eclipse.jdt.core.compiler.problem.reportMethodCanBePotentiallyStatic=ignore
++org.eclipse.jdt.core.compiler.problem.reportMethodCanBeStatic=ignore
++org.eclipse.jdt.core.compiler.problem.specialParameterHidingField=disabled
++org.eclipse.jdt.core.compiler.problem.staticAccessReceiver=warning
++org.eclipse.jdt.core.compiler.problem.suppressOptionalErrors=disabled
++org.eclipse.jdt.core.compiler.problem.suppressWarnings=enabled
++org.eclipse.jdt.core.compiler.problem.syntacticNullAnalysisForFields=disabled
++org.eclipse.jdt.core.compiler.problem.syntheticAccessEmulation=ignore
++org.eclipse.jdt.core.compiler.problem.typeParameterHiding=warning
++org.eclipse.jdt.core.compiler.problem.unavoidableGenericTypeProblems=enabled
++org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=warning
++org.eclipse.jdt.core.compiler.problem.unclosedCloseable=warning
++org.eclipse.jdt.core.compiler.problem.undocumentedEmptyBlock=ignore
++org.eclipse.jdt.core.compiler.problem.unhandledWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.unnecessaryElse=ignore
++org.eclipse.jdt.core.compiler.problem.unnecessaryTypeCheck=ignore
++org.eclipse.jdt.core.compiler.problem.unqualifiedFieldAccess=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownException=ignore
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionExemptExceptionAndThrowable=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedDeclaredThrownExceptionWhenOverriding=disabled
++org.eclipse.jdt.core.compiler.problem.unusedImport=warning
++org.eclipse.jdt.core.compiler.problem.unusedLabel=warning
++org.eclipse.jdt.core.compiler.problem.unusedLocal=warning
++org.eclipse.jdt.core.compiler.problem.unusedObjectAllocation=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
++org.eclipse.jdt.core.compiler.problem.unusedParameterIncludeDocCommentReference=enabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenImplementingAbstract=disabled
++org.eclipse.jdt.core.compiler.problem.unusedParameterWhenOverridingConcrete=disabled
++org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=warning
++org.eclipse.jdt.core.compiler.problem.unusedTypeParameter=ignore
++org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
++org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
++org.eclipse.jdt.core.compiler.source=1.8
+diff --git a/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.m2e.core.prefs b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.m2e.core.prefs
+new file mode 100644
+index 0000000..f897a7f
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.m2e.core.prefs
+@@ -0,0 +1,4 @@
++activeProfiles=
++eclipse.preferences.version=1
++resolveWorkspaceProjects=true
++version=1
+diff --git a/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.wst.common.project.facet.core.xml b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.wst.common.project.facet.core.xml
+new file mode 100644
+index 0000000..f4ef8aa
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/.settings/org.eclipse.wst.common.project.facet.core.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<faceted-project>
++  <installed facet="java" version="1.8"/>
++</faceted-project>
+diff --git a/Web/eclipse-workspaces/main-platform/README b/Web/eclipse-workspaces/main-platform/README
+new file mode 100644
+index 0000000..81f5f8f
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/README
+@@ -0,0 +1,43 @@
++This document is for platform code.
++The whole platform is divided to packages:
++
++1. Entities: It contains all the platform entities (I only finish the basic stuff so far)
++1) EntityObject: Base class for all the entities whose information needs to be saved
++2) OrderObject: Not Completely done half way
++3) PostComment: Entity Object for the post comment. 
++4) PostObject: Entity Object for the Post. 
++5) RecurEventInfo: Did not touch so far (Please ignore it)
++6) UserObject: To hold all user related information
++
++2. Enums: Hold all enums needs for the platform object. All the enum will have both db and api values. 
++1) DMLEvents: CRUD activities
++2) PostStatus: Open, Close, Expire, Removed
++3) TimeUnit: Half done but need more change based on RecurEventInfo
++
++3. main_platform: Please ignore this for now. It was for old framework.
++
++4. Mongodb.entities: It contains all the reflectionDbObject for all platform entities  (I only finish the basic stuff so far)
++1) DBEntityObject: Base class for all the db representation of platform entities
++2) DBOrderObject: Not complete
++3) DBPostComment: PostComment db representation. UserObject and Parent post information are all in reference id instead of the whole object.
++4) DBPostObject: PostObject db representation. UserObject and other entity information is delegated to reference id instead of the whole object. We will do the lazy load.
++5) DBUserObject: UserObject db representation.
++
++5. Adapters: It has all the DB related information
++1) DatabaseProvider: The interface for the DB operations. In the future, we can change it to other DB tools.
++2) MongoDbProvider: Implementation of DatabaseProvider for mongo db. It includes CRUD operations. It meets the basic requirement, but still need:
++	a) Bulk support for some function
++	b) Transaction add
++	c) Lock (I think mongo db did it automatically but need double check)
++3) DBContext: Platform DB caller
++4) IDBContext: Interface for the platform db adapter
++
++6. func: Platform operations information
++1) BulkEntityOperations: Platform to do the bulk save, load... etc. It will call the DmlOperationWrapper and DmlValidationHandler to finish the work.
++2) DmlOperationWrapper: Hold the information for the DMLValidation result, and return the correct set of information to the caller. For example, the valid entity set from the input.
++3) DmlValidationHandler: Valid the entities before doing the real db work so that we can fail fast.
++
++7. Relationships: Hold the relationship information between entities. It is not done, and will make the changes.
++
++8. Transhbin: Contain all old framework information which I did not plan to use any more.
++
+diff --git a/Web/eclipse-workspaces/main-platform/pom.xml b/Web/eclipse-workspaces/main-platform/pom.xml
+new file mode 100644
+index 0000000..8ceb717
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/pom.xml
+@@ -0,0 +1,62 @@
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++	<modelVersion>4.0.0</modelVersion>
++
++	<groupId>com.iamhere</groupId>
++	<artifactId>main-platform</artifactId>
++	<version>0.0.1-SNAPSHOT</version>
++	<packaging>jar</packaging>
++
++	<name>main-platform</name>
++	<url>http://maven.apache.org</url>
++
++	<properties>
++		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++	</properties>
++	<dependencies>
++		<dependency>
++			<groupId>junit</groupId>
++			<artifactId>junit</artifactId>
++			<version>3.8.1</version>
++			<scope>test</scope>
++		</dependency>
++		<dependency>
++			<groupId>javax.mail</groupId>
++			<artifactId>javax.mail-api</artifactId>
++			<version>1.5.1</version>
++		</dependency>
++		<dependency>
++			<groupId>org.mongodb</groupId>
++			<artifactId>mongo-java-driver</artifactId>
++			<version>3.0.0-beta2</version>
++		</dependency>
++		<dependency>
++			<groupId>joda-time</groupId>
++			<artifactId>joda-time</artifactId>
++			<version>2.7</version>
++		</dependency>
++	</dependencies>
++	<build>
++		<defaultGoal>install</defaultGoal>
++		<plugins>
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-surefire-plugin</artifactId>
++				<configuration>
++					<skip>true</skip>
++				</configuration>
++			</plugin>
++
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-compiler-plugin</artifactId>
++				<version>2.5.1</version>
++				<configuration>
++					<source>1.8</source>
++					<target>1.8</target>
++					<encoding>UTF-8</encoding>
++				</configuration>
++			</plugin>
++		</plugins>
++	</build>
++</project>
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/EntityObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/EntityObject.java
+new file mode 100644
+index 0000000..fdd8f12
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/EntityObject.java
+@@ -0,0 +1,85 @@
++package com.iamhere.entities;
++
++import java.util.Collections;
++import java.util.List;
++
++import org.joda.time.DateTime;
++
++import com.iamhere.enums.DMLEvents;
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.platform.func.BulkEntityOperations;
++import com.iamhere.platform.func.DmlOperationWrapper;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++/**
++ * Represente a signle entity row for data manipulation. This object contains an
++ * array of fields with the purpose of holding data values for that row. The
++ * class is responsible for persisting and reading those value.
++ * 
++ * @author jassica
++ *
++ */
++public abstract class EntityObject {
++	private String id;
++	private DateTime createdDate;
++	private DateTime lastModifiedDate;
++	
++	public EntityObject() {
++	}
++
++	public abstract void saveHook_Validate(DmlValidationHandler dml);
++
++	
++	public abstract DBEntityObject getDbObject() ;
++	public abstract  void reloadAllFieldInformationFromDb();
++	
++	public void setId(String id) {
++		this.id = id;
++	}
++	
++	public String getId() {
++		return id;
++	}
++	
++	public DateTime getCreatedDate() {
++		return createdDate;
++	}
++
++	public void setCreatedDate(DateTime createdDate) {
++		this.createdDate = createdDate;
++		getDbObject().setCreatedDate(createdDate.toDate());
++	}
++
++	public DateTime getLastModifiedDate() {
++		return lastModifiedDate;
++	}
++
++	public void setLastModifiedDate(DateTime lastModifiedDate) {
++		this.lastModifiedDate = lastModifiedDate;
++		getDbObject().setLastModifiedDate(lastModifiedDate.toDate());
++	}
++	
++	public abstract boolean isNew();
++	
++	public final DmlOperationWrapper save()  {
++		DMLEvents dmlType = DMLEvents.SAVE;
++		if (isNew()) {
++			dmlType = DMLEvents.CREATE;
++		} 
++		return BulkEntityOperations.bulkSave(Collections.singletonList(this),
++				dmlType);
++	}
++
++	public EntityObject load() throws Exception {
++		 List<EntityObject> reloads = BulkEntityOperations.bulkLoad(Collections.singletonList(this));
++		 if (reloads != null && reloads.size() >  0) {
++			 return reloads.get(0);
++		 } else {
++			 return null;
++		 }
++	}
++	
++	public boolean remove() {
++		 return BulkEntityOperations.bulkRemove(Collections.singletonList(this));
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/OrderObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/OrderObject.java
+new file mode 100644
+index 0000000..5d72004
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/OrderObject.java
+@@ -0,0 +1,126 @@
++package com.iamhere.entities;
++
++import java.util.Date;
++
++import org.joda.time.DateTime;
++
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++// TODO: Add the bargain features
++public class OrderObject extends EntityObject {
++	private UserObject jiaFang;
++	private UserObject yiFang;
++	private boolean isSuccess;
++	private Date TransactionDateTime;
++	private PostObject parentPost;
++	// TODO: should this restricted to ProvidePost
++	private String thirdPartyInfo;
++	private double actualCost; // TODO: both jia and yi can modify it
++	private int quantity; // TODO: only yi can modify it
++	private double score;	// TODO: only yi can modify it
++	
++	public OrderObject(UserObject jia, UserObject yi)  {
++		this.jiaFang = jia;
++		this.yiFang = yi;
++		setCreatedDate( new DateTime());
++	}
++
++	public UserObject getJiaFang() {
++		return jiaFang;
++	}
++
++	public void setJiaFang(UserObject jiaFang) {
++		this.jiaFang = jiaFang;
++	}
++
++	public UserObject getYiFang() {
++		return yiFang;
++	}
++
++	public void setYiFang(UserObject yiFang) {
++		this.yiFang = yiFang;
++	}
++
++	public boolean isSuccess() {
++		return isSuccess;
++	}
++
++	public void setSuccess(boolean isSuccess) {
++		this.isSuccess = isSuccess;
++	}
++
++	public Date getTransactionDateTime() {
++		return TransactionDateTime;
++	}
++
++	public void setTransactionDateTime(Date transactionDateTime) {
++		TransactionDateTime = transactionDateTime;
++	}
++
++	public PostObject getParentPost() {
++		return parentPost;
++	}
++
++	public void setParentPost(PostObject parentPost) {
++		this.parentPost = parentPost;
++	}
++
++	public String getThirdPartyInfo() {
++		return thirdPartyInfo;
++	}
++
++	public void setThirdPartyInfo(String thirdPartyInfo) {
++		this.thirdPartyInfo = thirdPartyInfo;
++	}
++
++	public double getActualCost() {
++		return actualCost;
++	}
++
++	public void setActualCost(double actualCost) {
++		this.actualCost = actualCost;
++	}
++
++	public int getQuantity() {
++		return quantity;
++	}
++
++	public void setQuantity(int quantity) {
++		this.quantity = quantity;
++	}
++
++	public double getScore() {
++		return score;
++	}
++
++	public void setScore(double score) {
++		this.score = score;
++	}
++	
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		// TODO Auto-generated method stub
++		
++	}
++
++	@Override
++	public DBEntityObject getDbObject() {
++		// TODO Auto-generated method stub
++		return null;
++	}
++
++	@Override
++	public void reloadAllFieldInformationFromDb() {
++		// TODO Auto-generated method stub
++		
++	}
++
++	@Override
++	public boolean isNew() {
++		// TODO Auto-generated method stub
++		return false;
++	}
++
++	
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/PostComment.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/PostComment.java
+new file mode 100644
+index 0000000..1c83676
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/PostComment.java
+@@ -0,0 +1,120 @@
++package com.iamhere.entities;
++
++import org.bson.types.ObjectId;
++import org.joda.time.DateTime;
++
++import com.iamhere.enums.DMLEvents;
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.mongodb.entities.DBPostComment;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++public class PostComment extends EntityObject {
++	private PostObject parentPost;
++	// TODO: to keep it simple now and not consider the rendering
++	private String commentBody;
++	private PostComment childComment; // TODO: is this only for child or sibling as well
++	private UserObject createdBy;
++	
++	private DBPostComment dbComment;
++	
++	public PostComment(PostObject parent, String comment) {
++		dbComment = new DBPostComment();
++		setParentPost(parent);
++		setCommentBody(comment);
++	}
++	
++	public PostComment(DBPostComment db) {
++		this.dbComment = db;
++		reloadAllFieldInformationFromDb();
++	}
++
++	public PostComment(String id) {
++		dbComment = new DBPostComment(id);
++		setId(id);
++	}
++
++	public PostObject getParentPost() {
++		return parentPost;
++	}
++
++	public void setParentPost(PostObject parentPost) {
++		this.parentPost = parentPost;
++		dbComment.setParentPostWithEntity(parentPost);
++	}
++
++	public String getCommentBody() {
++		return commentBody;
++	}
++
++	public void setCommentBody(String commentBody) {
++		this.commentBody = commentBody;
++		dbComment.setCommentBody(commentBody);
++	}
++
++	public PostComment getChildComment() {
++		return childComment;
++	}
++
++	public void setChildComment(PostComment childComment) {
++		this.childComment = childComment;
++		dbComment.setChildCommentWithEntity(childComment);
++	}
++	
++	public UserObject getCreatedBy() {
++		return createdBy;
++	}
++
++	public void setCreatedBy(UserObject createdBy) {
++		this.createdBy = createdBy;
++		dbComment.setCreatedByWithEntity(createdBy);
++	}
++
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		if (getCreatedBy() == null) {
++			dml.addError("Post creator is not set!");
++		}
++		if (getParentPost() == null) {
++			dml.addError("Parent post is forget to set!");
++		}
++		// TODO: validate parent and child comment exists
++		getDbObject().saveHook_Validate(dml);
++		
++		if (dml.getDmlType() == DMLEvents.CREATE) {
++			setCreatedDate(new DateTime());
++			setLastModifiedDate(getCreatedDate());
++		} else {
++			setLastModifiedDate(new DateTime());
++		}
++	}
++
++	@Override
++	public DBEntityObject getDbObject() {
++		if (getId() != null && !getId().isEmpty()) {
++			dbComment.set_id(new ObjectId(getId()));
++		}
++		return dbComment;
++	}
++
++	@Override
++	public void reloadAllFieldInformationFromDb() {
++		if (dbComment.getChildComment() != null) {
++			setChildComment(new PostComment(dbComment.getChildComment().toString()));
++		}
++		setCommentBody(dbComment.getCommentBody());
++		setCreatedDate(new DateTime(dbComment.getCreatedDate()));
++		setLastModifiedDate(new DateTime(dbComment.getLastModifiedDate()));
++		setParentPost(new PostObject(dbComment.getParentPost().toString()));
++		setId(dbComment.get_id().toString());
++		setCreatedBy(new UserObject(dbComment.getCreatedBy().toString()));
++	}
++	
++	@Override
++	public boolean isNew() {
++		return getId() == null || getId().isEmpty() || getCreatedDate() == null;
++	}
++	
++	public PostComment load() throws Exception {
++		return (PostComment) super.load();
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/PostObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/PostObject.java
+new file mode 100644
+index 0000000..a5ea3bf
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/PostObject.java
+@@ -0,0 +1,279 @@
++package com.iamhere.entities;
++
++import org.bson.types.ObjectId;
++import org.joda.time.DateTime;
++
++import com.iamhere.enums.DMLEvents;
++import com.iamhere.enums.PostStatus;
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.mongodb.entities.DBPostObject;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++/**
++ * 
++ * @author jassica
++ *
++ */
++public class PostObject extends EntityObject {
++	// Final static constant for types
++	final static String REQUEST = "REQUEST";
++	final static String PROVIDE = "PROVIDE";
++	
++	// private fields
++	private String subject;
++	private String location;
++	private RecurEventInfo period;
++	private int quantity;
++	private String commentsOrDescription;
++	private double cost;
++	private String image;
++	private UserObject[] partners;
++	private String postCategory;
++	private PostStatus status;
++	private int numberOfOrders; // TODO: more detail
++	private int numberOfLikes;
++	private UserObject creator;
++	private UserObject lastModifiedBy;
++	private String type;
++	private DateTime expireDate;
++	
++	// DbObject information holder
++	DBPostObject dbPost;
++			
++	public PostObject(UserObject creator, String subject, String location, int quantity) {
++		dbPost = new DBPostObject();
++		setCreator(creator);
++		setSubject(subject);
++		setLocation(location);
++		setQuantity(quantity);
++		setPostCategory("Food");
++	}
++	
++	public PostObject(DBPostObject db) {
++		this.dbPost = db;
++		reloadAllFieldInformationFromDb();
++	}
++
++	public PostObject(String id) {
++		dbPost = new DBPostObject(id);
++		setId(id);
++	}
++
++
++	/* Getters and Setters */
++	public String getSubject() {
++		return subject;
++	}
++
++	public void setSubject(String subject) {
++		this.subject = subject;
++		dbPost.setSubject(subject);
++	}
++
++	public String getLocation() {
++		return location;
++	}
++
++	public void setLocation(String location) {
++		this.location = location;
++		dbPost.setLocation(location);
++	}
++
++	public RecurEventInfo getPeriod() {
++		return period;
++	}
++
++	public void setPeriod(RecurEventInfo period) {
++		this.period = period;
++		dbPost.setPeriod(period);
++	}
++
++	public int getQuantity() {
++		return quantity;
++	}
++
++	public void setQuantity(int quantity) {
++		this.quantity = quantity;
++		dbPost.setQuantity(quantity);
++	}
++
++	public String getCommentsOrDescription() {
++		return commentsOrDescription;
++	}
++
++	public void setCommentsOrDescription(String commentsOrDescription) {
++		this.commentsOrDescription = commentsOrDescription;
++		dbPost.setCommentsOrDescription(commentsOrDescription);
++	}
++
++	public double getCost() {
++		return cost;
++	}
++
++	public void setCost(double cost) {
++		this.cost = cost;
++		dbPost.setCost(cost);
++	}
++
++	public String getImage() {
++		return image;
++	}
++
++	public void setImage(String image) {
++		this.image = image;
++		dbPost.setImage(image);
++	}
++
++	public UserObject[] getPartners() {
++		return partners;
++	}
++
++	public void setPartners(UserObject[] partners) {
++		this.partners = partners;
++		dbPost.setPartners(partners);
++	}
++
++	public String getPostCategory() {
++		return postCategory;
++	}
++
++	public void setPostCategory(String postCategory) {
++		this.postCategory = postCategory;
++		dbPost.setPostCategory(postCategory);
++	}
++
++	public PostStatus getStatus() {
++		return this.status;
++	}
++
++	public void setStatus(PostStatus status) {
++		this.status = status;
++		dbPost.setStatus(status.getDbValue());
++	}
++
++	public int getNumberOfOrders() {
++		return numberOfOrders;
++	}
++
++	public void setNumberOfOrders(int numberOfOrders) {
++		this.numberOfOrders = numberOfOrders;
++		dbPost.setNumberOfOrders(numberOfOrders);
++	}
++
++	public int getNumberOfLikes() {
++		return numberOfLikes;
++	}
++
++	public void setNumberOfLikes(int numberOfLikes) {
++		this.numberOfLikes = numberOfLikes;
++		dbPost.setNumberOfLikes(numberOfLikes);
++	}
++
++	public UserObject getCreator() {
++		return creator;
++	}
++
++	public void setCreator(UserObject creator) {
++		this.creator = creator;
++		dbPost.setCreatorWithEntity(creator);
++	}
++
++	public String getType()  {
++		return type;
++	}
++	
++	public void setType(String type) {
++		this.type = type;
++		dbPost.setType(type);
++	}
++	
++	public DateTime getExpireDate() {
++		return expireDate;
++	}
++
++	public void setExpireDate(DateTime expireDate) {
++		this.expireDate = expireDate;
++		dbPost.setExpireDate(expireDate.toDate());
++	}
++	
++	public UserObject getLastModifiedBy() {
++		return lastModifiedBy;
++	}
++
++	public void setLastModifiedBy(UserObject lastModifiedBy) {
++		this.lastModifiedBy = lastModifiedBy;
++		dbPost.setLastModifiedByWithEntity(lastModifiedBy);
++	}
++
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		// cost should be greater than 0
++		if (getCost() < 0) {
++			dml.addError("The cost cannot be negative number!");
++		}
++		if (getPartners() != null) {
++			for (UserObject partner: getPartners()) {
++				if (partner == null) {
++					dml.addError("One of the partner is not set!");
++					break;
++				}
++			}
++		}
++		if (getCreator() == null) {
++			dml.addError("Post creator is not set!");
++		}
++		if (getLastModifiedBy() == null) {
++			dml.addError("Post last modify by is not set!");
++		}
++		
++		getDbObject().saveHook_Validate(dml);
++		
++		if (dml.getDmlType() == DMLEvents.CREATE) {
++			setCreatedDate(new DateTime());
++			setLastModifiedDate(getCreatedDate());
++		} else {
++			setLastModifiedDate(new DateTime());
++		}
++	}
++
++	@Override
++	public DBEntityObject getDbObject() {
++		if (getId() != null && !getId().isEmpty()) {
++			dbPost.set_id(new ObjectId(getId()));
++		}
++		return dbPost;
++	}
++
++	@Override
++	public void reloadAllFieldInformationFromDb() {
++		setCommentsOrDescription(dbPost.getCommentsOrDescription());
++		setCost(dbPost.getCost());
++		setCreatedDate(new DateTime(dbPost.getCreatedDate()));
++		setCreator(new UserObject(dbPost.getCreator().toString()));
++		setExpireDate(new DateTime(dbPost.getExpireDate()));
++		setId(dbPost.get_id().toString());
++		setImage(dbPost.getImage());
++		setLastModifiedBy(new UserObject(dbPost.getLastModifiedBy().toString()));
++		setLastModifiedDate(new DateTime(dbPost.getLastModifiedDate()));
++		setLocation(dbPost.getLocation());
++		setNumberOfLikes(dbPost.getNumberOfLikes());
++		setNumberOfOrders(dbPost.getNumberOfOrders());
++		setPeriod(dbPost.getPeriod());
++		// TODO
++		setPartners(null);
++		setPostCategory(dbPost.getPostCategory());
++		setQuantity(dbPost.getQuantity());
++		setStatus(PostStatus.fromDbValue(dbPost.getStatus()));
++		setSubject(dbPost.getSubject());
++		setType(dbPost.getType());
++	}
++
++	@Override
++	public boolean isNew() {
++		return getId() == null || getId().isEmpty() || getCreatedDate() == null;
++	}
++	
++	public PostObject load() throws Exception {
++		return (PostObject) super.load();
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/RecurEventInfo.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/RecurEventInfo.java
+new file mode 100644
+index 0000000..f353ff6
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/RecurEventInfo.java
+@@ -0,0 +1,68 @@
++package com.iamhere.entities;
++
++import org.joda.time.DateTime;
++
++import com.iamhere.enums.TimeUnit;
++import com.mongodb.ReflectionDBObject;
++
++/**
++ * 
++ * @author jassica
++ *
++ */
++public class RecurEventInfo extends ReflectionDBObject {
++	private DateTime startDatetime;
++	private DateTime lastHappenDatetime;
++	private boolean isRecur;
++	private int recurOffset;
++	private TimeUnit  recurUnit;
++	
++	public RecurEventInfo(DateTime start) {
++		assert (start != null);
++		this.startDatetime = start;
++	}
++	
++//	public RecurEventInfo(Date start, TimeUnit interval, int offset) {
++//		this(start, new TimeInterval(interval, offset));
++//	}
++
++	public boolean isRecur() {
++		return isRecur;
++	}
++
++	public void setRecur(boolean isRecur) {
++		this.isRecur = isRecur;
++	}
++
++	public DateTime getStartDatetime() {
++		return startDatetime;
++	}
++
++	public void setStartDatetime(DateTime startDatetime) {
++		this.startDatetime = startDatetime;
++	}
++
++	public DateTime getLastHappenDatetime() {
++		return lastHappenDatetime;
++	}
++
++	public void setLastHappenDatetime(DateTime lastHappenDatetime) {
++		this.lastHappenDatetime = lastHappenDatetime;
++	}
++
++	public int getRecurOffset() {
++		return recurOffset;
++	}
++
++	public void setRecurOffset(int recurOffset) {
++		this.recurOffset = recurOffset;
++	}
++
++	public TimeUnit getRecurUnit() {
++		return recurUnit;
++	}
++
++	public void setRecurUnit(TimeUnit recurUnit) {
++		this.recurUnit = recurUnit;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/UserObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/UserObject.java
+new file mode 100644
+index 0000000..cffd54f
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/entities/UserObject.java
+@@ -0,0 +1,261 @@
++package com.iamhere.entities;
++
++import javax.mail.internet.AddressException;
++import javax.mail.internet.InternetAddress;
++
++import org.bson.types.ObjectId;
++import org.joda.time.DateTime;
++
++import com.iamhere.enums.DMLEvents;
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.mongodb.entities.DBUserObject;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++/***
++ * 
++ * @author jassica
++ *
++ */
++public class UserObject  extends EntityObject {
++	// private fields
++	private String firstName;
++	private String lastName;
++	private String email;
++	private String phone;
++	private double creditInfo; // the number of likes fro all the posts
++	private double activeScore; // the sum of provide posts, request posts and
++								// post comments
++	private String password;
++	private String alias;
++	private String role;
++
++	// db object
++	DBUserObject dbUser;
++	
++	public UserObject(String firstName, String lastName, String email,
++			String password) {
++		dbUser = new DBUserObject();
++		// TODO: Assume caller will give no-null-empty values
++		this.setFirstName(firstName);
++		this.setLastName(lastName);
++		this.setEmail(email);
++		this.setPassword(password);
++		this.setRole("normal");
++	}
++	
++	public UserObject(DBUserObject dbUser) {
++		this.dbUser = dbUser;
++		reloadAllFieldInformationFromDb();
++	}
++
++	public UserObject(String id) {
++		dbUser = new DBUserObject(id);
++		setId(id);
++	}
++
++	// Getters and setters
++	public String getFirstName() {
++		return firstName;
++	}
++
++	public void setFirstName(String firstName) {
++		this.firstName = firstName;
++		dbUser.setFirstName(firstName);
++	}
++
++	public String getLastName() {
++		return lastName;
++	}
++
++	public void setLastName(String lastName) {
++		this.lastName = lastName;
++		dbUser.setLastName(lastName);
++	}
++
++	public String getEmail() {
++		return email;
++	}
++
++	public void setEmail(String email) {
++		this.email = email;
++		dbUser.setEmail(email);
++	}
++
++	public double getCreditInfo() {
++		return creditInfo;
++	}
++
++	public void setCreditInfo(double creditInfo) {
++		this.creditInfo = creditInfo;
++		dbUser.setCreditInfo(creditInfo);
++	}
++
++	public String getPhone() {
++		return phone;
++	}
++
++	public void setPhone(String phone) {
++		this.phone = phone;
++		dbUser.setPhone(phone);
++	}
++
++	public double getActiveScore() {
++		return activeScore;
++	}
++
++	public void setActiveScore(double activeScore) {
++		this.activeScore = activeScore;
++		dbUser.setActiveScore(activeScore);
++	}
++
++	public String getPassword() {
++		return password;
++	}
++
++	public void setPassword(String password) {
++		this.password = password;
++		dbUser.setPassword(password);
++	}
++
++	public String getAlias() {
++		return alias;
++	}
++
++	public void setAlias(String alias) {
++		this.alias = alias;
++		dbUser.setAlias(alias);
++	}
++
++	public String getRole() {
++		return role;
++	}
++
++	public void setRole(String role) {
++		this.role = role;
++		dbUser.setRole(role);
++	}
++
++	/**
++	 * =============== Validation of Fields
++	 */
++	/*
++	 * 
++	 */
++	@SuppressWarnings("finally")
++	public boolean validateEmail() {
++		boolean isValid = false;
++		try {
++			//
++			// Create InternetAddress object and validated the supplied
++			// address which is this case is an email address.
++			InternetAddress internetAddress = new InternetAddress(email);
++			internetAddress.validate();
++			isValid = true;
++		} catch (AddressException e) {
++			// TODO: need change it to log
++			System.out
++					.println(" Email Address Exception for: "
++							+ email);
++		} finally {
++			return isValid;
++		}
++	}
++
++	/**
++	 * Validates the password and get the strength score of it 
++	 * Z = characters, S = numbers, T = special characters
++	 * @return
++	 */
++	public double validatePassword() {
++		String regexZ = "\\d*";  
++        String regexS = "[a-zA-Z]+";  
++        String regexT = "\\W+$";  
++        String regexZT = "\\D*";  
++        String regexST = "[\\d\\W]*";  
++        String regexZS = "\\w*";  
++        String regexZST = "[\\w\\W]*";  
++  
++        if (password.matches(regexZ) || password.matches(regexS) || password.matches(regexT)) {  
++        	return 1.0;
++        }  
++        if (password.matches(regexZT) || password.matches(regexST) || password.matches(regexZS) ) {  
++            return 3.0;
++        }  
++        if (password.matches(regexZST)) {  
++            return 5.0;
++        }  
++        return 0;
++	}
++
++	/**
++	 * Verify if the current user already exists in the db
++	 * @return
++	 */
++	// TODO
++	public boolean isAlreadyExist() {
++		return false;
++	}
++
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		// Do the object validations
++		if (getLastName() == null || getLastName().trim().isEmpty()) {
++			dml.addError("The last name cannot be empty!");
++		}
++		if (getEmail() == null || getEmail().trim().isEmpty()) {
++			dml.addError("Email cannot be empty!");
++		}
++		if (getPassword() == null || getPassword().trim().isEmpty()) {
++			dml.addError("Password cannot be empty!");
++		}
++		// Do the db validations
++		getDbObject().saveHook_Validate(dml);
++		// TODO: reset the the lastModify information as well
++		// 2. maybe move to a better place
++		if (dml.getDmlType() == DMLEvents.CREATE) {
++			setCreatedDate(new DateTime());
++			setLastModifiedDate(getCreatedDate());
++		} else {
++			setLastModifiedDate(new DateTime());
++		}
++	}
++
++	@Override
++	public DBEntityObject getDbObject() {
++		if (getId() != null && !getId().isEmpty()) {
++			dbUser.set_id(new ObjectId(getId()));
++		}
++//		dbUser.setActiveScore(getActiveScore());
++//		dbUser.setAlias(getAlias());
++//		dbUser.setCreatedDate(getCreatedDate());
++//		dbUser.setCreditInfo(getCreditInfo());
++//		dbUser.setLastModifiedDate(getLastModifiedDate());
++//		dbUser.setPhone(getPhone());
++//		dbUser.setRole(getRole());
++		return dbUser;
++	}
++	
++	public UserObject load() throws Exception {
++		return (UserObject) super.load();
++	}
++	
++	public void reloadAllFieldInformationFromDb() {
++		setActiveScore(dbUser.getActiveScore());
++		setAlias(dbUser.getAlias());
++		setCreatedDate(new DateTime(dbUser.getCreatedDate()));
++		setCreditInfo(dbUser.getCreditInfo());
++		setEmail(dbUser.getEmail());
++		setFirstName(getFirstName());
++		setId(dbUser.get_id().toString());
++		setLastModifiedDate(new DateTime(dbUser.getLastModifiedDate()));
++		setLastName(dbUser.getLastName());
++		setPassword(dbUser.getPassword());
++		setPhone(dbUser.getPhone());
++		setRole(dbUser.getRole());
++	}
++
++	@Override
++	public boolean isNew() {
++		return getId() == null || getId().isEmpty() || getCreatedDate() == null;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/DMLEvents.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/DMLEvents.java
+new file mode 100644
+index 0000000..99011b5
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/DMLEvents.java
+@@ -0,0 +1,19 @@
++package com.iamhere.enums;
++
++public enum DMLEvents {
++	CREATE, UPDATE, SAVE,  REMOVE;
++	
++	public String getValue() {
++		switch (this) {
++		case CREATE:
++			return "create";
++		case UPDATE:
++			return "update";
++		case REMOVE:
++			return "remove";
++		case SAVE:
++			return "save";
++		} 
++		throw new AssertionError();
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/PostStatus.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/PostStatus.java
+new file mode 100644
+index 0000000..ca64265
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/PostStatus.java
+@@ -0,0 +1,42 @@
++package com.iamhere.enums;
++
++public enum PostStatus {
++	OPEN("Open", "o"), CLOSE("Close", "c"), EXPIRE("Expire", "e"), REMOVED(
++			"Removed", "r");
++
++	private String apiValue;
++	private String dbValue;
++
++	private PostStatus(String apiValue, String dbValue) {
++		this.apiValue = apiValue;
++		this.dbValue = dbValue;
++	}
++
++	public String getDbValue() {
++		return this.dbValue;
++	}
++
++	@Override
++	public String toString() {
++		final StringBuilder sb = new StringBuilder();
++		sb.append("Post Status");
++		sb.append("{apiValue = ").append(apiValue);
++		sb.append(", dbValue = ").append(dbValue);
++		sb.append("}");
++		return sb.toString();
++	}
++
++	public static PostStatus fromDbValue(String dbValue) {
++		switch (dbValue) {
++		case "o":
++			return OPEN;
++		case "c":
++			return CLOSE;
++		case "e":
++			return EXPIRE;
++		case "r":
++			return REMOVED;
++		}
++		return null;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/TimeUnit.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/TimeUnit.java
+new file mode 100644
+index 0000000..070da4a
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/enums/TimeUnit.java
+@@ -0,0 +1,26 @@
++package com.iamhere.enums;
++
++public enum TimeUnit {
++		MINUTES("minute", "m"), 
++		HOURs("hour", "h"), 
++		DAYS("day", "d"), 
++		MONTHS("month", "t"), 
++		YEARS ("year", "y");
++		private String apiValue;
++		private String dbValue;
++		
++		private TimeUnit(String apiValue, String dbValue) {
++			this.apiValue = apiValue;
++			this.dbValue = dbValue;
++		}		
++		
++		@Override
++		public String toString() {
++			final StringBuilder sb = new StringBuilder();
++			sb.append("Time Unit");
++			sb.append("{apiValue = ").append(apiValue);
++			sb.append(", dbValue = ").append(dbValue);
++			sb.append("}");
++			return sb.toString();
++		}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/App.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/App.java
+new file mode 100644
+index 0000000..715cffd
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/App.java
+@@ -0,0 +1,13 @@
++package com.iamhere.main_platform;
++
++/**
++ * Hello world!
++ *
++ */
++public class App 
++{
++    public static void main( String[] args )
++    {
++        System.out.println( "Hello World!" );
++    }
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/PostBuilder.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/PostBuilder.java
+new file mode 100644
+index 0000000..2fbfe99
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/PostBuilder.java
+@@ -0,0 +1,67 @@
++package com.iamhere.main_platform;
++
++import java.util.Date;
++
++import org.joda.time.DateTime;
++
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.RecurEventInfo;
++import com.iamhere.entities.UserObject;
++import com.iamhere.enums.PostStatus;
++
++public  class PostBuilder {
++	protected PostObject post;
++
++	public PostObject getPost() {
++		return post;
++	}
++
++	public  void createNewPost(UserObject creator, String subject, String location,
++			int quantity){
++		post = new PostObject(creator, subject, location, quantity);
++	}
++
++	public void buildSubject(String subject) {
++		post.setSubject(subject);
++	}
++
++	public void buildLocation(String location) {
++		post.setLocation(location);
++	}
++
++	public void buildQuantity(int quantity) {
++		post.setQuantity(quantity);
++	}
++
++	public void buildCost(double cost) {
++		post.setCost(cost);
++	}
++
++	public void buildPeriod(RecurEventInfo period) {
++		post.setPeriod(period);
++	}
++
++	public void buildCommentAndDescription(String comment) {
++		post.setCommentsOrDescription(comment);
++	}
++
++	public void buildImage(String webURL) {
++		post.setImage(webURL);
++	}
++
++	public void buildPartner(UserObject[] users) {
++		post.setPartners(users);
++	}
++
++	public void buildStatus(PostStatus status) {
++		post.setStatus(status);
++	}
++
++	public void buildCreator(UserObject creator) {
++		post.setCreator(creator);
++	}
++	
++	public void buildExpiration(DateTime expireDate) {
++		post.setExpireDate(expireDate);
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/PostBuilderDirector.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/PostBuilderDirector.java
+new file mode 100644
+index 0000000..10d7112
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/PostBuilderDirector.java
+@@ -0,0 +1,58 @@
++package com.iamhere.main_platform;
++
++import java.util.Date;
++
++import org.joda.time.DateTime;
++
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.RecurEventInfo;
++import com.iamhere.entities.UserObject;
++import com.iamhere.trashbin.ProvidePost;
++import com.iamhere.trashbin.RequestPost;
++
++public class PostBuilderDirector {
++	private static volatile PostBuilderDirector INSTANCE = null;
++	 
++    private PostBuilderDirector() {}
++ 
++    //thread safe and performance  promote 
++    public static  PostBuilderDirector getInstance() {
++        if(INSTANCE == null){
++             synchronized(PostBuilderDirector.class){
++                 //when more than two threads run into the first null check same time, to avoid instanced more than one time, it needs to be checked again.
++                 if(INSTANCE == null){ 
++                     INSTANCE = new PostBuilderDirector();
++                  }
++              } 
++        }
++        return INSTANCE;
++    }
++    
++//	public RequestPost constructRequestPost(String subject, String location, int quantity, Period period, double cost, UserObject creator) {
++//		RequestPostBuilder postBuilder = RequestPostBuilder.getInstance();
++//		postBuilder.createNewAbstractPost(subject, location, quantity);
++//		postBuilder.buildCreator(creator);
++//		postBuilder.buildPeriod(period);
++//		postBuilder.buildCost(cost);
++//		return (RequestPost) postBuilder.getPost();
++//	}
++//	
++//	public ProvidePost constructProvidePost(String subject, String location, int quantity, Period period, double cost, UserObject creator, Date expiration) {
++//		ProvidePostBuilder postBuilder = ProvidePostBuilder.getInstance();
++//		postBuilder.createNewAbstractPost(subject, location, quantity);
++//		postBuilder.buildCreator(creator);
++//		postBuilder.buildPeriod(period);
++//		postBuilder.buildCost(cost);
++//		postBuilder.buildExpiration(expiration);
++//		return (ProvidePost) postBuilder.getPost();
++//	}
++	
++	public PostObject constructPost( String subject, String location, int quantity, RecurEventInfo period, double cost, UserObject creator, DateTime expiration) {
++		PostBuilder postBuilder = new PostBuilder();
++		postBuilder.createNewPost(creator, subject, location, quantity);
++		postBuilder.buildPeriod(period);
++		postBuilder.buildCost(cost);
++		postBuilder.buildExpiration(expiration);
++		return postBuilder.getPost();
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/ProvidePostBuilder.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/ProvidePostBuilder.java
+new file mode 100644
+index 0000000..28ec4b8
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/ProvidePostBuilder.java
+@@ -0,0 +1,34 @@
++package com.iamhere.main_platform;
++
++import java.util.Date;
++
++import com.iamhere.trashbin.ProvidePost;
++
++public class ProvidePostBuilder  {//extends PostBuilder{
++	
++	private static volatile ProvidePostBuilder INSTANCE = null;
++	 
++    private ProvidePostBuilder() {}
++ 
++    //thread safe and performance  promote 
++    public static  ProvidePostBuilder getInstance() {
++        if(INSTANCE == null){
++             synchronized(ProvidePostBuilder.class){
++                 //when more than two threads run into the first null check same time, to avoid instanced more than one time, it needs to be checked again.
++                 if(INSTANCE == null){ 
++                     INSTANCE = new ProvidePostBuilder();
++                  }
++              } 
++        }
++        return INSTANCE;
++    }
++    
++//	@Override
++//	public void createNewAbstractPost(String subject, String location, int quantity) {
++//		post = new ProvidePost(subject, location, quantity);
++//	}
++//	
++//	public void buildExpiration(Date expireDate) {
++//		((ProvidePost)post).setExpireDate(expireDate);
++//	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/RequestPostBuilder.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/RequestPostBuilder.java
+new file mode 100644
+index 0000000..242b011
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/main_platform/RequestPostBuilder.java
+@@ -0,0 +1,28 @@
++package com.iamhere.main_platform;
++
++import com.iamhere.trashbin.RequestPost;
++
++public class RequestPostBuilder { //extends PostBuilder {
++
++	 private static volatile RequestPostBuilder INSTANCE = null;
++	 
++	    private RequestPostBuilder() {}
++	 
++	    //thread safe and performance  promote 
++	    public static  RequestPostBuilder getInstance() {
++	        if(INSTANCE == null){
++	             synchronized(RequestPostBuilder.class){
++	                 //when more than two threads run into the first null check same time, to avoid instanced more than one time, it needs to be checked again.
++	                 if(INSTANCE == null){ 
++	                     INSTANCE = new RequestPostBuilder();
++	                  }
++	              } 
++	        }
++	        return INSTANCE;
++	    }
++	    
++//	@Override
++//	public void createNewAbstractPost(String subject, String location, int quantity) {
++//		post = new RequestPost(subject, location, quantity);
++//	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBEntityObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBEntityObject.java
+new file mode 100644
+index 0000000..bfff3e8
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBEntityObject.java
+@@ -0,0 +1,42 @@
++package com.iamhere.mongodb.entities;
++
++import java.util.Date;
++import java.util.HashMap;
++import java.util.Map;
++
++import com.iamhere.platform.func.DmlValidationHandler;
++import com.mongodb.ReflectionDBObject;
++
++public abstract class DBEntityObject extends ReflectionDBObject {
++	private Date createdDate;
++	private Date lastModifiedDate;
++	
++	public DBEntityObject() {
++	}
++	
++	public Date getCreatedDate() {
++		return createdDate;
++	}
++
++	public void setCreatedDate(Date createdDate) {
++		this.createdDate = createdDate;
++	}
++
++	public Date getLastModifiedDate() {
++		return lastModifiedDate;
++	}
++
++	public void setLastModifiedDate(Date lastModifiedDate) {
++		this.lastModifiedDate = lastModifiedDate;
++	}
++	
++	public abstract void saveHook_Validate(DmlValidationHandler dml);
++
++	public abstract String getDbTableName();
++
++	public Map<String, Object> getFieldsAndValues() {
++		Map<String, Object> maps = new HashMap<String, Object>();
++		maps.put("_id", get_id());
++		return maps;
++	}
++}
+\ No newline at end of file
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBOrderObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBOrderObject.java
+new file mode 100644
+index 0000000..6ffae29
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBOrderObject.java
+@@ -0,0 +1,111 @@
++package com.iamhere.mongodb.entities;
++
++import java.util.Date;
++
++import org.bson.types.ObjectId;
++import org.joda.time.DateTime;
++
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.UserObject;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++public class DBOrderObject extends DBEntityObject {
++	private ObjectId jiaFang;
++	private ObjectId yiFang;
++	private boolean isSuccess;
++	private Date TransactionDateTime;
++	private ObjectId parentPost;
++	// TODO: should this restricted to ProvidePost
++	private String thirdPartyInfo;
++	private double actualCost; // TODO: both jia and yi can modify it
++	private int quantity; // TODO: only yi can modify it
++	private double score;	// TODO: only yi can modify it
++	
++	public DBOrderObject()  {
++	}
++
++	public ObjectId getJiaFang() {
++		return jiaFang;
++	}
++
++	public void setJiaFang(ObjectId jiaFang) {
++		this.jiaFang = jiaFang;
++	}
++
++	public ObjectId getYiFang() {
++		return yiFang;
++	}
++
++	public void setYiFang(ObjectId yiFang) {
++		this.yiFang = yiFang;
++	}
++
++	public boolean isSuccess() {
++		return isSuccess;
++	}
++
++	public void setSuccess(boolean isSuccess) {
++		this.isSuccess = isSuccess;
++	}
++
++	public Date getTransactionDateTime() {
++		return TransactionDateTime;
++	}
++
++	public void setTransactionDateTime(Date transactionDateTime) {
++		TransactionDateTime = transactionDateTime;
++	}
++
++	public ObjectId getParentPost() {
++		return parentPost;
++	}
++
++	public void setParentPost(ObjectId parentPost) {
++		this.parentPost = parentPost;
++	}
++
++	public String getThirdPartyInfo() {
++		return thirdPartyInfo;
++	}
++
++	public void setThirdPartyInfo(String thirdPartyInfo) {
++		this.thirdPartyInfo = thirdPartyInfo;
++	}
++
++	public double getActualCost() {
++		return actualCost;
++	}
++
++	public void setActualCost(double actualCost) {
++		this.actualCost = actualCost;
++	}
++
++	public int getQuantity() {
++		return quantity;
++	}
++
++	public void setQuantity(int quantity) {
++		this.quantity = quantity;
++	}
++
++	public double getScore() {
++		return score;
++	}
++
++	public void setScore(double score) {
++		this.score = score;
++	}
++	
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		// TODO Auto-generated method stub
++		
++	}
++
++	@Override
++	public String getDbTableName() {
++		// TODO Auto-generated method stub
++		return null;
++	}
++
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBPostComment.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBPostComment.java
+new file mode 100644
+index 0000000..2041601
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBPostComment.java
+@@ -0,0 +1,82 @@
++package com.iamhere.mongodb.entities;
++
++import java.util.Date;
++
++import org.bson.types.ObjectId;
++
++import com.iamhere.entities.PostComment;
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.UserObject;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++public class DBPostComment extends DBEntityObject {
++	private ObjectId parentPost;
++	// TODO: to keep it simple now and not consider the rendering
++	private String commentBody;
++	private ObjectId childComment; // TODO: is this only for child or sibling as
++									// well
++	private ObjectId createdBy;
++
++	public DBPostComment() {
++	}
++
++	public DBPostComment(String id) {
++		set_id(id);
++	}
++
++	public ObjectId getParentPost() {
++		return parentPost;
++	}
++
++	public void setParentPost(ObjectId parentPost) {
++		this.parentPost = parentPost;
++	}
++
++	public String getCommentBody() {
++		return commentBody;
++	}
++
++	public void setCommentBody(String commentBody) {
++		this.commentBody = commentBody;
++	}
++
++	public ObjectId getChildComment() {
++		return childComment;
++	}
++
++	public void setChildComment(ObjectId childComment) {
++		this.childComment = childComment;
++	}
++
++	public ObjectId getCreatedBy() {
++		return createdBy;
++	}
++
++	public void setCreatedBy(ObjectId createdBy) {
++		this.createdBy = createdBy;
++	}
++	
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++	}
++
++	@Override
++	public String getDbTableName() {
++		return "PostComments";
++	}
++
++	public void setParentPostWithEntity(PostObject parentPost2) {
++		this.parentPost = parentPost2 == null ? null : new ObjectId(parentPost2.getId());
++	}
++
++	public void setChildCommentWithEntity(PostComment childComment2) {
++		this.childComment = childComment2 == null ? null : new ObjectId(childComment2.getId());
++	}
++
++	public void setCreatedByWithEntity(UserObject createdBy2) {
++		this.createdBy = createdBy2 == null ? null : new ObjectId(createdBy2.getId());
++	}
++
++	
++
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBPostObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBPostObject.java
+new file mode 100644
+index 0000000..3323769
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBPostObject.java
+@@ -0,0 +1,232 @@
++package com.iamhere.mongodb.entities;
++
++import java.util.Date;
++import java.util.Map;
++
++import org.bson.types.ObjectId;
++
++import com.iamhere.entities.RecurEventInfo;
++import com.iamhere.entities.UserObject;
++import com.iamhere.platform.func.DmlValidationHandler;
++
++public class DBPostObject extends DBEntityObject {
++	// private fields
++	private String subject;
++	private String location;
++	private RecurEventInfo period;
++	private int quantity;
++	private String commentsOrDescription;
++	private double cost;
++	private String image;
++	private ObjectId[] partners;
++	private String postCategory;
++	private String status;
++	private int numberOfOrders; // TODO: more detail
++	private int numberOfLikes;
++	private ObjectId creator;
++	private ObjectId lastModifiedBy;
++	private String type;
++	private Date expireDate;
++
++	public DBPostObject(ObjectId creator, String subject, String location,
++			int quantity) {
++		this.creator = creator;
++		this.subject = subject;
++		this.location = location;
++		this.quantity = quantity;
++		this.postCategory = "Food";
++	}
++
++	public DBPostObject(String id) {
++		set_id(id);
++	}
++
++	public DBPostObject() {
++	}
++
++	public String getType() {
++		return type;
++	}
++
++	/* Getters and Setters */
++	public String getSubject() {
++		return subject;
++	}
++
++	public void setSubject(String subject) {
++		this.subject = subject;
++	}
++
++	public String getLocation() {
++		return location;
++	}
++
++	public void setLocation(String location) {
++		this.location = location;
++	}
++
++	public RecurEventInfo getPeriod() {
++		return period;
++	}
++
++	public void setPeriod(RecurEventInfo period) {
++		this.period = period;
++	}
++
++	public int getQuantity() {
++		return quantity;
++	}
++
++	public void setQuantity(int quantity) {
++		this.quantity = quantity;
++	}
++
++	public String getCommentsOrDescription() {
++		return commentsOrDescription;
++	}
++
++	public void setCommentsOrDescription(String commentsOrDescription) {
++		this.commentsOrDescription = commentsOrDescription;
++	}
++
++	public double getCost() {
++		return cost;
++	}
++
++	public void setCost(double cost) {
++		assert (cost >= 0);
++		this.cost = cost;
++	}
++
++	public String getImage() {
++		return image;
++	}
++
++	public void setImage(String image) {
++		this.image = image;
++	}
++
++	public ObjectId[] getPartners() {
++		return partners;
++	}
++
++	public void setPartners(ObjectId[] partners) {
++		this.partners = partners;
++	}
++
++	public void setPartners(UserObject[] partners) {
++		if (partners != null) {
++			ObjectId[] partnerIds = new ObjectId[partners.length];
++			for (int i = 0; i < partnerIds.length; i++) {
++				partnerIds[i] = new ObjectId(partners[i].getId());
++			}
++			this.partners = partnerIds;
++		}
++	}
++
++	public String getPostCategory() {
++		return postCategory;
++	}
++
++	public void setPostCategory(String postCategory) {
++		this.postCategory = postCategory;
++	}
++
++	public String getStatus() {
++		return this.status;// PostStatus.fromDbValue(this.status);
++	}
++
++	public void setStatus(String status) {
++		this.status = status;
++	}
++
++	public int getNumberOfOrders() {
++		return numberOfOrders;
++	}
++
++	public void setNumberOfOrders(int numberOfOrders) {
++		this.numberOfOrders = numberOfOrders;
++	}
++
++	public int getNumberOfLikes() {
++		return numberOfLikes;
++	}
++
++	public void setNumberOfLikes(int numberOfLikes) {
++		this.numberOfLikes = numberOfLikes;
++	}
++
++	public ObjectId getCreator() {
++		return creator;
++	}
++
++	public void setCreator(ObjectId creator) {
++		this.creator = creator;
++	}
++
++	public void setCreatorWithEntity(UserObject creator) {
++		if (creator == null)
++			this.creator = null;
++		else
++			this.creator = new ObjectId(creator.getId());
++	}
++
++	public void setType(String type) {
++		this.type = type;
++	}
++
++	public Date getExpireDate() {
++		return expireDate;
++	}
++
++	public void setExpireDate(Date expireDate) {
++		this.expireDate = expireDate;
++	}
++
++	public ObjectId getLastModifiedBy() {
++		return lastModifiedBy;
++	}
++	
++	public void setLastModifiedBy(ObjectId lastModifiedBy) {
++		this.lastModifiedBy = lastModifiedBy;
++	}
++
++	public void setLastModifiedByWithEntity(UserObject lastModifiedBy) {
++		if (lastModifiedBy == null) {
++			this.lastModifiedBy = null;
++		} else {
++			this.lastModifiedBy = new ObjectId(lastModifiedBy.getId());
++		}
++	}
++
++
++	public Map<String, Object> getFieldsAndValues() {
++		Map<String, Object> maps = super.getFieldsAndValues();
++		// maps.put("createdDate", getCreatedDate());
++		// maps.put("lastModifiedDate", getLastModifiedDate());
++		// maps.put("subject", getSubject());
++		// maps.put("location", getLocation());
++		// // maps.put("period", getPeriod());
++		// maps.put("quantity", getQuantity());
++		// maps.put("description", getCommentsOrDescription());
++		// maps.put("cost", getCost());
++		// maps.put("image", getImage());
++		// maps.put("partners", getPartners());
++		// maps.put("type", getType());
++		// maps.put("category", getPostCategory());
++		// maps.put("status", getStatus());
++		// maps.put("expireDate", getExpireDate());
++		// // maps.put("creator", getCreator());
++		return maps;
++	}
++
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		// TODO Auto-generated method stub
++	}
++
++	@Override
++	public String getDbTableName() {
++		return "Posts";
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBUserObject.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBUserObject.java
+new file mode 100644
+index 0000000..6103e02
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/mongodb/entities/DBUserObject.java
+@@ -0,0 +1,128 @@
++package com.iamhere.mongodb.entities;
++
++import java.util.Map;
++
++import com.iamhere.platform.func.DmlValidationHandler;
++
++public class DBUserObject extends DBEntityObject {
++
++	private String firstName;
++	private String lastName;
++	private String email;
++	private String phone;
++	private double creditInfo; // the number of likes fro all the posts
++	private double activeScore; // the sum of provide posts, request posts and
++								// post comments
++	private String password;
++	private String alias;
++	private String role;
++	
++	public DBUserObject() {
++	}
++
++	public DBUserObject(String id) {
++		set_id(id);
++	}
++
++	// Getters and setters
++	public String getFirstName() {
++		return firstName;
++	}
++
++	public void setFirstName(String firstName) {
++		this.firstName = firstName;
++	}
++
++	public String getLastName() {
++		return lastName;
++	}
++
++	public void setLastName(String lastName) {
++		this.lastName = lastName;
++	}
++
++	public String getEmail() {
++		return email;
++	}
++
++	public void setEmail(String email) {
++		this.email = email;
++	}
++
++	public double getCreditInfo() {
++		return creditInfo;
++	}
++
++	public void setCreditInfo(double creditInfo) {
++		this.creditInfo = creditInfo;
++	}
++
++	public String getPhone() {
++		return phone;
++	}
++
++	public void setPhone(String phone) {
++		this.phone = phone;
++	}
++
++	public double getActiveScore() {
++		return activeScore;
++	}
++
++	public void setActiveScore(double activeScore) {
++		this.activeScore = activeScore;
++	}
++
++	public String getPassword() {
++		return password;
++	}
++
++	public void setPassword(String password) {
++		this.password = password;
++	}
++
++	public String getAlias() {
++		return alias;
++	}
++
++	public void setAlias(String alias) {
++		this.alias = alias;
++	}
++
++	public String getRole() {
++		return role;
++	}
++
++	public void setRole(String role) {
++		this.role = role;
++	}
++
++	@Override
++	public Map<String, Object> getFieldsAndValues() {
++		Map<String, Object> maps = super.getFieldsAndValues();
++//		maps.put("createdDate", getCreatedDate());
++//		maps.put("lastModifiedDate", getLastModifiedDate());
++//		maps.put("firstName", getFirstName());
++//		maps.put("lastName", getLastName());
++//		maps.put("email", getEmail());
++//		maps.put("phone", getPhone());
++//		maps.put("creditInfo", getCreditInfo());
++//		maps.put("activeScore", getActiveScore());
++//		maps.put("password", getPassword());
++//		maps.put("alias", getAlias());
++//		maps.put("role", getRole());
++		return maps;
++	}
++	
++	@Override
++	public void saveHook_Validate(DmlValidationHandler dml) {
++		// TODO Auto-generated method stub
++		
++	}
++
++	@Override
++	public String getDbTableName() {
++		return "Users";
++	}
++
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/DBContext.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/DBContext.java
+new file mode 100644
+index 0000000..a74c876
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/DBContext.java
+@@ -0,0 +1,7 @@
++package com.iamhere.platform.adapters;
++
++public class DBContext {
++	public static DatabaseProvider getContext() {
++		return new  MongoDbProvider();
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/DatabaseProvider.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/DatabaseProvider.java
+new file mode 100644
+index 0000000..13dc86d
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/DatabaseProvider.java
+@@ -0,0 +1,25 @@
++package com.iamhere.platform.adapters;
++
++import java.util.List;
++import java.util.Map;
++
++import com.iamhere.entities.EntityObject;
++
++public interface DatabaseProvider {
++	public Object getInstance();
++
++	public List<EntityObject>  getAllTableRecords(String tableName,
++			EntityObject info);
++
++	public List<EntityObject>  getRecordsBasedOnQuery(String tableName,
++			EntityObject info, Map<String, Object> queryInfo);
++
++	public void insertRecords(String tableName, EntityObject[] records)
++			throws Exception;
++
++	public void removeRecords(String tableName, EntityObject[] records)
++			throws Exception;
++
++	public void saveRecords(String tableName, EntityObject[] records)
++			throws Exception;
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/IDBContext.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/IDBContext.java
+new file mode 100644
+index 0000000..018264d
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/IDBContext.java
+@@ -0,0 +1,35 @@
++package com.iamhere.platform.adapters;
++
++import java.sql.SQLException;
++
++@Deprecated
++public interface IDBContext {
++	/**
++	 * Sets whether or not a new connection should be allowed to be made when getConnection() is called
++	 * @param isAllowed
++	 * @param reason
++	 */
++	void setIsNewConnectionAllowed(boolean isAllowed, String reason) ;
++	
++	/**
++	 * 
++	 * @return whether or not a new coonection should be allowed to be made when getConnection is called
++	 */
++	boolean isNewConnectionAllowed();
++	
++	/**
++	 * Establishes a connection to the database.
++	 * @return true if we established a connection for this dbcontext
++	 * @throws SQLException
++	 */
++	boolean establishConnection() throws SQLException;
++	
++	void releaseConnection();
++	
++	/**
++	 * Clears the current user's database context
++	 * @throws SQLException
++	 */
++	void clearConect() throws SQLException;
++	
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/MongoDbProvider.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/MongoDbProvider.java
+new file mode 100644
+index 0000000..14b63c7
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/adapters/MongoDbProvider.java
+@@ -0,0 +1,184 @@
++package com.iamhere.platform.adapters;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Map;
++
++import com.iamhere.entities.EntityObject;
++import com.iamhere.entities.PostComment;
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.UserObject;
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.mongodb.entities.DBPostComment;
++import com.iamhere.mongodb.entities.DBPostObject;
++import com.iamhere.mongodb.entities.DBUserObject;
++import com.mongodb.BasicDBObject;
++import com.mongodb.DB;
++import com.mongodb.DBCollection;
++import com.mongodb.DBCursor;
++import com.mongodb.Mongo;
++import com.mongodb.MongoClient;
++import com.mongodb.MongoClientURI;
++import com.mongodb.MongoException;
++import com.mongodb.WriteConcern;
++import com.mongodb.client.MongoDatabase;
++
++public class MongoDbProvider implements DatabaseProvider {
++	MongoDatabase database;
++	DB db;
++	final static String MONGO_DB_NAME = "amher";
++	final static String MONGO_USERNAME = "MongoAdmin";
++	final static String MONGO_PASSWORD = "Iamhere";
++	final static String MONGO_ROLE = "admin";
++	Mongo m = null;
++
++	@SuppressWarnings("deprecation")
++	public MongoDbProvider() {
++		try {
++			@SuppressWarnings("resource")
++			MongoClient mongoClient = new MongoClient(new MongoClientURI(
++					"mongodb://" + MONGO_USERNAME + ":" + MONGO_PASSWORD
++							+ "@localhost/" + MONGO_ROLE));
++			database = mongoClient.getDatabase(MONGO_DB_NAME);
++			db = mongoClient.getDB(MONGO_DB_NAME);
++		} catch (MongoException e) {
++			e.printStackTrace();
++		}
++
++	}
++
++	@Override
++	public Object getInstance() {
++		assert (database != null);
++		return database;
++	}
++
++	@Override
++	public List<EntityObject> getAllTableRecords(String tableName,
++			EntityObject info) {
++		List<EntityObject> records = new ArrayList<EntityObject>();
++		// MongoCollection<Document> collection = database
++		// .getCollection(tableName);
++		// MongoCursor<Document> cursor = collection.find().iterator();
++		// try {
++		// while (cursor.hasNext()) {
++		// records.add(cursor.next());
++		// }
++		// } finally {
++		// cursor.close();
++		// return records.toArray();
++		// }
++		DBCollection collection = db.getCollection(tableName);
++		collection.setObjectClass(info.getDbObject().getClass());
++		DBCursor cursor = collection.find();
++		while (cursor.hasNext()) {
++			records.add((EntityObject) cursor.next());
++		}
++		cursor.close();
++		return records;
++	}
++
++	@Override
++	public List<EntityObject> getRecordsBasedOnQuery(String tableName,
++			EntityObject info, Map<String, Object> queryInfo) {
++		List<EntityObject> records = new ArrayList<EntityObject>();
++		BasicDBObject searchQuery = new BasicDBObject();
++		searchQuery.putAll(queryInfo);
++		DBCollection collection = db.getCollection(tableName);
++		collection.setObjectClass(info.getDbObject().getClass());
++		DBCursor cursor = collection.find(searchQuery);
++
++		try {
++			while (cursor.hasNext()) {
++				EntityObject obj = null;
++				DBEntityObject dbObject = (DBEntityObject) cursor.next();
++				if ( dbObject instanceof DBUserObject) {
++					DBUserObject dbUser = (DBUserObject) dbObject;
++					obj = new UserObject(dbUser);
++				} else if(dbObject instanceof DBPostObject) {
++					DBPostObject dbPost = (DBPostObject) dbObject;
++					obj = new PostObject(dbPost);
++				} else if (dbObject instanceof DBPostComment) {
++					DBPostComment dbComment = (DBPostComment) dbObject;
++					obj = new PostComment(dbComment);
++				}
++				records.add(obj);
++			}
++		} finally {
++			cursor.close();
++		}
++		return records;
++	}
++
++	@Override
++	public void saveRecords(String tableName, EntityObject[] records) {
++		if (records == null) {
++			return;
++		}
++		DBCollection collection = db.getCollection(tableName);
++		for (EntityObject record : records) {
++			collection.save(record.getDbObject());
++			// TODO: how to make bulk happen
++		}
++
++		assert (collection.count() == records.length);
++
++	}
++
++	@Override
++	public void insertRecords(String tableName, EntityObject[] records)
++			throws Exception {
++		if (records == null) {
++			return;
++		}
++		// List<Document> documents = new ArrayList<Document>();
++		// for (int i = 0; i < records.length; i++) {
++		// Entity record = records[i];
++		// Map<String, Serializable> values = record.getFieldsAndValues();
++		// Document doc = new Document();
++		// doc.putAll(values);
++		// // for (Map.Entry<String, Serializable> entry : values.entrySet()) {
++		// // doc.append(entry.getKey(), entry.getValue());
++		// // }
++		// documents.add(doc);
++		// }
++		// MongoCollection<Document> collection =
++		// database.getCollection(tableName);
++		// collection.insertMany(documents);
++		DBCollection collection = db.getCollection(tableName);
++		DBEntityObject[] dbObjects = new DBEntityObject[records.length];
++		for (int i = 0; i < dbObjects.length; i++) {
++			dbObjects[i] = records[i].getDbObject();
++		}
++		collection.insert(dbObjects, WriteConcern.SAFE);
++
++		assert (collection.count() == records.length);
++	}
++
++	@Override
++	public void removeRecords(String tableName, EntityObject[] records)
++			throws Exception {
++		if (records == null) {
++			return;
++		}
++		DBCollection collection = db.getCollection(tableName);
++		for (EntityObject record : records) {
++			if (record.getId() != null) {
++				collection.remove(new BasicDBObject().append("_id", record.getDbObject().get_id()));
++			} else {
++				collection.remove(record.getDbObject());
++			}
++		}
++		// MongoCollection collection = database.getCollection(tableName);
++		// Document query = new Document();
++		// List list = new ArrayList();
++		// for (int i = 0; i < records.length; i++) {
++		// Entity record = records[i];
++		// Map<String, Serializable> values = record.getFieldsAndValues();
++		// list.add(values.get("email"));
++		// }
++		// query.put("email", new Document("$in", list));
++		// DeleteResult result = collection.deleteMany(query);
++		// assert (result.getDeletedCount() == records.length);
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/BulkEntityOperations.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/BulkEntityOperations.java
+new file mode 100644
+index 0000000..9c4f69f
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/BulkEntityOperations.java
+@@ -0,0 +1,132 @@
++package com.iamhere.platform.func;
++
++import java.util.ArrayList;
++import java.util.Collection;
++import java.util.IdentityHashMap;
++import java.util.List;
++import java.util.Map;
++
++import com.iamhere.entities.EntityObject;
++import com.iamhere.enums.DMLEvents;
++import com.iamhere.mongodb.entities.DBEntityObject;
++import com.iamhere.platform.adapters.DBContext;
++import com.iamhere.platform.adapters.DatabaseProvider;
++
++/**
++ * Static utilities for performing insert and update operations on entity
++ * objects
++ * 
++ * @author jassica
++ *
++ */
++public class BulkEntityOperations {
++
++	public static DmlOperationWrapper bulkSave(
++			Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
++		// Validate the objects first
++		validateEntityObjects(entityObjects);
++		if (!entityObjects.isEmpty()) {
++			DmlOperationWrapper dmlState = performBulkDml(entityObjects,
++					dmlType);
++			return dmlState;
++		}
++		return null;
++	}
++
++	public static List<EntityObject> bulkLoad(
++			Collection<EntityObject> entityObjects) {
++		ArrayList<EntityObject> reload = new ArrayList<EntityObject>();
++		if (entityObjects == null) {
++			throw new IllegalStateException(
++					"bulk operations should not allow null list objects");
++		}
++		if (entityObjects.isEmpty()) {
++			return reload;
++		}
++
++		DatabaseProvider dbContext = DBContext.getContext();
++		for (EntityObject eo : entityObjects) {
++			DBEntityObject dbEo = eo.getDbObject();
++			List<EntityObject> queryResults = dbContext.getRecordsBasedOnQuery(
++					dbEo.getDbTableName(), eo, dbEo.getFieldsAndValues());
++			// TODO the return result should be greater 1 or exactly 1?
++			if (queryResults != null && queryResults.size() > 0) {
++				eo = queryResults.get(0);
++				reload.add(queryResults.get(0));
++			}
++		}
++		return reload;
++	}
++
++	private static DmlOperationWrapper performBulkDml(
++			Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
++		DmlOperationWrapper dmlOperationState = new DmlOperationWrapper(
++				entityObjects, dmlType);
++		List<EntityObject> afterFirstValidationObjects = dmlOperationState
++				.getEntityObjectsWithoutError();
++		// do the db work
++		// TODO: change it to bulk
++		DatabaseProvider dbContext = DBContext.getContext();
++		for (EntityObject eo : afterFirstValidationObjects) {
++			try {
++				DBEntityObject dbEo = eo.getDbObject();
++				dbContext.saveRecords(dbEo.getDbTableName(),
++						new EntityObject[] { eo });
++				// reload does not required for MongoDb as id will be already in
++				// the eo
++				eo.setId(dbEo.get_id().toString());
++			} catch (Exception e) {
++				// TODO: put the error information back to dmlOperationState
++				dmlOperationState.addErrorToDmlOperation(eo, e.getMessage());
++			}
++		}
++		return dmlOperationState;
++	}
++
++	static final void validateEntityObjects(
++			Collection<? extends EntityObject> entityObjects) {
++		if (entityObjects == null) {
++			throw new IllegalStateException(
++					"bulk operations should not allow null list objects");
++		}
++		if (entityObjects.isEmpty()) {
++			return;
++		}
++
++		// TODO:
++		Map<EntityObject, Boolean> ident = new IdentityHashMap<EntityObject, Boolean>(
++				entityObjects.size() << 1);
++		for (EntityObject eo : entityObjects) {
++			if (eo == null) {
++				throw new IllegalStateException(
++						"bulk operations recieve a null object in the list");
++			}
++			if (ident.put(eo, Boolean.TRUE) != null) {
++				throw new IllegalStateException(
++						"bulk operations recieved the same objects more than twice");
++			}
++		}
++	}
++
++	// TODO: Return a list of result???
++	public static boolean bulkRemove(List<EntityObject> entityObjects) {
++		if (entityObjects == null) {
++			throw new IllegalStateException(
++					"bulk operations should not allow null list objects");
++		}
++		if (entityObjects.isEmpty()) {
++			return true;
++		}
++		DatabaseProvider dbContext = DBContext.getContext();
++		for (EntityObject eo : entityObjects) {
++			try {
++				DBEntityObject dbEo = eo.getDbObject();
++				dbContext.removeRecords(dbEo.getDbTableName(),
++						new EntityObject[] { eo });
++			} catch (Exception e) {
++				return false;
++			}
++		}
++		return true;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/DmlOperationWrapper.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/DmlOperationWrapper.java
+new file mode 100644
+index 0000000..b6c36ec
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/DmlOperationWrapper.java
+@@ -0,0 +1,71 @@
++package com.iamhere.platform.func;
++
++import java.util.ArrayList;
++import java.util.Collection;
++import java.util.Collections;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import com.iamhere.entities.EntityObject;
++import com.iamhere.enums.DMLEvents;
++
++/**
++ * Hold DML related information:
++ * 1. Validation for each entityObject
++ * 2. Return the valid entiities from the input
++ * @author jassica
++ *
++ */
++public class DmlOperationWrapper {
++
++	private final List<EntityObject> originalEntityObjects;
++	private final Map<EntityObject, DmlValidationHandler> validationHandlers;
++
++	private boolean hasError = false;
++
++	// private final DMLEvents dmlType;
++
++	public DmlOperationWrapper(
++			Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
++		this.originalEntityObjects = Collections
++				.unmodifiableList(new ArrayList<EntityObject>(entityObjects));
++		this.validationHandlers = new HashMap<EntityObject, DmlValidationHandler>(
++				entityObjects.size() << 1);
++		for (EntityObject eo : entityObjects) {
++			DmlValidationHandler handler = new DmlValidationHandler(eo, dmlType);
++			this.validationHandlers.put(eo, handler);
++		}
++		// this.dmlType = dmlType;
++	}
++
++	public List<EntityObject> getEntityObjectsWithoutError() {
++		List<EntityObject> validEntities = new ArrayList<EntityObject>(
++				this.originalEntityObjects.size());
++		for (EntityObject eo : this.originalEntityObjects) {
++			DmlValidationHandler handler = this.validationHandlers.get(eo);
++			handler.validate();
++			if (handler.isCurrenctlyValid()) {
++				validEntities.add(eo);
++			} else {
++				hasError = true;
++			}
++		}
++		return Collections.unmodifiableList(validEntities);
++	}
++
++	public boolean isBulkSuccess() {
++		return !hasError;
++	}
++
++	public boolean isDmlSuccessOnEntity(EntityObject eo) {
++		DmlValidationHandler handler = this.validationHandlers.get(eo);
++		return handler.isCurrenctlyValid();
++	}
++
++	public void addErrorToDmlOperation(EntityObject eo, String errorMessage) {
++		DmlValidationHandler handler = this.validationHandlers.get(eo);
++		handler.addError(errorMessage);
++		hasError = true;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/DmlValidationHandler.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/DmlValidationHandler.java
+new file mode 100644
+index 0000000..0a392a2
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/platform/func/DmlValidationHandler.java
+@@ -0,0 +1,35 @@
++package com.iamhere.platform.func;
++
++import java.util.ArrayList;
++import java.util.List;
++
++import com.iamhere.entities.EntityObject;
++import com.iamhere.enums.DMLEvents;
++
++public class DmlValidationHandler {
++	private List<String> errorMessages;
++	private final EntityObject entityObject;
++	private final DMLEvents dmlType;
++	public DmlValidationHandler(EntityObject o, DMLEvents dmlType) {
++		this.entityObject = o;
++		this.errorMessages = new ArrayList<String>();
++		this.dmlType = dmlType;
++	}
++	
++	public void validate() {
++		entityObject.saveHook_Validate(this);
++	}
++	
++	public void addError(String s) {
++		this.errorMessages.add(s);
++	}
++	
++	public boolean isCurrenctlyValid() {
++		return this.errorMessages.isEmpty();
++	}
++
++	public DMLEvents getDmlType() {
++		return dmlType;
++	}
++	
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/relationships/Follow.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/relationships/Follow.java
+new file mode 100644
+index 0000000..c4c37ca
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/relationships/Follow.java
+@@ -0,0 +1,31 @@
++package com.iamhere.relationships;
++
++import com.iamhere.entities.UserObject;
++import com.iamhere.trashbin.Entity;
++
++public class Follow extends Entity {
++	private UserObject creator;
++	private Object target;
++	
++	public Follow(UserObject creator, UserObject target) {
++		this.creator = creator;
++		this.target = target;
++	}
++
++	public UserObject getCreator() {
++		return creator;
++	}
++
++	public void setCreator(UserObject creator) {
++		this.creator = creator;
++	}
++
++	public Object getTarget() {
++		return target;
++	}
++
++	public void setTarget(Object target) {
++		this.target = target;
++	}
++	
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/relationships/Like.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/relationships/Like.java
+new file mode 100644
+index 0000000..b719213
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/relationships/Like.java
+@@ -0,0 +1,32 @@
++package com.iamhere.relationships;
++
++import com.iamhere.entities.UserObject;
++import com.iamhere.trashbin.Entity;
++
++public class Like extends Entity {
++	private UserObject whoLikes;
++	private Object likesWhom;
++
++	// TODO: In the first version, likesWhom will just be AbstractPost.
++	// It can be post Comment in the future
++	public Like(UserObject creator, Object target) {
++		this.whoLikes = creator;
++		this.likesWhom = target;
++	}
++
++	public UserObject getWhoLikes() {
++		return whoLikes;
++	}
++
++	public void setWhoLikes(UserObject whoLikes) {
++		this.whoLikes = whoLikes;
++	}
++
++	public Object getLikesWhom() {
++		return likesWhom;
++	}
++
++	public void setLikesWhom(Object likesWhom) {
++		this.likesWhom = likesWhom;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/Entity.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/Entity.java
+new file mode 100644
+index 0000000..64de1dc
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/Entity.java
+@@ -0,0 +1,47 @@
++package com.iamhere.trashbin;
++
++import java.util.Date;
++import java.util.HashMap;
++import java.util.Map;
++
++import org.joda.time.DateTime;
++
++import com.mongodb.ReflectionDBObject;
++
++public abstract class Entity extends ReflectionDBObject   {
++	private DateTime createdDate;
++	private DateTime lastModifiedDate;
++	private String Id;
++	
++	public DateTime getCreatedDate() {
++		return createdDate;
++	}
++
++	public void setCreatedDate(DateTime createdDate) {
++		this.createdDate = createdDate;
++	}
++
++	public DateTime getLastModifiedDate() {
++		return lastModifiedDate;
++	}
++
++	public void setLastModifiedDate(DateTime lastModifiedDate) {
++		this.lastModifiedDate = lastModifiedDate;
++	}
++
++	public String getId() {
++		return Id;
++	}
++
++	public void setId(String id) {
++		Id = id;
++	}
++	
++	public Map<String, java.io.Serializable> getFieldsAndValues() {
++		Map<String, java.io.Serializable> maps = new HashMap<String, java.io.Serializable>();
++		maps.put("id", getId());
++		maps.put("createdDate", getCreatedDate());
++		maps.put("lastModifiedDate", getLastModifiedDate());
++		return maps;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/PostManager.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/PostManager.java
+new file mode 100644
+index 0000000..f79f726
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/PostManager.java
+@@ -0,0 +1,55 @@
++package com.iamhere.trashbin;
++
++import java.io.Serializable;
++import java.util.HashMap;
++import java.util.Map;
++
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.UserObject;
++import com.iamhere.enums.DMLEvents;
++import com.iamhere.platform.adapters.DatabaseProvider;
++
++public class PostManager {
++	final String TABLE_NAME = "Posts";
++	private DatabaseProvider dbProvider;
++	
++	public PostManager(DatabaseProvider dbProvider) {
++		this.dbProvider = dbProvider;
++	}
++	
++//	public PostObject[] getAllPosts() {
++//		Object[] objectArray = dbProvider.getAllTableRecords("Posts", PostObject.class);
++//		PostObject[] posts = new PostObject[objectArray.length]; 
++//		for (int i = 0; i<objectArray.length; i++) {
++//			posts[i] =  (PostObject) objectArray[i];
++//			//new UserObject(objectArray[i]);
++//		}
++//		return posts;
++//	}
++//	
++//	public void savePosts(PostObject[] posts, UserObject user, DMLEvents event) throws Exception{
++//		dbProvider.saveRecords(TABLE_NAME, posts);
++//	}
++//	
++//	public void createNewPost(PostObject[] posts, UserObject user) throws Exception {
++//		dbProvider.insertRecords(TABLE_NAME, posts);
++//	}
++//	
++//	public void removePosts(PostObject[] posts) throws Exception {
++//		dbProvider.removeRecords(TABLE_NAME, posts);
++//	}
++//	
++//	public PostObject getPostById(String id)  {
++//		Map<String, Serializable> query = new HashMap<String, Serializable>();
++//		query.put("id", id);
++//		Object[] objectArray = dbProvider.getRecordsBasedOnQuery(TABLE_NAME, PostObject.class, query);
++//		assert(objectArray != null);
++//		if (objectArray.length != 1) {
++//			return null;
++//		}
++//		return (PostObject) objectArray[0];
++//	}
++//	
++//	
++	
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/ProvidePost.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/ProvidePost.java
+new file mode 100644
+index 0000000..afcc7a1
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/ProvidePost.java
+@@ -0,0 +1,37 @@
++package com.iamhere.trashbin;
++
++import java.util.Date;
++import java.util.Map;
++
++public class ProvidePost  {
++
++	private Date expireDate;
++
++//	public ProvidePost(String subject, String location, int quantity) {
++//		super(subject, location, quantity);
++//		// by default, set the cost to be zero for donation
++//		setCost(0);
++//		setType(AbstractPost.PROVIDE);
++//	}
++//
++//	public ProvidePost(String subject, String location, int quantity,
++//			double cost) {
++//		super(subject, location, quantity);
++//		setCost(cost);
++//	}
++
++	public Date getExpireDate() {
++		return expireDate;
++	}
++
++	public void setExpireDate(Date expireDate) {
++		this.expireDate = expireDate;
++	}
++	
++//	@Override
++//	public Map<String, java.io.Serializable> getFieldsAndValues() {
++//		Map<String, java.io.Serializable> maps = super.getFieldsAndValues();
++//		maps.put("expireDate", getExpireDate());
++//		return maps;
++//	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/RequestPost.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/RequestPost.java
+new file mode 100644
+index 0000000..4a66e6a
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/RequestPost.java
+@@ -0,0 +1,14 @@
++package com.iamhere.trashbin;
++
++public class RequestPost {
++
++//	public RequestPost(String subject, String location, int quantity) {
++//		super(subject, location, quantity);
++//	}
++//	
++//	public RequestPost(String subject, String location, int quantity, double cost) {
++//		super(subject, location, quantity);
++//		setCost(cost);
++//		setType(AbstractPost.REQUEST);
++//	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/TimeInterval.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/TimeInterval.java
+new file mode 100644
+index 0000000..21062b2
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/TimeInterval.java
+@@ -0,0 +1,39 @@
++package com.iamhere.trashbin;
++
++public class TimeInterval {
++	public enum TimeUnit {
++		//TODO:
++		MINUTES(1), HOURS(60), DAYS(60*24), MONTHS(0), YEARS(0);
++		private int offset;
++		private TimeUnit(int offset) {
++			this.offset = offset;
++		}
++		public int getOffset() {
++			return offset;
++		}
++	}
++	
++	private TimeUnit unit;
++	private int offset;
++	
++	public TimeInterval(TimeUnit unit, int offset) {
++		this.setUnit(unit);
++		this.setOffset(offset);
++	}
++
++	public TimeUnit getUnit() {
++		return unit;
++	}
++
++	public void setUnit(TimeUnit unit) {
++		this.unit = unit;
++	}
++
++	public int getOffset() {
++		return offset;
++	}
++
++	public void setOffset(int offset) {
++		this.offset = offset;
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/UserManager.java b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/UserManager.java
+new file mode 100644
+index 0000000..86d51b3
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/main/java/com/iamhere/trashbin/UserManager.java
+@@ -0,0 +1,51 @@
++package com.iamhere.trashbin;
++
++import java.io.Serializable;
++import java.util.Arrays;
++import java.util.HashMap;
++import java.util.Map;
++
++import org.bson.Document;
++
++import com.iamhere.entities.UserObject;
++import com.iamhere.platform.adapters.DatabaseProvider;
++import com.mongodb.util.JSON;
++
++public class UserManager {
++	final String TABLE_NAME = "Users";
++	private DatabaseProvider dbProvider;
++
++	public UserManager(DatabaseProvider dbProvider) {
++		this.dbProvider = dbProvider;
++	}
++
++//	public UserObject[] getAllUsers() {
++//		Object[] objectArray = dbProvider.getAllTableRecords(TABLE_NAME, UserObject.class);
++//		UserObject[] users = new UserObject[objectArray.length]; 
++//		for (int i = 0; i<objectArray.length; i++) {
++//			users[i] =  (UserObject) objectArray[i];
++//			//new UserObject(objectArray[i]);
++//		}
++//		return users;
++//	}
++//	
++//	public UserObject getUserById(String id) {
++//		Map<String, Serializable> query = new HashMap<String, Serializable>();
++//		query.put("id", id);
++//		Object[] objectArray = dbProvider.getRecordsBasedOnQuery(TABLE_NAME, UserObject.class, query);
++//		assert(objectArray != null);
++//		if (objectArray.length != 1) {
++//			return null;
++//		}
++//		return (UserObject) objectArray[0];
++//	}
++//
++//	public void createNewUsers(UserObject[] users) throws Exception {
++//		dbProvider.insertRecords(TABLE_NAME, users);
++//	}
++//	
++//	public void removeUsers(UserObject[] users) throws Exception {
++//		dbProvider.removeRecords(TABLE_NAME, users);
++//	}
++	
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/AppTest.java b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/AppTest.java
+new file mode 100644
+index 0000000..2aaafd2
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/AppTest.java
+@@ -0,0 +1,38 @@
++package com.iamhere.main_platform;
++
++import junit.framework.Test;
++import junit.framework.TestCase;
++import junit.framework.TestSuite;
++
++/**
++ * Unit test for simple App.
++ */
++public class AppTest 
++    extends TestCase
++{
++    /**
++     * Create the test case
++     *
++     * @param testName name of the test case
++     */
++    public AppTest( String testName )
++    {
++        super( testName );
++    }
++
++    /**
++     * @return the suite of tests being tested
++     */
++    public static Test suite()
++    {
++        return new TestSuite( AppTest.class );
++    }
++
++    /**
++     * Rigourous Test :-)
++     */
++    public void testApp()
++    {
++        assertTrue( true );
++    }
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/PostObjectTest.java b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/PostObjectTest.java
+new file mode 100644
+index 0000000..c775a77
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/PostObjectTest.java
+@@ -0,0 +1,95 @@
++package com.iamhere.main_platform;
++
++import com.iamhere.entities.PostComment;
++import com.iamhere.entities.PostObject;
++import com.iamhere.entities.UserObject;
++import com.iamhere.enums.PostStatus;
++import com.iamhere.platform.func.DmlOperationWrapper;
++
++import junit.framework.Test;
++import junit.framework.TestCase;
++import junit.framework.TestSuite;
++
++public class PostObjectTest extends TestCase {
++	/**
++	 * Create the test case
++	 *
++	 * @param testName
++	 *            name of the test case
++	 */
++	public PostObjectTest(String testName) {
++		super(testName);
++	}
++
++	/**
++	 * @return the suite of tests being tested
++	 */
++	public static Test suite() {
++		return new TestSuite(PostObjectTest.class);
++	}
++
++	/**
++	 * Create a new post and save to db?
++	 */
++	public void testCreateNewPost() {
++		UserObject user = new UserObject("54fcc61fe221fd609e77ab6c");
++		PostObject post = new PostObject(user, "Sample Post", "Around SSF", 1);
++		post.setCost(2.0); // it should be required and we need verify
++		post.setStatus(PostStatus.OPEN); // it should be a required field too
++		post.setNumberOfOrders(0); // should not allow to set the value
++		post.setLastModifiedBy(user);
++		DmlOperationWrapper dmlState = post.save();
++		assertTrue(dmlState.isBulkSuccess());
++		assertNotNull(
++				"The post should be created succesfully and assign a objectId",
++				post.getId());
++		System.out.println("The post id is: " + post.getId());
++		//
++		// DateTime current = DateTime.now();
++		// RecurEventInfo recur = new RecurEventInfo(current);
++		// recur.setRecur(true); // when recur is true the interval information
++		// has to be set
++		// recur.setRecurOffset(1);
++		// recur.setRecurUnit(TimeUnit.DAYS);
++		//
++		// post.setPeriod(recur);
++	}
++
++	public void testUpdateExistingPost() throws Exception {
++		UserObject user = new UserObject("54fcc61fe221fd609e77ab6c");
++		PostObject post = new PostObject("54fccd0ee221fd7ca43f2398");
++		post = post.load();
++		post.setCost(2.0); // it should be required and we need verify
++		post.setStatus(PostStatus.CLOSE); // it should be a required field too
++		post.setLastModifiedBy(user);
++		DmlOperationWrapper dmlState = post.save();
++		assertTrue(dmlState.isBulkSuccess());
++		assertEquals("The post id should not be changed",
++				"54fccd0ee221fd7ca43f2398", post.getId());
++	}
++	
++	public void testCreateNewPostComment() {
++		UserObject user = new UserObject("54fcc61fe221fd609e77ab6c");
++		PostObject post = new PostObject("54fccd0ee221fd7ca43f2398");
++		PostComment comment = new PostComment(post, "I add comment hahshsha");
++		comment.setCreatedBy(user);
++		DmlOperationWrapper state = comment.save();
++		assertTrue(state.isBulkSuccess());
++		assertNotNull("The comment id should not be null", comment.getId());
++		System.out.println("The comment id is : "  + comment.getId());
++	}
++	
++	public void testUpdateExistingPostComment() throws Exception {
++		PostComment comment = new PostComment("54fce395e221fd35c2af216c");
++		comment = comment.load();
++		comment.setCommentBody("I want to update my comment");
++		DmlOperationWrapper state = comment.save();
++		assertTrue(state.isBulkSuccess());
++	}
++	
++	public void testRemoveExistingPostComment() throws Exception {
++		PostComment comment = new PostComment("54fce435e221fd37600c6940");
++		boolean removed = comment.remove();
++		assertTrue("removed should successful", removed);
++	}
++}
+\ No newline at end of file
+diff --git a/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/UserManagerTest.java b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/UserManagerTest.java
+new file mode 100644
+index 0000000..54803cf
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/UserManagerTest.java
+@@ -0,0 +1,77 @@
++package com.iamhere.main_platform;
++
++import junit.framework.Test;
++import junit.framework.TestCase;
++import junit.framework.TestSuite;
++import com.iamhere.entities.UserObject;
++import com.iamhere.platform.func.DmlOperationWrapper;
++
++public class UserManagerTest extends TestCase
++{
++/**
++ * Create the test case
++ *
++ * @param testName name of the test case
++ */
++public UserManagerTest( String testName )
++{
++    super( testName );
++}
++
++/**
++ * @return the suite of tests being tested
++ */
++public static Test suite()
++{
++    return new TestSuite( PostObjectTest.class );
++}
++
++/**
++ * Create a new user and save to db
++ * @throws Exception 
++ */
++public void testCreateNewUser()
++{
++	UserObject user = new UserObject("Jassica", "admin", "jassica_jiafei@163.com", "test1234");
++	user.setActiveScore(10000);
++	user.setAlias("jadmin");
++	user.setCreditInfo(10000);
++	user.setRole("admin");
++	DmlOperationWrapper dmlOperationState = user.save();
++	assertTrue("Save should succeed", dmlOperationState.isBulkSuccess());
++	assertNotNull("User should be saved successfully", user.getId());
++	System.out.println("Newly created user id is: " + user.getId());
++}
++
++//	public static void main(String[] args) {
++//		// UserObject user1 = new UserObject("User1", "LastName",
++//		// "test@test.com",
++//		// "123456");
++//		// // UserManager um = new UserManager(new MongoDbProvider());
++//		// try {
++//		// user1.save();
++//		// System.out.println("Save is done");
++//		// user1.setEmail("testUpdate@test.com");
++//		// user1.save();
++//		// // um.createNewUsers(new UserObject[] { user1 });
++//		// // UserObject[] allUsers = um.getAllUsers();
++//		// // for (UserObject user: allUsers) {
++//		// // System.out.println(user.getEmail());
++//		// // }
++//		// // um.removeUsers(new UserObject[] { user1 });
++//		// } catch (Exception e) {
++//		// // TODO Auto-generated catch block
++//		// e.printStackTrace();
++//		// }
++//
++//		UserObject user = new UserObject("54f28f36e221fd10f166f952");
++//		try {
++//			user = user.load();
++//			user.setActiveScore(100);
++//			user.save();
++//		} catch (Exception e) {
++//			// TODO Auto-generated catch block
++//			e.printStackTrace();
++//		}
++//	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/UserObjectTest.java b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/UserObjectTest.java
+new file mode 100644
+index 0000000..b81f985
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/src/test/java/com/iamhere/main_platform/UserObjectTest.java
+@@ -0,0 +1,56 @@
++package com.iamhere.main_platform;
++
++import com.iamhere.entities.UserObject;
++import com.iamhere.platform.func.DmlOperationWrapper;
++
++import junit.framework.Test;
++import junit.framework.TestCase;
++import junit.framework.TestSuite;
++
++public class UserObjectTest extends TestCase {
++	/**
++	 * Create the test case
++	 *
++	 * @param testName name of the test case
++	 */
++	public UserObjectTest( String testName )
++	{
++	    super( testName );
++	}
++
++	/**
++	 * @return the suite of tests being tested
++	 */
++	public static Test suite()
++	{
++	    return new TestSuite( PostObjectTest.class );
++	}
++
++	/**
++	 * Create a new user and save to db
++	 * @throws Exception 
++	 */
++	public void testCreateNewUser()
++	{
++		UserObject user = new UserObject("George", "admin", "test@hotmail.com", "test1234");
++		user.setActiveScore(10000);
++		user.setAlias("gadmin");
++		user.setCreditInfo(10000);
++		user.setRole("admin");
++		DmlOperationWrapper dmlOperationState = user.save();
++		assertTrue("Save should succeed", dmlOperationState.isBulkSuccess());
++		assertNotNull("User should be saved successfully", user.getId());
++		System.out.println("Newly created user id is: " + user.getId());
++		// 54fd1a2be221fd5112e3fb61
++	}
++	
++	public void testUpdateExistingUser() throws Exception
++	{
++		UserObject user = new UserObject("54fcc61fe221fd609e77ab6c");
++		user = user.load();
++		user.setActiveScore(80000);
++		DmlOperationWrapper dmlOperationState = user.save();
++		assertTrue("Save should succeed", dmlOperationState.isBulkSuccess());
++		assertEquals("User should be saved successfully", "54fcc61fe221fd609e77ab6c", user.getId());
++	}
++}
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/EntityObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/EntityObject.class
+new file mode 100644
+index 0000000..cc3cfd6
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/EntityObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/OrderObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/OrderObject.class
+new file mode 100644
+index 0000000..a2101b3
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/OrderObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/PostComment.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/PostComment.class
+new file mode 100644
+index 0000000..91278db
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/PostComment.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/PostObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/PostObject.class
+new file mode 100644
+index 0000000..6135321
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/PostObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/RecurEventInfo.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/RecurEventInfo.class
+new file mode 100644
+index 0000000..7144e18
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/RecurEventInfo.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/UserObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/UserObject.class
+new file mode 100644
+index 0000000..ea861f4
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/entities/UserObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/DMLEvents.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/DMLEvents.class
+new file mode 100644
+index 0000000..3f79405
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/DMLEvents.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/PostStatus.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/PostStatus.class
+new file mode 100644
+index 0000000..a1f683d
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/PostStatus.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/TimeUnit.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/TimeUnit.class
+new file mode 100644
+index 0000000..5d835d0
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/enums/TimeUnit.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/App.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/App.class
+new file mode 100644
+index 0000000..5befbf7
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/App.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/PostBuilder.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/PostBuilder.class
+new file mode 100644
+index 0000000..52d481a
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/PostBuilder.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/PostBuilderDirector.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/PostBuilderDirector.class
+new file mode 100644
+index 0000000..bc3e7a5
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/PostBuilderDirector.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/ProvidePostBuilder.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/ProvidePostBuilder.class
+new file mode 100644
+index 0000000..a1362f0
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/ProvidePostBuilder.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/RequestPostBuilder.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/RequestPostBuilder.class
+new file mode 100644
+index 0000000..31373c1
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/main_platform/RequestPostBuilder.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBEntityObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBEntityObject.class
+new file mode 100644
+index 0000000..cc1315d
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBEntityObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBOrderObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBOrderObject.class
+new file mode 100644
+index 0000000..ba30460
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBOrderObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBPostComment.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBPostComment.class
+new file mode 100644
+index 0000000..e4b2eed
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBPostComment.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBPostObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBPostObject.class
+new file mode 100644
+index 0000000..a29a585
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBPostObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBUserObject.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBUserObject.class
+new file mode 100644
+index 0000000..8bd3129
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/mongodb/entities/DBUserObject.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/DBContext.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/DBContext.class
+new file mode 100644
+index 0000000..5d0cadc
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/DBContext.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/DatabaseProvider.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/DatabaseProvider.class
+new file mode 100644
+index 0000000..f21f297
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/DatabaseProvider.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/IDBContext.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/IDBContext.class
+new file mode 100644
+index 0000000..ce0c80f
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/IDBContext.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/MongoDbProvider.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/MongoDbProvider.class
+new file mode 100644
+index 0000000..4a9d57c
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/adapters/MongoDbProvider.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/BulkEntityOperations.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/BulkEntityOperations.class
+new file mode 100644
+index 0000000..c1f44fb
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/BulkEntityOperations.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/DmlOperationWrapper.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/DmlOperationWrapper.class
+new file mode 100644
+index 0000000..ec67f08
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/DmlOperationWrapper.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/DmlValidationHandler.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/DmlValidationHandler.class
+new file mode 100644
+index 0000000..aa112bc
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/platform/func/DmlValidationHandler.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/relationships/Follow.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/relationships/Follow.class
+new file mode 100644
+index 0000000..9150c31
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/relationships/Follow.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/relationships/Like.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/relationships/Like.class
+new file mode 100644
+index 0000000..98cc832
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/relationships/Like.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/Entity.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/Entity.class
+new file mode 100644
+index 0000000..ff47069
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/Entity.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/PostManager.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/PostManager.class
+new file mode 100644
+index 0000000..7302e5b
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/PostManager.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/ProvidePost.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/ProvidePost.class
+new file mode 100644
+index 0000000..b3ae02e
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/ProvidePost.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/RequestPost.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/RequestPost.class
+new file mode 100644
+index 0000000..0233b02
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/RequestPost.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/TimeInterval$TimeUnit.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/TimeInterval$TimeUnit.class
+new file mode 100644
+index 0000000..258d9c0
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/TimeInterval$TimeUnit.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/TimeInterval.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/TimeInterval.class
+new file mode 100644
+index 0000000..76a35d9
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/TimeInterval.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/UserManager.class b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/UserManager.class
+new file mode 100644
+index 0000000..b717ae8
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/classes/com/iamhere/trashbin/UserManager.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/main-platform-0.0.1-SNAPSHOT.jar b/Web/eclipse-workspaces/main-platform/target/main-platform-0.0.1-SNAPSHOT.jar
+new file mode 100644
+index 0000000..91be7e2
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/main-platform-0.0.1-SNAPSHOT.jar differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/maven-archiver/pom.properties b/Web/eclipse-workspaces/main-platform/target/maven-archiver/pom.properties
+new file mode 100644
+index 0000000..474789b
+--- /dev/null
++++ b/Web/eclipse-workspaces/main-platform/target/maven-archiver/pom.properties
+@@ -0,0 +1,5 @@
++#Generated by Maven
++#Tue Feb 10 22:08:34 PST 2015
++version=0.0.1-SNAPSHOT
++groupId=com.iamhere
++artifactId=main-platform
+diff --git a/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/AppTest.class b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/AppTest.class
+new file mode 100644
+index 0000000..8490b91
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/AppTest.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/PostObjectTest.class b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/PostObjectTest.class
+new file mode 100644
+index 0000000..c5bc1bc
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/PostObjectTest.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/UserManagerTest.class b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/UserManagerTest.class
+new file mode 100644
+index 0000000..b2babdd
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/UserManagerTest.class differ
+diff --git a/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/UserObjectTest.class b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/UserObjectTest.class
+new file mode 100644
+index 0000000..38faedf
+Binary files /dev/null and b/Web/eclipse-workspaces/main-platform/target/test-classes/com/iamhere/main_platform/UserObjectTest.class differ
