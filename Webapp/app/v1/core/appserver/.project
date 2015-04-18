@@ -42,7 +42,7 @@
 	<variableList>
 		<variable>
 			<name>JAVA_HOME</name>
-			<value>file:/home/yucheng-slave/Amher/Web/tools/jdk/Linux/jdk1.7.0_80</value>
+			<value>file:/home/yucheng-slave/Yummet/Webapp/tools/jdk/Linux/jdk1.7.0_80</value>
 		</variable>
 	</variableList>
 </projectDescription>
