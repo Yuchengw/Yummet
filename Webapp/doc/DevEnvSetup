@@ -1,0 +1,23 @@
+<1> Create External Tools Configuration:
+
+1) Location: Yummet specific maven location:
+/home/yucheng-slave/Amher/Web/tools/apache-maven-3.3.1/bin/mvn
+
+2) Working Directory: Yumment specific server code location:
+/home/yucheng-slave/Amher/Web/app/1/main/core/appserver
+
+3)Arguments:
+clean jetty:run
+
+4) Create Environment variable: MAVEN_OPTS
+-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
+
+<2> Create Debug Configuration:
+
+1) Setup the project
+
+2) Connection Type: Standard(Socket Attach)
+
+3) Connection Properties:
+Host: localhost
+Port: 4000
