@@ -1,0 +1,35 @@
+This document is for platform improvements.
+
+1. EntityObject: 
+1) P2: Divide dml save to pre-db and db-validation
+2) P1: Remove function works as long as id information is provided
+
+
+2. OrderObject & DBOrderObject: 
+1) P3: Add the bargain feature
+2) P2: Both jia and yi can modify the cost to support bargain
+3) P1: Only yi can modify quantity 
+4) P1. Only yi can rate on the order
+5) P2: Only jia can modify order status
+
+3. PostComment & DBPostComment:
+1) P3: Limit the comment length
+2) 
+
+4. PostObject & DBPostObject:
+1) If the expire date is not set, it should be treated as no end event
+2) P2: When the food mentioned in the post has expired, automatically update the post status
+
+5. UserObject & DBUserObject:
+1) P2: Alias can be automatically set by the system
+2) P1: Check if a user already exists in the system to make sure email address is unique all the time
+3) P1: Validation on the email address. Send an email out to verify if current email is correct
+4) P1: Db save should include checking if current email address is already used
+
+6.  MongoDbProvider:
+1) P2: Bulk support for some function. Bulk for delete is done.
+2) P1: Transaction add
+3) P2: Lock (I think mongo db did it automatically but need double check)
+4) (DONE) P1: Update the Remove the function to allow remove directly from id 
+
+
