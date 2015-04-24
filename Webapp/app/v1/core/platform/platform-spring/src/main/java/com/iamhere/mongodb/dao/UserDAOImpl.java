@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.iamhere.mongodb.entities.DBUserObject;
 import com.mongodb.WriteResult;
 
+@Deprecated
 @Repository("userDaoImpl")
 public class UserDAOImpl implements UserDAO {
 	@Resource

@@ -41,3 +41,13 @@ The whole platform is divided to packages:
 
 8. Transhbin: Contain all old framework information which I did not plan to use any more.
 
+9. Cache: Management of the cache so that we will reduce the number of db access
+1) CacheManager: The interface of the cache system. It lists the major functions the cache provider need support.
+2) RedisProvider: The Redis implementation of the cache service. 
+Will add session management in the future.
+3) AbstractBaseRedisDao: A simple implementation of the redis service management
+4) RedisService: Deprecated redise support for the cache
+
+10. Utilities: All the methods can be used cross board
+
+11. Mongodb.Dao and Mongodb.repositories: @Deprecated 

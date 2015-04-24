@@ -1,5 +1,6 @@
 package com.iamhere.entities;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,10 +20,15 @@ import com.iamhere.platform.func.DmlValidationHandler;
  * @author jassica
  *
  */
-public abstract class EntityObject {
+public abstract class EntityObject implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6011241820070393952L;  
 	private String id;
 	private DateTime createdDate;
 	private DateTime lastModifiedDate;
+	private String cacheKey;	// The cache identifier for the cache management system
 
 	// Primary getter and setters
 	public void setId(String id) {
@@ -31,6 +37,14 @@ public abstract class EntityObject {
 
 	public String getId() {
 		return id;
+	}
+	
+	public String getCacheKey() {
+		return cacheKey;
+	}
+
+	public void setCacheKey(String cacheKey) {
+		this.cacheKey = cacheKey;
 	}
 
 	public DateTime getCreatedDate() {
