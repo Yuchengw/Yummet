@@ -22,34 +22,4 @@ angular.module('signupApp', ['ngAnimate'])
     // show success message
     $scope.showMessage = true;
   };
-}])
-.directive('shakeThat', ['$animate', function($animate) {
-  return {
-    require: '^form',
-    scope: {
-      submit: '&',
-      submitted: '='
-    },
-    link: function(scope, element, attrs, form) {
-      // listen on submit event
-      element.on('signupFormSubmit', function() {
-        // tell angular to update scope
-    	  console.log("Submit in controller's directive");
-        scope.$apply(function() {
-      	  console.log("Submit in controller's directive");
-          // everything ok -> call submit from controller
-          if (form.$valid) {
-        	  return scope.submit();
-        	  // TODO: Add callback for checking errors from server side
-          }
-          // show error messages on submit
-          scope.submitted = true;
-          // shake that form
-          $animate.addClass(element, 'shake', function() {
-            $animate.removeClass(element, 'shake');
-          });
-        });
-      });
-    }
-  };
 }]);

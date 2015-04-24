@@ -20,9 +20,9 @@ public class PostCommentProvider {
 	static {
 		allPostComments = new PostCommentList();
 		Post p1 = new Post("1", new User("1", "Yucheng", "Wang",
-				"ycwmike@gmail.com"), "Post1", "China", 1);
+				"ycwmike@gmail.com", "1234"), "Post1", "China", 1);
 		Post p2 = new Post("2", new User("2", "George", "Lin",
-				"gglin@gmail.com"), "Post2", "USA", 2);
+				"gglin@gmail.com", "1234"), "Post2", "USA", 2);
 		PostComment pm1 = new PostComment("1", p1,  "PostComment1");
 		PostComment pm2 = new PostComment("2", p2, "PostComment2");
 		allPostComments.add(pm1);
