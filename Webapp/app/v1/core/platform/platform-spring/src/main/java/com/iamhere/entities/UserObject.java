@@ -1,8 +1,5 @@
 package com.iamhere.entities;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-
 import org.joda.time.DateTime;
 
 import com.iamhere.mongodb.entities.DBEntityObject;
@@ -54,7 +51,6 @@ public class UserObject  extends EntityObject {
 		setEmail(email);
 	}
 
-	// Getters and setters
 	public String getFirstName() {
 		return firstName;
 	}
@@ -79,6 +75,8 @@ public class UserObject  extends EntityObject {
 
 	public void setEmail(String email) {
 		this.email = email;
+		// override cache key to be the email address 
+		setCacheKey(email);
 		dbUser.setEmail(email);
 	}
 
@@ -142,59 +140,6 @@ public class UserObject  extends EntityObject {
 
 	public void setEmailAuthorized(boolean isEmailAuthorized) {
 		this.isEmailAuthorized = isEmailAuthorized;
-	}
-	/**
-	 * =============== Validation of Fields
-	 */
-	/*
-	 * Verify the email.
-	 * 1. The format of the email should be correct
-	 * 2. The email should not be used by any one else
-	 */
-	@SuppressWarnings("finally")
-	public boolean validateEmail() {
-		boolean isValid = false;
-		try {
-			//
-			// Create InternetAddress object and validated the supplied
-			// address which is this case is an email address.
-			InternetAddress internetAddress = new InternetAddress(email);
-			internetAddress.validate();
-			isValid = !isAlreadyExist();
-		} catch (AddressException e) {
-			// TODO: need change it to log
-			System.out
-					.println(" Email Address Exception for: "
-							+ email);
-		} finally {
-			return isValid;
-		}
-	}
-
-	/**
-	 * Validates the password and get the strength score of it 
-	 * Z = characters, S = numbers, T = special characters
-	 * @return
-	 */
-	public double validatePassword() {
-		String regexZ = "\\d*";  
-        String regexS = "[a-zA-Z]+";  
-        String regexT = "\\W+$";  
-        String regexZT = "\\D*";  
-        String regexST = "[\\d\\W]*";  
-        String regexZS = "\\w*";  
-        String regexZST = "[\\w\\W]*";  
-  
-        if (password.matches(regexZ) || password.matches(regexS) || password.matches(regexT)) {  
-        	return 1.0;
-        }  
-        if (password.matches(regexZT) || password.matches(regexST) || password.matches(regexZS) ) {  
-            return 3.0;
-        }  
-        if (password.matches(regexZST)) {  
-            return 5.0;
-        }  
-        return 0;
 	}
 
 	/**

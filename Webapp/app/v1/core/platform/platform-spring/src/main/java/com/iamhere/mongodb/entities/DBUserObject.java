@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.iamhere.entities.UserObject;
 import com.iamhere.enums.DMLEvents;
-import com.iamhere.platform.adapters.DBContext;
+import com.iamhere.platform.adapters.SystemContext;
 import com.iamhere.platform.adapters.DatabaseProvider;
 import com.iamhere.platform.func.DmlValidationHandler;
 
@@ -131,7 +131,7 @@ public class DBUserObject extends DBEntityObject {
 	 */
 	public boolean isEmailUsed() {
 		// verify if the email address is already used
-		DatabaseProvider dbContext = DBContext.getContext();
+		DatabaseProvider dbContext = SystemContext.getContext();
 		Map<String, Object> maps = new HashMap<String, Object>();
 		maps.put("Email", getEmail());
 		boolean isExist = false;

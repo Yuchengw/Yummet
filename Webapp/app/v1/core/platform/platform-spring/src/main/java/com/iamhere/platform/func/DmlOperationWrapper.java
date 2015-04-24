@@ -9,6 +9,8 @@ import java.util.Map;
 
 import com.iamhere.entities.EntityObject;
 import com.iamhere.enums.DMLEvents;
+import com.iamhere.platform.adapters.MongoDbProvider;
+import com.iamhere.utilities.LogUtil;
 
 /**
  * Hold DML related information:
@@ -21,11 +23,9 @@ public class DmlOperationWrapper {
 
 	private final List<EntityObject> originalEntityObjects;
 	private final Map<EntityObject, DmlValidationHandler> validationHandlers;
-
 	private boolean hasError = false;
-
 	// private final DMLEvents dmlType;
-
+	
 	public DmlOperationWrapper(
 			Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
 		this.originalEntityObjects = Collections
@@ -47,8 +47,10 @@ public class DmlOperationWrapper {
 			handler.validate();
 			if (handler.isCurrenctlyValid()) {
 				validEntities.add(eo);
+				LogUtil.getInstance(DmlOperationWrapper.class).debug("Save validation pass for record ==> " + eo);
 			} else {
 				hasError = true;
+				LogUtil.getInstance(DmlOperationWrapper.class).debug("Save validation with error message  for record ==> " + handler.getErrorMessages());
 			}
 		}
 		return Collections.unmodifiableList(validEntities);
