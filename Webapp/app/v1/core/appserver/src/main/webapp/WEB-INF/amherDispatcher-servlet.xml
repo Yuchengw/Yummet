@@ -78,6 +78,11 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!--  Add this for login purpose -->
+	<bean id="loginController" class="com.amher.bean.rest.controller.LoginControllerImpl">
+	</bean>
+	
 	<!-- Please don't remove following beans, we may need them later:) -->
 
 	<!-- jave To Spring XML Bean Mapping through JaxB2Marshaller -->

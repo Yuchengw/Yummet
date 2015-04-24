@@ -15,8 +15,8 @@ public class UserProvider {
 
 	static {
 		allUsers = new UserList();
-		User u1 = new User("1", "Yucheng", "Wang", "ycwmike@gmail.com");
-		User u2 = new User("2", "George", "Lin", "gglin@gmail.com");
+		User u1 = new User("1", "Yucheng", "Wang", "ycwmike@gmail.com","1234");
+		User u2 = new User("2", "George", "Lin", "gglin@gmail.com","1234");
 		allUsers.add(u1);
 		allUsers.add(u2);
 	}
@@ -47,5 +47,18 @@ public class UserProvider {
 	public void update(String index, User newUser) {
 		List<User> allUserList = allUsers.getUsers();
 		allUserList.set(Integer.parseInt(index), newUser);
+	}
+	
+	/**
+	 * find user by user's name
+	 * */
+	public User findByUserName(String username) {
+		List<User> allUserList = allUsers.getUsers();
+		for (User user: allUserList) {
+			if (user.getEmail().equals(username)) {
+				return user;
+			}
+		}
+		return null;
 	}
 }
