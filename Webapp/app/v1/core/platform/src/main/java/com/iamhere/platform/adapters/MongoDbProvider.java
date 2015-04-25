@@ -17,6 +17,7 @@ import com.iamhere.mongodb.entities.DBEntityObject;
 import com.iamhere.mongodb.entities.DBPostComment;
 import com.iamhere.mongodb.entities.DBPostObject;
 import com.iamhere.mongodb.entities.DBUserObject;
+import com.iamhere.utilities.LogUtil;
 
 /**
  * Mongo DB implementation for the DB functions
@@ -25,20 +26,11 @@ import com.iamhere.mongodb.entities.DBUserObject;
  *
  */
 public class MongoDbProvider implements DatabaseProvider {
-
 	public RegistrationBean registrationBean;
-	private ClassPathXmlApplicationContext context;
-	private MongoTemplate mongoOps;
-
+	// Auto threadsafe singleton pattern
+	private static final MongoTemplate mongoOps = (MongoTemplate) new ClassPathXmlApplicationContext("spring.xml").getBean("mongoTemplate");
 
 	public MongoDbProvider() {
-		context = new ClassPathXmlApplicationContext("spring.xml");
-		mongoOps = (MongoTemplate) context.getBean("mongoTemplate");
-	}
-
-	@Override
-	public Object getInstance() {
-		return context;
 	}
 
 	@Override
@@ -96,6 +88,7 @@ public class MongoDbProvider implements DatabaseProvider {
 	 * @return
 	 */
 	private Query createQueryBasedOnMap(Map<String, Object> queryInfo) {
+		LogUtil.getInstance(MongoDbProvider.class).debug("Query record with information => " + queryInfo);
 		Query query = new Query();
 		Criteria criteria = null;
 		for (String key : queryInfo.keySet()) {
@@ -104,6 +97,7 @@ public class MongoDbProvider implements DatabaseProvider {
 			} else {
 				criteria.and(key).is(queryInfo.get(key));
 			}
+			LogUtil.getInstance(MongoDbProvider.class).debug("Query record with criteria => key -  " + key + "; value - " + queryInfo.get(key) );
 		}
 		query.addCriteria(criteria);
 		return query;
@@ -115,10 +109,11 @@ public class MongoDbProvider implements DatabaseProvider {
 			return;
 		}
 		int numberOfRecordsSaved = 0;
-
+		LogUtil.getInstance(MongoDbProvider.class).debug("Start saving " + records.length + " records => " );
 		for (EntityObject record : records) {
 			mongoOps.save(record.getDbObject());
 			numberOfRecordsSaved++;
+			LogUtil.getInstance(MongoDbProvider.class).debug("Saving " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
 			// TODO: how to make bulk happen
 		}
 		assert (numberOfRecordsSaved == records.length);
@@ -131,9 +126,11 @@ public class MongoDbProvider implements DatabaseProvider {
 			return;
 		}
 		int numberOfRecordsSaved = 0;
+		LogUtil.getInstance(MongoDbProvider.class).debug("Start inserting " + records.length + " records => " );
 		for (EntityObject record : records) {
 			mongoOps.save(record.getDbObject());
 			numberOfRecordsSaved++;
+			LogUtil.getInstance(MongoDbProvider.class).debug("Inserting " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
 			// TODO: how to make bulk happen
 		}
 		assert (numberOfRecordsSaved == records.length);
@@ -150,9 +147,11 @@ public class MongoDbProvider implements DatabaseProvider {
 			return;
 		}
 		int numberOfRecordsSaved = 0;
+		LogUtil.getInstance(MongoDbProvider.class).debug("Start removing " + records.length + " records => " );
 		for (EntityObject record : records) {
 			mongoOps.remove(record.getDbObject());
 			numberOfRecordsSaved++;
+			LogUtil.getInstance(MongoDbProvider.class).debug("Removing " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
 		}
 		// As remove is using filters on the object all fields, we need either
 		// pass in the whole object matching information or switch the passin
@@ -174,7 +173,7 @@ public class MongoDbProvider implements DatabaseProvider {
 	public boolean exists(String tablename,  Map<String, Object> queryInfo, EntityObject record)
 			throws Exception {
 		Query query = createQueryBasedOnMap(queryInfo);
-
+		LogUtil.getInstance(MongoDbProvider.class).debug("Calling MongoDb Exist function on record => " + record.getDbObject().toString() );
 		return  mongoOps.exists(
 				query, record.getDbObject().getClass());
 	}

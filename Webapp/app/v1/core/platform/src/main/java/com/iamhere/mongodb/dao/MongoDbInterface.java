@@ -3,6 +3,7 @@ package com.iamhere.mongodb.dao;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public interface MongoDbInterface<T> {
     /**
      * Insert records to the database

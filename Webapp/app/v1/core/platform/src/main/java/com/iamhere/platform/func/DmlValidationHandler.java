@@ -52,4 +52,16 @@ public class DmlValidationHandler {
 		return dmlType;
 	}
 	
+	/**
+	 * Flat the error message and return it
+	 * @return
+	 */
+	public String getErrorMessages() {
+		StringBuffer toStringMessage = new StringBuffer("");
+		for (String error: errorMessages) {
+			toStringMessage.append(error);
+		}
+		return toStringMessage.toString();
+	}
+	
 }

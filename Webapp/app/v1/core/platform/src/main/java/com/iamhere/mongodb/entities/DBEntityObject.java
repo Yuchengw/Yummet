@@ -1,5 +1,6 @@
 package com.iamhere.mongodb.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,8 @@ import com.iamhere.platform.func.DmlValidationHandler;
  * @author jassica
  *
  */
-public abstract class DBEntityObject  {
+public abstract class DBEntityObject implements Serializable {
+	private static final long serialVersionUID =  -1267719235225203410L;  
 	@Id
 	private String id;
 	private Date createdDate;

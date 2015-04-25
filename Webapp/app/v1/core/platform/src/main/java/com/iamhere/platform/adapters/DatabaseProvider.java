@@ -12,12 +12,6 @@ import com.iamhere.entities.EntityObject;
  */
 public interface DatabaseProvider {
 	/**
-	 * Return the Database connection
-	 * @return
-	 */
-	public Object getInstance();
-
-	/**
 	 * Get all the records for a certain table and map all the information in @EntityObject format
 	 * @param tableName
 	 * @param info
