@@ -1,6 +1,7 @@
 package com.iamhere.platform.adapters;
 
 import com.iamhere.cache.CacheManager;
+import com.iamhere.cache.RedisDataSourceCacheManager;
 import com.iamhere.cache.RedisProvider;
 
 /**
@@ -22,6 +23,8 @@ public class SystemContext {
 	 * @return
 	 */
 	public static CacheManager getCacheContext() {
-		return RedisProvider.getInstance();
+		//return RedisProvider.getInstance();
+		// try the pool connection settings
+		return new RedisDataSourceCacheManager();
 	}
 }

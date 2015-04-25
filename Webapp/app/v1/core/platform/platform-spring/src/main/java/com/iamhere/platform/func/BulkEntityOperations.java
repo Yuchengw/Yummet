@@ -24,6 +24,7 @@ import com.iamhere.utilities.LogUtil;
 public class BulkEntityOperations {
 	/**
 	 * Bulk save a collection of entities
+	 * 
 	 * @param entityObjects
 	 * @param dmlType
 	 * @return
@@ -42,6 +43,7 @@ public class BulkEntityOperations {
 
 	/**
 	 * Bulk load a collection of entities
+	 * 
 	 * @param entityObjects
 	 * @return
 	 */
@@ -64,25 +66,42 @@ public class BulkEntityOperations {
 			EntityObject cacheEo = cacheContext.get(eo);
 			if (cacheEo != null) {
 				reload.add(cacheEo);
-			}
-			else {
+			} else {
 				needLoadFromDb.add(eo);
 			}
 		}
-		DatabaseProvider dbContext = SystemContext.getContext();
-		for (EntityObject eo : needLoadFromDb) {
-			DBEntityObject dbEo = eo.getDbObject();
-			List<EntityObject> queryResults = dbContext.getRecordsBasedOnQuery(
-					dbEo.getDbTableName(), eo, dbEo.getFieldsAndValues());
-			// TODO the return result should be greater 1 or exactly 1?
-			if (queryResults != null && queryResults.size() > 0) {
-				LogUtil.getInstance(BulkEntityOperations.class)
-						.debug("The query returns more than 1 result. And we will only get the first one. <==");
-				eo = queryResults.get(0);
-				reload.add(queryResults.get(0));
-			} else {
-				LogUtil.getInstance(BulkEntityOperations.class).debug(
-						"The query find nothing. <==");
+		
+		// Load from db if there is any record information cannot be found under cache
+		if (!needLoadFromDb.isEmpty()) {
+			DatabaseProvider dbContext = SystemContext.getContext();
+			for (EntityObject eo : needLoadFromDb) {
+				DBEntityObject dbEo = eo.getDbObject();
+				List<EntityObject> queryResults = dbContext
+						.getRecordsBasedOnQuery(dbEo.getDbTableName(), eo,
+								dbEo.getFieldsAndValues());
+				// TODO the return result should be greater 1 or exactly 1?
+				if (queryResults != null && queryResults.size() > 0) {
+					LogUtil.getInstance(BulkEntityOperations.class)
+							.debug("The query returns more than 1 result. And we will only get the first one. <==");
+					eo = queryResults.get(0);
+					reload.add(eo);
+					try {
+					boolean cacheStatus = cacheContext.insert(eo);
+					if (cacheStatus) {
+						LogUtil.getInstance(BulkEntityOperations.class)
+						.debug("Update cache with the new db values Succeeds<==");
+					} else {
+						LogUtil.getInstance(BulkEntityOperations.class)
+						.debug("Update cache with the new db values Fails <==");
+					}
+					} catch (Exception e) {
+						LogUtil.getInstance(BulkEntityOperations.class)
+						.debug("Update cache with the new db values Fails <=="  + e.getStackTrace());
+					}
+				} else {
+					LogUtil.getInstance(BulkEntityOperations.class).debug(
+							"The query find nothing. <==");
+				}
 			}
 		}
 		return reload;
@@ -98,7 +117,8 @@ public class BulkEntityOperations {
 		// TODO: change it to bulk
 		DatabaseProvider dbContext = SystemContext.getContext();
 		CacheManager cacheContext = SystemContext.getCacheContext();
-		// We assume a collection items will be saved and we will do them one by one
+		// We assume a collection items will be saved and we will do them one by
+		// one
 		// TODO: hash against the entity to make bulk really happens
 		for (EntityObject eo : afterFirstValidationObjects) {
 			try {
