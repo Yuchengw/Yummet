@@ -8,5 +8,6 @@ import com.iamhere.mongodb.entities.DBUserObject;
  * @author jassica
  *
  */
+@Deprecated
 public interface UserDAO extends MongoDbInterface<DBUserObject> {
 }

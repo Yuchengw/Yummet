@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.iamhere.mongodb.repositories.UserRepository;
 
+@Deprecated
 @Component
 public class RegistrationBean {
 	@Autowired
