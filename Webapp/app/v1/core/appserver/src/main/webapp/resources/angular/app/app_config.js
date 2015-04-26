@@ -14,7 +14,8 @@ angular.module('yummet.home',['ngRoute','signupApp'])
                 controller: 'signupAppController'
           })
           .when('/amherpost',{
-        	  	templateUrl: '/rs/angular/app/components/post/post-content.amher'
+       	  	templateUrl: '/rs/angular/app/components/post/post-content.amher',
+                controller: 'postAppController'
           });
 })
 .controller('cfgController',function($scope){
