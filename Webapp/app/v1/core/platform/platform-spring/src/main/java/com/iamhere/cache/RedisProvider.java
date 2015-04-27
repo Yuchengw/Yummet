@@ -3,12 +3,17 @@ package com.iamhere.cache;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.util.Assert;
+
+import redis.clients.jedis.Jedis;
 
 import com.iamhere.entities.EntityObject;
 import com.iamhere.utilities.SerializeUtil;
@@ -117,4 +122,28 @@ public class RedisProvider extends AbstractBaseRedisDao<String, EntityObject>
 		return result != null;
 	}
 
+	/**
+     * Remove all redis data
+     * @return
+     */
+	@Override
+    public String flushDB(){
+        return this.getJedis().flushDB();
+    }
+	
+	  /**
+     * Get a jedis client
+     * @return
+     */
+    private Jedis getJedis(){
+        if(jedis == null){
+            return jedisConnectionFactory.getShardInfo().createResource();
+        }
+        return jedis;
+    }
+
+    private static Jedis jedis;
+	@Autowired
+	@Qualifier("jedisConnectionFactory")
+	private JedisConnectionFactory jedisConnectionFactory;
 }

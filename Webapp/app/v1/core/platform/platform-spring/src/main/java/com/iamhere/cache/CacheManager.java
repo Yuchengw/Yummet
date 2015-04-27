@@ -73,4 +73,10 @@ public interface CacheManager {
 	 * @throws Exception
 	 */
 	public boolean exists(EntityObject record) throws Exception;
+	
+	/**
+	 * Delete the data from cache
+	 * @return
+	 */
+	public String flushDB();
 }

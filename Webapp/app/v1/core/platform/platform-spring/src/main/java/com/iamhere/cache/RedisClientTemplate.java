@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.iamhere.utilities.LogUtil;
 
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
@@ -20,8 +21,7 @@ import ch.qos.logback.classic.Logger;
 
 @Repository("redisClientTemplate")
 public class RedisClientTemplate {
-	// TODO
-    private static final Logger log = (Logger) LoggerFactory.getLogger(RedisClientTemplate.class);
+    private static final Logger log = LogUtil.getInstance(RedisClientTemplate.class);
 
     @Autowired
     private RedisDataSource redisDataSource;

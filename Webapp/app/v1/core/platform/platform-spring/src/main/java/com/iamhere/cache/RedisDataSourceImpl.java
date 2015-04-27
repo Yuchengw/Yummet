@@ -1,17 +1,23 @@
 package com.iamhere.cache;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.iamhere.utilities.LogUtil;
 
 import ch.qos.logback.classic.Logger;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
+/**
+ * 
+ * @author jassica
+ *
+ */
 @Repository("redisDataSource")
 public class RedisDataSourceImpl implements RedisDataSource {
 	// TODO: Change to the log util
-    private static final Logger log = (Logger) LoggerFactory.getLogger(RedisDataSourceImpl.class);
+    private static final Logger log = LogUtil.getInstance(RedisDataSourceImpl.class);
 
     @Autowired
     private ShardedJedisPool shardedJedisPool;
