@@ -2,6 +2,7 @@ package com.iamhere.mongodb.entities;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.iamhere.entities.RecurEventInfo;
@@ -32,7 +33,7 @@ public class DBPostObject extends DBEntityObject {
 	private String creator;
 	private String lastModifiedBy;
 	private String type;
-	private Date expireDate;
+	private DateTime expireDate;
 
 	public DBPostObject(String id) {
 		setId(id);
@@ -181,11 +182,11 @@ public class DBPostObject extends DBEntityObject {
 		this.type = type;
 	}
 
-	public Date getExpireDate() {
+	public DateTime getExpireDate() {
 		return expireDate;
 	}
 
-	public void setExpireDate(Date expireDate) {
+	public void setExpireDate(DateTime expireDate) {
 		this.expireDate = expireDate;
 	}
 

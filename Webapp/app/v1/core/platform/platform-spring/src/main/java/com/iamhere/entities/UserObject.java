@@ -1,9 +1,9 @@
 package com.iamhere.entities;
 
-import org.joda.time.DateTime;
-
+import com.iamhere.cache.CacheManager;
 import com.iamhere.mongodb.entities.DBEntityObject;
 import com.iamhere.mongodb.entities.DBUserObject;
+import com.iamhere.platform.adapters.SystemContext;
 import com.iamhere.platform.func.DmlValidationHandler;
 import com.iamhere.utilities.TextUtil;
 
@@ -14,6 +14,7 @@ import com.iamhere.utilities.TextUtil;
  *
  */
 public class UserObject  extends EntityObject {
+	private static final long serialVersionUID = -6011241820070393953L;  
 	// private fields
 	private String firstName;
 	private String lastName;
@@ -27,12 +28,9 @@ public class UserObject  extends EntityObject {
 	private String role;
 	private boolean isEmailAuthorized;
 
-	// db object
-	DBUserObject dbUser;
 	
 	public UserObject(String firstName, String lastName, String email,
 			String password) {
-		dbUser = new DBUserObject();
 		// TODO: Assume caller will give no-null-empty values
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -41,13 +39,11 @@ public class UserObject  extends EntityObject {
 		this.setRole("normal");
 	}
 	
-	public UserObject(DBUserObject dbUser) {
-		this.dbUser = dbUser;
-		reloadAllFieldInformationFromDbObject();
+	public UserObject(DBEntityObject dbUser) {
+		reloadAllFieldInformationFromDbObject(dbUser);
 	}
 
 	public UserObject(String email) {
-		this.dbUser = new DBUserObject();
 		setEmail(email);
 	}
 
@@ -57,7 +53,6 @@ public class UserObject  extends EntityObject {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-		dbUser.setFirstName(firstName);
 	}
 
 	public String getLastName() {
@@ -66,7 +61,6 @@ public class UserObject  extends EntityObject {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		dbUser.setLastName(lastName);
 	}
 
 	public String getEmail() {
@@ -77,7 +71,6 @@ public class UserObject  extends EntityObject {
 		this.email = email;
 		// override cache key to be the email address 
 		setCacheKey(email);
-		dbUser.setEmail(email);
 	}
 
 	public double getCreditInfo() {
@@ -86,7 +79,6 @@ public class UserObject  extends EntityObject {
 
 	public void setCreditInfo(double creditInfo) {
 		this.creditInfo = creditInfo;
-		dbUser.setCreditInfo(creditInfo);
 	}
 
 	public String getPhone() {
@@ -95,7 +87,6 @@ public class UserObject  extends EntityObject {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-		dbUser.setPhone(phone);
 	}
 
 	public double getActiveScore() {
@@ -104,7 +95,6 @@ public class UserObject  extends EntityObject {
 
 	public void setActiveScore(double activeScore) {
 		this.activeScore = activeScore;
-		dbUser.setActiveScore(activeScore);
 	}
 
 	public String getPassword() {
@@ -113,7 +103,6 @@ public class UserObject  extends EntityObject {
 
 	public void setPassword(String password) {
 		this.password = password;
-		dbUser.setPassword(password);
 	}
 
 	public String getAlias() {
@@ -122,7 +111,6 @@ public class UserObject  extends EntityObject {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
-		dbUser.setAlias(alias);
 	}
 
 	public String getRole() {
@@ -131,7 +119,6 @@ public class UserObject  extends EntityObject {
 
 	public void setRole(String role) {
 		this.role = role;
-		dbUser.setRole(role);
 	}
 
 	public boolean isEmailAuthorized() {
@@ -147,7 +134,22 @@ public class UserObject  extends EntityObject {
 	 * @return
 	 */
 	public boolean isAlreadyExist() {
-		return dbUser.isEmailUsed();
+		// Check if the user email is already used under cache
+		CacheManager cache = SystemContext.getCacheContext();
+		boolean userIsAlreadyUsed = false;
+		try {
+			userIsAlreadyUsed = cache.exists(this);
+		} catch (Exception e) {
+		}
+		// If the cache match the result, the user should be exist already
+		// However if the cache did not find the result, we need double check for the db
+		if (!userIsAlreadyUsed) {
+			DBUserObject dbUser;
+			dbUser = new DBUserObject();
+			dbUser.setEmail(email);
+			return dbUser.isEmailUsed();
+		} 
+		return true;
 	}
 
 	@Override
@@ -175,16 +177,21 @@ public class UserObject  extends EntityObject {
 
 	@Override
 	public DBEntityObject getDbObject() {
+		DBUserObject dbUser = new DBUserObject();
+		dbUser.setEmail(email);
+		dbUser.setFirstName(firstName);
+		dbUser.setLastName(lastName);
+		dbUser.setCreditInfo(creditInfo);
+		dbUser.setPhone(phone);
+		dbUser.setActiveScore(activeScore);
+		dbUser.setPassword(password);
+		dbUser.setAlias(alias);
+		dbUser.setRole(role);
+		dbUser.setCreatedDate(getCreatedDate());
+		dbUser.setLastModifiedDate(getLastModifiedDate());
 		if (!TextUtil.isNullOrEmpty(getId())) {
 			dbUser.setId(getId());
 		}
-//		dbUser.setActiveScore(getActiveScore());
-//		dbUser.setAlias(getAlias());
-//		dbUser.setCreatedDate(getCreatedDate());
-//		dbUser.setCreditInfo(getCreditInfo());
-//		dbUser.setLastModifiedDate(getLastModifiedDate());
-//		dbUser.setPhone(getPhone());
-//		dbUser.setRole(getRole());
 		return dbUser;
 	}
 	
@@ -194,19 +201,30 @@ public class UserObject  extends EntityObject {
 	}
 	
 	@Override
-	public void reloadAllFieldInformationFromDbObject() {
+	public void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject) {
+		DBUserObject dbUser = (DBUserObject) dbObject;
 		setActiveScore(dbUser.getActiveScore());
 		setAlias(dbUser.getAlias());
-		setCreatedDate(new DateTime(dbUser.getCreatedDate()));
+		setCreatedDate(dbUser.getCreatedDate());
 		setCreditInfo(dbUser.getCreditInfo());
 		setEmail(dbUser.getEmail());
 		setFirstName(getFirstName());
 		setId(dbUser.getId());
-		setLastModifiedDate(new DateTime(dbUser.getLastModifiedDate()));
+		setLastModifiedDate(dbUser.getLastModifiedDate());
 		setLastName(dbUser.getLastName());
 		setPassword(dbUser.getPassword());
 		setPhone(dbUser.getPhone());
 		setRole(dbUser.getRole());
+	}
+
+	@Override
+	public Class<?> getDbClass() {
+		return DBUserObject.class;
+	}
+
+	@Override
+	public String getDbTableName() {
+		return new DBUserObject().getDbTableName();
 	}
 
 	

@@ -1,6 +1,23 @@
 This document is for platform code.
 The whole platform is divided to packages:
 
+May 1st Notes:
+1. EntityObjectWithDbObject: Add one mapping class for the entity class and the database class
+2. Cache save will only save the the entity object instead of including the database object. How to make it happen:
+1) DB object is not one child property of the entity object
+2) Every update on the entity object will only impact entity, and caller need invoke getDBObject to get the db entity info. The save will automatically convert entity object to db object and save to the db.
+3) We need covert the db object to platform entity from  the load call
+4) DB object can also support DateTime from JodaTime as we use MongoTemplate to save the object now
+3. Cache bug fix during the load: 
+1) load the object from cache
+2) If cache has the result return, we will skip db
+3) If cache cannot find match, we will go to db and search for it. After a match found, update the cache as well
+4. Cache bug fix for the user email existence check:
+1) Check the email in the cache. If find a match, return the result immediately
+2) If cache cannot find the record, we still need go to db to make sure the email is not used
+5. Mongodb Load ID fix: Mongotemplate will return the id for the record so that we need reset the object id under the MongoDBProvider instead of BulkOperation
+
+
 1. Entities: It contains all the platform entities (I only finish the basic stuff so far)
 1) EntityObject: Base class for all the entities whose information needs to be saved
 2) OrderObject: Not Completely done half way
@@ -47,6 +64,9 @@ The whole platform is divided to packages:
 Will add session management in the future.
 3) AbstractBaseRedisDao: A simple implementation of the redis service management
 4) RedisService: Deprecated redise support for the cache
+5) RedisClientTemplate: The redis template to encapsulate the multil-server operations, transactions
+6) RedisDataSourceCacheManager: Implements the cache management for the Redis with multiple client pool supported
+7) RedisDataSource & Impl: Interface for the shared redis management 
 
 10. Utilities: All the methods can be used cross board
 

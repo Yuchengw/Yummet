@@ -1,7 +1,5 @@
 package com.iamhere.entities;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
 
 import com.iamhere.enums.OrderStatus;
@@ -16,10 +14,11 @@ import com.iamhere.utilities.TextUtil;
  *
  */
 public class OrderObject extends EntityObject {
+	private static final long serialVersionUID = -6011241820070393954L;  
 	private UserObject jiaFang;
 	private UserObject yiFang;
 	private boolean isSuccess;
-	private Date TransactionDateTime;
+	private DateTime transactionDateTime;
 	private PostObject parentPost;
 	private String thirdPartyInfo;
 	private double actualCost; 
@@ -27,22 +26,18 @@ public class OrderObject extends EntityObject {
 	private double score;	
 	private OrderStatus status;
 	
-	private DBOrderObject dbOrder;
-	
 	/*===================== Constructors =============================*/
 	public OrderObject(UserObject jia, UserObject yi)  {
-		dbOrder = new DBOrderObject();
+		
 		setJiaFang(jia);
 		setYiFang(yi);
 	}
 	
 	public OrderObject(DBOrderObject db) {
-		this.dbOrder = db;
-		reloadAllFieldInformationFromDbObject();
+		reloadAllFieldInformationFromDbObject(db);
 	}
 
 	public OrderObject(String id) {
-		dbOrder = new DBOrderObject(id);
 		setId(id);
 	}
 
@@ -53,7 +48,6 @@ public class OrderObject extends EntityObject {
 
 	public void setJiaFang(UserObject jiaFang) {
 		this.jiaFang = jiaFang;
-		dbOrder.setJiaWithEntity(jiaFang);
 	}
 
 	public UserObject getYiFang() {
@@ -62,7 +56,6 @@ public class OrderObject extends EntityObject {
 
 	public void setYiFang(UserObject yiFang) {
 		this.yiFang = yiFang;
-		dbOrder.setYiWithEntity(yiFang);
 	}
 
 	public boolean isSuccess() {
@@ -71,16 +64,14 @@ public class OrderObject extends EntityObject {
 
 	public void setSuccess(boolean isSuccess) {
 		this.isSuccess = isSuccess;
-		dbOrder.setSuccess(isSuccess);
 	}
 
-	public Date getTransactionDateTime() {
-		return TransactionDateTime;
+	public DateTime getTransactionDateTime() {
+		return transactionDateTime;
 	}
 
-	public void setTransactionDateTime(Date transactionDateTime) {
-		TransactionDateTime = transactionDateTime;
-		dbOrder.setTransactionDateTime(transactionDateTime);
+	public void setTransactionDateTime(DateTime transactionDateTime) {
+		this.transactionDateTime = transactionDateTime;
 	}
 
 	public PostObject getParentPost() {
@@ -89,7 +80,6 @@ public class OrderObject extends EntityObject {
 
 	public void setParentPost(PostObject parentPost) {
 		this.parentPost = parentPost;
-		dbOrder.setParentPostWithEntity(parentPost);
 	}
 
 	public String getThirdPartyInfo() {
@@ -98,7 +88,6 @@ public class OrderObject extends EntityObject {
 
 	public void setThirdPartyInfo(String thirdPartyInfo) {
 		this.thirdPartyInfo = thirdPartyInfo;
-		dbOrder.setThirdPartyInfo(thirdPartyInfo);
 	}
 
 	public double getActualCost() {
@@ -107,7 +96,6 @@ public class OrderObject extends EntityObject {
 
 	public void setActualCost(double actualCost) {
 		this.actualCost = actualCost;
-		dbOrder.setActualCost(actualCost);
 	}
 
 	public int getQuantity() {
@@ -116,7 +104,6 @@ public class OrderObject extends EntityObject {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-		dbOrder.setQuantity(quantity);
 	}
 
 	public double getScore() {
@@ -125,7 +112,6 @@ public class OrderObject extends EntityObject {
 
 	public void setScore(double score) {
 		this.score = score;
-		dbOrder.setScore(score);
 	}
 	
 	public OrderStatus getStatus() {
@@ -134,7 +120,6 @@ public class OrderObject extends EntityObject {
 
 	public void setStatus(OrderStatus status) {
 		this.status = status;
-		dbOrder.setStatus(status.getDbValue());
 	}
 	
 	/*===================== Override super method =============================*/
@@ -163,6 +148,19 @@ public class OrderObject extends EntityObject {
 
 	@Override
 	public DBEntityObject getDbObject() {
+		DBOrderObject dbOrder = new DBOrderObject();
+		dbOrder.setJiaWithEntity(jiaFang);
+		dbOrder.setYiWithEntity(yiFang);
+		dbOrder.setSuccess(isSuccess);
+		dbOrder.setTransactionDateTime(transactionDateTime);
+		dbOrder.setParentPostWithEntity(parentPost);
+		dbOrder.setThirdPartyInfo(thirdPartyInfo);
+		dbOrder.setActualCost(actualCost);
+		dbOrder.setQuantity(quantity);
+		dbOrder.setScore(score);
+		dbOrder.setStatus(status.getDbValue());
+		dbOrder.setCreatedDate(getCreatedDate());
+		dbOrder.setLastModifiedDate(getLastModifiedDate());
 		if (!TextUtil.isNullOrEmpty(getId())) {
 			dbOrder.setId(getId());
 		}
@@ -170,7 +168,8 @@ public class OrderObject extends EntityObject {
 	}
 
 	@Override
-	public void reloadAllFieldInformationFromDbObject() {
+	public void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject) {
+		DBOrderObject dbOrder = (DBOrderObject) dbObject;
 		setId(dbOrder.getId());
 		setCreatedDate(new DateTime(dbOrder.getCreatedDate()));
 		setLastModifiedDate(new DateTime(dbOrder.getLastModifiedDate()));
@@ -188,6 +187,16 @@ public class OrderObject extends EntityObject {
 	
 	public OrderObject load() throws Exception {
 		return (OrderObject) super.load();
+	}
+
+	@Override
+	public Class<?> getDbClass() {
+		return DBOrderObject.class;
+	}
+
+	@Override
+	public String getDbTableName() {
+		return new DBOrderObject().getDbTableName();
 	}
 
 	

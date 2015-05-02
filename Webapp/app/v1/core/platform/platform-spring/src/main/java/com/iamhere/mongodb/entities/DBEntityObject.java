@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 
 import com.iamhere.platform.func.DmlValidationHandler;
@@ -20,8 +21,8 @@ public abstract class DBEntityObject implements Serializable {
 	private static final long serialVersionUID =  -1267719235225203410L;  
 	@Id
 	private String id;
-	private Date createdDate;
-	private Date lastModifiedDate;
+	private DateTime createdDate;
+	private DateTime lastModifiedDate;
 
 	// Primary getters and setters
 	public String getId() {
@@ -32,19 +33,19 @@ public abstract class DBEntityObject implements Serializable {
 		this.id = id;
 	}
 	
-	public Date getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getLastModifiedDate() {
+	public DateTime getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 
-	public void setLastModifiedDate(Date lastModifiedDate) {
+	public void setLastModifiedDate(DateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 

@@ -1,7 +1,5 @@
 package com.iamhere.entities;
 
-import org.joda.time.DateTime;
-
 import com.iamhere.mongodb.entities.DBEntityObject;
 import com.iamhere.mongodb.entities.DBPostComment;
 import com.iamhere.platform.func.DmlValidationHandler;
@@ -13,28 +11,24 @@ import com.iamhere.utilities.TextUtil;
  *
  */
 public class PostComment extends EntityObject {
+	private static final long serialVersionUID = -6011241820070393956L;  
 	private PostObject parentPost;
 	// TODO: to keep it simple now and not consider the rendering
 	private String commentBody;
 	private PostComment childComment; // TODO: is this only for child or sibling as well
 	private UserObject createdBy;
 	
-	private DBPostComment dbComment;
-	
 	/*===================== Constructors =============================*/
 	public PostComment(PostObject parent, String comment) {
-		dbComment = new DBPostComment();
 		setParentPost(parent);
 		setCommentBody(comment);
 	}
 	
 	public PostComment(DBPostComment db) {
-		this.dbComment = db;
-		reloadAllFieldInformationFromDbObject();
+		reloadAllFieldInformationFromDbObject(db);
 	}
 
 	public PostComment(String id) {
-		dbComment = new DBPostComment(id);
 		setId(id);
 	}
 
@@ -45,7 +39,6 @@ public class PostComment extends EntityObject {
 
 	public void setParentPost(PostObject parentPost) {
 		this.parentPost = parentPost;
-		dbComment.setParentPostWithEntity(parentPost);
 	}
 
 	public String getCommentBody() {
@@ -54,7 +47,6 @@ public class PostComment extends EntityObject {
 
 	public void setCommentBody(String commentBody) {
 		this.commentBody = commentBody;
-		dbComment.setCommentBody(commentBody);
 	}
 
 	public PostComment getChildComment() {
@@ -63,7 +55,6 @@ public class PostComment extends EntityObject {
 
 	public void setChildComment(PostComment childComment) {
 		this.childComment = childComment;
-		dbComment.setChildCommentWithEntity(childComment);
 	}
 	
 	public UserObject getCreatedBy() {
@@ -72,7 +63,6 @@ public class PostComment extends EntityObject {
 
 	public void setCreatedBy(UserObject createdBy) {
 		this.createdBy = createdBy;
-		dbComment.setCreatedByWithEntity(createdBy);
 	}
 
 	/*===================== Override super method =============================*/
@@ -90,6 +80,13 @@ public class PostComment extends EntityObject {
 
 	@Override
 	public DBEntityObject getDbObject() {
+		DBPostComment dbComment = new DBPostComment();
+		dbComment.setParentPostWithEntity(parentPost);
+		dbComment.setCommentBody(commentBody);
+		dbComment.setChildCommentWithEntity(childComment);
+		dbComment.setCreatedByWithEntity(createdBy);
+		dbComment.setCreatedDate(getCreatedDate());
+		dbComment.setLastModifiedDate(getLastModifiedDate());
 		if (!TextUtil.isNullOrEmpty(getId())) {
 			dbComment.setId(getId());
 		}
@@ -97,19 +94,30 @@ public class PostComment extends EntityObject {
 	}
 
 	@Override
-	public void reloadAllFieldInformationFromDbObject() {
+	public void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject) {
+		DBPostComment dbComment = (DBPostComment) dbObject;
 		if (dbComment.getChildComment() != null) {
-			setChildComment(new PostComment(dbComment.getChildComment().toString()));
+			setChildComment(new PostComment(dbComment.getChildComment()));
 		}
 		setCommentBody(dbComment.getCommentBody());
-		setCreatedDate(new DateTime(dbComment.getCreatedDate()));
-		setLastModifiedDate(new DateTime(dbComment.getLastModifiedDate()));
-		setParentPost(new PostObject(dbComment.getParentPost().toString()));
+		setCreatedDate(dbComment.getCreatedDate());
+		setLastModifiedDate(dbComment.getLastModifiedDate());
+		setParentPost(new PostObject(dbComment.getParentPost()));
 		setId(dbComment.getId());
-		setCreatedBy(new UserObject(dbComment.getCreatedBy().toString()));
+		setCreatedBy(new UserObject(dbComment.getCreatedBy()));
 	}
 	
 	public PostComment load() throws Exception {
 		return (PostComment) super.load();
+	}
+
+	@Override
+	public Class<?> getDbClass() {
+		return DBPostComment.class;
+	}
+
+	@Override
+	public String getDbTableName() {
+		return new DBPostComment().getDbTableName();
 	}
 }

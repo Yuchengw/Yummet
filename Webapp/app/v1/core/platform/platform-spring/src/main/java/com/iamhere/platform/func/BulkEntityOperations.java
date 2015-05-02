@@ -67,11 +67,14 @@ public class BulkEntityOperations {
 			if (cacheEo != null) {
 				reload.add(cacheEo);
 			} else {
+				// if we can not find the object from cache, we need search for
+				// db
 				needLoadFromDb.add(eo);
 			}
 		}
-		
-		// Load from db if there is any record information cannot be found under cache
+
+		// Load from db if there is any record information cannot be found under
+		// cache
 		if (!needLoadFromDb.isEmpty()) {
 			DatabaseProvider dbContext = SystemContext.getContext();
 			for (EntityObject eo : needLoadFromDb) {
@@ -85,18 +88,20 @@ public class BulkEntityOperations {
 							.debug("The query returns more than 1 result. And we will only get the first one. <==");
 					eo = queryResults.get(0);
 					reload.add(eo);
+					// Update the cache information if we find the result under database
 					try {
-					boolean cacheStatus = cacheContext.insert(eo);
-					if (cacheStatus) {
-						LogUtil.getInstance(BulkEntityOperations.class)
-						.debug("Update cache with the new db values Succeeds<==");
-					} else {
-						LogUtil.getInstance(BulkEntityOperations.class)
-						.debug("Update cache with the new db values Fails <==");
-					}
+						boolean cacheSucceeds = cacheContext.insert(eo);
+						if (cacheSucceeds) {
+							LogUtil.getInstance(BulkEntityOperations.class)
+									.debug("Update cache with the new db values Succeeds<==");
+						} else {
+							LogUtil.getInstance(BulkEntityOperations.class)
+									.debug("Update cache with the new db values Fails <==");
+						}
 					} catch (Exception e) {
-						LogUtil.getInstance(BulkEntityOperations.class)
-						.debug("Update cache with the new db values Fails <=="  + e.getStackTrace());
+						LogUtil.getInstance(BulkEntityOperations.class).debug(
+								"Update cache with the new db values Fails <=="
+										+ e.getStackTrace());
 					}
 				} else {
 					LogUtil.getInstance(BulkEntityOperations.class).debug(
@@ -107,6 +112,12 @@ public class BulkEntityOperations {
 		return reload;
 	}
 
+	/**
+	 * Bulk Create or Update the records
+	 * @param entityObjects
+	 * @param dmlType
+	 * @return
+	 */
 	private static DmlOperationWrapper performBulkDml(
 			Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
 		DmlOperationWrapper dmlOperationState = new DmlOperationWrapper(
@@ -115,23 +126,17 @@ public class BulkEntityOperations {
 				.getEntityObjectsWithoutError();
 		// do the db work
 		// TODO: change it to bulk
+		// TODO: hash against the entity to make bulk really happens
 		DatabaseProvider dbContext = SystemContext.getContext();
 		CacheManager cacheContext = SystemContext.getCacheContext();
 		// We assume a collection items will be saved and we will do them one by
 		// one
-		// TODO: hash against the entity to make bulk really happens
 		for (EntityObject eo : afterFirstValidationObjects) {
 			try {
-				DBEntityObject dbEo = eo.getDbObject();
-				dbContext.saveRecords(dbEo.getDbTableName(),
+				dbContext.saveRecords(eo.getDbTableName(),
 						new EntityObject[] { eo });
 				LogUtil.getInstance(BulkEntityOperations.class).debug(
-						"Save succeeds. <==");
-				// reload does not required for MongoDb as id will be already in
-				// the eo
-				eo.setId(dbEo.getId());
-				LogUtil.getInstance(BulkEntityOperations.class).debug(
-						"Saved record id is ==> " + eo.getId());
+						"Save succeeds. <==" + eo);
 				// Save or update the cache
 				boolean cacheResult = cacheContext
 						.saveRecords(new EntityObject[] { eo });
@@ -150,6 +155,10 @@ public class BulkEntityOperations {
 		return dmlOperationState;
 	}
 
+	/**
+	 * Validate all the records before bulk operation
+	 * @param entityObjects
+	 */
 	static final void validateEntityObjects(
 			Collection<? extends EntityObject> entityObjects) {
 		if (entityObjects == null) {
@@ -181,11 +190,15 @@ public class BulkEntityOperations {
 			return true;
 		}
 		DatabaseProvider dbContext = SystemContext.getContext();
+		CacheManager redisContext = SystemContext.getCacheContext();
 		for (EntityObject eo : entityObjects) {
 			try {
-				DBEntityObject dbEo = eo.getDbObject();
-				dbContext.removeRecords(dbEo.getDbTableName(),
-						new EntityObject[] { eo });
+				boolean removeResult = dbContext.removeRecords(
+						eo.getDbTableName(), new EntityObject[] { eo });
+				if (removeResult) {
+					// remove the record from the cache
+					redisContext.removeRecords(new EntityObject[] { eo });
+				}
 			} catch (Exception e) {
 				return false;
 			}

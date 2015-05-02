@@ -53,7 +53,7 @@ public abstract class EntityObject implements Serializable{
 
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
-		getDbObject().setCreatedDate(createdDate.toDate());
+//		getDbObject().setCreatedDate(createdDate.toDate());
 	}
 
 	public DateTime getLastModifiedDate() {
@@ -62,7 +62,7 @@ public abstract class EntityObject implements Serializable{
 
 	public void setLastModifiedDate(DateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
-		getDbObject().setLastModifiedDate(lastModifiedDate.toDate());
+//		getDbObject().setLastModifiedDate(lastModifiedDate.toDate());
 	}
 
 	/**
@@ -123,13 +123,20 @@ public abstract class EntityObject implements Serializable{
 	 */
 	public void saveHook_Validate(DmlValidationHandler dml) {
 		// TODO: validate parent and child comment exists
-		getDbObject().saveHook_Validate(dml);
+		DBEntityObject dbObj = getDbObject();
+		dbObj.saveHook_Validate(dml);
 
+		DateTime now = new DateTime();
 		if (dml.getDmlType() == DMLEvents.CREATE) {
-			setCreatedDate(new DateTime());
-			setLastModifiedDate(getCreatedDate());
+			setCreatedDate(now);
+//			dbObj.setCreatedDate(now);
+			setLastModifiedDate(now);
+//			dbObj.setLastModifiedDate(now);
 		} else {
-			setLastModifiedDate(new DateTime());
+			// if it is update, the created date information should already be there
+//			dbObj.setCreatedDate(getCreatedDate());
+			setLastModifiedDate(now);
+//			dbObj.setLastModifiedDate(now);
 		}
 	}
 
@@ -153,6 +160,17 @@ public abstract class EntityObject implements Serializable{
 	 * Reload all the entity field information from db object. No db access is
 	 * required is for this step.
 	 */
-	public abstract void reloadAllFieldInformationFromDbObject();
+	public abstract void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject);
+	
+	/**
+	 * Get the db class for the current object
+	 * @return
+	 */
+	public abstract Class<?> getDbClass();
 
+	/**
+	 * Get the db table name
+	 * @return
+	 */
+	public abstract String getDbTableName();
 }

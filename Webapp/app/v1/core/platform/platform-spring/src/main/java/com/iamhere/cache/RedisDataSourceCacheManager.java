@@ -22,23 +22,22 @@ public class RedisDataSourceCacheManager implements CacheManager {
 	private static RedisClientTemplate redisClientTemplate = (RedisClientTemplate) new ClassPathXmlApplicationContext(
 			"classpath:spring.xml").getBean("redisClientTemplate");
 	
-//	private static Jedis jedis;
-//	@Autowired
-//	@Qualifier("jedisConnectionFactory")
-//	private JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)new ClassPathXmlApplicationContext(
-//			"classpath:spring.xml").getBean("jedisConnectionFactory");
-//	
+	private static Jedis jedis;
+	@Autowired
+	@Qualifier("jedisConnectionFactory")
+	private JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)new ClassPathXmlApplicationContext(
+			"classpath:spring.xml").getBean("jedisConnectionFactory");
+	
 	/**
 	 * Get a jedis client
 	 * 
 	 * @return
 	 */
 	private Jedis getJedis() {
-//		if (jedis == null) {
-//			return jedisConnectionFactory.getShardInfo().createResource();
-//		}
-//		return jedis;
-		return null;
+		if (jedis == null) {
+			return jedisConnectionFactory.getShardInfo().createResource();
+		}
+		return jedis;
 	}
 	
 	@Override
@@ -123,8 +122,7 @@ public class RedisDataSourceCacheManager implements CacheManager {
 	 */
 	@Override
 	public String flushDB() {
-//		return this.getJedis().flushDB();
-		return null;
+		return this.getJedis().flushDB();
 	}
 
 	

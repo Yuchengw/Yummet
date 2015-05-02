@@ -18,6 +18,7 @@ import com.iamhere.mongodb.entities.DBPostComment;
 import com.iamhere.mongodb.entities.DBPostObject;
 import com.iamhere.mongodb.entities.DBUserObject;
 import com.iamhere.utilities.LogUtil;
+import com.mongodb.WriteResult;
 
 /**
  * Mongo DB implementation for the DB functions
@@ -26,9 +27,10 @@ import com.iamhere.utilities.LogUtil;
  *
  */
 public class MongoDbProvider implements DatabaseProvider {
-	public RegistrationBean registrationBean;
+	// public RegistrationBean registrationBean;
 	// Auto threadsafe singleton pattern
-	private static final MongoTemplate mongoOps = (MongoTemplate) new ClassPathXmlApplicationContext("spring.xml").getBean("mongoTemplate");
+	private static final MongoTemplate mongoOps = (MongoTemplate) new ClassPathXmlApplicationContext(
+			"spring.xml").getBean("mongoTemplate");
 
 	public MongoDbProvider() {
 	}
@@ -38,20 +40,10 @@ public class MongoDbProvider implements DatabaseProvider {
 			EntityObject info) {
 		List<EntityObject> records = new ArrayList<EntityObject>();
 		List<DBEntityObject> dbRecords = (List<DBEntityObject>) mongoOps
-				.findAll(info.getDbObject().getClass());
-		// UserDAO userDaoImpl = (UserDAO) context.getBean("userDaoImpl");
+				.findAll(info.getDbClass());
+		EntityObjectWithDbObject objectMappings = new EntityObjectWithDbObject();
 		for (DBEntityObject dbObject : dbRecords) {
-			EntityObject obj = null;
-			if (dbObject instanceof DBUserObject) {
-				DBUserObject dbUser = (DBUserObject) dbObject;
-				obj = new UserObject(dbUser);
-			} else if (dbObject instanceof DBPostObject) {
-				DBPostObject dbPost = (DBPostObject) dbObject;
-				obj = new PostObject(dbPost);
-			} else if (dbObject instanceof DBPostComment) {
-				DBPostComment dbComment = (DBPostComment) dbObject;
-				obj = new PostComment(dbComment);
-			}
+			EntityObject obj = objectMappings.getEntityObjectFromDb(dbObject);
 			records.add(obj);
 		}
 		return records;
@@ -64,19 +56,9 @@ public class MongoDbProvider implements DatabaseProvider {
 		Query query = createQueryBasedOnMap(queryInfo);
 		List<DBEntityObject> dbRecords = (List<DBEntityObject>) mongoOps.find(
 				query, info.getDbObject().getClass());
-		
+		EntityObjectWithDbObject objectMappings = new EntityObjectWithDbObject();
 		for (DBEntityObject dbObject : dbRecords) {
-			EntityObject obj = null;
-			if (dbObject instanceof DBUserObject) {
-				DBUserObject dbUser = (DBUserObject) dbObject;
-				obj = new UserObject(dbUser);
-			} else if (dbObject instanceof DBPostObject) {
-				DBPostObject dbPost = (DBPostObject) dbObject;
-				obj = new PostObject(dbPost);
-			} else if (dbObject instanceof DBPostComment) {
-				DBPostComment dbComment = (DBPostComment) dbObject;
-				obj = new PostComment(dbComment);
-			}
+			EntityObject obj = objectMappings.getEntityObjectFromDb(dbObject);
 			records.add(obj);
 		}
 		return records;
@@ -84,11 +66,13 @@ public class MongoDbProvider implements DatabaseProvider {
 
 	/**
 	 * Create the query object with the map query Info
+	 * 
 	 * @param queryInfo
 	 * @return
 	 */
 	private Query createQueryBasedOnMap(Map<String, Object> queryInfo) {
-		LogUtil.getInstance(MongoDbProvider.class).debug("Query record with information => " + queryInfo);
+		LogUtil.getInstance(MongoDbProvider.class).debug(
+				"Query record with information => " + queryInfo);
 		Query query = new Query();
 		Criteria criteria = null;
 		for (String key : queryInfo.keySet()) {
@@ -97,7 +81,9 @@ public class MongoDbProvider implements DatabaseProvider {
 			} else {
 				criteria.and(key).is(queryInfo.get(key));
 			}
-			LogUtil.getInstance(MongoDbProvider.class).debug("Query record with criteria => key -  " + key + "; value - " + queryInfo.get(key) );
+			LogUtil.getInstance(MongoDbProvider.class).debug(
+					"Query record with criteria => key -  " + key
+							+ "; value - " + queryInfo.get(key));
 		}
 		query.addCriteria(criteria);
 		return query;
@@ -109,11 +95,16 @@ public class MongoDbProvider implements DatabaseProvider {
 			return;
 		}
 		int numberOfRecordsSaved = 0;
-		LogUtil.getInstance(MongoDbProvider.class).debug("Start saving " + records.length + " records => " );
+		LogUtil.getInstance(MongoDbProvider.class).debug(
+				"Start saving " + records.length + " records => ");
 		for (EntityObject record : records) {
-			mongoOps.save(record.getDbObject());
+			DBEntityObject db = record.getDbObject();
+			mongoOps.save(db);
 			numberOfRecordsSaved++;
-			LogUtil.getInstance(MongoDbProvider.class).debug("Saving " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
+			LogUtil.getInstance(MongoDbProvider.class).debug(
+					"Saving " + numberOfRecordsSaved + " => "
+							+ record.getDbObject().toString());
+			record.setId(db.getId());
 			// TODO: how to make bulk happen
 		}
 		assert (numberOfRecordsSaved == records.length);
@@ -126,11 +117,14 @@ public class MongoDbProvider implements DatabaseProvider {
 			return;
 		}
 		int numberOfRecordsSaved = 0;
-		LogUtil.getInstance(MongoDbProvider.class).debug("Start inserting " + records.length + " records => " );
+		LogUtil.getInstance(MongoDbProvider.class).debug(
+				"Start inserting " + records.length + " records => ");
 		for (EntityObject record : records) {
 			mongoOps.save(record.getDbObject());
 			numberOfRecordsSaved++;
-			LogUtil.getInstance(MongoDbProvider.class).debug("Inserting " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
+			LogUtil.getInstance(MongoDbProvider.class).debug(
+					"Inserting " + numberOfRecordsSaved + " => "
+							+ record.getDbObject().toString());
 			// TODO: how to make bulk happen
 		}
 		assert (numberOfRecordsSaved == records.length);
@@ -141,17 +135,20 @@ public class MongoDbProvider implements DatabaseProvider {
 	 * first version will ignore the removing request
 	 */
 	@Override
-	public void removeRecords(String tableName, EntityObject[] records)
+	public boolean removeRecords(String tableName, EntityObject[] records)
 			throws Exception {
 		if (records == null) {
-			return;
+			return false;
 		}
 		int numberOfRecordsSaved = 0;
-		LogUtil.getInstance(MongoDbProvider.class).debug("Start removing " + records.length + " records => " );
+		LogUtil.getInstance(MongoDbProvider.class).debug(
+				"Start removing " + records.length + " records => ");
 		for (EntityObject record : records) {
-			mongoOps.remove(record.getDbObject());
+			WriteResult result = mongoOps.remove(record.getDbObject());
 			numberOfRecordsSaved++;
-			LogUtil.getInstance(MongoDbProvider.class).debug("Removing " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
+			LogUtil.getInstance(MongoDbProvider.class).debug(
+					"Removing " + numberOfRecordsSaved + " => "
+							+ record.getDbObject().toString());
 		}
 		// As remove is using filters on the object all fields, we need either
 		// pass in the whole object matching information or switch the passin
@@ -166,15 +163,16 @@ public class MongoDbProvider implements DatabaseProvider {
 		// Option Two: 1. Treat each object as its own and remove the field we
 		// don't care as the value is null 2. Remove the records one by one
 		// Currently we assume all records to be removed has id provided
-		assert(numberOfRecordsSaved == records.length);
+		return numberOfRecordsSaved == records.length;
 	}
 
 	@Override
-	public boolean exists(String tablename,  Map<String, Object> queryInfo, EntityObject record)
-			throws Exception {
+	public boolean exists(String tablename, Map<String, Object> queryInfo,
+			EntityObject record) throws Exception {
 		Query query = createQueryBasedOnMap(queryInfo);
-		LogUtil.getInstance(MongoDbProvider.class).debug("Calling MongoDb Exist function on record => " + record.getDbObject().toString() );
-		return  mongoOps.exists(
-				query, record.getDbObject().getClass());
+		LogUtil.getInstance(MongoDbProvider.class).debug(
+				"Calling MongoDb Exist function on record => "
+						+ record.getDbObject().toString());
+		return mongoOps.exists(query, record.getDbObject().getClass());
 	}
 }

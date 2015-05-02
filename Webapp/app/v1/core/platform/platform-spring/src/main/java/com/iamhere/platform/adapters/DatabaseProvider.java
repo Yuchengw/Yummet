@@ -45,7 +45,7 @@ public interface DatabaseProvider {
 	 * @param records
 	 * @throws Exception
 	 */
-	public void removeRecords(String tableName, EntityObject[] records)
+	public boolean removeRecords(String tableName, EntityObject[] records)
 			throws Exception;
 
 	/**

@@ -2,6 +2,7 @@ package com.iamhere.mongodb.entities;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.iamhere.entities.PostObject;
@@ -18,7 +19,7 @@ public class DBOrderObject extends DBEntityObject {
 	private String jiaFang;
 	private String yiFang;
 	private boolean isSuccess;
-	private Date TransactionDateTime;
+	private DateTime TransactionDateTime;
 	private String parentPost;
 	private String thirdPartyInfo;
 	private double actualCost; 
@@ -57,11 +58,11 @@ public class DBOrderObject extends DBEntityObject {
 		this.isSuccess = isSuccess;
 	}
 
-	public Date getTransactionDateTime() {
+	public DateTime getTransactionDateTime() {
 		return TransactionDateTime;
 	}
 
-	public void setTransactionDateTime(Date transactionDateTime) {
+	public void setTransactionDateTime(DateTime transactionDateTime) {
 		TransactionDateTime = transactionDateTime;
 	}
 
