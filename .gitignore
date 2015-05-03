@@ -25,6 +25,6 @@ hs_err_pid*
 >>>>>>> d5f48660f3d63bf6d25bfaddf2bda13205377f96
 #======================Ignore independent eclipse settings====================#
 RemoteSystemsTempFiles/
-DB/Linux/data/
+DB/
 .settings/
 .metadata/
