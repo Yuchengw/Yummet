@@ -21,8 +21,7 @@ public class PostCommentControllerAOPImpl {
 	/**
 	 * Get the logger class
 	 * */
-	private static final Logger logger = LoggerFactory
-			.getLogger(PostCommentControllerAOPImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PostCommentControllerAOPImpl.class);
 
 	/**
 	 * Before PostCommentController's operations

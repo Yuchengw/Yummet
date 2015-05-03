@@ -3,7 +3,7 @@ package com.iamhere.utilities;
 /**
  * The util class for all  String 
  * @author jassica
- *
+ * @version 1
  */
 public class TextUtil {
 	/**
@@ -12,10 +12,7 @@ public class TextUtil {
 	 * @return
 	 */
 	public static boolean isNullOrEmpty(String s) {
-		if (s == null) {
-			return true;
-		}
-		if (s.trim().isEmpty()) {
+		if (s == null || s.trim().isEmpty()) {
 			return true;
 		}
 		return false;
