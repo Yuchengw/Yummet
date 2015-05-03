@@ -21,8 +21,7 @@ public class OrderControllerAOPImpl {
 	/**
 	 * Get the logger class
 	 * */
-	private static final Logger logger = LoggerFactory
-			.getLogger(OrderControllerAOPImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrderControllerAOPImpl.class);
 
 	/**
 	 * Before OrderController's operations

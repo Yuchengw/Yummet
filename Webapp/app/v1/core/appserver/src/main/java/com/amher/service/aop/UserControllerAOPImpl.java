@@ -23,8 +23,7 @@ public class UserControllerAOPImpl {
 	/**
 	 * Get the logger class
 	 * */
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserControllerAOPImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserControllerAOPImpl.class);
 
 	/**
 	 * Before UserController's operations

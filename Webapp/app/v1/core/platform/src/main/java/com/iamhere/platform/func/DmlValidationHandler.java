@@ -7,11 +7,12 @@ import com.iamhere.entities.EntityObject;
 import com.iamhere.enums.DMLEvents;
 
 /**
- * DML event wrapper to hold DML event type information and error mesage
+ * DML event wrapper to hold DML event type information and error message
  * @author jassica
- *
+ * @version 1
  */
 public class DmlValidationHandler {
+	
 	private List<String> errorMessages;
 	private final EntityObject entityObject;
 	private final DMLEvents dmlType;
@@ -54,10 +55,10 @@ public class DmlValidationHandler {
 	
 	/**
 	 * Flat the error message and return it
-	 * @return
+	 * @return error message
 	 */
 	public String getErrorMessages() {
-		StringBuffer toStringMessage = new StringBuffer("");
+		StringBuilder toStringMessage = new StringBuilder();
 		for (String error: errorMessages) {
 			toStringMessage.append(error);
 		}

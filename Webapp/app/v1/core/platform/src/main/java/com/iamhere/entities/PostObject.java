@@ -1,5 +1,7 @@
 package com.iamhere.entities;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 
 import com.iamhere.enums.PostStatus;
@@ -11,10 +13,12 @@ import com.iamhere.utilities.TextUtil;
 
 /**
  * Platform entity for the Post
- * @author jassica
+ * @author Jessica
+ * @version 1
  *
  */
 public class PostObject extends EntityObject {
+	private static final long serialVersionUID = -6011241820070393955L;  
 	// Final static constant for different post types
 	public final static String REQUEST = "REQUEST";
 	public final static String PROVIDE = "PROVIDE";
@@ -36,13 +40,9 @@ public class PostObject extends EntityObject {
 	private UserObject creator;
 	private UserObject lastModifiedBy;
 	private String type;
-	private DateTime expireDate;
+	private Date expireDate;
 	
-	// DbObject information holder
-	DBPostObject dbPost;
-			
 	public PostObject(UserObject creator, String subject, String location, int quantity) {
-		dbPost = new DBPostObject();
 		setCreator(creator);
 		setSubject(subject);
 		setLocation(location);
@@ -53,12 +53,10 @@ public class PostObject extends EntityObject {
 	}
 	
 	public PostObject(DBPostObject db) {
-		this.dbPost = db;
-		reloadAllFieldInformationFromDbObject();
+		reloadAllFieldInformationFromDbObject(db);
 	}
 
 	public PostObject(String id) {
-		dbPost = new DBPostObject(id);
 		setId(id);
 	}
 
@@ -69,7 +67,6 @@ public class PostObject extends EntityObject {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-		dbPost.setSubject(subject);
 	}
 
 	public String getLocation() {
@@ -78,7 +75,6 @@ public class PostObject extends EntityObject {
 
 	public void setLocation(String location) {
 		this.location = location;
-		dbPost.setLocation(location);
 	}
 
 	public RecurEventInfo getPeriod() {
@@ -87,7 +83,6 @@ public class PostObject extends EntityObject {
 
 	public void setPeriod(RecurEventInfo period) {
 		this.period = period;
-		dbPost.setPeriod(period);
 	}
 
 	public int getQuantity() {
@@ -96,7 +91,6 @@ public class PostObject extends EntityObject {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-		dbPost.setQuantity(quantity);
 	}
 
 	public String getCommentsOrDescription() {
@@ -105,7 +99,6 @@ public class PostObject extends EntityObject {
 
 	public void setCommentsOrDescription(String commentsOrDescription) {
 		this.commentsOrDescription = commentsOrDescription;
-		dbPost.setCommentsOrDescription(commentsOrDescription);
 	}
 
 	public double getCost() {
@@ -114,7 +107,6 @@ public class PostObject extends EntityObject {
 
 	public void setCost(double cost) {
 		this.cost = cost;
-		dbPost.setCost(cost);
 	}
 
 	public String getImage() {
@@ -123,7 +115,6 @@ public class PostObject extends EntityObject {
 
 	public void setImage(String image) {
 		this.image = image;
-		dbPost.setImage(image);
 	}
 
 	public UserObject[] getPartners() {
@@ -132,7 +123,6 @@ public class PostObject extends EntityObject {
 
 	public void setPartners(UserObject[] partners) {
 		this.partners = partners;
-		dbPost.setPartners(partners);
 	}
 
 	public String getPostCategory() {
@@ -141,7 +131,6 @@ public class PostObject extends EntityObject {
 
 	public void setPostCategory(String postCategory) {
 		this.postCategory = postCategory;
-		dbPost.setPostCategory(postCategory);
 	}
 
 	public PostStatus getStatus() {
@@ -150,7 +139,6 @@ public class PostObject extends EntityObject {
 
 	public void setStatus(PostStatus status) {
 		this.status = status;
-		dbPost.setStatus(status.getDbValue());
 	}
 
 	public PostVisibilityEnum getVisibility() {
@@ -159,7 +147,6 @@ public class PostObject extends EntityObject {
 
 	public void setVisibility(PostVisibilityEnum visibility) {
 		this.visibility = visibility;
-		dbPost.setVisibility(visibility.getDbValue());
 	}
 	
 	public int getNumberOfOrders() {
@@ -168,7 +155,6 @@ public class PostObject extends EntityObject {
 
 	public void setNumberOfOrders(int numberOfOrders) {
 		this.numberOfOrders = numberOfOrders;
-		dbPost.setNumberOfOrders(numberOfOrders);
 	}
 
 	public int getNumberOfLikes() {
@@ -177,7 +163,6 @@ public class PostObject extends EntityObject {
 
 	public void setNumberOfLikes(int numberOfLikes) {
 		this.numberOfLikes = numberOfLikes;
-		dbPost.setNumberOfLikes(numberOfLikes);
 	}
 
 	public UserObject getCreator() {
@@ -186,7 +171,6 @@ public class PostObject extends EntityObject {
 
 	public void setCreator(UserObject creator) {
 		this.creator = creator;
-		dbPost.setCreatorWithEntity(creator);
 	}
 
 	public String getType()  {
@@ -195,16 +179,14 @@ public class PostObject extends EntityObject {
 	
 	public void setType(String type) {
 		this.type = type;
-		dbPost.setType(type);
 	}
 	
-	public DateTime getExpireDate() {
+	public Date getExpireDate() {
 		return expireDate;
 	}
 
-	public void setExpireDate(DateTime expireDate) {
+	public void setExpireDate(Date expireDate) {
 		this.expireDate = expireDate;
-		dbPost.setExpireDate(expireDate.toDate());
 	}
 	
 	public UserObject getLastModifiedBy() {
@@ -213,7 +195,6 @@ public class PostObject extends EntityObject {
 
 	public void setLastModifiedBy(UserObject lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
-		dbPost.setLastModifiedByWithEntity(lastModifiedBy);
 	}
 
 	@Override
@@ -260,6 +241,27 @@ public class PostObject extends EntityObject {
 
 	@Override
 	public DBEntityObject getDbObject() {
+		DBPostObject dbPost = new DBPostObject();
+		dbPost.setSubject(subject);
+		dbPost.setLocation(location);
+		dbPost.setPeriod(period);
+		dbPost.setQuantity(quantity);
+		dbPost.setCommentsOrDescription(commentsOrDescription);
+		dbPost.setCost(cost);
+		dbPost.setImage(image);
+		dbPost.setPartners(partners);
+		dbPost.setPostCategory(postCategory);
+		dbPost.setStatus(status.getDbValue());
+		dbPost.setVisibility(visibility.getDbValue());
+		dbPost.setNumberOfOrders(numberOfOrders);
+		dbPost.setNumberOfLikes(numberOfLikes);
+		dbPost.setCreatorWithEntity(creator);
+		dbPost.setType(type);
+		dbPost.setExpireDate(expireDate);
+		dbPost.setLastModifiedByWithEntity(lastModifiedBy);
+		dbPost.setCreatedDate(getCreatedDate());
+		dbPost.setLastModifiedDate(getLastModifiedDate());
+		
 		if (!TextUtil.isNullOrEmpty(getId())) {
 			dbPost.setId(getId());
 		}
@@ -267,16 +269,17 @@ public class PostObject extends EntityObject {
 	}
 
 	@Override
-	public void reloadAllFieldInformationFromDbObject() {
+	public void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject) {
+		DBPostObject dbPost = (DBPostObject) dbObject;
 		setCommentsOrDescription(dbPost.getCommentsOrDescription());
 		setCost(dbPost.getCost());
-		setCreatedDate(new DateTime(dbPost.getCreatedDate()));
-		setCreator(new UserObject(dbPost.getCreator().toString()));
-		setExpireDate(new DateTime(dbPost.getExpireDate()));
+		setCreatedDate(dbPost.getCreatedDate());
+		setCreator(new UserObject(dbPost.getCreator())); // TODO: Verify
+		setExpireDate(dbPost.getExpireDate());
 		setId(dbPost.getId());
 		setImage(dbPost.getImage());
-		setLastModifiedBy(new UserObject(dbPost.getLastModifiedBy().toString()));
-		setLastModifiedDate(new DateTime(dbPost.getLastModifiedDate()));
+		setLastModifiedBy(new UserObject(dbPost.getLastModifiedBy())); // TODO: Verify
+		setLastModifiedDate(dbPost.getLastModifiedDate());
 		setLocation(dbPost.getLocation());
 		setNumberOfLikes(dbPost.getNumberOfLikes());
 		setNumberOfOrders(dbPost.getNumberOfOrders());
@@ -293,5 +296,15 @@ public class PostObject extends EntityObject {
 
 	public PostObject load() throws Exception {
 		return (PostObject) super.load();
+	}
+
+	@Override
+	public Class<?> getDbClass() {
+		return DBPostObject.class;
+	}
+
+	@Override
+	public String getDbTableName() {
+		return new DBPostObject().getDbTableName();
 	}
 }

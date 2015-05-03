@@ -2,6 +2,7 @@ package com.iamhere.entities;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -13,11 +14,12 @@ import com.iamhere.platform.func.DmlOperationWrapper;
 import com.iamhere.platform.func.DmlValidationHandler;
 
 /**
- * Represente a signle entity row for data manipulation. This object contains an
+ * Represent a single entity row for data manipulation. This object contains an
  * array of fields with the purpose of holding data values for that row. The
  * class is responsible for persisting and reading those value.
  * 
- * @author jassica
+ * @author Jessica
+ * @version 1
  *
  */
 public abstract class EntityObject implements Serializable{
@@ -26,8 +28,8 @@ public abstract class EntityObject implements Serializable{
 	 */
 	private static final long serialVersionUID = -6011241820070393952L;  
 	private String id;
-	private DateTime createdDate;
-	private DateTime lastModifiedDate;
+	private Date createdDate;
+	private Date lastModifiedDate;
 	private String cacheKey;	// The cache identifier for the cache management system
 
 	// Primary getter and setters
@@ -47,22 +49,20 @@ public abstract class EntityObject implements Serializable{
 		this.cacheKey = cacheKey;
 	}
 
-	public DateTime getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
-		getDbObject().setCreatedDate(createdDate.toDate());
 	}
 
-	public DateTime getLastModifiedDate() {
+	public Date getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 
-	public void setLastModifiedDate(DateTime lastModifiedDate) {
+	public void setLastModifiedDate(Date lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
-		getDbObject().setLastModifiedDate(lastModifiedDate.toDate());
 	}
 
 	/**
@@ -75,7 +75,7 @@ public abstract class EntityObject implements Serializable{
 	 * @return
 	 */
 	public final DmlOperationWrapper save() {
-		DMLEvents dmlType = DMLEvents.SAVE;
+		DMLEvents dmlType = DMLEvents.UPDATE;
 		if (isNew()) {
 			dmlType = DMLEvents.CREATE;
 		}
@@ -123,13 +123,15 @@ public abstract class EntityObject implements Serializable{
 	 */
 	public void saveHook_Validate(DmlValidationHandler dml) {
 		// TODO: validate parent and child comment exists
-		getDbObject().saveHook_Validate(dml);
+		DBEntityObject dbObj = getDbObject();
+		dbObj.saveHook_Validate(dml);
 
+		Date now = new Date();
 		if (dml.getDmlType() == DMLEvents.CREATE) {
-			setCreatedDate(new DateTime());
-			setLastModifiedDate(getCreatedDate());
+			setCreatedDate(now);
+			setLastModifiedDate(now);
 		} else {
-			setLastModifiedDate(new DateTime());
+			setLastModifiedDate(now);
 		}
 	}
 
@@ -153,6 +155,17 @@ public abstract class EntityObject implements Serializable{
 	 * Reload all the entity field information from db object. No db access is
 	 * required is for this step.
 	 */
-	public abstract void reloadAllFieldInformationFromDbObject();
+	public abstract void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject);
+	
+	/**
+	 * Get the db class for the current object
+	 * @return
+	 */
+	public abstract Class<?> getDbClass();
 
+	/**
+	 * Get the db table name
+	 * @return
+	 */
+	public abstract String getDbTableName();
 }

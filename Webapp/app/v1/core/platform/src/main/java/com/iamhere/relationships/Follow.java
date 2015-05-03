@@ -1,9 +1,12 @@
 package com.iamhere.relationships;
 
 import com.iamhere.entities.UserObject;
-import com.iamhere.trashbin.Entity;
 
-public class Follow extends Entity {
+/**
+ * @author jessica
+ * @version 1
+ * */
+public class Follow extends Relationship {
 	private UserObject creator;
 	private Object target;
 	
@@ -13,7 +16,7 @@ public class Follow extends Entity {
 	}
 
 	public UserObject getCreator() {
-		return creator;
+		return this.creator;
 	}
 
 	public void setCreator(UserObject creator) {
@@ -21,7 +24,7 @@ public class Follow extends Entity {
 	}
 
 	public Object getTarget() {
-		return target;
+		return this.target;
 	}
 
 	public void setTarget(Object target) {

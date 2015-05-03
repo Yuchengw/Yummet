@@ -15,7 +15,8 @@ angular.module('yummet.home',['ngRoute','signupApp','filterApp'])
                 controller: 'signupAppController'
           })
           .when('/amherpost',{
-        	  	templateUrl: '/rs/angular/app/components/post/post-content.html'
+        	  	templateUrl: '/rs/angular/app/components/post/post-content.html',
+        	  	controller: 'postAppController'
           })
           .when('/logout', {
         	    templateUrl: '/rs/angular/app/components/identification/logout/logout.html'

@@ -21,12 +21,10 @@ public class UserDAOImpl implements UserDAO {
 	@Resource
 	private MongoTemplate mongoTemplate;
 
-	@Override
 	public void insert(DBUserObject object, String collectionName) {
 		mongoTemplate.insert(object, collectionName);
 	}
 
-	@Override
 	public DBUserObject findOne(Map<String, Object> params,
 			String collectionName) {
 		return mongoTemplate.findOne(
@@ -34,7 +32,6 @@ public class UserDAOImpl implements UserDAO {
 				DBUserObject.class, collectionName);
 	}
 
-	@Override
 	public List<DBUserObject> findAll(Map<String, Object> params,
 			String collectionName) {
 		Criteria criteria = null;
@@ -51,7 +48,6 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
-	@Override
 	public void update(Map<String, Object> params, String collectionName) {
 		Criteria criteria = null;
 		for (String key: params.keySet()) {

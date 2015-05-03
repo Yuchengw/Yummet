@@ -2,6 +2,7 @@ package com.iamhere.mongodb.entities;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.iamhere.entities.PostObject;
@@ -10,15 +11,15 @@ import com.iamhere.platform.func.DmlValidationHandler;
 
 /**
  * MongoDb representation of the Order platform entity
- * @author jassica
- *
+ * @author Jessica
+ * @version 1
  */
 @Document(collection = "Orders")
 public class DBOrderObject extends DBEntityObject {
-	private String jiaFang;
-	private String yiFang;
+	private String seller;
+	private String buyer;
 	private boolean isSuccess;
-	private Date TransactionDateTime;
+	private DateTime TransactionDateTime;
 	private String parentPost;
 	private String thirdPartyInfo;
 	private double actualCost; 
@@ -33,20 +34,20 @@ public class DBOrderObject extends DBEntityObject {
 		setId(id);
 	}
 
-	public String getJiaFang() {
-		return jiaFang;
+	public String getSeller() {
+		return seller;
 	}
 
-	public void setJiaFang(String jiaFang) {
-		this.jiaFang = jiaFang;
+	public void setSeller(String seller) {
+		this.seller = seller;
 	}
 
-	public String getYiFang() {
-		return yiFang;
+	public String getBuyer() {
+		return buyer;
 	}
 
-	public void setYiFang(String yiFang) {
-		this.yiFang = yiFang;
+	public void setBuyer(String buyer) {
+		this.buyer = buyer;
 	}
 
 	public boolean isSuccess() {
@@ -57,11 +58,11 @@ public class DBOrderObject extends DBEntityObject {
 		this.isSuccess = isSuccess;
 	}
 
-	public Date getTransactionDateTime() {
+	public DateTime getTransactionDateTime() {
 		return TransactionDateTime;
 	}
 
-	public void setTransactionDateTime(Date transactionDateTime) {
+	public void setTransactionDateTime(DateTime transactionDateTime) {
 		TransactionDateTime = transactionDateTime;
 	}
 
@@ -106,11 +107,11 @@ public class DBOrderObject extends DBEntityObject {
 	}
 	
 	public void setJiaWithEntity(UserObject jia) {
-		this.jiaFang = jia == null ? null : jia.getEmail();
+		this.seller = jia == null ? null : jia.getEmail();
 	}
 	
 	public void setYiWithEntity(UserObject yi) {
-		this.yiFang = yi == null ? null : yi.getEmail();
+		this.buyer = yi == null ? null : yi.getEmail();
 	}
 	
 	public void setParentPostWithEntity(PostObject post) {

@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
+import com.google.common.collect.ImmutableList;
 import com.iamhere.entities.EntityObject;
 import com.iamhere.enums.DMLEvents;
-import com.iamhere.platform.adapters.MongoDbProvider;
 import com.iamhere.utilities.LogUtil;
 
 /**
@@ -21,17 +23,19 @@ import com.iamhere.utilities.LogUtil;
  */
 public class DmlOperationWrapper {
 
+	private static final Logger logger = LogUtil.getInstance(DmlOperationWrapper.class);
+	
 	private final List<EntityObject> originalEntityObjects;
 	private final Map<EntityObject, DmlValidationHandler> validationHandlers;
 	private boolean hasError = false;
 	// private final DMLEvents dmlType;
 	
-	public DmlOperationWrapper(
-			Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
-		this.originalEntityObjects = Collections
-				.unmodifiableList(new ArrayList<EntityObject>(entityObjects));
-		this.validationHandlers = new HashMap<EntityObject, DmlValidationHandler>(
-				entityObjects.size() << 1);
+	/**
+	 * 
+	 * */
+	public DmlOperationWrapper(Collection<? extends EntityObject> entityObjects, DMLEvents dmlType) {
+		this.originalEntityObjects = ImmutableList.copyOf(new ArrayList<EntityObject>(entityObjects));
+		this.validationHandlers = new HashMap<EntityObject, DmlValidationHandler>(entityObjects.size() << 1);
 		for (EntityObject eo : entityObjects) {
 			DmlValidationHandler handler = new DmlValidationHandler(eo, dmlType);
 			this.validationHandlers.put(eo, handler);
@@ -39,21 +43,23 @@ public class DmlOperationWrapper {
 		// this.dmlType = dmlType;
 	}
 
+	/**
+	 * 
+	 * */
 	public List<EntityObject> getEntityObjectsWithoutError() {
-		List<EntityObject> validEntities = new ArrayList<EntityObject>(
-				this.originalEntityObjects.size());
+		List<EntityObject> validEntities = new ArrayList<EntityObject>(this.originalEntityObjects.size());
 		for (EntityObject eo : this.originalEntityObjects) {
 			DmlValidationHandler handler = this.validationHandlers.get(eo);
 			handler.validate();
 			if (handler.isCurrenctlyValid()) {
 				validEntities.add(eo);
-				LogUtil.getInstance(DmlOperationWrapper.class).debug("Save validation pass for record ==> " + eo);
+				logger.debug("Save validation pass for record ==> " + eo);
 			} else {
 				hasError = true;
-				LogUtil.getInstance(DmlOperationWrapper.class).debug("Save validation with error message  for record ==> " + handler.getErrorMessages());
+				logger.debug("Save validation with error message  for record ==> " + handler.getErrorMessages());
 			}
 		}
-		return Collections.unmodifiableList(validEntities);
+		return ImmutableList.copyOf(validEntities);
 	}
 
 	public boolean isBulkSuccess() {

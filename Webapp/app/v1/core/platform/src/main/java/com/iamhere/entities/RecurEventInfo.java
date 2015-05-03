@@ -6,9 +6,8 @@ import com.iamhere.enums.TimeUnit;
 import com.mongodb.ReflectionDBObject;
 
 /**
- * 
  * @author jassica
- *
+ * @version 1
  */
 public class RecurEventInfo extends ReflectionDBObject {
 	private DateTime startDatetime;
@@ -22,10 +21,6 @@ public class RecurEventInfo extends ReflectionDBObject {
 		this.startDatetime = start;
 	}
 	
-//	public RecurEventInfo(Date start, TimeUnit interval, int offset) {
-//		this(start, new TimeInterval(interval, offset));
-//	}
-
 	public boolean isRecur() {
 		return isRecur;
 	}

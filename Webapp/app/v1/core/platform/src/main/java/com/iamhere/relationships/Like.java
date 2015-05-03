@@ -1,9 +1,12 @@
 package com.iamhere.relationships;
 
 import com.iamhere.entities.UserObject;
-import com.iamhere.trashbin.Entity;
 
-public class Like extends Entity {
+/**
+ * @author Jessica
+ * @version 1
+ * */
+public class Like extends Relationship {
 	private UserObject whoLikes;
 	private Object likesWhom;
 
@@ -15,7 +18,7 @@ public class Like extends Entity {
 	}
 
 	public UserObject getWhoLikes() {
-		return whoLikes;
+		return this.whoLikes;
 	}
 
 	public void setWhoLikes(UserObject whoLikes) {
@@ -23,7 +26,7 @@ public class Like extends Entity {
 	}
 
 	public Object getLikesWhom() {
-		return likesWhom;
+		return this.likesWhom;
 	}
 
 	public void setLikesWhom(Object likesWhom) {
