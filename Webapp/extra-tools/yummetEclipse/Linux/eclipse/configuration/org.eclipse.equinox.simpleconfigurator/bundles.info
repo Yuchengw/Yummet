@@ -17,6 +17,7 @@ javax.inject,1.0.0.v20091030,plugins/javax.inject_1.0.0.v20091030.jar,4,false
 javax.servlet,3.0.0.v201112011016,plugins/javax.servlet_3.0.0.v201112011016.jar,4,false
 javax.servlet.jsp,2.2.0.v201112011158,plugins/javax.servlet.jsp_2.2.0.v201112011158.jar,4,false
 javax.xml,1.3.4.v201005080400,plugins/javax.xml_1.3.4.v201005080400.jar,4,false
+net.jumperz.app.MMonjaDB,1.0.16,plugins/net.jumperz.app.MMonjaDB_1.0.16.jar,4,false
 org.apache.ant,1.9.2.v201404171502,plugins/org.apache.ant_1.9.2.v201404171502/,4,false
 org.apache.batik.css,1.7.0.v201011041433,plugins/org.apache.batik.css_1.7.0.v201011041433.jar,4,false
 org.apache.batik.util,1.7.0.v201011041433,plugins/org.apache.batik.util_1.7.0.v201011041433.jar,4,false

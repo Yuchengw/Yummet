@@ -1,5 +1,9 @@
 package com.iamhere.platform.adapters;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
 import com.iamhere.cache.CacheManager;
 import com.iamhere.cache.RedisDataSourceCacheManager;
 import com.iamhere.cache.RedisProvider;
@@ -9,7 +13,10 @@ import com.iamhere.cache.RedisProvider;
  * @author jassica
  * @version 1
  */
-public class SystemContext {
+public class SystemContext implements ApplicationContextAware {
+	
+	private static ApplicationContext ctx = null;
+
 	/**
 	 * Get the db driver for the system
 	 * @return
@@ -23,8 +30,14 @@ public class SystemContext {
 	 * @return
 	 */
 	public static CacheManager getCacheContext() {
-		//return RedisProvider.getInstance();
-		// try the pool connection settings
 		return new RedisDataSourceCacheManager();
 	}
+
+	 public static ApplicationContext getApplicationContext() {
+		 return ctx;
+	 }
+	 
+	 public void setApplicationContext(ApplicationContext ctx) throws BeansException {
+		 this.ctx = ctx;
+	 }
 }

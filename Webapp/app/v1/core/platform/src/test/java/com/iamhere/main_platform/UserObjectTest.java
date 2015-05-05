@@ -58,7 +58,7 @@ public class UserObjectTest extends TestCase {
 		 user = user.load();
 		 assertTrue(user.remove());
 		 CacheManager manager = SystemContext.getCacheContext();
-		assertTrue(!manager.exists(user));
+		 assertTrue(!manager.exists(user));
 	}
 	
 	public void testLoadExistingUser() throws Exception {

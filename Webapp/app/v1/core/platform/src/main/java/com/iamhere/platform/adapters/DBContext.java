@@ -2,7 +2,7 @@ package com.iamhere.platform.adapters;
 
 /**
  * Provide DB context information for the app and platform
- * @author jassica
+ * @author Jessica
  * @version 1
  */
 public class DBContext {

@@ -9,27 +9,23 @@ import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
 
 import com.iamhere.entities.EntityObject;
+import com.iamhere.platform.adapters.SystemContext;
 import com.iamhere.utilities.SerializeUtil;
 
 /**
  * Implements the cache management for the Redis with multiple client pool supported
  * 
- * @author jassica
+ * @author Jessica
+ * @version 1
  *
  */
 public class RedisDataSourceCacheManager implements CacheManager {
-	@Autowired
-	private static RedisClientTemplate redisClientTemplate = (RedisClientTemplate) new ClassPathXmlApplicationContext(
-			"classpath:spring.xml").getBean("redisClientTemplate");
+	private static RedisClientTemplate redisClientTemplate = new RedisClientTemplate();
 	
 	private static Jedis jedis;
-	@Autowired
-	@Qualifier("jedisConnectionFactory")
-	private JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)new ClassPathXmlApplicationContext(
-			"classpath:spring.xml").getBean("jedisConnectionFactory");
-	
-	/**
-	 * Get a jedis client
+	private JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory) SystemContext.getApplicationContext().getBean("jedisConnectionFactory");
+	 
+	/** Get a jedis client
 	 * 
 	 * @return
 	 */

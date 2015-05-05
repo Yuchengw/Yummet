@@ -1,5 +1,7 @@
 package com.iamhere.cache;
 
+import org.springframework.context.ApplicationContextAware;
+
 import com.iamhere.entities.EntityObject;
 
 /**

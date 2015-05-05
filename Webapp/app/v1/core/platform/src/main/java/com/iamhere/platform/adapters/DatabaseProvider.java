@@ -8,7 +8,7 @@ import com.iamhere.entities.EntityObject;
 /**
  * Database provider for the whole system
  * 
- * @author jassica
+ * @author Jessica
  * @version 1
  */
 public interface DatabaseProvider {

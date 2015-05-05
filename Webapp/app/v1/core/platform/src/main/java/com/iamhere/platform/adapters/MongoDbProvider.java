@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,6 +14,7 @@ import com.iamhere.entities.EntityObject;
 import com.iamhere.entities.PostComment;
 import com.iamhere.entities.PostObject;
 import com.iamhere.entities.UserObject;
+import com.iamhere.mongodb.YummetMongoConfig;
 import com.iamhere.mongodb.entities.DBEntityObject;
 import com.iamhere.mongodb.entities.DBPostComment;
 import com.iamhere.mongodb.entities.DBPostObject;
@@ -31,12 +33,13 @@ public class MongoDbProvider implements DatabaseProvider {
 	
 	public RegistrationBean registrationBean;
 	// Auto threadsafe singleton pattern
-	private static final MongoTemplate mongoOps = (MongoTemplate) new ClassPathXmlApplicationContext("spring.xml").getBean("mongoTemplate");
+	private static final MongoTemplate mongoOps =   (MongoTemplate) new AnnotationConfigApplicationContext(YummetMongoConfig.class)
+													.getBean("mongoTemplate");
 	private static final Logger logger = LogUtil.getInstance(MongoDbProvider.class);
 
 	public MongoDbProvider() {
 	}
-
+	
 	public List<EntityObject> getAllTableRecords(String tableName, EntityObject info) {
 		List<EntityObject> records = new ArrayList<EntityObject>();
 		List<DBEntityObject> dbRecords = (List<DBEntityObject>) mongoOps.findAll(info.getDbObject().getClass());
