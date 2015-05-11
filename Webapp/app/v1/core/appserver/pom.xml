@@ -28,7 +28,6 @@
 		<spring.data.mongodb.version>1.7.0.RELEASE</spring.data.mongodb.version>
 		<spring.mongo.java.driver.version>3.0.0</spring.mongo.java.driver.version>
 		<jersey.spring.version>1.4.0</jersey.spring.version>
-		<guava.version>18.0</guava.version>
 	</properties>
 
 	<!-- choose EBR repository since we care about OSGI -->
@@ -70,7 +69,17 @@
     		  <version>${jersey.spring.version></version>
 		</dependency>
 	  -->
+	 	 <dependency>
+        	<groupId>org.mortbay.jetty</groupId>
+        	<artifactId>jsp-2.1</artifactId>
+        	<version>6.0.0</version>
+     	</dependency>
 		<!-- -->
+		<dependency>
+			<groupId>com.amher</groupId>
+			<artifactId>platform</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -243,7 +252,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>{guava.version}</version>
+			<version>18.0</version>
 		</dependency>
 	</dependencies>
 
@@ -270,7 +279,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.2.v20120308</version>
+				<version>8.1.14.v20131031</version>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopKey>stop</stopKey>

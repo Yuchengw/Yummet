@@ -20,6 +20,11 @@ import com.iamhere.platform.func.DmlValidationHandler;
 @Document(collection = "Users")
 public class DBUserObject extends DBEntityObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5761815599608865412L;
+	
 	private String firstName;
 	private String lastName;
 	private String email;

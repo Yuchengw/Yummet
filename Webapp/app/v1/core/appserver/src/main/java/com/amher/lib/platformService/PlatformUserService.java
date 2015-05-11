@@ -8,6 +8,6 @@ package com.amher.lib.platformService;
  * @author yucheng
  * @version 1
  * */
-public class PlatformUserService {
-
+public abstract class PlatformUserService implements PlatformService {
+	
 }

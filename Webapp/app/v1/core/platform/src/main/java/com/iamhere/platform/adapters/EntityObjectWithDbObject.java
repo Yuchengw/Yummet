@@ -12,6 +12,7 @@ import com.iamhere.mongodb.entities.DBUserObject;
 /**
  * 
  * */
+// Do we still need this?
 public class EntityObjectWithDbObject {
 	
 	public EntityObject getEntityObjectFromDb(DBEntityObject dbObject) {

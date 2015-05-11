@@ -62,10 +62,14 @@ public class DmlOperationWrapper {
 		return ImmutableList.copyOf(validEntities);
 	}
 
+	/**
+	 * */
 	public boolean isBulkSuccess() {
 		return !hasError;
 	}
 
+	/**
+	 * */
 	public boolean isDmlSuccessOnEntity(EntityObject eo) {
 		DmlValidationHandler handler = this.validationHandlers.get(eo);
 		return handler.isCurrenctlyValid();

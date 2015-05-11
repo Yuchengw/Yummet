@@ -31,15 +31,20 @@ import org.slf4j.Logger;
  */
 public class MongoDbProvider implements DatabaseProvider {
 	
+	@SuppressWarnings("deprecation")
 	public RegistrationBean registrationBean;
 	// Auto threadsafe singleton pattern
-	private static final MongoTemplate mongoOps =   (MongoTemplate) new AnnotationConfigApplicationContext(YummetMongoConfig.class)
+	private static final MongoTemplate mongoOps = (MongoTemplate) new AnnotationConfigApplicationContext(YummetMongoConfig.class)
 													.getBean("mongoTemplate");
 	private static final Logger logger = LogUtil.getInstance(MongoDbProvider.class);
 
 	public MongoDbProvider() {
 	}
 	
+	/**
+	 * 
+	 * */
+	@SuppressWarnings("unchecked")
 	public List<EntityObject> getAllTableRecords(String tableName, EntityObject info) {
 		List<EntityObject> records = new ArrayList<EntityObject>();
 		List<DBEntityObject> dbRecords = (List<DBEntityObject>) mongoOps.findAll(info.getDbObject().getClass());
@@ -61,6 +66,10 @@ public class MongoDbProvider implements DatabaseProvider {
 		return records;
 	}
 
+	/**
+	 * 
+	 * */
+	@SuppressWarnings("unchecked")
 	public List<EntityObject> getRecordsBasedOnQuery(String tableName, EntityObject info, Map<String, Object> queryInfo) {
 		List<EntityObject> records = new ArrayList<EntityObject>();
 		Query query = createQueryBasedOnMap(queryInfo);
@@ -108,6 +117,9 @@ public class MongoDbProvider implements DatabaseProvider {
 		return query;
 	}
 
+	/**
+	 * 
+	 * */
 	public void saveRecords(String tableName, EntityObject[] records) {
 		if (records == null) {
 			return;
@@ -123,6 +135,9 @@ public class MongoDbProvider implements DatabaseProvider {
 		assert (numberOfRecordsSaved == records.length);
 	}
 
+	/**
+	 * 
+	 * */
 	public void insertRecords(String tableName, EntityObject[] records) throws Exception {
 		if (records == null) {
 			return;
@@ -170,6 +185,9 @@ public class MongoDbProvider implements DatabaseProvider {
 		assert (numberOfRecordsSaved == records.length);
 	}
 
+	/**
+	 * 
+	 * */
 	public boolean exists(String tablename, Map<String, Object> queryInfo, EntityObject record) throws Exception {
 		Query query = createQueryBasedOnMap(queryInfo);
 		logger.debug("Calling MongoDb Exist function on record => " + record.getDbObject().toString());

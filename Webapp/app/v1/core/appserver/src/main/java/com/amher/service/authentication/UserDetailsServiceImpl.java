@@ -1,5 +1,8 @@
 package com.amher.service.authentication;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,8 +16,9 @@ import com.amher.lib.objectProvider.UserDetailsProvider;
  * @version 1
  * */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService, InitializingBean, DisposableBean {
 
+	@Autowired
 	private UserDetailsProvider userDetailsProvider;
 
 	private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
@@ -30,5 +34,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 		detailsChecker.check(userDetailsImpl);
 		return userDetailsImpl;
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,9 +1,7 @@
 package com.amher.lib.objectProvider;
 
-import java.util.List;
-
 import com.amher.business.bean.User;
-import com.amher.business.bean.UserList;
+import com.amher.lib.platformService.PlatformUserServiceImpl;
 
 /**
  * @author yucheng
@@ -11,54 +9,39 @@ import com.amher.business.bean.UserList;
  * */
 public class UserProvider {
 
-	private static UserList allUsers;
-
-	static {
-		allUsers = new UserList();
-		User u1 = new User("1", "Yucheng", "Wang", "ycwmike@gmail.com","1234");
-		User u2 = new User("2", "George", "Lin", "gglin@gmail.com","1234");
-		allUsers.add(u1);
-		allUsers.add(u2);
+	private PlatformUserServiceImpl platformUserServiceImpl;
+	
+	public UserProvider() {
+		this.platformUserServiceImpl = new PlatformUserServiceImpl();
 	}
-
+	
+	public PlatformUserServiceImpl getUserServiceImpl() {
+		return this.platformUserServiceImpl;
+	}
+	
 	public void add(User user) {
-		allUsers.add(user);
+		this.platformUserServiceImpl.createUser(user);
 	}
 
-	public User get(String index) {
-		return allUsers.get(Integer.parseInt(index));
+	public User get(String email) {
+		return this.platformUserServiceImpl.getUserByEmail(email);
 	}
 
-	public List<User> getAll() {
-		return allUsers.getUsers();
-	}
-
-	public void remove(int id) {
-		allUsers.remove(id);
+	public Boolean remove(int id) {
+		return true;
 	}
 	
 	/**
 	 * update is expensive, think before do it
 	 * */
 	public void update(User updateUser) {
-		update(updateUser.getId(), updateUser);
+		//TODO:
 	}
-	
-	public void update(String index, User newUser) {
-		List<User> allUserList = allUsers.getUsers();
-		allUserList.set(Integer.parseInt(index), newUser);
-	}
-	
+
 	/**
-	 * find user by user's name
+	 * find user by user's name, used for spring security
 	 * */
-	public User findByUserName(String username) {
-		List<User> allUserList = allUsers.getUsers();
-		for (User user: allUserList) {
-			if (user.getEmail().equals(username)) {
-				return user;
-			}
-		}
-		return null;
+	public User findByUserName(String userEmail) {
+		return this.platformUserServiceImpl.getUserByEmail(userEmail);
 	}
 }

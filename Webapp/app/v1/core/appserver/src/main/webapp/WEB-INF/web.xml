@@ -9,12 +9,14 @@
 	<display-name>Amher Web Application</display-name>
 
 	<!-- This is the basic home page, show the world, deprecate it now since we are depending on Spring -->
-	<welcome-file-list> <welcome-file>loading.html</welcome-file> </welcome-file-list>
+	<welcome-file-list> 
+		<welcome-file>loading.html</welcome-file> 
+	</welcome-file-list>
 
 	<!-- The context params that read by ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/rest-context.xml, WEB-INF/spring-security.xml</param-value>
+		<param-value>WEB-INF/rest-context.xml</param-value> 
 	</context-param>
 
 	<!-- This listener will load other application context file in addition 
@@ -64,6 +66,19 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> 
 
+	<!-- =========== Error Page ========== -->
+	<servlet>
+        <servlet-name>403error</servlet-name>
+        <jsp-file>/403.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>403error</servlet-name>
+        <url-pattern>/403</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403</location>
+    </error-page>
 </web-app>

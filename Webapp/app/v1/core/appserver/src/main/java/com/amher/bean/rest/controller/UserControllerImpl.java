@@ -39,8 +39,8 @@ public class UserControllerImpl implements UserController {
 	}
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=UserRestURIConstants.GET_USER)
-	public @ResponseBody User getUser(@PathVariable String id) {
-		User e = userProvider.get(id);
+	public @ResponseBody User getUser(@PathVariable String userEmail){
+		User e = userProvider.getUserServiceImpl().getUserByEmail(userEmail);
 		return e;
 	}
 	
@@ -53,27 +53,21 @@ public class UserControllerImpl implements UserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value=UserRestURIConstants.CREATE_USER)
-	public @ResponseBody User addUser(@RequestBody String body) {
-		Source source = new StreamSource(new StringReader(body));
-		User u = (User) jaxb2Mashaller.unmarshal(source);
-		userProvider.add(u);
-		return u;
+	public @ResponseBody User addUser(@RequestBody User user) {
+		userProvider.getUserServiceImpl().createUser(user);
+		return user;
 	}
 	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.DELETE, value=UserRestURIConstants.DELETE_USER)
 	public @ResponseBody UserList removeUser(@PathVariable String id) {
 		userProvider.remove(Integer.parseInt(id));
-		List<User> users = userProvider.getAll();
-		UserList list = new UserList(users);
-		return list;
+		return null;
 	}
 	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=UserRestURIConstants.GET_ALL_USER)
 	public @ResponseBody UserList getUsers() {
-		List<User> users = userProvider.getAll();
-		UserList list = new UserList(users);
-		return list;
+		return null;
 	}
 }

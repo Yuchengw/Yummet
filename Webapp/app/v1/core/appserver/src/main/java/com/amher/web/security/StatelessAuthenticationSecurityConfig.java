@@ -7,6 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,18 +15,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.amher.lib.objectProvider.UserDetailsProvider;
+import com.amher.lib.objectProvider.UserDetailsProviderImpl;
 import com.amher.service.authentication.TokenAuthenticationService;
+import com.amher.service.authentication.UserDetailsServiceImpl;
 
 /**
  * @author yucheng
  * @version 1
  * */
-@EnableWebSecurity
 @Configuration
-@Order(1)
+@EnableWebSecurity
+@EnableGlobalMethodSecurity( prePostEnabled = true )
 public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	/**
-	 * This is the java hardcode version, for now, we setup the xml version instead, this could be used as a reference.
+	 * This is the java hardcode version
 	 * */
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -36,18 +41,24 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 	public StatelessAuthenticationSecurityConfig() {
 		super(true);
 	}
-
+	
+	@Bean
+	public UserDetailsProvider userDetailsProvider() {
+		return new UserDetailsProviderImpl();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.exceptionHandling().and()
+		http.exceptionHandling()
+				.accessDeniedPage("/403")
+				.and()
 				.anonymous().and()
 				.servletApi().and()
 				//headers().cacheControl().and() // no need, compatibility issue here, will look at it after
-				.authorizeRequests()
-				
-				.antMatchers("/").permitAll()
+				.authorizeRequests()				
+				.antMatchers("/vw/**").permitAll()
 				.antMatchers("/favicon.ico").permitAll()
-				.antMatchers("/resources/**").permitAll()
+				.antMatchers("/rs/**").permitAll()
 				// allow anonymous POSTs to login
 				.antMatchers(HttpMethod.POST, "/service/login").permitAll()
 				// allow anonymous GETs to API
@@ -61,34 +72,25 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 				// {"username":"<name>","password":"<password>"} which sets the
 				// token header upon authentication
 				.addFilterBefore(
-						new StatelessLoginFilter("/api/login",
-								tokenAuthenticationService, userDetailsService,
-								authenticationManager()),
+						new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService,
+							authenticationManager()),
 						UsernamePasswordAuthenticationFilter.class)
-
 				// custom Token based authentication based on the header
 				// previously given to the client
 				.addFilterBefore(
-						new StatelessAuthenticationFilter(
-								tokenAuthenticationService),
+						new StatelessAuthenticationFilter(tokenAuthenticationService),
 						UsernamePasswordAuthenticationFilter.class);
 	}
 
-	@Bean
+	@Bean(name="myAuthenticationManager")
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(
-				new BCryptPasswordEncoder());
+	protected void configure(AuthenticationManagerBuilder auth)throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
-	@Override
-	protected UserDetailsService userDetailsService() {
-		return userDetailsService;
-	}
 }

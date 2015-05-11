@@ -7,6 +7,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import com.amher.web.security.UserAuthentication;
 
@@ -15,6 +16,7 @@ import com.amher.web.security.UserAuthentication;
  * @author yucheng
  * @version 1
  * */
+@Service
 public class TokenAuthenticationService {
 	
 	private static final String AUTH_HEADER_NAME = "X-AUTH-TOKEN";

@@ -55,13 +55,9 @@
 	</repositories>
 
 	<dependencies>
-	 <!-- added for lack of jersey on IDE  
-		<dependency>
-			  <groupId>com.sun.jersey.contribs</groupId>
-   			  <artifactId>jersey-spring</artifactId>
-    		  <version>${jersey.spring.version></version>
-		</dependency>
-	  -->
+		<!-- added for lack of jersey on IDE <dependency> <groupId>com.sun.jersey.contribs</groupId> 
+			<artifactId>jersey-spring</artifactId> <version>${jersey.spring.version></version> 
+			</dependency> -->
 		<!-- Spring and Transactions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -187,12 +183,31 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.2.v20120308</version>
+				<version>9.1.4.v20140401</version>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopKey>stop</stopKey>
 					<stopPort>9999</stopPort>
 				</configuration>
+				<executions>
+					<execution>
+						<id>start-jetty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<daemon>true</daemon>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

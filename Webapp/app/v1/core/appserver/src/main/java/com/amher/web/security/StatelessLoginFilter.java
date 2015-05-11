@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,8 +30,10 @@ class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter {
 	private final TokenAuthenticationService tokenAuthenticationService;
 	private final UserDetailsService userDetailsService;
 
-	protected StatelessLoginFilter(String urlMapping, TokenAuthenticationService tokenAuthenticationService,
-								   UserDetailsService userDetailsService, AuthenticationManager authManager) {
+	protected StatelessLoginFilter(String urlMapping,
+									TokenAuthenticationService tokenAuthenticationService,
+									UserDetailsService userDetailsService,
+									AuthenticationManager authManager) {
 		super(new AntPathRequestMatcher(urlMapping));
 		this.userDetailsService = userDetailsService;
 		this.tokenAuthenticationService = tokenAuthenticationService;
@@ -42,12 +45,14 @@ class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter {
 	 * */
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException,
-			IOException, ServletException {
+												HttpServletResponse response) 
+												throws AuthenticationException,
+												IOException, ServletException {
 
-		final UserDetailsImpl userDetailsImpl = new ObjectMapper().readValue(request.getInputStream(), UserDetailsImpl.class);
-		final UsernamePasswordAuthenticationToken loginToken = new UsernamePasswordAuthenticationToken(userDetailsImpl.getUsername(), 
-																									   userDetailsImpl.getPassword());
+		final UserDetailsImpl userDetailsImpl = new ObjectMapper().readValue(
+				request.getInputStream(), UserDetailsImpl.class);
+		final UsernamePasswordAuthenticationToken loginToken = new UsernamePasswordAuthenticationToken(
+				userDetailsImpl.getUsername(), userDetailsImpl.getPassword());
 		return getAuthenticationManager().authenticate(loginToken);
 	}
 
@@ -56,16 +61,17 @@ class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter {
 	 * */
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request,
-			HttpServletResponse response, FilterChain chain,
-			Authentication authentication) throws IOException, ServletException {
+												HttpServletResponse response, FilterChain chain,
+												Authentication authentication) throws IOException, ServletException {
 
 		// Lookup the complete User object from the database and create an
 		// Authentication for it
-		final UserDetailsImpl authenticatedUser = (UserDetailsImpl) userDetailsService.loadUserByUsername(authentication.getName());
+		final UserDetailsImpl authenticatedUser = (UserDetailsImpl) userDetailsService
+				.loadUserByUsername(authentication.getName());
 		final UserAuthentication userAuthentication = new UserAuthentication(authenticatedUser);
 
 		// Add the custom token as HTTP header to the response
-		tokenAuthenticationService.addAuthentication(response, userAuthentication);
+		tokenAuthenticationService.addAuthentication(response,userAuthentication);
 
 		// Add the authentication to the Security context
 		SecurityContextHolder.getContext().setAuthentication(userAuthentication);
