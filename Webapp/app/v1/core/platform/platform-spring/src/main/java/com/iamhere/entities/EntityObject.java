@@ -18,27 +18,26 @@ import com.iamhere.platform.func.DmlValidationHandler;
  * class is responsible for persisting and reading those value.
  * 
  * @author jassica
- *
+ * @version 1
  */
-public abstract class EntityObject implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6011241820070393952L;  
-	private String id;
+public abstract class EntityObject implements Serializable {
+	private static final long serialVersionUID = -6011241820070393952L;
+	protected String id;
 	private DateTime createdDate;
 	private DateTime lastModifiedDate;
-	private String cacheKey;	// The cache identifier for the cache management system
+	private String cacheKey; // The cache identifier for the cache management
+								// system
 
 	// Primary getter and setters
 	public void setId(String id) {
 		this.id = id;
+		setCacheKey(id);
 	}
 
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getCacheKey() {
 		return cacheKey;
 	}
@@ -53,7 +52,6 @@ public abstract class EntityObject implements Serializable{
 
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
-//		getDbObject().setCreatedDate(createdDate.toDate());
 	}
 
 	public DateTime getLastModifiedDate() {
@@ -62,7 +60,6 @@ public abstract class EntityObject implements Serializable{
 
 	public void setLastModifiedDate(DateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
-//		getDbObject().setLastModifiedDate(lastModifiedDate.toDate());
 	}
 
 	/**
@@ -75,12 +72,15 @@ public abstract class EntityObject implements Serializable{
 	 * @return
 	 */
 	public final DmlOperationWrapper save() {
-		DMLEvents dmlType = DMLEvents.SAVE;
+		DMLEvents dmlType = DMLEvents.UPDATE;
 		if (isNew()) {
 			dmlType = DMLEvents.CREATE;
 		}
-		return BulkEntityOperations.bulkSave(Collections.singletonList(this),
-				dmlType);
+		DmlOperationWrapper dmlResult = BulkEntityOperations.bulkSave(
+				Collections.singletonList(this), dmlType);
+		// TODO: how to use the return result
+		saveRelatedInfoDuringUpdate();
+		return dmlResult;
 	}
 
 	/**
@@ -111,7 +111,9 @@ public abstract class EntityObject implements Serializable{
 	 * @return
 	 */
 	public boolean remove() {
-		return BulkEntityOperations.bulkRemove(Collections.singletonList(this));
+		boolean removeResult = BulkEntityOperations.bulkRemove(Collections.singletonList(this));
+		saveRelatedInfoDuringRemove();
+		return removeResult;
 	}
 
 	/**
@@ -129,14 +131,13 @@ public abstract class EntityObject implements Serializable{
 		DateTime now = new DateTime();
 		if (dml.getDmlType() == DMLEvents.CREATE) {
 			setCreatedDate(now);
-//			dbObj.setCreatedDate(now);
 			setLastModifiedDate(now);
-//			dbObj.setLastModifiedDate(now);
 		} else {
-			// if it is update, the created date information should already be there
-//			dbObj.setCreatedDate(getCreatedDate());
-			setLastModifiedDate(now);
-//			dbObj.setLastModifiedDate(now);
+			if (!isRelatedInfoUpdate()) {
+				// if it is update, the created date information should already
+				// be there
+				setLastModifiedDate(now);
+			}
 		}
 	}
 
@@ -160,17 +161,41 @@ public abstract class EntityObject implements Serializable{
 	 * Reload all the entity field information from db object. No db access is
 	 * required is for this step.
 	 */
-	public abstract void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject);
-	
+	public abstract void reloadAllFieldInformationFromDbObject(
+			DBEntityObject dbObject);
+
 	/**
 	 * Get the db class for the current object
+	 * 
 	 * @return
 	 */
 	public abstract Class<?> getDbClass();
 
 	/**
 	 * Get the db table name
+	 * 
 	 * @return
 	 */
 	public abstract String getDbTableName();
+
+	/**
+	 * Cascade update the parent object information when the current object information is updated
+	 * 
+	 * @return
+	 */
+	public abstract DmlOperationWrapper saveRelatedInfoDuringUpdate();
+	
+	/**
+	 * Cascade update the parent object information when the current object will be removed
+	 * 
+	 * @return
+	 */
+	public abstract DmlOperationWrapper saveRelatedInfoDuringRemove();
+
+	/**
+	 * Return true if parent object needs update
+	 * 
+	 * @return
+	 */
+	public abstract boolean isRelatedInfoUpdate();
 }

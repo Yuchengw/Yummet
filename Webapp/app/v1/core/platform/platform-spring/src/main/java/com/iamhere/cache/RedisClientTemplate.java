@@ -19,6 +19,11 @@ import redis.clients.jedis.SortingParams;
 import redis.clients.jedis.Tuple;
 import ch.qos.logback.classic.Logger;
 
+/**
+ * 
+ * @author jassica
+ * @vesion 1
+ */
 @Repository("redisClientTemplate")
 public class RedisClientTemplate {
     private static final Logger log = LogUtil.getInstance(RedisClientTemplate.class);
@@ -32,7 +37,6 @@ public class RedisClientTemplate {
     }
 
     /**
-     * 设置单个值
      * 
      * @param key
      * @param value
@@ -58,7 +62,6 @@ public class RedisClientTemplate {
     }
 
     /**
-     * 获取单个值
      * 
      * @param key
      * @return
@@ -121,7 +124,6 @@ public class RedisClientTemplate {
     }
 
     /**
-     * 在某段时间后实现
      * 
      * @param key
      * @param unixTime
@@ -147,7 +149,6 @@ public class RedisClientTemplate {
     }
 
     /**
-     * 在某个时间点失效
      * 
      * @param key
      * @param unixTime

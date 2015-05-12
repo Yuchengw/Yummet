@@ -5,13 +5,14 @@ import org.joda.time.DateTime;
 import com.iamhere.enums.OrderStatus;
 import com.iamhere.mongodb.entities.DBEntityObject;
 import com.iamhere.mongodb.entities.DBOrderObject;
+import com.iamhere.platform.func.DmlOperationWrapper;
 import com.iamhere.platform.func.DmlValidationHandler;
 import com.iamhere.utilities.TextUtil;
 
 /**
  * Platform entity for the orders
  * @author jassica
- *
+ * @version 1
  */
 public class OrderObject extends EntityObject {
 	private static final long serialVersionUID = -6011241820070393954L;  
@@ -28,7 +29,6 @@ public class OrderObject extends EntityObject {
 	
 	/*===================== Constructors =============================*/
 	public OrderObject(UserObject jia, UserObject yi)  {
-		
 		setJiaFang(jia);
 		setYiFang(yi);
 	}
@@ -149,11 +149,14 @@ public class OrderObject extends EntityObject {
 	@Override
 	public DBEntityObject getDbObject() {
 		DBOrderObject dbOrder = new DBOrderObject();
-		dbOrder.setJiaWithEntity(jiaFang);
-		dbOrder.setYiWithEntity(yiFang);
+		dbOrder.setJiaFang(jiaFang);
+//		dbOrder.setJiaWithEntity(jiaFang);
+		dbOrder.setYiFang(yiFang);
+//		dbOrder.setYiWithEntity(yiFang);
 		dbOrder.setSuccess(isSuccess);
 		dbOrder.setTransactionDateTime(transactionDateTime);
-		dbOrder.setParentPostWithEntity(parentPost);
+		dbOrder.setParentPost(parentPost);
+//		dbOrder.setParentPostWithEntity(parentPost);
 		dbOrder.setThirdPartyInfo(thirdPartyInfo);
 		dbOrder.setActualCost(actualCost);
 		dbOrder.setQuantity(quantity);
@@ -174,9 +177,9 @@ public class OrderObject extends EntityObject {
 		setCreatedDate(new DateTime(dbOrder.getCreatedDate()));
 		setLastModifiedDate(new DateTime(dbOrder.getLastModifiedDate()));
 		setActualCost(dbOrder.getActualCost());
-		setJiaFang(new UserObject(dbOrder.getJiaFang().toString()));
-		setYiFang(new UserObject(dbOrder.getYiFang().toString()));
-		setParentPost(new PostObject(dbOrder.getParentPost().toString()));
+		setJiaFang(dbOrder.getJiaFang());
+		setYiFang(dbOrder.getYiFang());
+		setParentPost(dbOrder.getParentPost());
 		setQuantity(dbOrder.getQuantity());
 		setScore(dbOrder.getScore());
 		setSuccess(dbOrder.isSuccess());
@@ -197,6 +200,24 @@ public class OrderObject extends EntityObject {
 	@Override
 	public String getDbTableName() {
 		return new DBOrderObject().getDbTableName();
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringUpdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringRemove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRelatedInfoUpdate() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

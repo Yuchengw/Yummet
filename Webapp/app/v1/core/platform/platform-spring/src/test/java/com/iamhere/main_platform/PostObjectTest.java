@@ -1,9 +1,11 @@
 package com.iamhere.main_platform;
 
+import com.iamhere.cache.CacheManager;
 import com.iamhere.entities.PostComment;
 import com.iamhere.entities.PostObject;
 import com.iamhere.entities.UserObject;
 import com.iamhere.enums.PostStatus;
+import com.iamhere.platform.adapters.SystemContext;
 import com.iamhere.platform.func.DmlOperationWrapper;
 
 import junit.framework.Test;
@@ -30,9 +32,11 @@ public class PostObjectTest extends TestCase {
 
 	/**
 	 * Create a new post and save to db?
+	 * @throws Exception 
 	 */
-	public void testCreateNewPost() {
+	public void testCreateNewPost() throws Exception {
 //		UserObject user = new UserObject("test@hotmail.com");
+//		user = user.load();
 //		PostObject post = new PostObject(user, "Sample Post", "Around SSF", 1);
 //		post.setCost(2.0); // it should be required and we need verify
 //		post.setStatus(PostStatus.OPEN); // it should be a required field too
@@ -57,8 +61,9 @@ public class PostObjectTest extends TestCase {
 	}
 
 	public void testUpdateExistingPost() throws Exception {
-//		UserObject user = new UserObject("test@hotmail.com");
-//		PostObject post = new PostObject("552c9595e221fd5c2173c682");
+//		UserObject user = new UserObject("test2@hotmail.com");
+//		user = user.load();
+//		PostObject post = new PostObject("555026fde221fd2c9899a04d");
 //		post = post.load();
 //		post.setCost(2.0); // it should be required and we need verify
 //		post.setStatus(PostStatus.CLOSE); // it should be a required field too
@@ -66,22 +71,33 @@ public class PostObjectTest extends TestCase {
 //		DmlOperationWrapper dmlState = post.save();
 //		assertTrue(dmlState.isBulkSuccess());
 //		assertEquals("The post id should not be changed",
-//				"552c9595e221fd5c2173c682", post.getId());
+//				"555026fde221fd2c9899a04d", post.getId());
 	}
 	
-	public void testCreateNewPostComment() {
-//		UserObject user = new UserObject("test@hotmail.com");
-//		PostObject post = new PostObject("552c9595e221fd5c2173c682");
-//		PostComment comment = new PostComment(post, "I add comment hahshsha");
-//		comment.setCreatedBy(user);
-//		DmlOperationWrapper state = comment.save();
-//		assertTrue(state.isBulkSuccess());
-//		assertNotNull("The comment id should not be null", comment.getId());
-//		System.out.println("The comment id is : "  + comment.getId());
+	public void testRemoveExistingPost() throws Exception {
+//		PostObject post = new PostObject("555026fde221fd2c9899a04d");
+//		post = post.load();
+//		boolean removed = post.remove();
+//		assertTrue("removed should successful", removed);
+//		CacheManager manager = SystemContext.getCacheContext();
+//		assertTrue(!manager.exists(post));
+	}
+	
+	public void testCreateNewPostComment() throws Exception {
+		UserObject user = new UserObject("test@hotmail.com");
+		user = user.load();
+		PostObject post = new PostObject("555026fde221fd2c9899a04d");
+		post = post.load();
+		PostComment comment = new PostComment(post, "I add comment hahshsha");
+		comment.setCreatedBy(user);
+		DmlOperationWrapper state = comment.save();
+		assertTrue(state.isBulkSuccess());
+		assertNotNull("The comment id should not be null", comment.getId());
+		System.out.println("The comment id is : "  + comment.getId());
 	}
 	
 	public void testUpdateExistingPostComment() throws Exception {
-//		PostComment comment = new PostComment("552c971be221fd5da1bd6968");
+//		PostComment comment = new PostComment("55502cf7e221fd2eeb57a5c1");
 //		comment = comment.load();
 //		comment.setCommentBody("I want to update my comment");
 //		DmlOperationWrapper state = comment.save();
@@ -89,7 +105,8 @@ public class PostObjectTest extends TestCase {
 	}
 	
 	public void testRemoveExistingPostComment() throws Exception {
-//		PostComment comment = new PostComment("552c971be221fd5da1bd6968");
+//		PostComment comment = new PostComment("55502cf7e221fd2eeb57a5c1");
+//		comment = comment.load();
 //		boolean removed = comment.remove();
 //		assertTrue("removed should successful", removed);
 	}

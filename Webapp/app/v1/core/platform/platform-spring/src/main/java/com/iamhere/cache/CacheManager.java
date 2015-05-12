@@ -5,6 +5,7 @@ import com.iamhere.entities.EntityObject;
 /**
  * Interface for the cache management
  * @author jassica
+ * @version 1
  *
  */
 public interface CacheManager {

@@ -10,6 +10,8 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  *
  * @param <K>
  * @param <V>
+ * 
+ * @version 1
  */
 public abstract class AbstractBaseRedisDao<K, V> {  
      

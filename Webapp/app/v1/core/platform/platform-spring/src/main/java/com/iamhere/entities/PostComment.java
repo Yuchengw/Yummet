@@ -2,6 +2,7 @@ package com.iamhere.entities;
 
 import com.iamhere.mongodb.entities.DBEntityObject;
 import com.iamhere.mongodb.entities.DBPostComment;
+import com.iamhere.platform.func.DmlOperationWrapper;
 import com.iamhere.platform.func.DmlValidationHandler;
 import com.iamhere.utilities.TextUtil;
 
@@ -64,7 +65,7 @@ public class PostComment extends EntityObject {
 	public void setCreatedBy(UserObject createdBy) {
 		this.createdBy = createdBy;
 	}
-
+	
 	/*===================== Override super method =============================*/
 	@Override
 	public void saveHook_Validate(DmlValidationHandler dml) {
@@ -81,10 +82,10 @@ public class PostComment extends EntityObject {
 	@Override
 	public DBEntityObject getDbObject() {
 		DBPostComment dbComment = new DBPostComment();
-		dbComment.setParentPostWithEntity(parentPost);
+		dbComment.setParentPost(parentPost);
 		dbComment.setCommentBody(commentBody);
 		dbComment.setChildCommentWithEntity(childComment);
-		dbComment.setCreatedByWithEntity(createdBy);
+		dbComment.setCreatedBy(createdBy);
 		dbComment.setCreatedDate(getCreatedDate());
 		dbComment.setLastModifiedDate(getLastModifiedDate());
 		if (!TextUtil.isNullOrEmpty(getId())) {
@@ -102,9 +103,9 @@ public class PostComment extends EntityObject {
 		setCommentBody(dbComment.getCommentBody());
 		setCreatedDate(dbComment.getCreatedDate());
 		setLastModifiedDate(dbComment.getLastModifiedDate());
-		setParentPost(new PostObject(dbComment.getParentPost()));
+		setParentPost(dbComment.getParentPost());
 		setId(dbComment.getId());
-		setCreatedBy(new UserObject(dbComment.getCreatedBy()));
+		setCreatedBy(dbComment.getCreatedBy());
 	}
 	
 	public PostComment load() throws Exception {
@@ -119,5 +120,32 @@ public class PostComment extends EntityObject {
 	@Override
 	public String getDbTableName() {
 		return new DBPostComment().getDbTableName();
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringUpdate() {
+		// Add current post comment to the parent post 
+		parentPost.addPostComments(getId());
+		parentPost.save();
+		
+		// Add commented post id to the user object
+		createdBy.addCommentedPosts(getParentPost().getId());
+		DmlOperationWrapper creatorResult = createdBy.save();
+		return creatorResult;
+	}
+
+	@Override
+	public boolean isRelatedInfoUpdate() {
+		return false;
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringRemove() {
+		// Remove current post comment from the parent post 
+		parentPost.removePostComments(getId());
+		parentPost.save();
+		// Remove commented post id from the user object
+		createdBy.removeCommentedPosts(getParentPost().getId());
+		return createdBy.save();
 	}
 }

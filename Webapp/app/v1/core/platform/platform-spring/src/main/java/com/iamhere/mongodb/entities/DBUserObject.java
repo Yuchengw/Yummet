@@ -1,7 +1,9 @@
 package com.iamhere.mongodb.entities;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -32,10 +34,73 @@ public class DBUserObject extends DBEntityObject {
 	private String role;
 	private boolean isEmailAuthorized;
 
+	// Related Object information which is relationship information in the
+	// Relational DB
+	private Set<String> createdPosts;
+	private Set<String> commentedPosts;
+	
 	public DBUserObject() {
 	}
 
+	/**
+	 * When a user create a post, we add the postId to the User
+	 * @param postId
+	 */
+	public void addCreatedPosts(String postId)  {
+		if (createdPosts == null) {
+			createdPosts = new HashSet<String>();
+		}
+		createdPosts.add(postId);
+	}
+	
+	/**
+	 * When a user remove a post, we remove the postId from the User
+	 * @param postId
+	 */
+	public void removeCreatedPosts(String postId) {
+		if (createdPosts != null) {
+			createdPosts.remove(postId);
+		}
+	}
+	
+	/**
+	 * When a user comment a post, we add the postId to the User
+	 * @param postId
+	 */
+	public void addCommentedPosts(String postId)  {
+		if (commentedPosts == null) {
+			commentedPosts = new HashSet<String>();
+		}
+		commentedPosts.add(postId);
+	}
+	
+	/**
+	 * When a user comment a post, we remove the postId from the User
+	 * @param postId
+	 */
+	public void removeCommentedPosts(String postId) {
+		if (commentedPosts != null) {
+			commentedPosts.remove(postId);
+		}
+	}
+	
 	// Getters and setters
+	public void setCreatedPosts(Set<String> posts) {
+		createdPosts = posts;
+	}
+	
+	public Set<String> getCreatedPosts() {
+		return createdPosts;
+	}
+	
+	public void setCommentedPosts(Set<String> posts) {
+		commentedPosts = posts;
+	}
+	
+	public Set<String> getCommentedPosts() {
+		return commentedPosts;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

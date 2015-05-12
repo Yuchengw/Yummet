@@ -1,6 +1,6 @@
 package com.iamhere.mongodb.entities;
 
-import java.util.Date;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +11,7 @@ import com.iamhere.platform.func.DmlValidationHandler;
 
 /**
  * Mongodb representation for the Post object
+ * 
  * @author jassica
  *
  */
@@ -24,16 +25,20 @@ public class DBPostObject extends DBEntityObject {
 	private String commentsOrDescription;
 	private double cost;
 	private String image;
-	private String[] partners;
+	private UserObject[] partners;
 	private String postCategory;
 	private String status;
 	private String visibility;
 	private int numberOfOrders; // TODO: more detail
 	private int numberOfLikes;
-	private String creator;
-	private String lastModifiedBy;
+	private UserObject creator;
+	private UserObject lastModifiedBy;
 	private String type;
 	private DateTime expireDate;
+
+	// Related Object information which is relationship information in the
+	// Relational DB
+	private Set<String> postComments;
 
 	public DBPostObject(String id) {
 		setId(id);
@@ -48,6 +53,14 @@ public class DBPostObject extends DBEntityObject {
 	}
 
 	/* Getters and Setters */
+	public void setPostComments(Set<String> posts) {
+		postComments = posts;
+	}
+
+	public Set<String> getPostComments() {
+		return postComments;
+	}
+
 	public String getSubject() {
 		return subject;
 	}
@@ -105,23 +118,23 @@ public class DBPostObject extends DBEntityObject {
 		this.image = image;
 	}
 
-	public String[] getPartners() {
+	public UserObject[] getPartners() {
 		return partners;
 	}
 
-	public void setPartners(String[] partners) {
+	public void setPartners(UserObject[] partners) {
 		this.partners = partners;
 	}
 
-	public void setPartners(UserObject[] partners) {
-		if (partners != null) {
-			String[] partnerIds = new String[partners.length];
-			for (int i = 0; i < partnerIds.length; i++) {
-				partnerIds[i] = partners[i].getEmail();
-			}
-			this.partners = partnerIds;
-		}
-	}
+	// public void setPartners(UserObject[] partners) {
+	// if (partners != null) {
+	// String[] partnerIds = new String[partners.length];
+	// for (int i = 0; i < partnerIds.length; i++) {
+	// partnerIds[i] = partners[i].getEmail();
+	// }
+	// this.partners = partnerIds;
+	// }
+	// }
 
 	public String getPostCategory() {
 		return postCategory;
@@ -146,7 +159,7 @@ public class DBPostObject extends DBEntityObject {
 	public void setVisibility(String visibility) {
 		this.visibility = visibility;
 	}
-	
+
 	public int getNumberOfOrders() {
 		return numberOfOrders;
 	}
@@ -163,19 +176,12 @@ public class DBPostObject extends DBEntityObject {
 		this.numberOfLikes = numberOfLikes;
 	}
 
-	public String getCreator() {
+	public UserObject getCreator() {
 		return creator;
 	}
 
-	public void setCreator(String creator) {
+	public void setCreator(UserObject creator) {
 		this.creator = creator;
-	}
-
-	public void setCreatorWithEntity(UserObject creator) {
-		if (creator == null)
-			this.creator = null;
-		else
-			this.creator = creator.getEmail();
 	}
 
 	public void setType(String type) {
@@ -190,20 +196,12 @@ public class DBPostObject extends DBEntityObject {
 		this.expireDate = expireDate;
 	}
 
-	public String getLastModifiedBy() {
+	public UserObject getLastModifiedBy() {
 		return lastModifiedBy;
 	}
-	
-	public void setLastModifiedBy(String lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
-	}
 
-	public void setLastModifiedByWithEntity(UserObject lastModifiedBy) {
-		if (lastModifiedBy == null) {
-			this.lastModifiedBy = null;
-		} else {
-			this.lastModifiedBy = lastModifiedBy.getEmail();
-		}
+	public void setLastModifiedBy(UserObject lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	@Override
@@ -217,6 +215,6 @@ public class DBPostObject extends DBEntityObject {
 
 	@Override
 	public String toString() {
-		return  "Post [subject=" + subject + ", location=" + location +  "]";
+		return "Post [subject=" + subject + ", location=" + location + "]";
 	}
 }

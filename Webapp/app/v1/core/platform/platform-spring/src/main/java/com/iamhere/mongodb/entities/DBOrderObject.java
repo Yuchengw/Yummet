@@ -1,7 +1,5 @@
 package com.iamhere.mongodb.entities;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,11 +14,11 @@ import com.iamhere.platform.func.DmlValidationHandler;
  */
 @Document(collection = "Orders")
 public class DBOrderObject extends DBEntityObject {
-	private String jiaFang;
-	private String yiFang;
+	private UserObject jiaFang;
+	private UserObject yiFang;
 	private boolean isSuccess;
 	private DateTime TransactionDateTime;
-	private String parentPost;
+	private PostObject parentPost;
 	private String thirdPartyInfo;
 	private double actualCost; 
 	private int quantity; 
@@ -34,19 +32,19 @@ public class DBOrderObject extends DBEntityObject {
 		setId(id);
 	}
 
-	public String getJiaFang() {
+	public UserObject getJiaFang() {
 		return jiaFang;
 	}
 
-	public void setJiaFang(String jiaFang) {
+	public void setJiaFang(UserObject jiaFang) {
 		this.jiaFang = jiaFang;
 	}
 
-	public String getYiFang() {
+	public UserObject getYiFang() {
 		return yiFang;
 	}
 
-	public void setYiFang(String yiFang) {
+	public void setYiFang(UserObject yiFang) {
 		this.yiFang = yiFang;
 	}
 
@@ -66,11 +64,11 @@ public class DBOrderObject extends DBEntityObject {
 		TransactionDateTime = transactionDateTime;
 	}
 
-	public String getParentPost() {
+	public PostObject getParentPost() {
 		return parentPost;
 	}
 
-	public void setParentPost(String parentPost) {
+	public void setParentPost(PostObject parentPost) {
 		this.parentPost = parentPost;
 	}
 
@@ -106,17 +104,17 @@ public class DBOrderObject extends DBEntityObject {
 		this.score = score;
 	}
 	
-	public void setJiaWithEntity(UserObject jia) {
-		this.jiaFang = jia == null ? null : jia.getEmail();
-	}
-	
-	public void setYiWithEntity(UserObject yi) {
-		this.yiFang = yi == null ? null : yi.getEmail();
-	}
-	
-	public void setParentPostWithEntity(PostObject post) {
-		this.parentPost = post == null ? null : post.getId();
-	}
+//	public void setJiaWithEntity(UserObject jia) {
+//		this.jiaFang = jia == null ? null : jia.getEmail();
+//	}
+//	
+//	public void setYiWithEntity(UserObject yi) {
+//		this.yiFang = yi == null ? null : yi.getEmail();
+//	}
+//	
+//	public void setParentPostWithEntity(PostObject post) {
+//		this.parentPost = post == null ? null : post.getId();
+//	}
 	
 	public void setStatus(String dbValue) {
 		this.status = dbValue;

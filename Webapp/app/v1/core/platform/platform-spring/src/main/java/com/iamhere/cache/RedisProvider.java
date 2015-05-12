@@ -21,7 +21,7 @@ import com.iamhere.utilities.SerializeUtil;
 /**
  * Implements the cache management for the Redis
  * @author jassica
- *
+ * @version 1
  */
 public class RedisProvider extends AbstractBaseRedisDao<String, EntityObject>
 		implements CacheManager {

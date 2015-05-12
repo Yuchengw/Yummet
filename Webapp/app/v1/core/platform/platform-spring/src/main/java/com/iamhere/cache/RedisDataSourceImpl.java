@@ -12,11 +12,10 @@ import redis.clients.jedis.ShardedJedisPool;
 /**
  * 
  * @author jassica
- *
+ * @version 1
  */
 @Repository("redisDataSource")
 public class RedisDataSourceImpl implements RedisDataSource {
-	// TODO: Change to the log util
     private static final Logger log = LogUtil.getInstance(RedisDataSourceImpl.class);
 
     @Autowired

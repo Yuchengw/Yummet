@@ -5,7 +5,7 @@ import redis.clients.jedis.ShardedJedis;
 /**
  * Interface for the shared redis management
  * @author jassica
- *
+ * @version 1
  */
 public interface RedisDataSource {
 	public abstract ShardedJedis getRedisClient();

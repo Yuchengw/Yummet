@@ -14,12 +14,12 @@ import com.iamhere.platform.func.DmlValidationHandler;
  */
 @Document(collection = "PostComments")
 public class DBPostComment extends DBEntityObject {
-	private String parentPost;
+	private PostObject parentPost;
 	// TODO: to keep it simple now and not consider the rendering
 	private String commentBody;
 	private String childComment; // TODO: is this only for child or sibling as
 									// well
-	private String createdBy;
+	private UserObject createdBy;
 
 	public DBPostComment() {
 	}
@@ -28,11 +28,11 @@ public class DBPostComment extends DBEntityObject {
 		setId(id);
 	}
 
-	public String getParentPost() {
+	public PostObject getParentPost() {
 		return parentPost;
 	}
 
-	public void setParentPost(String parentPost) {
+	public void setParentPost(PostObject parentPost) {
 		this.parentPost = parentPost;
 	}
 
@@ -52,11 +52,11 @@ public class DBPostComment extends DBEntityObject {
 		this.childComment = childComment;
 	}
 
-	public String getCreatedBy() {
+	public UserObject getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(UserObject createdBy) {
 		this.createdBy = createdBy;
 	}
 	
@@ -69,16 +69,8 @@ public class DBPostComment extends DBEntityObject {
 		return "PostComments";
 	}
 
-	public void setParentPostWithEntity(PostObject parentPost2) {
-		this.parentPost = parentPost2 == null ? null : parentPost2.getId();
-	}
-
 	public void setChildCommentWithEntity(PostComment childComment2) {
 		this.childComment = childComment2 == null ? null : childComment2.getId();
-	}
-
-	public void setCreatedByWithEntity(UserObject createdBy2) {
-		this.createdBy = createdBy2 == null ? null : createdBy2.getEmail();
 	}
 
 	@Override
