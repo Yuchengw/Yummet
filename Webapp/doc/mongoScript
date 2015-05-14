@@ -1,0 +1,9 @@
+clear
+echo "MongoDb setup begins"
+
+echo "Start MongoDb console"
+echo "Create a db user."
+mongo iamhere --eval "printjson(db.createUser({'user':'amheredb', 'pwd':'amhere1234', roles:['readWrite']}))"
+
+#mongo -u 'amheredb' -p 'amhere1234' localhost/iamhere
+

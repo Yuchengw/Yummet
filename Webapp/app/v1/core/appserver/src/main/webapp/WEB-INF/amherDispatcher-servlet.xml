@@ -1,0 +1,106 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+ 	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!-- Spring Annotation driving programming -->
+	<mvc:annotation-driven />
+	<!-- Handles GET requests for /resources/** by efficiently serving static 
+		content in the ${webappRoot}/resources dir -->
+	<mvc:resources mapping="/rs/**" location="/resources/" />
+	<mvc:resources mapping="/vw/**" location="/views/" />
+	<mvc:resources mapping="/as/**" location="/assets/"/>
+	<!-- Ensures that dispatcher sservlet can be mapped to '/' and that static 
+		resources are still served by the containers default servlet. Requires Spring 
+		Framework 3.0 or higher. -->
+	<mvc:default-servlet-handler />
+	<bean id="jedisFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:use-pool="true" />
+	<!-- TODO: need to figure out how to use RedisTemplate -->
+	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" 
+		p:connection-factory="jedisFactory" /> -->
+	<!-- Enable Aspectj proxy -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!--***************************************** Aspects ***************************************************** -->
+	<!-- Logging part -->
+	<bean id="logAspect" class="com.amher.service.aop.UserControllerAOPImpl" />
+	<!-- Performance part -->
+	<!-- <bean id="performanceMonitor" class="com.amher.util.monitoring.UserControllerPerformanceMonitorInterceptor" 
+		/> -->
+	<bean id="performanceMonitor"
+		class="com.amher.util.monitoring.UserControllerPerformanceMonitorInterceptor" />
+	<aop:config>
+		<aop:pointcut id="allServiceMethods"
+			expression="execution(* com.amher.bean.rest.controller.UserController.*.*(..))" />
+		<aop:advisor pointcut-ref="allServiceMethods" advice-ref="performanceMonitor"
+			order="2" />
+	</aop:config>
+
+	<!-- Let Spring be notice of Rest Controllers -->
+	<context:component-scan base-package="com.amher" />
+	<!-- To enable @RequestMapping process on type level and method level -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<!-- Restful controller: UserController's aggregate object -->
+	<bean id="userControllerImpl" class="com.amher.bean.rest.controller.UserControllerImpl">
+		<property name="userProvider" ref="userProvider" />
+	</bean>
+	
+	<!-- <bean id="PostControllerImpl" class="com.amher.bean.rest.controller.PostControllerImpl"> 
+		<property name="postProvider" ref="postProvider" /> </bean> <bean id="PostCommentControllerImpl" 
+		class="com.amher.bean.rest.controller.PostCommentControllerImpl"> <property 
+		name="postCommentProvider" ref="postCommentProvider" /> </bean> <bean id="OrderControllerImpl" 
+		class="com.amher.bean.rest.controller.OrderControllerImpl"> <property name="orderProvider" 
+		ref="orderProvider" /> </bean> -->
+		
+	<!-- Configure bean to convert JSON to POJO and vice versa -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	<!-- Configure to plugin JSON as request and response in method handler -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	<!--  Add this for login purpose -->
+	<bean id="loginController" class="com.amher.bean.rest.controller.LoginControllerImpl">
+	</bean>
+	
+	<!-- Please don't remove following beans, we may need them later:) -->
+	<!-- jave To Spring XML Bean Mapping through JaxB2Marshaller -->
+	<!-- <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 
+		<property name="classesToBeBound"> <list> <value>com.amher.business.bean.User</value> 
+		<value>com.amher.business.bean.UserList</value> </list> </property> </bean> -->
+	<!-- Users Bean to Viewer -->
+	<!-- <bean id="users" class="org.springframework.web.servlet.view.xml.MarshallingView"> 
+		<constructor-arg ref="jaxbMarshaller" /> </bean> -->
+	<!-- Decide which content spring returns to client, we leave it first since 
+		we use SPA:), may use it later -->
+	<!--<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"> 
+		<property name="mediaTypes"> <map> <entry key="xml" value="application/xml" 
+		/> <entry key="html" value="text/html" /> </map> </property> <property name="viewResolvers"> 
+		<list> <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" 
+		/> <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
+		/> <property name="prefix" value="/WEB-INF/views/" /> <property name="suffix" 
+		value=".html" /> </bean> </list> </property> </bean> -->
+		
+</beans>

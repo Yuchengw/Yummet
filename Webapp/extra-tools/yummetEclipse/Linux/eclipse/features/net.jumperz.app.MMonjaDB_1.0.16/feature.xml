@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="net.jumperz.app.MMonjaDB"
+      label="MonjaDBFeature"
+      version="1.0.16"
+      provider-name="JUMPERZ.NET"
+      plugin="net.jumperz.app.MMonjaDB">
+
+   <description url="http://www.jumperz.net/index.php?i=2&amp;a=0&amp;b=9">
+      MonjaDB is a MongoDB GUI client tool for rapid application development. It aims to provide a really straightforward way of updating MongoDB documents.
+   </description>
+
+   <license url="http://www.jumperz.net/">
+      GPL
+   </license>
+
+   <url>
+      <update label="JUMPERZ.NET" url="http://www.jumperz.net/update/"/>
+      <discovery label="JUMPERZ.NET" url="http://www.jumperz.net/"/>
+   </url>
+
+   <plugin
+         id="net.jumperz.app.MMonjaDB"
+         download-size="0"
+         install-size="0"
+         version="1.0.16"
+         unpack="false"/>
+
+</feature>

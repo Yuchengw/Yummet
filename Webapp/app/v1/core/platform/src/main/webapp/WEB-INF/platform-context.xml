@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.5.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/data/jpa 
+          http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	<bean id="redisProvider" class="com.iamhere.cache.RedisProvider" />   
+	<bean id="redisService" class="com.iamhere.cache.RedisService"/>
+	<bean id="redisDataSource" class="com.iamhere.cache.RedisDataSourceImpl" />
+	<bean id="redisClientTemplate" class="com.iamhere.cache.RedisClientTemplate" />
+	<bean id="systemContext" class="com.iamhere.platform.adapters.SystemContext"/>
+	
+	<mongo:mongo host="localhost" port="27017" id="mongo" /> 
+	<!--  for defining mongo template -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="iamhere" />
+	</bean>
+
+	<!-- For consider the using of annotations fof defining Spring Bean -->
+	<context:annotation-config />
+	<!-- For defining Spring Bean -->
+	<context:component-scan base-package="com.iamhere.platform.adapters" />
+	<!-- For defining mongo repository -->
+	<mongo:repositories base-package="com.iamhere.mongodb.repositories" />	
+
+	<!-- Redis configuration -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxActive" value="32"></property>  
+        <property name="maxIdle" value="6"></property>  
+        <property name="maxWait" value="15000"></property>  
+        <property name="minEvictableIdleTimeMillis" value="300000"></property>  
+        <property name="numTestsPerEvictionRun" value="3"></property>  
+        <property name="timeBetweenEvictionRunsMillis" value="60000"></property>  
+        <property name="whenExhaustedAction" value="1"></property>  
+        <property name="testOnBorrow" value="true"></property>  
+    </bean>  
+    <!-- ShardedJedisPool v.s. JedisPool 一个是分片形式，可以连接有主备的redis服务端，一个是单个的 -->
+	<bean id="jedis.shardInfo1" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg index="0" value="127.0.0.1" />
+		<constructor-arg index="1" value="6379" />
+	</bean>
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool"
+		scope="singleton">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1">
+			<list>
+				<!-- ref bean="jedis.shardInfo1" / -->
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg value="127.0.0.1" />
+					<constructor-arg type="int" value="6379" />
+					<constructor-arg value="instance:01" />
+					<property name="password" value="amer0501"></property>  
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">  
+        <property name="poolConfig" ref="jedisPoolConfig"></property>  
+        <property name="hostName" value="127.0.0.1"></property>  
+        <property name="port" value="6379"></property>  
+        <property name="password" value="amer0501"></property>  
+        <property name="timeout" value="15000"></property>  
+        <property name="usePool" value="true"></property>  
+    </bean>  
+   
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">  
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>  
+        <property name="keySerializer">  
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>  
+        </property>  
+        <property name="valueSerializer">  
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>  
+        </property>  
+    </bean>  
+</beans>
