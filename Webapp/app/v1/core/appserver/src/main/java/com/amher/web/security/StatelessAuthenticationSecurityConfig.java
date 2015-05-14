@@ -26,7 +26,8 @@ import com.amher.service.authentication.UserDetailsServiceImpl;
  * */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity( prePostEnabled = true )
+@EnableGlobalMethodSecurity//( prePostEnabled = true )
+@Order(3)
 public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	/**
@@ -54,7 +55,6 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 				.and()
 				.anonymous().and()
 				.servletApi().and()
-				//headers().cacheControl().and() // no need, compatibility issue here, will look at it after
 				.authorizeRequests()				
 				.antMatchers("/vw/**").permitAll()
 				.antMatchers("/favicon.ico").permitAll()

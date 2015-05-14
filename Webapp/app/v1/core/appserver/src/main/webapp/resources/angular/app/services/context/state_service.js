@@ -3,7 +3,7 @@
  * @author yucheng
  * @version 1
  * */
-angular.module('contextServiceApp')
+angular.module('contextServiceApp',[])
 .factory('stateService', function(){
 	var state = {
 		isLogin : false

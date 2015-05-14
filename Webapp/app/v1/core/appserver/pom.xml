@@ -254,6 +254,12 @@
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
 		</dependency>
+		<!--  Java Config -->
+		<dependency>
+    		<groupId>org.springframework.javaconfig</groupId>
+    		<artifactId>org.springframework.config.java</artifactId>
+    		<version>1.0.0.M4</version>
+		</dependency>
 	</dependencies>
 
 	<!-- main build start -->

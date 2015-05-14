@@ -11,7 +11,7 @@ angular.module('postApp', ['ngAnimate'])
       $scope.id = $scope.id+1;
   };
 
-  $scope.delete = function (idx) {
-    $scope.posts.splice(idx, 1);
-  };
+//  $scope.delete = function (idx) {
+//    $scope.posts.splice(idx, 1);
+//  };
 }]);

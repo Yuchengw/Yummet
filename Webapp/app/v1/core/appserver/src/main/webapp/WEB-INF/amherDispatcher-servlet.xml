@@ -48,16 +48,16 @@
 	<!-- Let Spring be notice of Rest Controllers -->
 	<context:component-scan base-package="com.amher" />
 	<!-- To enable @RequestMapping process on type level and method level -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
 	<!-- Restful controller: UserController's aggregate object -->
 	<bean id="userControllerImpl" class="com.amher.bean.rest.controller.UserControllerImpl">
 		<property name="userProvider" ref="userProvider" />
 	</bean>
 	
+	<!-- ===========================================Add Spring Security Configuration================================== -->
+	<bean name="statelessAuthenticationSecurityConfig" class="com.amher.web.security.StatelessAuthenticationSecurityConfig" /> 
 	<!-- <bean id="PostControllerImpl" class="com.amher.bean.rest.controller.PostControllerImpl"> 
 		<property name="postProvider" ref="postProvider" /> </bean> <bean id="PostCommentControllerImpl" 
 		class="com.amher.bean.rest.controller.PostCommentControllerImpl"> <property 
@@ -81,8 +81,7 @@
 	</bean>
 	
 	<!--  Add this for login purpose -->
-	<bean id="loginController" class="com.amher.bean.rest.controller.LoginControllerImpl">
-	</bean>
+	<bean id="loginController" class="com.amher.bean.rest.controller.LoginControllerImpl"> </bean>
 	
 	<!-- Please don't remove following beans, we may need them later:) -->
 	<!-- jave To Spring XML Bean Mapping through JaxB2Marshaller -->

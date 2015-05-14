@@ -2,7 +2,7 @@
  * @author yucheng
  * @version 1
  */
-angular.module('yummet.home',['ngRoute','signupApp','filterApp'])
+angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp'])
 .config(function($routeProvider, $httpProvider){
       
 	$routeProvider
@@ -25,7 +25,7 @@ angular.module('yummet.home',['ngRoute','signupApp','filterApp'])
         	 redirectTo: '/' 
           });
       
-    $httpProvider.interceptors.push('tokenInteceptor'); 
+    //$httpProvider.interceptors.push('tokenInteceptor'); 
       // added for Rest API with Jason format
       //$httpProvider.defaults.headers.common["X-Requested-With"] = 'JasonHttpRequest';
 })

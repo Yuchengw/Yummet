@@ -1,7 +1,7 @@
 /**
  * This is used for user's login and logout service
  * */
-angular.module('authenticateServiceApp')
+angular.module('authenticateServiceApp', [])
 .factory('userLoginService', function($http){
 	
 	return {

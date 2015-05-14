@@ -1,4 +1,4 @@
-var app = angular.module('s', []).factory('TokenStorage', function() {
+angular.module('localStore', []).factory('TokenStorage', function() {
 	var storageKey = 'auth_token';
 	return {		
 		store : function(token) {

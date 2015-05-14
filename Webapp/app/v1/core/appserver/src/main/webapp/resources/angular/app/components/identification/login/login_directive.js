@@ -1,5 +1,5 @@
-angular.module('loginApp', ['ngAnimate'])
-.controller('loginAppContoller', ['$scope','$location', TokenStorage,'stateService','userLoginService', 
+angular.module('loginApp', ['ngAnimate','localStore','authenticateServiceApp'])
+.controller('loginAppContoller', ['$scope','$location', 'TokenStorage','stateService','userLoginService', 
     function($scope, $location, $window,  stateService, userLoginService, TokenStorage) {
 	 
 	  

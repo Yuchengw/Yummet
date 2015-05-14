@@ -3,7 +3,7 @@
  * @author yucheng
  * @version 1
  * */
-angualr.moduel('filterApp')
+angular.module('filterApp',[])
 .factory('tokenInterceptor',['TokenStorage', function ($q,  $location, stateService, TokenStorage) {
 	
 	var generateRandomCSRFToken = function (a) {
