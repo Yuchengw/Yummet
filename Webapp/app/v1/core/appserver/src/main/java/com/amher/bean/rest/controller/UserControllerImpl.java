@@ -68,6 +68,9 @@ public class UserControllerImpl implements UserController {
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=UserRestURIConstants.GET_ALL_USER)
 	public @ResponseBody UserList getUsers() {
-		return null;
+		User e = userProvider.getUserServiceImpl().getUserByEmail("ycwmike@gmail.com");
+		UserList userList = new UserList();
+		userList.add(e);
+		return userList;
 	}
 }

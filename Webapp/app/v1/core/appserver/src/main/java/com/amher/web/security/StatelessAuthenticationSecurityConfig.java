@@ -72,7 +72,7 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 				// {"username":"<name>","password":"<password>"} which sets the
 				// token header upon authentication
 				.addFilterBefore(
-						new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService,
+						new StatelessLoginFilter("/service/login", tokenAuthenticationService, userDetailsService,
 							authenticationManager()),
 						UsernamePasswordAuthenticationFilter.class)
 				// custom Token based authentication based on the header

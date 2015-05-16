@@ -1,15 +1,26 @@
-angular.module('loginApp', ['ngAnimate','localStore','authenticateServiceApp'])
+/** 
+*@author yucheng
+*@since 1
+*/
+angular.module('loginApp', ['ngAnimate','localStore','authenticateUserLoginService','contextStateService'])
+.config(function(){
+	
+})
+.run(function(){
+	
+})
 .controller('loginAppContoller', ['$scope','$location', 'TokenStorage','stateService','userLoginService', 
     function($scope, $location, $window,  stateService, userLoginService, TokenStorage) {
-	 
-	  
 	  /**
 	   * Login function
 	   * */
-	  $scope.login = function logIn(username, password) {
-		  console.log("entered login function");
-		  if (username !== undefined && password !== undefined) {
-			  loginAuthenticate(username, password);
+	  $scope.login = function logIn() {
+		  console.log("entered login function with username "  + $scope.credentials.email + " password" + $scope.credentials.password);
+		  var email = $scope.credentials.email;
+		  var password = $scope.credentials.password;
+		  if (email !== undefined && password !== undefined) {
+			  console.log("gonna entering loginAuthenticate function")
+			  loginAuthenticate(email, password);
 		  }
 	  };
 	  
@@ -24,11 +35,13 @@ angular.module('loginApp', ['ngAnimate','localStore','authenticateServiceApp'])
 			  $location.path("/logout");
 		  }
 	  }
+	  
 	  /**
 	   * Authenticate function used for login function
 	   * */
 	  var loginAuthenticate = function(username, password) {
-		   userLoginService.login(username,password). success(function(data){
+		  console.log("entered loginAuthenticate function with username " + username + " password" + password);
+		   userLoginService.logIn(username,password). success(function(data){
 			   console.log("user login successfully");
 			   stateService.isLogin = true;
 			   TokenStorage.store(data.token);
@@ -41,5 +54,5 @@ angular.module('loginApp', ['ngAnimate','localStore','authenticateServiceApp'])
 			   console.log(data);
 		   })
 	    }
-	}]);
+}]);
 

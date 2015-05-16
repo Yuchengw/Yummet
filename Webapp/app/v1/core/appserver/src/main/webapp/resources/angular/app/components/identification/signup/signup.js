@@ -1,9 +1,7 @@
-/**
- * This is for signup app on identification components
- * @author yucheng
- * @version 1
- * */
-
+/** 
+*@author yucheng
+*@since 1
+*/
 angular.module('signupApp', ['ngAnimate'])
 .config(function(){
 	
@@ -20,6 +18,6 @@ angular.module('signupApp', ['ngAnimate'])
   console.log("entering singupAppControler");
   $scope.signupFormSubmit = function() {
     // show success message
-    $scope.showMessage = true;
+  $scope.showMessage = true;
   };
 }]);

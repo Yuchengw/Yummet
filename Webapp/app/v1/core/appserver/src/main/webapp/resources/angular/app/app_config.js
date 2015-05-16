@@ -2,8 +2,12 @@
  * @author yucheng
  * @version 1
  */
-angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp'])
-.config(function($routeProvider, $httpProvider){
+var app = angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp'])
+// need to dynamicly resolve the base url, maybe Grunt will help us?
+var options = {};
+options.api = {};
+options.api.base_url = "http://localhost:8080";
+app.config(function($routeProvider, $httpProvider){
       
 	$routeProvider
           .when('/login',{
@@ -26,8 +30,8 @@ angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterAp
           });
       
     //$httpProvider.interceptors.push('tokenInteceptor'); 
-      // added for Rest API with Jason format
-      //$httpProvider.defaults.headers.common["X-Requested-With"] = 'JasonHttpRequest';
+    // added for Rest API with Jason format
+    //$httpProvider.defaults.headers.common["X-Requested-With"] = 'JasonHttpRequest';
 })
 .controller('configController',['$scope','$http',function($scope, $http){
 

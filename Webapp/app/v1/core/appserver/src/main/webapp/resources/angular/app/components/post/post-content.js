@@ -1,3 +1,7 @@
+/** 
+*@author minming
+*@since 1
+*/
 angular.module('postApp', ['ngAnimate'])
 .controller('postAppController', ['$scope', function($scope) {
     $scope.id = 3;
