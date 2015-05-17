@@ -24,7 +24,7 @@ public class UserProvider {
 	}
 
 	public User get(String email) {
-		return this.platformUserServiceImpl.getUserByEmail(email);
+		return this.platformUserServiceImpl.getUserByEmailAndPassword(email);
 	}
 
 	public Boolean remove(int id) {
@@ -42,6 +42,6 @@ public class UserProvider {
 	 * find user by user's name, used for spring security
 	 * */
 	public User findByUserName(String userEmail) {
-		return this.platformUserServiceImpl.getUserByEmail(userEmail);
+		return this.platformUserServiceImpl.getUserByEmailAndPassword(userEmail);
 	}
 }

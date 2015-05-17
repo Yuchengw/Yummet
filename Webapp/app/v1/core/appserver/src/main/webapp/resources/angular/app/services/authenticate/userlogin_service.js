@@ -6,7 +6,7 @@ angular.module('authenticateUserLoginService', [])
 	
 	return {
 		logIn: function(username, password) {
-			return $http.post(options.api.base_url + '/service/login', {username: username, password: password});
+			return $http.post(options.api.base_url + '/service/user', {username: username, password: password});
 		},
 
 		logOut: function() {

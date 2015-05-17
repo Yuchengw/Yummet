@@ -30,21 +30,20 @@ app.config(function($routeProvider, $httpProvider){
           });
       
     //$httpProvider.interceptors.push('tokenInteceptor'); 
-    // added for Rest API with Jason format
-    //$httpProvider.defaults.headers.common["X-Requested-With"] = 'JasonHttpRequest';
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 })
 .controller('configController',['$scope','$http',function($scope, $http){
 
 	$scope.init = function () {
-		$http.get('/service/users/current').success(function (user) {
-			if(user.username !== 'anonymousUser'){
-				$scope.authenticated = true;
-				$scope.username = user.username;
-				
-				// For display purposes only
-				$scope.token = JSON.parse(atob(TokenStorage.retrieve().split('.')[0]));
-			}
-		});
+//		$http.get('/service/users/current').success(function (user) {
+//			if(user.username !== 'anonymousUser'){
+//				$scope.authenticated = true;
+//				$scope.username = user.username;
+//				
+//				// For display purposes only
+//				$scope.token = JSON.parse(atob(TokenStorage.retrieve().split('.')[0]));
+//			}
+//		});
 	};
 	
 }]);

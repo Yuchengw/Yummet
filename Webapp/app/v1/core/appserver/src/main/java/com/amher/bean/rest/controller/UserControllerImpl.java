@@ -1,6 +1,7 @@
 package com.amher.bean.rest.controller;
 
 import java.io.StringReader;
+import java.security.Principal;
 import java.util.List;
 
 import javax.xml.transform.Source;
@@ -37,10 +38,11 @@ public class UserControllerImpl implements UserController {
 	public void setJaxb2Mashaller(Jaxb2Marshaller jaxb2Mashaller) {
 		this.jaxb2Mashaller = jaxb2Mashaller;
 	}
+	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=UserRestURIConstants.GET_USER)
-	public @ResponseBody User getUser(@PathVariable String userEmail){
-		User e = userProvider.getUserServiceImpl().getUserByEmail(userEmail);
+	public @ResponseBody User getUser(@RequestBody String userInfo){
+		User e = userProvider.getUserServiceImpl().getUserByEmailAndPassword(userInfo);
 		return e;
 	}
 	
@@ -60,17 +62,8 @@ public class UserControllerImpl implements UserController {
 	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.DELETE, value=UserRestURIConstants.DELETE_USER)
-	public @ResponseBody UserList removeUser(@PathVariable String id) {
+	public @ResponseBody UserList removeUser(@RequestBody String id) {
 		userProvider.remove(Integer.parseInt(id));
 		return null;
-	}
-	
-	@net.bull.javamelody.MonitoredWithSpring
-	@RequestMapping(method=RequestMethod.GET, value=UserRestURIConstants.GET_ALL_USER)
-	public @ResponseBody UserList getUsers() {
-		User e = userProvider.getUserServiceImpl().getUserByEmail("ycwmike@gmail.com");
-		UserList userList = new UserList();
-		userList.add(e);
-		return userList;
 	}
 }

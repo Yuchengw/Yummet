@@ -21,8 +21,7 @@
 		resources are still served by the containers default servlet. Requires Spring 
 		Framework 3.0 or higher. -->
 	<mvc:default-servlet-handler />
-	<bean id="jedisFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+	<bean id="jedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:use-pool="true" />
 	<!-- TODO: need to figure out how to use RedisTemplate -->
 	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" 

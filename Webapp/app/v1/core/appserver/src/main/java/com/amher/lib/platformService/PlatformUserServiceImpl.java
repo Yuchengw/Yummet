@@ -24,7 +24,7 @@ public class PlatformUserServiceImpl extends PlatformUserService {
 	/**
 	 * This function is used for get appserver user object from Platform 
 	 * */
-	public User getUserByEmail(String userEmail) {
+	public User getUserByEmailAndPassword(String userEmail) {
 		UserObject platformUserObject = null;
 		User user = null;
 		try {

@@ -10,7 +10,7 @@
 
 	<!-- This is the basic home page, show the world, deprecate it now since we are depending on Spring -->
 	<welcome-file-list> 
-		<welcome-file>loading.html</welcome-file> 
+		<welcome-file>index.html</welcome-file> 
 	</welcome-file-list>
 
 	<!-- The context params that read by ContextLoaderListener -->

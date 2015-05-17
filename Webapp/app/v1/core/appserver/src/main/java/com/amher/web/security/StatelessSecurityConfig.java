@@ -8,8 +8,9 @@ import org.springframework.security.web.csrf.CsrfFilter;
 /**
  * Since we are stateless-driven webapplication, we need more flexibility in Security Side
  * @author yucheng
- * @version 1
+ * @since 1
  * */
+@Deprecated
 @EnableWebSecurity
 public class StatelessSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
