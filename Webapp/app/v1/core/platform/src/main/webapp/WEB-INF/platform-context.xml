@@ -12,11 +12,11 @@
           http://www.springframework.org/schema/data/jpa 
           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<bean id="redisProvider" class="com.iamhere.cache.RedisProvider" />   
-	<bean id="redisService" class="com.iamhere.cache.RedisService"/>
-	<bean id="redisDataSource" class="com.iamhere.cache.RedisDataSourceImpl" />
-	<bean id="redisClientTemplate" class="com.iamhere.cache.RedisClientTemplate" />
-	<bean id="systemContext" class="com.iamhere.platform.adapters.SystemContext"/>
+	<bean id="redisProvider" class="com.yummet.cache.RedisProvider" />   
+	<bean id="redisService" class="com.yummet.cache.RedisService"/>
+	<bean id="redisDataSource" class="com.yummet.cache.RedisDataSourceImpl" />
+	<bean id="redisClientTemplate" class="com.yummet.cache.RedisClientTemplate" />
+	<bean id="systemContext" class="com.yummet.platform.adapters.SystemContext"/>
 	
 	<mongo:mongo host="localhost" port="27017" id="mongo" /> 
 	<!--  for defining mongo template -->
@@ -28,9 +28,9 @@
 	<!-- For consider the using of annotations fof defining Spring Bean -->
 	<context:annotation-config />
 	<!-- For defining Spring Bean -->
-	<context:component-scan base-package="com.iamhere.platform.adapters" />
+	<context:component-scan base-package="com.yummet.platform.adapters" />
 	<!-- For defining mongo repository -->
-	<mongo:repositories base-package="com.iamhere.mongodb.repositories" />	
+	<mongo:repositories base-package="com.yummet.mongodb.repositories" />	
 
 	<!-- Redis configuration -->
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  

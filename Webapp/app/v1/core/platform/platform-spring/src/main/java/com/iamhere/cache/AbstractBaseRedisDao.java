@@ -1,4 +1,4 @@
-package com.iamhere.cache;
+package com.yummet.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

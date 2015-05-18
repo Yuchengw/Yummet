@@ -47,7 +47,7 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService'])
 	   * */
 	  var loginAuthenticate = function(credentials, callback) {
 		  var headers = credentials ? {authorization : "Basic "
-		        + btoa(credentials.username + ":" + credentials.password)
+		        + btoa(credentials.email + ":" + credentials.password)
 		    } : {};
 		   $http.get(options.api.base_url + '/service/user', {headers : headers}).success(function(data){
 			   if (data.name) {

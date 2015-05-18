@@ -1,67 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
- 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+ 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
  	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/data/mongo
+	http://www.springframework.org/schema/data/mongo/spring-mongo-1.5.xsd
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-
-	<!-- Spring Annotation driving programming -->
+	<!-- =========================================Mongo DB================================= -->
+	<mongo:mongo host="localhost" port="27017" id="mongo" />
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="iamhere" />
+	</bean>
+	
 	<mvc:annotation-driven />
-	<!-- Handles GET requests for /resources/** by efficiently serving static 
-		content in the ${webappRoot}/resources dir -->
 	<mvc:resources mapping="/rs/**" location="/resources/" />
 	<mvc:resources mapping="/vw/**" location="/views/" />
 	<mvc:resources mapping="/as/**" location="/assets/"/>
-	<!-- Ensures that dispatcher sservlet can be mapped to '/' and that static 
-		resources are still served by the containers default servlet. Requires Spring 
-		Framework 3.0 or higher. -->
 	<mvc:default-servlet-handler />
-	<bean id="jedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:use-pool="true" />
-	<!-- TODO: need to figure out how to use RedisTemplate -->
-	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" 
-		p:connection-factory="jedisFactory" /> -->
-	<!-- Enable Aspectj proxy -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-
+	
 	<!--***************************************** Aspects ***************************************************** -->
-	<!-- Logging part -->
-	<bean id="logAspect" class="com.amher.service.aop.UserControllerAOPImpl" />
+	<bean id="logAspect" class="com.yummet.service.aop.UserControllerAOPImpl" />
 	<!-- Performance part -->
-	<!-- <bean id="performanceMonitor" class="com.amher.util.monitoring.UserControllerPerformanceMonitorInterceptor" 
+	<!-- <bean id="performanceMonitor" class="com.yummet.util.monitoring.UserControllerPerformanceMonitorInterceptor" 
 		/> -->
 	<bean id="performanceMonitor"
-		class="com.amher.util.monitoring.UserControllerPerformanceMonitorInterceptor" />
+		class="com.yummet.util.monitoring.UserControllerPerformanceMonitorInterceptor" />
 	<aop:config>
 		<aop:pointcut id="allServiceMethods"
-			expression="execution(* com.amher.bean.rest.controller.UserController.*.*(..))" />
+			expression="execution(* com.yummet.bean.rest.controller.UserController.*.*(..))" />
 		<aop:advisor pointcut-ref="allServiceMethods" advice-ref="performanceMonitor"
 			order="2" />
 	</aop:config>
 
 	<!-- Let Spring be notice of Rest Controllers -->
-	<context:component-scan base-package="com.amher" />
+	<context:component-scan base-package="com.yummet" />
 	<!-- To enable @RequestMapping process on type level and method level -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
 	<!-- Restful controller: UserController's aggregate object -->
-	<bean id="userControllerImpl" class="com.amher.bean.rest.controller.UserControllerImpl">
+	<bean id="userControllerImpl" class="com.yummet.bean.rest.controller.UserControllerImpl">
 		<property name="userProvider" ref="userProvider" />
 	</bean>
 	
 	<!-- ===========================================Add Spring Security Configuration================================== -->
-	<bean name="statelessAuthenticationSecurityConfig" class="com.amher.web.security.StatelessAuthenticationSecurityConfig" /> 
-	<!-- <bean id="PostControllerImpl" class="com.amher.bean.rest.controller.PostControllerImpl"> 
+	<bean name="statelessAuthenticationSecurityConfig" class="com.yummet.web.security.StatelessAuthenticationSecurityConfig" /> 
+	<!-- <bean id="PostControllerImpl" class="com.yummet.bean.rest.controller.PostControllerImpl"> 
 		<property name="postProvider" ref="postProvider" /> </bean> <bean id="PostCommentControllerImpl" 
-		class="com.amher.bean.rest.controller.PostCommentControllerImpl"> <property 
+		class="com.yummet.bean.rest.controller.PostCommentControllerImpl"> <property 
 		name="postCommentProvider" ref="postCommentProvider" /> </bean> <bean id="OrderControllerImpl" 
-		class="com.amher.bean.rest.controller.OrderControllerImpl"> <property name="orderProvider" 
+		class="com.yummet.bean.rest.controller.OrderControllerImpl"> <property name="orderProvider" 
 		ref="orderProvider" /> </bean> -->
 		
 	<!-- Configure bean to convert JSON to POJO and vice versa -->
@@ -80,13 +80,13 @@
 	</bean>
 	
 	<!--  Add this for login purpose -->
-	<bean id="loginController" class="com.amher.bean.rest.controller.LoginControllerImpl"> </bean>
+	<bean id="loginController" class="com.yummet.bean.rest.controller.LoginControllerImpl"> </bean>
 	
 	<!-- Please don't remove following beans, we may need them later:) -->
 	<!-- jave To Spring XML Bean Mapping through JaxB2Marshaller -->
 	<!-- <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 
-		<property name="classesToBeBound"> <list> <value>com.amher.business.bean.User</value> 
-		<value>com.amher.business.bean.UserList</value> </list> </property> </bean> -->
+		<property name="classesToBeBound"> <list> <value>com.yummet.business.bean.User</value> 
+		<value>com.yummet.business.bean.UserList</value> </list> </property> </bean> -->
 	<!-- Users Bean to Viewer -->
 	<!-- <bean id="users" class="org.springframework.web.servlet.view.xml.MarshallingView"> 
 		<constructor-arg ref="jaxbMarshaller" /> </bean> -->
@@ -101,4 +101,34 @@
 		/> <property name="prefix" value="/WEB-INF/views/" /> <property name="suffix" 
 		value=".html" /> </bean> </list> </property> </bean> -->
 		
+	<!-- =========================Redis configuration=============================== -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxActive" value="32"></property>  
+        <property name="maxIdle" value="6"></property>  
+        <property name="maxWait" value="15000"></property>  
+        <property name="minEvictableIdleTimeMillis" value="300000"></property>  
+        <property name="numTestsPerEvictionRun" value="3"></property>  
+        <property name="timeBetweenEvictionRunsMillis" value="60000"></property>  
+        <property name="whenExhaustedAction" value="1"></property>  
+        <property name="testOnBorrow" value="true"></property>  
+    </bean>  
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">  
+        <property name="poolConfig" ref="jedisPoolConfig"></property>  
+        <property name="hostName" value="127.0.0.1"></property>  
+        <property name="port" value="6379"></property>  
+        <property name="password" value="amer0501"></property>  
+        <property name="timeout" value="15000"></property>  
+        <property name="usePool" value="true"></property>  
+    </bean>  
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">  
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>  
+        <property name="keySerializer">  
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>  
+        </property>  
+        <property name="valueSerializer">  
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>  
+        </property>  
+    </bean>  
+    <bean id="redisProvider" class="com.yummet.cache.RedisProvider" />   
+	<bean id="redisService" class="com.yummet.cache.RedisService"/>
 </beans>

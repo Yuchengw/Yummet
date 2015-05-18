@@ -1,4 +1,4 @@
-package com.iamhere.utilities;
+package com.yummet.utilities;
 
 import org.slf4j.LoggerFactory;
 

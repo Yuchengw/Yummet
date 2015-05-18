@@ -1,12 +1,12 @@
-package com.iamhere.platform.adapters;
+package com.yummet.platform.adapters;
 
-import com.iamhere.cache.CacheManager;
-import com.iamhere.cache.RedisProvider;
+import com.yummet.cache.CacheManager;
+import com.yummet.cache.RedisProvider;
 
 /**
  * Provide System context information for the app and platform
  * @author jassica
- *
+ * @since 1
  */
 public class SystemContext {
 	/**

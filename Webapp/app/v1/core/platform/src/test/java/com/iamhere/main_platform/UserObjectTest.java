@@ -1,9 +1,9 @@
 package com.iamhere.main_platform;
 
-import com.iamhere.cache.CacheManager;
-import com.iamhere.entities.UserObject;
-import com.iamhere.platform.adapters.SystemContext;
-import com.iamhere.platform.func.DmlOperationWrapper;
+import com.yummet.cache.CacheManager;
+import com.yummet.entities.UserObject;
+import com.yummet.platform.adapters.SystemContext;
+import com.yummet.platform.func.DmlOperationWrapper;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

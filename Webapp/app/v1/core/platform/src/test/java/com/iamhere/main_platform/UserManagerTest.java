@@ -3,8 +3,9 @@ package com.iamhere.main_platform;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import com.iamhere.entities.UserObject;
-import com.iamhere.platform.func.DmlOperationWrapper;
+
+import com.yummet.entities.UserObject;
+import com.yummet.platform.func.DmlOperationWrapper;
 
 public class UserManagerTest extends TestCase
 {

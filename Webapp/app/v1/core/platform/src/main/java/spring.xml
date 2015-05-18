@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/context
@@ -23,9 +23,9 @@
 	<!-- For consider the using of annotations fof defining Spring Bean -->
 	<context:annotation-config />
 	<!-- For defining Spring Bean -->
-	<context:component-scan base-package="com.iamhere.platform.adapters" />
+	<context:component-scan base-package="com.yummet.platform.adapters" />
 	<!-- For defining mongo repository -->
-	<mongo:repositories base-package="com.iamhere.mongodb.repositories" />	
+	<mongo:repositories base-package="com.yummet.mongodb.repositories" />	
 	
 	<!-- Redis configuration -->
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
@@ -56,6 +56,6 @@
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>  
         </property>  
     </bean>  
-    <bean id="redisProvider" class="com.iamhere.cache.RedisProvider" />   
-	<bean id="redisService" class="com.iamhere.cache.RedisService"/>
+    <bean id="redisProvider" class="com.yummet.cache.RedisProvider" />   
+	<bean id="redisService" class="com.yummet.cache.RedisService"/>
 </beans>

@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.amher</groupId>
+	<groupId>com.yummet</groupId>
 	<artifactId>appserver</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
@@ -25,7 +25,7 @@
 		<jedis.version>2.6.2</jedis.version>
 		<spring.data.commons.version>1.10.0.RELEASE</spring.data.commons.version>
 		<spring.data.redis.version>1.2.1.RELEASE</spring.data.redis.version>
-		<spring.data.mongodb.version>1.7.0.RELEASE</spring.data.mongodb.version>
+		<spring.data.mongodb.version>1.5.2.RELEASE</spring.data.mongodb.version>
 		<spring.mongo.java.driver.version>3.0.0</spring.mongo.java.driver.version>
 		<jersey.spring.version>1.4.0</jersey.spring.version>
 	</properties>
@@ -76,7 +76,7 @@
      	</dependency>
 		<!-- -->
 		<dependency>
-			<groupId>com.amher</groupId>
+			<groupId>com.yummet</groupId>
 			<artifactId>platform</artifactId>
 			<version>1.0.0</version>
 		</dependency>
@@ -236,11 +236,11 @@
     		<artifactId>spring-security-config</artifactId>
     		<version>${org.springframework.version}</version>
   		</dependency>
-  		<!-- ***************************Spring Data Mongo Support**************** -->
+  		<!--=====================Spring Data Mongo Support================= -->
   		<dependency>
   			<groupId>org.springframework.data</groupId>
   			<artifactId>spring-data-mongodb</artifactId>
-  			<version>${spring.data.mongodb.version}</version>
+  			<version>1.7.0.RELEASE</version>
   		</dependency>
   		<!-- Dependency for MongoDB Java connector -->
 		<dependency>
@@ -248,11 +248,17 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>${spring.mongo.java.driver.version}</version>
 		</dependency>
+		<!-- =========================Third party Libarary============================= -->
 		<!-- guava is a good stuff, we need it! -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.2</version>
 		</dependency>
 		<!--  Java Config -->
 		<dependency>
@@ -294,7 +300,7 @@
 			</plugin>
 			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
 				<version>1.1</version> <executions> <execution><goals><goal>java</goal></goals></execution> 
-				</executions> <configuration> <mainClass>com.amher.appserver.core.entry.HelloAmherServlet</mainClass> 
+				</executions> <configuration> <mainClass>com.yummet.appserver.core.entry.HelloAmherServlet</mainClass> 
 				</configuration> </plugin> -->
 		</plugins>
 	</build>

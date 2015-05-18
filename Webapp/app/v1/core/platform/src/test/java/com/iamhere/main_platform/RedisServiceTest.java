@@ -9,11 +9,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
-import com.iamhere.cache.CacheManager;
-import com.iamhere.cache.RedisDataSourceCacheManager;
-import com.iamhere.cache.RedisService;
-import com.iamhere.entities.UserObject;
-import com.iamhere.platform.func.DmlOperationWrapper;
+import com.yummet.cache.CacheManager;
+import com.yummet.cache.RedisDataSourceCacheManager;
+import com.yummet.cache.RedisService;
+import com.yummet.entities.UserObject;
+import com.yummet.platform.func.DmlOperationWrapper;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

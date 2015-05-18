@@ -1,10 +1,10 @@
 package com.iamhere.main_platform;
 
-import com.iamhere.entities.PostComment;
-import com.iamhere.entities.PostObject;
-import com.iamhere.entities.UserObject;
-import com.iamhere.enums.PostStatus;
-import com.iamhere.platform.func.DmlOperationWrapper;
+import com.yummet.entities.PostComment;
+import com.yummet.entities.PostObject;
+import com.yummet.entities.UserObject;
+import com.yummet.enums.PostStatus;
+import com.yummet.platform.func.DmlOperationWrapper;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

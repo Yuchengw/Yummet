@@ -1,4 +1,4 @@
-package com.iamhere.cache;
+package com.yummet.cache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.util.Assert;
 
-import com.iamhere.entities.EntityObject;
-import com.iamhere.utilities.SerializeUtil;
+import com.yummet.entities.EntityObject;
+import com.yummet.utilities.SerializeUtil;
 
 /**
  * Implements the cache management for the Redis

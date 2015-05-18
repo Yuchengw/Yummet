@@ -6,13 +6,6 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 		   http://www.springframework.org/schema/security
 		   http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<!--<http auto-config="true">
-		<intercept-url pattern="/admin**" access="ROLE_USER" />
-	</http>
- 
-	<authentication-manager>
-	  <authentication-provider  user-service-ref="UserDetailsServiceImpl">
-	  </authentication-provider>
-	</authentication-manager> -->
+	<!-- ====================We use java config right now=================== -->
 	
 </beans:beans>

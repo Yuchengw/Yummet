@@ -1,6 +1,6 @@
-package com.iamhere.cache;
+package com.yummet.cache;
 
-import com.iamhere.entities.EntityObject;
+import com.yummet.entities.EntityObject;
 
 /**
  * Interface for the cache management
