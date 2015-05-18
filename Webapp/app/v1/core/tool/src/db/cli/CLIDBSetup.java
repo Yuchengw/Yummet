@@ -20,7 +20,7 @@ import com.mongodb.client.MongoDatabase;
 /**
  * This is the DB initial class for setuping and connecting to MongoDb
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public class CLIDBSetup {
 
