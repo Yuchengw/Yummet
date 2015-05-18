@@ -28,7 +28,7 @@
 		<spring.data.redis.version>1.2.1.RELEASE</spring.data.redis.version>
 		<spring.data.mongodb.version>1.5.2.RELEASE</spring.data.mongodb.version>
 		<spring.mongo.java.driver.version>3.0.0</spring.mongo.java.driver.version>
-		<jersey.spring.version>1.4.0</jersey.spring.version>
+		<jersey.spring.version>1.4.0</jersey.spring.version> 
 		<spring.data.commons.version>1.10.0.RELEASE</spring.data.commons.version>
 	</properties>
 	
@@ -63,11 +63,12 @@
 	</repositories>
 	
 	<dependencies>
-		<dependency>
+		<!-- =====Please comment out this if you are lack of jersey on your env===== -->
+		<!-- <dependency>
 			  <groupId>com.sun.jersey.contribs</groupId>
    			  <artifactId>jersey-spring</artifactId>
     		  <version>${jersey.spring.version}</version>
-		</dependency>
+		</dependency> -->
 	 	 <dependency>
         	<groupId>org.mortbay.jetty</groupId>
         	<artifactId>jsp-2.1</artifactId>
