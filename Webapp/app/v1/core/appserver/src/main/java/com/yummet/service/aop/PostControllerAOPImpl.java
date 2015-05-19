@@ -26,21 +26,21 @@ public class PostControllerAOPImpl {
 	/**
 	 * Before PostController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.PostController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.PostController.*(..))")
 	public void PostControllerBeforePointcutter() {
 	}
 
 	/**
 	 * Before PostController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.PostController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.PostController.*(..))")
 	public void PostControllerAfterPointcutter() {
 	}
 
 	/**
 	 * Before and after PostController's operation with business logic
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.PostController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.PostController.*(..))")
 	public void PostControllerAround() {
 	}
 
@@ -64,7 +64,7 @@ public class PostControllerAOPImpl {
 	/**
 	 * Perform advice on return result, cache, analysis, performance
 	 * */
-	@AfterReturning(pointcut = "execution(* com.amher.bean.rest.controller.PostController.*(..))", returning = "result")
+	@AfterReturning(pointcut = "execution(* com.yummet.bean.rest.controller.PostController.*(..))", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
 		logger.info("Method Signature: " + joinPoint.getSignature());
 		logger.info("Result in advice: " + result);
@@ -86,7 +86,7 @@ public class PostControllerAOPImpl {
 	/**
 	 * Deal with throwables
 	 * */
-	@AfterThrowing(pointcut = "execution(* com.amher.bean.rest.controller.PostController.*(..))", throwing = "throwable")
+	@AfterThrowing(pointcut = "execution(* com.yummet.bean.rest.controller.PostController.*(..))", throwing = "throwable")
 	public void PostControllerThrowables(JoinPoint joinPoint,
 			Throwable throwable) {
 		logger.info("Method Signature: " + joinPoint.getSignature());

@@ -26,21 +26,21 @@ public class PostCommentControllerAOPImpl {
 	/**
 	 * Before PostCommentController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.PostCommentController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.PostCommentController.*(..))")
 	public void PostCommentControllerBeforePointcutter() {
 	}
 
 	/**
 	 * Before PostCommentController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.PostCommentController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.PostCommentController.*(..))")
 	public void PostCommentControllerAfterPointcutter() {
 	}
 
 	/**
 	 * Before and after PostCommentController's operation with business logic
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.PostCommentController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.PostCommentController.*(..))")
 	public void PostCommentControllerAround() {
 	}
 
@@ -64,7 +64,7 @@ public class PostCommentControllerAOPImpl {
 	/**
 	 * Perform advice on return result, cache, analysis, performance
 	 * */
-	@AfterReturning(pointcut = "execution(* com.amher.bean.rest.controller.PostCommentController.*(..))", returning = "result")
+	@AfterReturning(pointcut = "execution(* com.yummet.bean.rest.controller.PostCommentController.*(..))", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
 		logger.info("Method Signature: " + joinPoint.getSignature());
 		logger.info("Result in advice: " + result);
@@ -86,7 +86,7 @@ public class PostCommentControllerAOPImpl {
 	/**
 	 * Deal with throwables
 	 * */
-	@AfterThrowing(pointcut = "execution(* com.amher.bean.rest.controller.PostCommentController.*(..))", throwing = "throwable")
+	@AfterThrowing(pointcut = "execution(* com.yummet.bean.rest.controller.PostCommentController.*(..))", throwing = "throwable")
 	public void PostCommentControllerThrowables(JoinPoint joinPoint,
 			Throwable throwable) {
 		logger.info("Method Signature: " + joinPoint.getSignature());

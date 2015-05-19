@@ -28,21 +28,21 @@ public class UserControllerAOPImpl {
 	/**
 	 * Before UserController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.UserController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.UserController.*(..))")
 	public void UserControllerBeforePointcutter() {
 	}
 
 	/**
 	 * Before UserController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.UserController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.UserController.*(..))")
 	public void UserControllerAfterPointcutter() {
 	}
 
 	/**
 	 * Before and after usercontroller's operation with business logic
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.UserController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.UserController.*(..))")
 	public void UserControllerAround() {
 	}
 
@@ -66,7 +66,7 @@ public class UserControllerAOPImpl {
 	/**
 	 * Perform advice on return result, cache, analysis, performance
 	 * */
-	@AfterReturning(pointcut = "execution(* com.amher.bean.rest.controller.UserController.*(..))", returning = "result")
+	@AfterReturning(pointcut = "execution(* com.yummet.bean.rest.controller.UserController.*(..))", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
 		logger.info("Method Signature: " + joinPoint.getSignature());
 		logger.info("Result in advice: " + result);
@@ -88,7 +88,7 @@ public class UserControllerAOPImpl {
 	/**
 	 * Deal with throwables
 	 * */
-	@AfterThrowing(pointcut = "execution(* com.amher.bean.rest.controller.UserController.*(..))", throwing = "throwable")
+	@AfterThrowing(pointcut = "execution(* com.yummet.bean.rest.controller.UserController.*(..))", throwing = "throwable")
 	public void userControllerThrowables(JoinPoint joinPoint,
 			Throwable throwable) {
 		logger.info("Method Signature: " + joinPoint.getSignature());

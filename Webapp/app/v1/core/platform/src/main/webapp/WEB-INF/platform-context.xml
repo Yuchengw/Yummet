@@ -34,13 +34,13 @@
 
 	<!-- Redis configuration -->
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
-        <property name="maxActive" value="32"></property>  
+        <!--  <property name="maxActive" value="32"></property>  -->
         <property name="maxIdle" value="6"></property>  
-        <property name="maxWait" value="15000"></property>  
+        <!--  <property name="maxWait" value="15000"></property> -->
         <property name="minEvictableIdleTimeMillis" value="300000"></property>  
         <property name="numTestsPerEvictionRun" value="3"></property>  
         <property name="timeBetweenEvictionRunsMillis" value="60000"></property>  
-        <property name="whenExhaustedAction" value="1"></property>  
+        <!--  <property name="whenExhaustedAction" value="1"></property>  -->
         <property name="testOnBorrow" value="true"></property>  
     </bean>  
     <!-- ShardedJedisPool v.s. JedisPool 一个是分片形式，可以连接有主备的redis服务端，一个是单个的 -->

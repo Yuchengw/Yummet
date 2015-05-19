@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 @Aspect
 public class OrderControllerAOPImpl {
@@ -26,21 +26,21 @@ public class OrderControllerAOPImpl {
 	/**
 	 * Before OrderController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.OrderController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.OrderController.*(..))")
 	public void OrderControllerBeforePointcutter() {
 	}
 
 	/**
 	 * Before OrderController's operations
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.OrderController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.OrderController.*(..))")
 	public void OrderControllerAfterPointcutter() {
 	}
 
 	/**
 	 * Before and after OrderController's operation with business logic
 	 * */
-	@Pointcut("execution(* com.amher.bean.rest.controller.OrderController.*(..))")
+	@Pointcut("execution(* com.yummet.bean.rest.controller.OrderController.*(..))")
 	public void OrderControllerAround() {
 	}
 
@@ -64,7 +64,7 @@ public class OrderControllerAOPImpl {
 	/**
 	 * Perform advice on return result, cache, analysis, performance
 	 * */
-	@AfterReturning(pointcut = "execution(* com.amher.bean.rest.controller.OrderController.*(..))", returning = "result")
+	@AfterReturning(pointcut = "execution(* com.yummet.bean.rest.controller.OrderController.*(..))", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
 		logger.info("Method Signature: " + joinPoint.getSignature());
 		logger.info("Result in advice: " + result);
@@ -86,7 +86,7 @@ public class OrderControllerAOPImpl {
 	/**
 	 * Deal with throwables
 	 * */
-	@AfterThrowing(pointcut = "execution(* com.amher.bean.rest.controller.OrderController.*(..))", throwing = "throwable")
+	@AfterThrowing(pointcut = "execution(* com.yummet.bean.rest.controller.OrderController.*(..))", throwing = "throwable")
 	public void OrderControllerThrowables(JoinPoint joinPoint,
 			Throwable throwable) {
 		logger.info("Method Signature: " + joinPoint.getSignature());

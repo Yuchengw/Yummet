@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>yummet.app</groupId>
 	<artifactId>appserver</artifactId>
-	<packaging>jar</packaging>
-	<version>1.0.0</version>
+	<packaging>war</packaging>
+	<version>1.0.SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<description>Appserver POM for Yummet, Author:Yucheng</description>
 
@@ -19,16 +19,21 @@
 	<!-- Pom properties -->
 	<properties>
 		<jackson.databind-version>2.2.3</jackson.databind-version>
+	     <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
 	</properties>
-
 
 	<!-- dependencies Start -->
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
 		<!-- ================platform dependency================== -->
 		<dependency>
 			<groupId>yummet.platform</groupId>
 			<artifactId>platform</artifactId>
-			<version>1.0.0</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- Jackson convert jpo to json format -->
@@ -108,31 +113,12 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.14.v20131031</version>
+				<version>8.1.2.v20120308</version>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopKey>stop</stopKey>
 					<stopPort>9999</stopPort>
 				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
