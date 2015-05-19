@@ -12,11 +12,10 @@
 	<welcome-file-list> 
 		<welcome-file>index.html</welcome-file> 
 	</welcome-file-list>
-
 	<!-- The context params that read by ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/rest-context.xml, WEB-INF/spring-security.xml</param-value> 
+		<param-value>WEB-INF/rest-context.xml, WEB-INF/spring-security.xml</param-value>
 	</context-param>
 
 	<!-- This listener will load other application context file in addition 

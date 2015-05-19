@@ -33,8 +33,7 @@
 		<dependency>
 			<groupId>yummet.platform</groupId>
 			<artifactId>platform</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
+			<version>1.0.SNAPSHOT</version>
 		</dependency>
 		<!-- Jackson convert jpo to json format -->
 		<dependency>
