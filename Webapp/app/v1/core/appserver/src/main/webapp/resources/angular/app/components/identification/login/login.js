@@ -22,9 +22,9 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService'])
 			  console.log("gonna entering loginAuthenticate function")
 			  loginAuthenticate($scope.credentials, function() {
 				  if (stateService.isLogin) {
-					   $location.path("/#/amherpost");
+					   $location.path("/amherpost");
 				  } else {
-					   $location.path("/#/signup")
+					   $location.path("/login")
 				  }
 			  });
 		  }
@@ -50,8 +50,9 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService'])
 		        + btoa(credentials.email + ":" + credentials.password)
 		    } : {};
 		   $http.get(options.api.base_url + '/service/user', {headers : headers}).success(function(data){
-			   if (data.name) {
+			   if (data.email) {
 			      console.log("user login successfully");
+			      alert("Hello " + data.alias);
 			   	  stateService.isLogin = true;
 			   	  TokenStorage.store(data.token);
 			   } else {

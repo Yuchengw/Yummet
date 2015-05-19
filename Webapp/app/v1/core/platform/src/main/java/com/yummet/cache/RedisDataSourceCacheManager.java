@@ -16,12 +16,12 @@ import com.yummet.utilities.SerializeUtil;
  * Implements the cache management for the Redis with multiple client pool supported
  * 
  * @author Jessica
- * @version 1
+ * @since 1
  *
  */
 public class RedisDataSourceCacheManager implements CacheManager {
-	private static RedisClientTemplate redisClientTemplate = new RedisClientTemplate();
 	
+	private static RedisClientTemplate redisClientTemplate =(RedisClientTemplate) SystemContext.getApplicationContext().getBean("redisClientTemplate");
 	private static Jedis jedis;
 	private JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory) SystemContext.getApplicationContext().getBean("jedisConnectionFactory");
 	 

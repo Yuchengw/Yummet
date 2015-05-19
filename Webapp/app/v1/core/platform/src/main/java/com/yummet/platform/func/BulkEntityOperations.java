@@ -71,6 +71,7 @@ public class BulkEntityOperations {
 				}
 			} catch (Exception e) {
 				logger.debug("Check cache exists with the db values Fails <=="  + e.getStackTrace());
+				needLoadFromDb.add(eo); // something happended in cache, try in db, db failes
 			}
 		}
 		
