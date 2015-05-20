@@ -70,9 +70,9 @@ public class UserControllerImpl implements UserController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value=UserRestURIConstants.CREATE_USER)
-	public @ResponseBody User addUser(@RequestBody User user) {
-		userProvider.getUserServiceImpl().createUser(user);
-		return user;
+	public @ResponseBody User addUser(@RequestHeader("authorization") String user) {
+//		userProvider.getUserServiceImpl().createUser(user);
+		return new User();
 	}
 	
 	@net.bull.javamelody.MonitoredWithSpring
@@ -81,4 +81,5 @@ public class UserControllerImpl implements UserController {
 		userProvider.remove(Integer.parseInt(id));
 		return null;
 	}
+	
 }

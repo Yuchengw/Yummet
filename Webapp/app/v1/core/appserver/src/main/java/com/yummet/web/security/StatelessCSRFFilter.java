@@ -54,7 +54,7 @@ public class StatelessCSRFFilter extends OncePerRequestFilter {
 	}
 
 	public static final class DefaultRequiresCsrfMatcher implements RequestMatcher {
-		private final Pattern allowedMethods = Pattern.compile("^(GET|HEAD|TRACE|OPTIONS)$");
+		private final Pattern allowedMethods = Pattern.compile("^(GET|POST|PUT|HEAD|TRACE|OPTIONS)$");
 
 		@Override
 		public boolean matches(HttpServletRequest request) {

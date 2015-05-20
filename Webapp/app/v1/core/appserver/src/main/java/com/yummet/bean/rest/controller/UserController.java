@@ -15,7 +15,7 @@ public interface UserController {
 
 	public @ResponseBody User updateUser(@RequestBody String body);
 	
-	public @ResponseBody User addUser(@RequestBody User user);
+	public @ResponseBody User addUser(@RequestBody String user);
 
 	public @ResponseBody UserList removeUser(@RequestBody String id);
 	
