@@ -35,10 +35,10 @@
         }
  
         function create(user) {
-        	var headers = user ? {authorization : "Basic "
-		        + btoa(user.username + ":" + user.email + ":" + user.password)
-		    } : {};
-            return $http.post(options.api.base_url + '/service/user/create/', {headers : headers})//.then(handleSuccess, handleError('Error creating user'));
+//        	var headers = user ? {authorization : "Basic "
+//		        + btoa(user.username + ":" + user.email + ":" + user.password)
+//		    } : {};
+            return $http.post(options.api.base_url + '/service/user/create/', user).then(handleSuccess, handleError('Error creating user'));
         }
  
         function update(user) {

@@ -22,14 +22,14 @@ public class User extends BeanObject {
 	private String email;
 	
 	public User() {}
-	
+
 	public User(String id, String firstname, String lastname, String email, String password) {
 		// Be careful of lower and upper case 
 		super.setId(id);
-		setFirstName(firstname);
-		setLastName(lastname);
-		setEmail(email);
-		setPassword(password);
+		this.firstName = firstname;
+		this.lastName = lastname;
+		this.email = email;
+		this.password = password;
 	}
 	
 	// Getter and Setter

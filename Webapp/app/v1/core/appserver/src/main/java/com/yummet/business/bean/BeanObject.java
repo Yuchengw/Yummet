@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public abstract class BeanObject implements Serializable {
 	

@@ -9,7 +9,8 @@ angular.module('signupApp', ['ngAnimate', 'userContextService'])
 .run(function(){
 	
 })
-.controller('signupAppController', ['$scope', 'userService', function($scope, userService) {
+.controller('signupAppController', ['$scope', '$location', 'userService', 'stateService', 
+  function($scope, $location, userService, stateService) {
   // hide error messages until 'submit' event
   $scope.submitted = false;
   // hide success message
@@ -18,13 +19,14 @@ angular.module('signupApp', ['ngAnimate', 'userContextService'])
   console.log("entering singupAppControler");
   
   $scope.signupFormSubmit = function singupFormSubmit() {
-  	var username = $scope.user.username;
+  	var firstname = $scope.user.firstname;
+  	var lastname = $scope.user.lastname;
   	var email = $scope.user.email;
 	var password = $scope.user.password;
 	var repeatPassword = $scope.user.repeatpassword;
 	// maybe we need a utility here, could be service, any ideas?
-	if (username !== undefined && email !== undefined && password !== undefined && repeatPassword !== undefined) {
-		console.log("gonna register user with " + username + " " + email + " " + password + " " + repeatPassword);
+	if (firstname !== undefined && lastname !== undefined && email !== undefined && password !== undefined && repeatPassword !== undefined) {
+		console.log("gonna register user with " + firstname + " " + lastname +  " " + email + " " + password + " " + repeatPassword);
 		register($scope.user, function() {
 			if (stateService.isRegister) {
 				$location.path("/amherpost");
@@ -37,24 +39,19 @@ angular.module('signupApp', ['ngAnimate', 'userContextService'])
   };
    
   var register = function(user, callback) {
-  	userService.create($scope.user).sucess(function (data) {
-        if (data.email) {
+  	userService.create($scope.user).then(function (response) {
+        if (response.data.email) {
             // TODO: we need animation service, for example: FlashService.Success('Registration successful', true);
         	console.log("user register successfully");
-            $stateService.isRegister = true;
-		   	TokenStorage.store(data.token);
+            stateService.isRegister = true;
+//		   	TokenStorage.store(data.token);
         } else {
+        	// TODO: we need our logging service!
         	console.log("user register failed");
-            $stateService.isRegister = true;
+        	console.log(status);
+        	console.log(data);
         }
 		callback && callback();
-    }).error(function(status, data){
-    	// TODO: we need our logging service!
-    	console.log("user register failed");
-    	console.log(status);
-    	console.log(data);
-    	callback && callback();
     })
   }
-  
 }]);

@@ -17,9 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 
+import com.google.common.collect.ImmutableMap;
 import com.yummet.business.bean.User;
 import com.yummet.business.bean.UserList;
 import com.yummet.lib.objectProvider.UserProvider;
+
+import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class is used for Restful API User Control.
@@ -69,10 +75,17 @@ public class UserControllerImpl implements UserController {
 		return u;
 	}
 	
+	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.POST, value=UserRestURIConstants.CREATE_USER)
-	public @ResponseBody User addUser(@RequestHeader("authorization") String user) {
-//		userProvider.getUserServiceImpl().createUser(user);
-		return new User();
+	public @ResponseBody User addUser(@RequestBody String user) {
+		Map<String,String> userInfo = parseUserRequest(user);
+		User newUser =  new User(null,
+						userInfo.get("firstname"), 
+						userInfo.get("lastname"), 
+						userInfo.get("email"), 
+						userInfo.get("password"));
+		User createdUser = userProvider.getUserServiceImpl().createUser(newUser);
+		return createdUser;
 	}
 	
 	@net.bull.javamelody.MonitoredWithSpring
@@ -82,4 +95,29 @@ public class UserControllerImpl implements UserController {
 		return null;
 	}
 	
+	/**
+	 * */
+	public Map<String,String> parseUserRequest(String user) {
+		if (user == null || user.length() <= 0) {
+			return null;
+		}
+		user = StringUtils.removeStart(user, "{");
+		user = StringUtils.removeEnd(user, "}");
+		user = StringUtils.remove(user, "\"");
+		String[] userSections = user.split(",");
+		if (userSections.length < 4) {
+			return null;
+		}
+		String[] userFirstName = userSections[0].split(":");
+		String[] userLastName = userSections[1].split(":");
+		String[] userEmail = userSections[2].split(":");
+		String[] userPassword = userSections[3].split(":");
+		Map<String,String> userInfoMap = ImmutableMap.of(
+				userFirstName[0], userFirstName[1],
+				userLastName[0], userLastName[1],
+				userEmail[0], userEmail[1], 
+				userPassword[0],userPassword[1]);
+		return userInfoMap;
+	}
+
 }

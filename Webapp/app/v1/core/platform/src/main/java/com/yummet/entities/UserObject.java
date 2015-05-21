@@ -165,9 +165,6 @@ public class UserObject  extends EntityObject {
 		if (TextUtil.isNullOrEmpty(getPassword())) {
 			dml.addError("Password cannot be empty!");
 		}
-		if (TextUtil.isNullOrEmpty(getAlias())) {
-			dml.addError("Alias cannot be empty!");
-		}
 		
 		// The default role information is normal user
 		if (TextUtil.isNullOrEmpty(getRole())) {

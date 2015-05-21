@@ -52,7 +52,7 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService'])
 		   $http.get(options.api.base_url + '/service/user', {headers : headers}).success(function(data){
 			   if (data.email) {
 			      console.log("user login successfully");
-			      alert("Hello " + data.alias);
+			      alert("Hello " + data.email);
 			   	  stateService.isLogin = true;
 			   	  TokenStorage.store(data.token);
 			   } else {
