@@ -84,7 +84,7 @@ public class UserControllerImpl implements UserController {
 						userInfo.get("lastname"), 
 						userInfo.get("email"), 
 						userInfo.get("password"));
-		User createdUser = userProvider.getUserServiceImpl().createUser(newUser);
+		User createdUser = userProvider.add(newUser);
 		return createdUser;
 	}
 	

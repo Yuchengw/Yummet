@@ -11,7 +11,7 @@ import com.yummet.utilities.TextUtil;
  * 
  * Platform entity for User
  * @author Jessica
- * @version 1
+ * @since 1
  *
  */
 public class UserObject  extends EntityObject {

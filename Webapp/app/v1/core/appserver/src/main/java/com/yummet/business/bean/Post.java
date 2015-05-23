@@ -50,6 +50,9 @@ public class Post extends BeanObject {
 		setId(id);
 	}
 	
+	public Post() {
+	}
+
 	/* Getters and Setters */
 	public static long getSerialversionuid() {
 		return serialVersionUID;

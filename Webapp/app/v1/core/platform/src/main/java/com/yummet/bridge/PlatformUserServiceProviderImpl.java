@@ -4,6 +4,10 @@ import com.yummet.entities.EntityObject;
 import com.yummet.entities.UserObject;
 import com.yummet.platform.func.DmlOperationWrapper;
 
+/**
+ * @author yucheng
+ * @since 1
+ * */
 public class PlatformUserServiceProviderImpl implements PlatformServiceProvider{
 	
 	public PlatformUserServiceProviderImpl() {
@@ -22,11 +26,19 @@ public class PlatformUserServiceProviderImpl implements PlatformServiceProvider{
 		return new UserObject(userEmail).load();
 	}
 	
+	/**
+	 * 
+	 * */
 	public EntityObject updateObject(UserObject userInfo) {
 		DmlOperationWrapper dmlOperationState = userInfo.save();
-		return userInfo;
+		if (!dmlOperationState.isBulkSuccess()) {
+		}
+		return (EntityObject) dmlOperationState.getEntityObjectsWithoutError();
 	}
 	
+	/**
+	 * 
+	 * */
 	public EntityObject insertObject(UserObject userInfo) throws Exception {
 		DmlOperationWrapper dmlOperationState = userInfo.save();
 		if (!dmlOperationState.isBulkSuccess()) {
@@ -35,6 +47,9 @@ public class PlatformUserServiceProviderImpl implements PlatformServiceProvider{
 		return userInfo;
 	}
 	
+	/**
+	 * 
+	 * */
 	public Boolean deleteObject(UserObject userInfo) {
 		return userInfo.remove();
 	}

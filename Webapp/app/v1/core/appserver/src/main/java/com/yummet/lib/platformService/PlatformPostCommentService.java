@@ -6,6 +6,6 @@ package com.yummet.lib.platformService;
  * @author Yucheng
  * @version 1
  * */
-public class PlatformPostCommentService {
+public abstract class PlatformPostCommentService implements PlatformService{
 
 }

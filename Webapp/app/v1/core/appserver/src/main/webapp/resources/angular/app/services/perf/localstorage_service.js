@@ -1,5 +1,5 @@
 angular.module('localStore', []).factory('TokenStorage', function() {
-	var storageKey = 'auth_token';
+	var storageKey = 'yummet_auth_token';
 	return {		
 		store : function(token) {
 			return localStorage.setItem(storageKey, token);

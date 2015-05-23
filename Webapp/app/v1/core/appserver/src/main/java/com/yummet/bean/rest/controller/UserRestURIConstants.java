@@ -5,7 +5,6 @@ package com.yummet.bean.rest.controller;
  * @since 1
  * */
 public class UserRestURIConstants {
-	 public static final String DUMMY_USER = "/service/user/dummy";
 	 public static final String GET_USER = "/service/user";
 //	 public static final String GET_ALL_USER = "/service/users";
 	 public static final String CREATE_USER = "/service/user/create";

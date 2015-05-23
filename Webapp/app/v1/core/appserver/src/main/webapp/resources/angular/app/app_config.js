@@ -2,7 +2,7 @@
  * @author yucheng
  * @since 1
  */
-var app = angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp'])
+var app = angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp', 'postApp'])
 // need to dynamicly resolve the base url, maybe Grunt will help us?
 var options = {};
 options.api = {};
@@ -19,7 +19,7 @@ app.config(function($routeProvider, $httpProvider){
                 controller: 'signupAppController'
           })
           .when('/amherpost',{
-        	  	templateUrl: '/rs/angular/app/components/post/post-content.html',
+        	  	templateUrl: '/rs/angular/app/components/post/post.html',
         	  	controller: 'postAppController'
           })
           .when('/logout', {

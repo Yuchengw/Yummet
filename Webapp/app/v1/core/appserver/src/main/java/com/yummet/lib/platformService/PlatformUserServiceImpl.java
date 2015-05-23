@@ -11,7 +11,7 @@ import com.yummet.util.monitoring.UserControllerPerformanceMonitorInterceptor;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public class PlatformUserServiceImpl extends PlatformUserService {
 	PlatformServiceProvider platformServiceProvider;

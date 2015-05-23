@@ -1,11 +1,12 @@
 package com.yummet.lib.objectProvider;
 
 import com.yummet.business.bean.User;
+import com.yummet.lib.platformService.PlatformUserService;
 import com.yummet.lib.platformService.PlatformUserServiceImpl;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public class UserProvider {
 
@@ -16,11 +17,11 @@ public class UserProvider {
 	}
 	
 	public PlatformUserServiceImpl getUserServiceImpl() {
-		return this.platformUserServiceImpl;
+		return (PlatformUserServiceImpl) this.platformUserServiceImpl;
 	}
 	
-	public void add(User user) {
-		this.platformUserServiceImpl.createUser(user);
+	public User add(User user) {
+		return this.platformUserServiceImpl.createUser(user);
 	}
 
 	public User get(String email, String password) {
@@ -32,7 +33,7 @@ public class UserProvider {
 	}
 
 	public Boolean remove(int id) {
-		return true;
+		return false;
 	}
 	
 	/**

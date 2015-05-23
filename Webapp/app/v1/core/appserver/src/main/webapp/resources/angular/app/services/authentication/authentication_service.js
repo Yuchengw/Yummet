@@ -9,10 +9,8 @@
 	'use strict';
 	angular.module('authenticateService').factory('authenticationService',
 			authenticationService);
-	
 	authenticationService.$inject = [ '$http', '$cookieStore', '$rootScope',
 			'$timeout', 'userService' ];
-	
 	function authenticationService($http, $cookieStore, $rootScope, $timeout,
 			userService) {
 		
@@ -23,7 +21,7 @@
 
 		return service;
 
-		function SetCredentials(username, password) {
+		function setCredentials(username, password) {
 			var authdata = Base64.encode(username + ':' + password);
 
 			$rootScope.globals = {
@@ -35,13 +33,17 @@
 
 			$http.defaults.headers.common['Authorization'] = 'Basic '
 					+ authdata; // jshint ignore:line
-			$cookieStore.put('globals', $rootScope.globals);
+			$cookieStore.put('yummet', $rootScope.globals);
 		}
 
-		function ClearCredentials() {
+		function clearCredentials() {
 			$rootScope.globals = {};
-			$cookieStore.remove('globals');
+			$cookieStore.remove('yummet');
 			$http.defaults.headers.common.Authorization = 'Basic ';
+		}
+		
+		function getCredentials() {
+			return $cookieStore.get('yummet');
 		}
 	}
 

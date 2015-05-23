@@ -1,5 +1,5 @@
 package com.yummet.bridge;
 
-public class PlatformPostCommentServiceProviderImpl {
+public class PlatformPostCommentServiceProviderImpl implements PlatformServiceProvider {
 
 }

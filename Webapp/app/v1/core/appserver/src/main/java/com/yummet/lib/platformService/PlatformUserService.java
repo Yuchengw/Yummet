@@ -6,7 +6,7 @@ package com.yummet.lib.platformService;
  * Use Strategy pattern to decouple different ways of communicating with Platform code
  * 
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public abstract class PlatformUserService implements PlatformService {
 	

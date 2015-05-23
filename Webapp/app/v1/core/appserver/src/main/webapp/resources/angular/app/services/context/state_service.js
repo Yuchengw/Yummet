@@ -8,7 +8,6 @@ angular.module('contextStateService',[])
 .factory('stateService', function(){
 	var state = {
 		isLogin : false ,
-		isRegister : false
 	}
 	return state;
 });

@@ -5,52 +5,50 @@ import java.util.List;
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostList;
 import com.yummet.business.bean.User;
+import com.yummet.lib.platformService.PlatformPostService;
+import com.yummet.lib.platformService.PlatformPostServiceImpl;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public class PostProvider {
 
-	private static PostList allPosts;
+	private PlatformPostServiceImpl platformPostServiceImpl;
+	
+	public PostProvider() {
+		this.platformPostServiceImpl = new PlatformPostServiceImpl();
+	}
+	
+	public PlatformPostServiceImpl getUserServiceImpl() {
+		return (PlatformPostServiceImpl) this.platformPostServiceImpl;
+	}
+	
+	public Post add(User user, Post post) {
+		post.setCreator(user);
+		return this.platformPostServiceImpl.createPost(post);
+	}
+
+	public Post get(String postId) {
+		return this.platformPostServiceImpl.getPostById(postId);
+	}
+
 	/**
-	 * mocking
+	 * 
 	 * */
-	static {
-		allPosts = new PostList();
-		Post p1 = new Post("1", new User("1", "Yucheng", "Wang",
-				"ycwmike@gmail.com", "1234"), "Post1", "China", 1);
-		Post p2 = new Post("2", new User("2", "George", "Lin",
-				"gglin@gmail.com", "1234"), "Post2", "USA", 2);
-		allPosts.add(p1);
-		allPosts.add(p2);
+	public List<Post> get(User user, int number) {
+		return null;
 	}
 
-	public void add(Post user) {
-		allPosts.add(user);
-	}
-
-	public Post get(int index) {
-		return allPosts.get(index);
-	}
-
-	public List<Post> getAll() {
-		return allPosts.getPosts();
-	}
-
-	public void remove(int id) {
-		allPosts.remove(id);
-	}
+	public Boolean remove(int postId) {
+		return (Boolean) this.platformPostServiceImpl.removeById(postId);
+	} 
 
 	/**
 	 * update is expensive, think before do it
 	 * */
 	public void update(Post updatePost) {
-		update(updatePost.getId(), updatePost);
+		//TODO:
 	}
-	
-	public void update(String index, Post newPost) {
-		List<Post> allPostList = allPosts.getPosts();
-		allPostList.set(Integer.parseInt(index), newPost);
-	}
+
 }

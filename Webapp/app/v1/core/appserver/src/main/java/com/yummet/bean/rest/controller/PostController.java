@@ -8,14 +8,12 @@ import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostList;
 
 public interface PostController {
-	
-	public @ResponseBody Post getPost(@PathVariable String id);
 
-	public @ResponseBody Post updatePost(@RequestBody String body);
-	
+	public @ResponseBody PostList getPosts(@RequestBody String bodt);
+
 	public @ResponseBody Post addPost(@RequestBody String body);
-
-	public @ResponseBody PostList removePost(@PathVariable String id);
 	
-	public @ResponseBody PostList getPosts();
+	public @ResponseBody Post updatePost(@RequestBody String body);
+
+	public @ResponseBody Post removePost(@RequestBody String body);
 }
