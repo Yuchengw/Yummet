@@ -12,9 +12,9 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"> 
     <!-- @author Yucheng -->
 	<!--  provider object aim to providing Business object provider to Business layer, mainly used for Restful service -->
-	<bean id="userProvider" class="com.amher.lib.objectProvider.UserProvider" /> 
-    <bean id="postProvider" class="com.amher.lib.objectProvider.PostProvider"/>
-    <bean id="postCommentProvider" class="com.amher.lib.objectProvider.PostCommentProvider"/>
-    <bean id="orderProvider" class="com.amher.lib.objectProvider.OrderProvider"/>
+	<bean id="userProvider" class="com.yummet.lib.objectProvider.UserProvider" /> 
+    <bean id="postProvider" class="com.yummet.lib.objectProvider.PostProvider"/>
+    <bean id="postCommentProvider" class="com.yummet.lib.objectProvider.PostCommentProvider"/>
+    <bean id="orderProvider" class="com.yummet.lib.objectProvider.OrderProvider"/>
    
 </beans>

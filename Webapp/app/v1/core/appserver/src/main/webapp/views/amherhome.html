@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Yummet</title>
+<<<<<<< HEAD
 <link rel="shortcut icon" type="image/x-icon" href="/as/icon/favicon.ico" />
 <script src="/as/js/angular_v1.3.14//angular.min.js"></script>
 <script src="/as/js/angular_v1.3.14/angular-route.min.js"></script>
@@ -34,5 +35,41 @@
  -->
         </div>
     </div>
+=======
+<link rel="shortcut icon" type="image/x-icon"
+	href="/as/icon/favicon.ico" />
+<script src="/as/js/angular_v1.3.14//angular.js"></script>
+<script src="/as/js/angular_v1.3.14/angular-route.js"></script>
+<script src="/as/js/angular_v1.3.14/angular-animate.js"></script>
+<script src="/as/js/angular_v1.3.14/angular-resource.js"></script>
+<script src="/rs/angular/app/app_config.js"></script>
+<script src="/rs/angular/app/components/identification/common/identification_module.js"></script>
+<script src="/rs/angular/app/components/identification/login/login.js"></script>
+<script src="/rs/angular/app/components/identification/signup/signup.js"></script>
+<script src="/rs/angular/app/services/authenticate/userlogin_service.js"></script>
+<script src="/rs/angular/app/services/context/state_service.js"></script> 
+<script src="/rs/angular/app/services/perf/localstorage_service.js"></script>
+<script src="/rs/angular/app/filters/token_service.js"></script> 
+<link rel="stylesheet" type="text/css" href="/as/css/bootstrap/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/rs/angular/app/components/identification/common/identification.css"></link>
+</head>
+<body data-ng-app="yummet">
+	<div data-ng-controller="configController">
+		<div>
+			<nav>
+				<ul>
+					<li><a href="#/login">login</a>
+					<l1><a href="#/logout">logout</a>
+					<li><a href="#/signup">signup</a></li>
+					<li><a href="#/amherpost">post</a></li>
+				</ul>
+			</nav>
+		</div>
+		<br />
+		<div data-ng-view>
+			<!--This DIV loads templates depending upon route.-->
+		</div>
+	</div>
+>>>>>>> origin/yucheng-topic
 </body>
 </html>

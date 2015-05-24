@@ -27,5 +27,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+=======
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+>>>>>>> origin/yucheng-topic
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

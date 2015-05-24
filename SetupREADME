@@ -1,0 +1,38 @@
+Setup Instruction:
+
+(1)
+<1> download Redis and start it
+<2> download MongoDb and Start the DB
+
+You could following the standard instruction online and referecing to the version in POM.xml under core project.
+
+(2)
+Create maven running env:
+
+Click Run in the upper menus in Elcipse -> Click External Tools -> Create new Running Environment:
+
+<1> Set up the maven as the tools in Yummet 
+<2> set up the running project as Appserver
+
+Create a MAVEN_OPTS environment vairable under environments tab:
+-Xdebug -Xnoagent  -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=4001,server=y,suspend=n
+
+(3)
+Create Debugging Env:
+
+Click Bug icon at the fron tabs of eclipse, and create a new debug configuration,
+Set localhost as server name
+Set 4001 as debug port
+
+(4) Running the appserver
+
+<1> Firstly, right clean core app, then maven clean install
+
+<2> Click Run in the upper menus in Eclipse -> run the app env set up in (2) steps
+
+<3> click bug tabs -> run the debug env
+
+Then you are all set!!!!
+
+Contact me if you have any question and feel free to add instructions if you have better ideas.
+
