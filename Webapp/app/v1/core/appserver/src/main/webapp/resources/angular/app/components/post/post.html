@@ -1,19 +1,22 @@
 <div data-ng-app="postApp">
-	<div data-ng-controller="postAppController">
-		<span>{{posts.length}} posts</span>
+	<div class="container" data-ng-controller="postAppController">
+		<span>There are {{posts.length}} posts</span>
 		<form data-ng-submit="addPost()">
+			<input type="text" data-ng-model="postsubj" size="30"
+				placeholder="add new post subject">
 			<input type="text" data-ng-model="postbody" size="30"
-				placeholder="add new post here"> <input class="btn-primary"
+				placeholder="add new post here">
+                        <input class="btn-primary"
 				type="submit" value="post">
 		</form>
 		<ul class="unstyled">
 			<li data-ng-repeat="post in posts">
-				<!-- here should be the post comment body --> <span class="ppp">#{{post.subject}}
-					- {{post.text}}</span>
+				<!-- here should be the post comment body -->
+                                <span class="ppp">{{post.subject}} - {{post.text}}</span>
 				<form data-ng-submit="addPostComment()">
 					<input type="text" data-ng-model="postcommentbody" size="30"
-						placeholder="add comment here"> <input
-						class="btn-primary" type="submit" value="postcomment">
+						placeholder="add comment here">
+                                        <input class="btn-primary" type="submit" value="postcomment">
 				</form> <a class="btn-secondary" data-ng-click="removePost(post)">x</a>
 			</li>
 		</ul>
