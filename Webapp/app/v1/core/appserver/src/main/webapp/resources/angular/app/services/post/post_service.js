@@ -31,7 +31,8 @@
 //        	var headers = user ? {authorization : "Basic "
 //		        + btoa(user.username + ":" + user.email + ":" + user.password)
 //		    } : {};
-            return $http.post(options.api.base_url + '/service/post/create/', userCredentials, post).then(handleSuccess, handleError('Error creating post'));
+        	// TODO: We could do something here for credentials here in frontend in the future, for now, let server deal with these stuff.
+            return $http.post(options.api.base_url + '/service/post/create/', post).then(handleSuccess, handleError('Error creating post'));
         }
  
         function update(post) {

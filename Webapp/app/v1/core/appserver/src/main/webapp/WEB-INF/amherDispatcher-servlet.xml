@@ -53,6 +53,7 @@
 	<!-- Restful controller: PostController's aggregate object -->
 	<bean id="postControllerImpl" class="com.yummet.bean.rest.controller.PostControllerImpl">
 		<property name="postProvider" ref="postProvider" />
+		<property name="userProvider" ref="userProvider" />
 	</bean>
 	
 	<!-- ===========================================Add Spring Security Configuration================================== -->

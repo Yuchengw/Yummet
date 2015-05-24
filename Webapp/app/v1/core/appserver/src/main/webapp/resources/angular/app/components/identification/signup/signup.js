@@ -2,7 +2,7 @@
 *@author yucheng
 *@since 1
 */
-angular.module('signupApp', ['ngAnimate', 'localStore', 'userContextService', 'authenticationService'])
+angular.module('signupApp', ['ngAnimate', 'localStore', 'userContextService', 'authenticateService'])
 .config(function(){
 	
 })

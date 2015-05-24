@@ -2,7 +2,7 @@
 *@author yucheng
 *@since 1
 */
-angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'authenticationService', 'postContextService'])
+angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'authenticateService', 'postContextService'])
 .config(function(){
 	
 })
@@ -13,10 +13,9 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'aut
     function($scope, $location, TokenStorage, userService, stateService, authenticationService, postService) {
   $scope.posts = [];
   $scope.addPost = function() {
-	  var credentials = null;
+	  var credentials = authenticationService.getCredentials();
 	  var post = null;
-      if (stateService.isLogin && stateService.isLoging === true) {
-    	  credentials = authenticationService.getCredentials();
+      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
     	  post = $scope.postbody;
     	  create(credentials, post, function() {
     		 // TODO: specify your callback here 
@@ -27,7 +26,6 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'aut
   $scope.removePost = function() {
 	  var credentials = null;
       if (stateService.isLogin && stateService.isLoging === true) {
-    	  credentials = authenticationService.getCredentials();
     	  remove(credentials, post, function() {
     		 // TODO: specify your callback here 
     	  });
@@ -50,10 +48,10 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'aut
   var create = function(userCredential, post, callback) {
 	  if (userCredential) {
 		  postService.create(userCredential, post).then(function (response) {
-			  if (response.data.id) {
-				  
+			  if (response.data) {
+				  $scope.posts.push(response.data);
 			  } else {
-				  
+				  $scope.posts.pop()
 			  }
 			  callback && callback();
 		  })

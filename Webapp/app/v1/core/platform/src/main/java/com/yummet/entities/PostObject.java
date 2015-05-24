@@ -203,18 +203,19 @@ public class PostObject extends EntityObject {
 		if (TextUtil.isNullOrEmpty(getSubject())) {
 			dml.addError("The subject is not set!");
 		}
-		if (TextUtil.isNullOrEmpty(getLocation())) {
-			dml.addError("The location is not set!");
-		}
-		if (getQuantity() < 0) {
-			dml.addError("The quntity cannot be negative!");
-		}
-		if (getCost() < 0) {
-			dml.addError("The cost cannot be negative number!");
-		}
-		if (TextUtil.isNullOrEmpty(getType())) {
-			dml.addError("The post type is not set!");
-		}
+		// Comment this out first since they are not needed for now
+//		if (TextUtil.isNullOrEmpty(getLocation())) {
+//			dml.addError("The location is not set!");
+//		}
+//		if (getQuantity() < 0) {
+//			dml.addError("The quntity cannot be negative!");
+//		}
+//		if (getCost() < 0) {
+//			dml.addError("The cost cannot be negative number!");
+//		}
+//		if (TextUtil.isNullOrEmpty(getType())) {
+//			dml.addError("The post type is not set!");
+//		}
 		
 		if (getPartners() != null) {
 			for (UserObject partner: getPartners()) {
@@ -228,10 +229,10 @@ public class PostObject extends EntityObject {
 		if (getCreator() == null) {
 			dml.addError("Post creator is not set!");
 		}
-		if (getLastModifiedBy() == null) {
-			dml.addError("Post last modify by is not set!");
-		}
-		
+//		if (getLastModifiedBy() == null) {
+//			dml.addError("Post last modify by is not set!");
+//		}
+//		
 		// the post default category is food
 		if (TextUtil.isNullOrEmpty(getPostCategory())) {
 			setPostCategory("Food");
@@ -251,8 +252,8 @@ public class PostObject extends EntityObject {
 		dbPost.setImage(image);
 		dbPost.setPartners(partners);
 		dbPost.setPostCategory(postCategory);
-		dbPost.setStatus(status.getDbValue());
-		dbPost.setVisibility(visibility.getDbValue());
+//		dbPost.setStatus(status.getDbValue()); // BUG:
+//		dbPost.setVisibility(visibility.getDbValue());
 		dbPost.setNumberOfOrders(numberOfOrders);
 		dbPost.setNumberOfLikes(numberOfLikes);
 		dbPost.setCreatorWithEntity(creator);

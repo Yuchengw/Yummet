@@ -7,7 +7,7 @@
 
 (function() {
 	'use strict';
-	angular.module('authenticateService').factory('authenticationService',
+	angular.module('authenticateService', ['ngCookies']).factory('authenticationService',
 			authenticationService);
 	authenticationService.$inject = [ '$http', '$cookieStore', '$rootScope',
 			'$timeout', 'userService' ];
@@ -15,9 +15,9 @@
 			userService) {
 		
 		var service = {};
-		service.Login = Login;
-		service.SetCredentials = SetCredentials;
-		service.ClearCredentials = ClearCredentials;
+		service.setCredentials = setCredentials;
+		service.clearCredentials = clearCredentials;
+		service.getCredentials = getCredentials;
 
 		return service;
 
@@ -32,7 +32,7 @@
 			};
 
 			$http.defaults.headers.common['Authorization'] = 'Basic '
-					+ authdata; // jshint ignore:line
+					+ authdata; 
 			$cookieStore.put('yummet', $rootScope.globals);
 		}
 
@@ -50,7 +50,7 @@
 	// Base64 encoding service used by authenticationService
 	var Base64 = {
 		encode : function(input) {
-			output = btoa(input);
+			var output = btoa(input);
 			// TODO: our own algorithm to secure
 			return output;
 		},
