@@ -1,33 +1,39 @@
-<!--  The Home View page @author Yucheng @since 1
+<!--  The Home Index page @author Yucheng @since 1
  -->
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Yummet</title>
+<title>Yummet - Share Food With World</title>
+
+<!--==== Bootstrap Core css ====-->
+<link rel="stylesheet" type="text/css"
+	href="/as/css/bootstrap/bootstrap.min.css"></link>
+<!--==== Third Party css ====-->
+<link rel="stylesheet" type="text/css"
+	href="/as/css/other/landing-page.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="as/css/font-awesome/font-awesome.min.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"></link>
+<!--==== Yummet css====-->
 <link rel="shortcut icon" type="image/x-icon"
 	href="/as/icon/favicon.ico" />
-<script src="/as/js/angular_v1.3.14//angular.js"></script>
-<script src="/as/js/angular_v1.3.14/angular-route.js"></script>
-<script src="/as/js/angular_v1.3.14/angular-animate.js"></script>
-<script src="/as/js/angular_v1.3.14/angular-resource.js"></script>
-<script src="/as/js/angular_v1.3.14/angular-cookies.js"></script>
-<script src="/rs/angular/app/app_config.js"></script>
-<script src="/rs/angular/app/components/identification/common/identification_module.js"></script>
-<script src="/rs/angular/app/components/identification/login/login.js"></script>
-<script src="/rs/angular/app/components/identification/signup/signup.js"></script>
-<script src="/rs/angular/app/components/post/post.js"></script>
-<script src="/rs/angular/app/services/context/state_service.js"></script> 
-<script src="/rs/angular/app/services/perf/localstorage_service.js"></script>
-<script src="/rs/angular/app/services/authentication/authentication_service.js"></script>
-<script src="/rs/angular/app/services/user/user_service.js"></script>
-<script src="/rs/angular/app/services/post/post_service.js"></script>
-<script src="/rs/angular/app/filters/token_service.js"></script> 
-<link rel="stylesheet" type="text/css" href="/as/css/bootstrap/bootstrap.min.css"></link>
-<link rel="stylesheet" type="text/css" href="/rs/angular/app/components/identification/common/identification.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="/as/css/yummet/index.css"></link>
+
+<!-- Accessibility Issues -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 <body data-ng-app="yummet">
 	<div data-ng-controller="configController">
+<<<<<<< HEAD
 		<div>
 			<nav>
 				<ul>
@@ -39,9 +45,68 @@
 			</nav>
 		</div>
 		<br />
+=======
+		<!--==== Navigation ====-->
+		<nav class="navbar navbar-default navbar-fixed-top topnav"
+			role="navigation">
+			<div class="container topnav">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand topnav" href="#">Boot Your online kitchen</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#about">About</a></li>
+						<li><a href="#services">Services</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<li><a href="#/login">login</a> </li>
+						<li><a href="#/logout">logout</a> </li>
+						<li><a href="#/signup">signup</a></li>
+						<li><a href="#/amherpost">post</a></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container -->
+		</nav>
+>>>>>>> yucheng-topic
 		<div data-ng-view>
 			<!--This DIV loads templates depending upon route.-->
 		</div>
 	</div>
+
+	<!--==== Third Party Script ====-->
+	<script src="/as/js/angular_v1.3.14//angular.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-route.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-animate.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-resource.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-cookies.js"></script>
+	<script src="/as/js/ui/jquery.js"></script>
+	<script src="/as/js/ui/bootstrap.min.js"></script>
+
+	<!--==== Yummet JS Framework Script ====-->
+	<script src="/rs/angular/app/app_config.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/common/identification_module.js"></script>
+	<script src="/rs/angular/app/components/identification/login/login.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/signup/signup.js"></script>
+	<script src="/rs/angular/app/components/post/post.js"></script>
+	<script src="/rs/angular/app/services/context/state_service.js"></script>
+	<script src="/rs/angular/app/services/perf/localstorage_service.js"></script>
+	<script
+		src="/rs/angular/app/services/authentication/authentication_service.js"></script>
+	<script src="/rs/angular/app/services/user/user_service.js"></script>
+	<script src="/rs/angular/app/services/post/post_service.js"></script>
+	<script src="/rs/angular/app/filters/token_service.js"></script>
+	<!--==== Yummet JS UI Script ====-->
 </body>
 </html>
