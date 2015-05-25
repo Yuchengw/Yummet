@@ -10,11 +10,13 @@ import com.yummet.business.bean.PostList;
 
 public interface PostController {
 
-	public @ResponseBody PostList getPosts(@RequestBody String bodt);
+	public @ResponseBody Post getPost(@PathVariable String id, @RequestBody String bodt);
+	
+	public @ResponseBody PostList getPosts(@PathVariable String id, @RequestBody String bodt);
 
 	public @ResponseBody Post addPost(@RequestHeader String credentials, @RequestBody String body);
 	
-	public @ResponseBody Post updatePost(@RequestBody String body);
+	public @ResponseBody Post updatePost(@RequestHeader String credentials, @PathVariable String id, @RequestBody String body);
 
-	public @ResponseBody Post removePost(@RequestBody String body);
+	public @ResponseBody void removePost(@RequestHeader String credentials, @PathVariable String id, @RequestBody String body);
 }
