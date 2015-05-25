@@ -14,34 +14,34 @@ import com.yummet.lib.platformService.PlatformPostServiceImpl;
  * */
 public class PostProvider {
 
-	private PlatformPostServiceImpl platformPostServiceImpl;
+	private PlatformPostService platformPostService;
 	
 	public PostProvider() {
-		this.platformPostServiceImpl = new PlatformPostServiceImpl();
+		this.platformPostService = new PlatformPostServiceImpl();
 	}
 	
-	public PlatformPostServiceImpl getUserServiceImpl() {
-		return (PlatformPostServiceImpl) this.platformPostServiceImpl;
+	public PlatformPostService getPostService() {
+		return this.platformPostService;
 	}
 	
 	public Post add(User user, Post post) {
 		post.setCreator(user);
-		return this.platformPostServiceImpl.createPost(post);
+		return this.platformPostService.createPost(post);
 	}
 
 	public Post get(String postId) {
-		return this.platformPostServiceImpl.getPostById(postId);
+		return this.platformPostService.getPostById(postId);
 	}
 
 	/**
 	 * 
 	 * */
-	public List<Post> get(User user, int number) {
+	public List<Post> get(User user, int number, int cursor) {
 		return null;
 	}
 
-	public Boolean remove(int postId) {
-		return (Boolean) this.platformPostServiceImpl.removeById(postId);
+	public Boolean remove(String postId) {
+		return (Boolean) this.platformPostService.removeById(postId);
 	} 
 
 	/**

@@ -11,7 +11,7 @@ import com.yummet.business.bean.User;
 import com.yummet.entities.PostObject;
 import com.yummet.entities.UserObject;
 
-public class PlatformPostServiceImpl extends PlatformPostService{
+public class PlatformPostServiceImpl implements PlatformPostService{
 	PlatformServiceProvider platformPostServiceProvider;
 	PlatformServiceProvider platformUserServiceProvider;
 	
@@ -23,7 +23,7 @@ public class PlatformPostServiceImpl extends PlatformPostService{
 	}
 	
 	/**
-	 * This function is used for create user in mongodb
+	 * This function is used for create a new post in mongodb
 	 * @throws Exception 
 	 * */
 	public Post createPost(Post post) {
@@ -32,7 +32,22 @@ public class PlatformPostServiceImpl extends PlatformPostService{
 		PostObject newPostObject = new PostObject(userObject, post.getSubject(), post.getLocation(), post.getQuantity());
 		((PlatformPostServiceProviderImpl) platformPostServiceProvider).insertObject(newPostObject);
 		} catch (Exception e) {
-			logger.debug("there is something wrong when inserting user object" + e.getStackTrace());
+			logger.debug("there is something wrong when inserting post object" + e.getStackTrace());
+		}
+		return post;
+	}
+
+	/**
+	 * This function is used for update a post in mongodb
+	 * @throws Exception 
+	 * */
+	public Post updatePost(Post post) {
+		try {
+		UserObject userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider).getObject(post.getCreator().getEmail());
+		PostObject newPostObject = new PostObject(userObject, post.getSubject(), post.getLocation(), post.getQuantity());
+		((PlatformPostServiceProviderImpl) platformPostServiceProvider).updateObject(newPostObject);
+		} catch (Exception e) {
+			logger.debug("there is something wrong when updating post object" + e.getStackTrace());
 		}
 		return post;
 	}
@@ -87,9 +102,9 @@ public class PlatformPostServiceImpl extends PlatformPostService{
 //		post.setPartners(platformPost.getPartners());
 	}
 
-	public Boolean removeById(int postId) {
+	public boolean removeById(String postId) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }

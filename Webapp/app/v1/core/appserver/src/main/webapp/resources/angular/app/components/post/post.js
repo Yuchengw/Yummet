@@ -12,6 +12,16 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'aut
 .controller('postAppController', ['$scope', '$location', 'TokenStorage', 'userService', 'stateService', 'authenticationService', 'postService',
     function($scope, $location, TokenStorage, userService, stateService, authenticationService, postService) {
   $scope.posts = [];
+
+  $scope.getPosts = function() {
+      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
+    	  post = $scope.postbody;
+    	  create(credentials, post, function() {
+    		 // TODO: specify your callback here 
+    	  });
+      }
+  };
+
   $scope.addPost = function() {
 	  var credentials = authenticationService.getCredentials();
 	  var post = null;
@@ -34,7 +44,7 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'aut
   
   var remove = function(userCredential, post, callback) {
 	  if (userCredential) {
-		  postService.remove(userCredential, post).then(function (response) {
+	  postService.remove(userCredential, post).then(function (response) {
 		  if (response.data.id) {
 				  
 	      } else {
