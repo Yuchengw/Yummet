@@ -1,6 +1,65 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+<<<<<<< HEAD
+	<!-- <groupId>com.iamhere</groupId> <artifactId>main-platform</artifactId> 
+		<version>0.0.1-SNAPSHOT</version> <packaging>jar</packaging> <name>main-platform</name> 
+		<url>http://maven.apache.org</url> <properties> <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
+		</properties> <dependencies> <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+		<version>3.8.1</version> <scope>test</scope> </dependency> <dependency> <groupId>javax.mail</groupId> 
+		<artifactId>javax.mail-api</artifactId> <version>1.5.1</version> </dependency> 
+		<dependency> <groupId>org.mongodb</groupId> <artifactId>mongo-java-driver</artifactId> 
+		<version>3.0.0-beta2</version> </dependency> <dependency> <groupId>joda-time</groupId> 
+		<artifactId>joda-time</artifactId> <version>2.7</version> </dependency> <dependency> 
+		<groupId>org.springframework.data</groupId> <artifactId>spring-data-mongodb</artifactId> 
+		<version>1.7.0.RELEASE</version> </dependency> </dependencies> <build> <defaultGoal>install</defaultGoal> 
+		<plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
+		<configuration> <skip>true</skip> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-compiler-plugin</artifactId> <version>2.5.1</version> <configuration> 
+		<source>1.8</source> <target>1.8</target> <encoding>UTF-8</encoding> </configuration> 
+		</plugin> </plugins> </build> -->
+	<groupId>com.iamhere</groupId>
+	<artifactId>platform</artifactId>
+	<version>0.1.0</version>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.3.RELEASE</version>
+	</parent>
+
+	<properties>
+		<!-- Generic properties -->
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- Spring -->
+		<spring-framework.version>4.0.3.RELEASE</spring-framework.version>
+		<spring-data-mongodb.version>1.5.2.RELEASE</spring-data-mongodb.version>
+		<!-- Logging -->
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+	</properties>
+
+	<dependencies>
+		<!-- Spring and Transactions -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<!-- Spring Data commons -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>1.10.0.RELEASE</version>
+		</dependency>
+=======
 	<groupId>yummet.platform</groupId>
 	<artifactId>platform</artifactId>
 	<packaging>jar</packaging>
@@ -24,12 +83,17 @@
 	</properties>
 
 	<dependencies>
+>>>>>>> origin/yucheng-topic
 		<!-- Spring Data Mongo Support -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.7.0.RELEASE</version>
+<<<<<<< HEAD
+			<!--  version>${spring-data-mongodb.version}</version-->
+=======
 			<!-- version>${spring-data-mongodb.version}</version -->
+>>>>>>> origin/yucheng-topic
 		</dependency>
 		<!-- Dependency for MongoDB Java connector -->
 		<dependency>
@@ -37,6 +101,23 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+<<<<<<< HEAD
+		<!-- Logging with SLF4J & LogBack -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+=======
+>>>>>>> origin/yucheng-topic
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -47,6 +128,46 @@
 			<artifactId>javax.mail-api</artifactId>
 			<version>1.5.1</version>
 		</dependency>
+<<<<<<< HEAD
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-neo4j</artifactId>
+			<version>2.2.2.RELEASE</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
+=======
 	</dependencies>
 	<build>
 		<plugins>
@@ -92,3 +213,4 @@
 		</plugins>
 	</build>
 </project>
+>>>>>>> origin/yucheng-topic
