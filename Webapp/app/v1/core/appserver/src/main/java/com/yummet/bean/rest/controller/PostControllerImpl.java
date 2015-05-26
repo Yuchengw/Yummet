@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.collect.ImmutableMap;
 import com.yummet.business.bean.Post;
@@ -60,13 +61,14 @@ public class PostControllerImpl implements PostController {
 	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=PostRestURIConstants.GET_POSTS)
-	public PostList getPosts(@PathVariable String id, @RequestBody String body) {
+	public PostList getPosts(@PathVariable final String id, @RequestParam(value="step") final String step,
+			@RequestParam(value="cursor") final String cursor) {
 		PostList postList = new PostList();
 		User user = userProvider.get(id);
 		if (user == null) {
 			//Console log
 		}
-		List<Post> posts = postProvider.get(user, 10, 10);
+		List<Post> posts = postProvider.get(user, Integer.parseInt(step), Integer.parseInt(cursor));
 		postList.setPosts(posts);
 		return postList;
 	}

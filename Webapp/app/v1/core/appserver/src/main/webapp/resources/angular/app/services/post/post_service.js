@@ -26,6 +26,10 @@
         function getByUsername(user) {
             return $http.get(options.api.base_url + '/service/posts/' + user).then(handleSuccess, handleError('Error getting post by username'));
         }
+
+        function get() {
+            return $http.get(options.api.base_url + '/service/posts/' + user).then(handleSuccess, handleError('Error getting post by username'));
+        }
  
         function create(userCredentials, post) {
 //        	var headers = user ? {authorization : "Basic "
