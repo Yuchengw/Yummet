@@ -1,49 +1,72 @@
-<!-- -->
-<div data-ng-app="signupApp">
-	<div class="container" data-ng-controller="signupAppController">
-        <div shakeThat>
-		<form name="signupform" data-ng-submit="signupFormSubmit()" novalidate>
-			<div class="form-group" data-ng-class="{'has-error': signupform.firstname.$invalid && !signupform.firstname.$pristine}">
-				<label for="firstname" class="control-label">First Name</label> 
-				<input type="text" class="form-control" id="firstname" name="firstname"
-					placeholder="First Name" data-ng-model="user.firstname"
-					data-ng-model-options="{updateOn: 'blur'}" 
-					data-ng-minlength="3" data-ng-maxlength="25" required>
-		        <p data-ng-show="signupForm.firstname.$invalid && !userForm.firstname.$pristine" class="help-block">You first name is required.</p>
-		        <p data-ng-show="userForm.firstname.$error.minlength" class="help-block">First Name is too short.</p>
-                <p data-ng-show="userForm.firstname.$error.maxlength" class="help-block">First Name is too long.</p>
+<!--==== Signup Partials ====-->
+<div class="chef-box-container">
+	<div data-ng-app="signupApp">
+		<div data-ng-controller="signupAppController">
+			<div shakeThat>
+				<form name="signupform" data-ng-submit="signupFormSubmit()"
+					novalidate>
+					<div class="form-group"
+						data-ng-class="{'has-error': signupform.firstname.$invalid && !signupform.firstname.$pristine}">
+						<label for="firstname" class="control-label">First Name</label> <input
+							type="text" class="form-control" id="firstname" name="firstname"
+							placeholder="First Name" data-ng-model="user.firstname"
+							data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="3"
+							data-ng-maxlength="25" required>
+						<p
+							data-ng-show="signupForm.firstname.$invalid && !userForm.firstname.$pristine"
+							class="help-block">You first name is required.</p>
+						<p data-ng-show="userForm.firstname.$error.minlength"
+							class="help-block">First Name is too short.</p>
+						<p data-ng-show="userForm.firstname.$error.maxlength"
+							class="help-block">First Name is too long.</p>
+					</div>
+					<div class="form-group"
+						data-ng-class="{'has-error': signupform.lastname.$invalid && !signupform.lastname.$pristine}">
+						<label for="lastname" class="control-label">Last Name</label> <input
+							type="text" class="form-control" id="lastname" name="lastname"
+							placeholder="Last Name" data-ng-model="user.lastname"
+							data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="3"
+							data-ng-maxlength="25" required>
+						<p
+							data-ng-show="signupForm.lastname.$invalid && !userForm.lastname.$pristine"
+							class="help-block">Last Name is required.</p>
+						<p data-ng-show="userForm.lastname.$error.minlength"
+							class="help-block">Last Name is too short.</p>
+						<p data-ng-show="userForm.lastname.$error.maxlength"
+							class="help-block">Last Name is too long.</p>
+					</div>
+					<div class="form-group"
+						data-ng-class="{'has-error': signupform.email.$invalid && !signupform.email.$pristine}">
+						<label for="email" class="control-label">Email</label> <input
+							type="email" class="form-control" id="email" name="email"
+							placeholder="Email" data-ng-model="user.email"
+							data-ng-model-options="{updateOn: 'blur'}" required>
+						<p
+							data-ng-show="userForm.email.$invalid && !userForm.email.$pristine"
+							class="help-block">Enter a valid email.</p>
+					</div>
+					<div class="form-group"
+						data-ng-class="{'has-error': signupform.password.$invalid && !signupform.password.$pristine}">
+						<label for="password" class="control-label">New Password</label> <input
+							type="password" class="form-control" id="password"
+							name="password" placeholder="Password"
+							data-ng-model="user.password"
+							data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="6"
+							required>
+					</div>
+					<div class="form-group"
+						data-ng-class="{'has-error': signupform.password.$invalid && !signupform.password.$pristine}">
+						<label for="password" class="control-label">Repeat
+							Password</label> <input type="password" class="form-control"
+							id="repeatpassword" name="repeatpassword"
+							placeholder="Repeat Password" data-ng-model="user.repeatpassword"
+							data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="6"
+							required>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Sign
+						up</button>
+				</form>
 			</div>
-			<div class="form-group" data-ng-class="{'has-error': signupform.lastname.$invalid && !signupform.lastname.$pristine}">
-				<label for="lastname" class="control-label">Last Name</label> 
-				<input type="text" class="form-control" id="lastname" name="lastname"
-					placeholder="Last Name" data-ng-model="user.lastname"
-					data-ng-model-options="{updateOn: 'blur'}" 
-					data-ng-minlength="3" data-ng-maxlength="25" required>
-		        <p data-ng-show="signupForm.lastname.$invalid && !userForm.lastname.$pristine" class="help-block">Last Name is required.</p>
-		        <p data-ng-show="userForm.lastname.$error.minlength" class="help-block">Last Name is too short.</p>
-                <p data-ng-show="userForm.lastname.$error.maxlength" class="help-block">Last Name is too long.</p>
-			</div>
-			<div class="form-group" data-ng-class="{'has-error': signupform.email.$invalid && !signupform.email.$pristine}">
-				<label for="email" class="control-label">Email</label> 
-				<input type="email" class="form-control" id="email" name="email"
-					placeholder="Email" data-ng-model="user.email"
-					data-ng-model-options="{updateOn: 'blur'}" required>
-			    <p data-ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
-			</div>
-			<div class="form-group" data-ng-class="{'has-error': signupform.password.$invalid && !signupform.password.$pristine}">
-				<label for="password" class="control-label">New Password</label> 
-				<input type="password" class="form-control" id="password" name="password"
-					placeholder="Password" data-ng-model="user.password"
-					data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="6" required >
-			</div>
-			<div class="form-group" data-ng-class="{'has-error': signupform.password.$invalid && !signupform.password.$pristine}">
-				<label for="password" class="control-label">Repeat Password</label> 
-				<input type="password" class="form-control" id="repeatpassword" name="repeatpassword"
-					placeholder="Repeat Password" data-ng-model="user.repeatpassword"
-					data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="6" required >
-			</div>
-			<button type="submit" class="btn btn-primary btn-block">Sign up</button>
-		</form>
 		</div>
 	</div>
 </div>

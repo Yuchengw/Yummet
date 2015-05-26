@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+#This is the ignore files for github
+=======
 d#This is the ignore files for github
+>>>>>>> origin/yucheng-topic
 #
 #@author Yucheng
 #@verision 1
@@ -19,6 +23,9 @@ d#This is the ignore files for github
 
 #======================Ignore independent eclipse settings====================#
 RemoteSystemsTempFiles/
+<<<<<<< HEAD
+=======
 /**/DB/*
+>>>>>>> origin/yucheng-topic
 .settings/
 .metadata/
