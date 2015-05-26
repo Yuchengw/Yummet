@@ -62,7 +62,7 @@ public class PostControllerImpl implements PostController {
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=PostRestURIConstants.GET_POSTS)
 	public PostList getPosts(@PathVariable final String id, @RequestParam(value="step") final String step,
-			@RequestParam(value="cursor") final String cursor) {
+			@RequestParam(value="cursor") final String cursor, String body) {
 		PostList postList = new PostList();
 		User user = userProvider.get(id);
 		if (user == null) {
