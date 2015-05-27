@@ -56,6 +56,11 @@
 		<property name="userProvider" ref="userProvider" />
 	</bean>
 	
+	<!-- Restful controller: ProfileController's aggregate object -->
+	<bean id="profileControllerImpl" class="com.yummet.bean.rest.controller.ProfileControllerImpl">
+		<property name="userProvider" ref="userProvider" />
+	</bean>
+	
 	<!-- ===========================================Add Spring Security Configuration================================== -->
 	<bean name="statelessAuthenticationSecurityConfig" class="com.yummet.web.security.StatelessAuthenticationSecurityConfig" /> 
 	<!-- <bean id="PostControllerImpl" class="com.yummet.bean.rest.controller.PostControllerImpl"> 

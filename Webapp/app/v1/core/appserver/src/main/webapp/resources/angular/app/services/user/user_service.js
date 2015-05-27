@@ -17,7 +17,7 @@
         service.getByUsername = getByUsername;
         service.create = create;
         service.update = update;
-//        service.remove = remove;
+//      service.remove = remove;
  
         return service;
         
@@ -45,12 +45,11 @@
             return $http.put(options.api.base_url + '/service/user/update/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
         }
  
-//        function remove(id) {
-//            return $http.delete(options.api.base_url + '/service/user/' + user.id).then(handleSuccess, handleError('Error deleting user'));
-//        }
+//      function remove(id) {
+//          return $http.delete(options.api.base_url + '/service/user/' + user.id).then(handleSuccess, handleError('Error deleting user'));
+//      }
  
         // private functions
- 
         function handleSuccess(data) {
             return data;
         }
@@ -61,5 +60,4 @@
             };
         }
     }
- 
 })();

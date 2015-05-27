@@ -40,20 +40,6 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 	  };
 	  
 	  /**
-	   * Logout function
-	   * */
-	  $scope.logout = function logOut() {
-		  console.log("entered logout function");
-		  if (stateService.isLogin) {
-			  stateService.isLogin = false;
-			  authenticationServie.clearCredentials();
-//			   	  TokenStorage.clear();
-//			  delete $window.sessionStorage.token;
-			  $location.path("/logout");
-		  }
-	  }
-	  
-	  /**
 	   * Authenticate function used for login function
 	   * */
 	  var loginAuthenticate = function(credentials, callback) {
