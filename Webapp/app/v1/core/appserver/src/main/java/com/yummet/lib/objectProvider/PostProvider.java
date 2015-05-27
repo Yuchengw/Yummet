@@ -39,18 +39,8 @@ public class PostProvider {
 	/**
 	 * 
 	 * */
-	public List<Post> get(User user, int number, int cursor) {
-		UserObject uo = new UserObject(user.getId());
-		PostObject po = new PostObject(uo, null, null, cursor);
-		List<Post> postList = new ArrayList<Post>();
-		try {
-			po.load();
-			Post p = new Post();
-			postList.add(p);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public List<Post> get(User user, int size, int cursor) {
+		return this.platformPostService.get(user, size, cursor);
 	}
 
 	public Boolean remove(String postId) {

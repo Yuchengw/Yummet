@@ -1,5 +1,8 @@
 package com.yummet.lib.platformService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,18 +11,23 @@ import com.yummet.bridge.PlatformServiceProvider;
 import com.yummet.bridge.PlatformUserServiceProviderImpl;
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.User;
+import com.yummet.entities.EntityObject;
 import com.yummet.entities.PostObject;
 import com.yummet.entities.UserObject;
+import com.yummet.platform.adapters.DatabaseProvider;
+import com.yummet.platform.adapters.MongoDbProvider;
 
 public class PlatformPostServiceImpl implements PlatformPostService{
 	PlatformServiceProvider platformPostServiceProvider;
 	PlatformServiceProvider platformUserServiceProvider;
+	DatabaseProvider dbProvider;
 	
 	private static final Logger logger = LoggerFactory.getLogger(PlatformPostServiceImpl.class);
 	
 	public PlatformPostServiceImpl() {
 		platformPostServiceProvider =  new PlatformPostServiceProviderImpl();
 		platformUserServiceProvider =  new PlatformUserServiceProviderImpl();
+		dbProvider = new MongoDbProvider();
 	}
 	
 	/**
@@ -47,15 +55,14 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		PostObject newPostObject = new PostObject(userObject, post.getSubject(), post.getLocation(), post.getQuantity());
 		((PlatformPostServiceProviderImpl) platformPostServiceProvider).updateObject(newPostObject);
 		} catch (Exception e) {
-			logger.debug("there is something wrong when updating post object" + e.getStackTrace());
+			logger.error("there is something wrong when updating post object" + e.getStackTrace());
 		}
 		return post;
 	}
 	
 	@Override
 	public PlatformServiceProvider getPlatformServiceProvider() {
-		// TODO Auto-generated method stub
-		return null;
+		return platformPostServiceProvider;
 	}
 	
 	/**
@@ -69,7 +76,7 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 			post = new Post();
 			copyPost(platformPostObject, post);
 		} catch (Exception e) {
-			logger.debug("Error happens when retriving User object" + e.getStackTrace());
+			logger.error("Error happens when retriving User object" + e.getStackTrace());
 		}
 		return post;
 	}
@@ -103,8 +110,27 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 	}
 
 	public boolean removeById(String postId) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			PostObject newPostObject = new PostObject(postId);
+			((PlatformPostServiceProviderImpl) platformPostServiceProvider).deleteObject(newPostObject);
+		} catch (Exception e) {
+			logger.error("there is something wrong when deleting post object" + e.getStackTrace());
+			return false;
+		}
+		return true;
+	}
+	
+	public List<Post> get(User user, int size, int cursor) {
+		List<EntityObject> postList = new ArrayList<EntityObject>();
+		UserObject userObject;
+		try {
+			userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider).getObject(user.getEmail());
+			PostObject po = new PostObject(userObject, null, null, 0);
+			postList = dbProvider.getRecordsBasedOnQuery(po);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		return null;
 	}
 
 }
