@@ -1,5 +1,6 @@
-<!--  This page should be displayed after user login successfully, this is user specfic page -->
-<!--  The post home page @author Yucheng @since 1
+<!--  This page should be displayed after user login successfully, this is user account page
+      User could use this page to see his/her own posts, interested posts, and make order-->
+<!--  The User account page @author Yucheng @since 1
  -->
 <!doctype html>
 <html lang="en">
@@ -31,12 +32,7 @@
     <![endif]-->
 </head>
 <body data-ng-app="yummet">
-		<div data-ng-include="'/rs/angular/app/partials/postnavigation.html'"></div>
-		<div id="userposts" class="content-section-a">
-			<div class="container">
-				<div data-ng-include="'/rs/angular/app/components/post/post.html'"></div>
-			</div>
-		</div>
+		<div data-ng-include="'/rs/angular/app/partials/accountnavigation.html'"></div>
 		<div data-ng-view>
 		</div>
 	<!--==== Third Party Script ====-->
