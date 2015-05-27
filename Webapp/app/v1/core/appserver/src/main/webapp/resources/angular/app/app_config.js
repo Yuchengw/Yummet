@@ -8,7 +8,6 @@ var options = {};
 options.api = {};
 options.api.base_url = "http://localhost:8080";
 app.config(function($routeProvider, $httpProvider){
-      
 	$routeProvider
           .when('/login',{
                 templateUrl: '/rs/angular/app/components/identification/login/login.html',
@@ -18,33 +17,35 @@ app.config(function($routeProvider, $httpProvider){
                 templateUrl: '/rs/angular/app/components/identification/signup/signup.html',
                 controller: 'signupAppController'
           })
-          .when('/amherpost',{
-        	  	templateUrl: '/rs/angular/app/components/post/post.html',
-        	  	controller: 'postAppController'
-          })
           .when('/logout', {
-        	    templateUrl: '/rs/angular/app/components/identification/logout/logout.html'
+        	    templateUrl: '/rs/angular/app/components/identification/logout/logout.html',
+        	    controller: 'logoutAppContoller'
           })
           .otherwise({
         	 redirectTo: '/' 
           });
-      
     //$httpProvider.interceptors.push('tokenInteceptor'); 
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 })
-.controller('configController',['$scope','$http',function($scope, $http){
+.run(function($rootScope, $location, $anchorScroll, $routeParams) {
+  //when the route is changed scroll to the proper element.
+  $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+    $location.hash($routeParams.scrollTo);
+    $anchorScroll();  
+  });
+})
+.controller('configController',['$scope','$http', '$anchorScroll', '$location', function($scope, $http, $anchorScroll, $location){
 
-	$scope.init = function () {
-//		$http.get('/service/users/current').success(function (user) {
-//			if(user.username !== 'anonymousUser'){
-//				$scope.authenticated = true;
-//				$scope.username = user.username;
-//				
-//				// For display purposes only
-//				$scope.token = JSON.parse(atob(TokenStorage.retrieve().split('.')[0]));
-//			}
-//		});
-	};
-	
+		$scope.init = function () {
+//	//		$http.get('/service/users/current').success(function (user) {
+//	//			if(user.username !== 'anonymousUser'){
+//	//				$scope.authenticated = true;
+//	//				$scope.username = user.username;
+//	//				
+//	//				// For display purposes only
+//	//				$scope.token = JSON.parse(atob(TokenStorage.retrieve().split('.')[0]));
+//	//			}
+//	//		});
+		};
 }]);
 

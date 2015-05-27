@@ -80,9 +80,6 @@
 		</property>
 	</bean>
 	
-	<!--  Add this for login purpose -->
-	<bean id="loginController" class="com.yummet.bean.rest.controller.LoginControllerImpl"> </bean>
-	
 	<!-- Please don't remove following beans, we may need them later:) -->
 	<!-- jave To Spring XML Bean Mapping through JaxB2Marshaller -->
 	<!-- <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 

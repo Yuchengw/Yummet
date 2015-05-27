@@ -2,9 +2,8 @@
 *@author yucheng
 *@since 1
 */
-angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'authenticateService', 'postContextService'])
-.config(function(){
-	
+angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextService', 'authenticateService', 'postContextService'])
+.config(function($routeProvider, $httpProvider){
 })
 .run(function(){
 	

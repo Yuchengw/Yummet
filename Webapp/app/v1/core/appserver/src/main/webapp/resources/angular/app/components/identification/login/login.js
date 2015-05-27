@@ -9,8 +9,8 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 .run(function(){
 	
 })
-.controller('loginAppContoller', ['$scope','$location', '$http', 'TokenStorage','stateService', 'authenticationService',
-    function($scope, $location, $http, TokenStorage, stateService, authenticationService) {
+.controller('loginAppContoller', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
+    function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
 	  /**
 	   * Login function
 	   * */
@@ -27,7 +27,7 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 			  console.log("gonna entering loginAuthenticate function")
 			  loginAuthenticate($scope.credentials, function() {
 				  if (stateService.isLogin) {
-					   $location.path("/amherpost");
+					   $window.location.href = '/vw/posthome.html';
 					   authenticationService.setCredentials(email, password);
 //					   	  TokenStorage.store(data.token);
 				  } else {

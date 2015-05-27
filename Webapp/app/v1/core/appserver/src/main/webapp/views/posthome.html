@@ -1,3 +1,4 @@
+<!--  This page should be displayed after user login successfully, this is user specfic page -->
 <!--  The Home Index page @author Yucheng @since 1
  -->
 <!doctype html>
@@ -28,20 +29,16 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script>
-      document.write('<base href="' + document.location + '" />');
-</script>
 </head>
 <body data-ng-app="yummet">
-	<div data-ng-controller="configController">
-		<div data-ng-include="'/rs/angular/app/partials/indexnavigation.html'"></div>
-		<div data-ng-view>
-			<!--This DIV loads templates depending upon route.-->
+		<div data-ng-include="'/rs/angular/app/partials/postnavigation.html'"></div>
+		<div id="userposts" class="content-section-a">
+			<div class="container">
+				<div data-ng-include="'/rs/angular/app/components/post/post.html'"></div>
+			</div>
 		</div>
-		<div data-ng-include="'/rs/angular/app/partials/service.html'"></div>
-		<div data-ng-include="'/rs/angular/app/partials/about.html'"></div>
-	</div>
-
+		<div data-ng-view>
+		</div>
 	<!--==== Third Party Script ====-->
 	<script src="/as/js/angular_v1.3.14//angular.js"></script>
 	<script src="/as/js/angular_v1.3.14/angular-route.js"></script>
