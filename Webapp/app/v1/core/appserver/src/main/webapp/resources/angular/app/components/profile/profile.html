@@ -1,16 +1,14 @@
-<div class="chef-box-container">
-	<div data-ng-app="profileApp" data-ng-init="init()">
-		<div  data-ng-controller="profileAppContoller">
-            <table data-ng-table class="table">
-                <tr data-ng-model="user">
-                    <td data-title="'alias'">{{user.alias}}</td>
-                    <td data-title="'Firstame'">{{user.firstname}}</td>
-                    <td data-title="'Lastame'">{{user.lattname}}</td>
-                    <td data-title="'Phone'">{{user.phone}}</td>
-                    <td data-title="'activeScore'">{{user.activeScore}}</td>
-                    <td data-title="'email'">{{user.email}}</td>
-                </tr>
-            </table>
-		</div>
+<div data-ng-app="profileApp" data-ng-init="init()">
+	<div  data-ng-controller="profileController">
+		<table data-ng-table class="table">
+			<tr data-ng-model="user">
+				<td data-title="'alias'">Alias: {{user.alias}}</td>
+				<td data-title="'Firstame'">First Name: {{user.firstName}}</td>
+				<td data-title="'Lastame'">Last Name: {{user.lastName}}</td>
+				<td data-title="'Phone'">Phone: {{user.phone}}</td>
+				<td data-title="'activeScore'">ActiveScore: {{user.activeScore}}</td>
+				<td data-title="'email'">Email: {{user.email}}</td>
+			</tr>
+		</table>
 	</div>
 </div>

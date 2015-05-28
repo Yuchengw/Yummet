@@ -2,7 +2,7 @@
  * @author yucheng
  * @since 1
  */
-var app = angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp', 'postApp'])
+var app = angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp', 'postApp', 'profileApp'])
 // need to dynamicly resolve the base url, maybe Grunt will help us?
 var options = {};
 options.api = {};

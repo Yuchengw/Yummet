@@ -8,21 +8,20 @@
 (function () {
     'use strict';
     angular.module('profileContextService',[]).factory('profileService', profileService);
-    userService.$inject = ['$http'];
     function profileService($http) {
         var service = {};
 
-        service.getByUsername = getProfile;
-        service.update = updateProfile;
+        service.getProfile= getProfile;
+        service.updateProfile = updateProfile;
  
         return service;
 
-        function getProfile(username) {
-            return $http.get(options.api.base_url + '/service/profile/' + username).then(handleSuccess, handleError('Error getting user by username'));
+        function getProfile() {
+            return $http.get(options.api.base_url + '/service/profile/').then(handleSuccess, handleError('Error getting user profile'));
         }
  
-        function update(user) {
-            return $http.put(options.api.base_url + '/service/profile/update/' + user).then(handleSuccess, handleError('Error updating user'));
+        function updateProfile(user) {
+            return $http.put(options.api.base_url + '/service/profile/update/' + user).then(handleSuccess, handleError('Error updating user profile'));
         }
  
         // private functions

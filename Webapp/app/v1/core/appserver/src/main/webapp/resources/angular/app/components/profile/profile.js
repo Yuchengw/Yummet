@@ -3,30 +3,21 @@
 *@since 1
 */
 angular.module('profileApp', ['ngAnimate','localStore','contextStateService', 'profileContextService', 'authenticateService'])
-.config(function(){
-	
+.config(function($routeProvider, $httpProvider){
 })
 .run(function(){
-	
 })
-.controller('loginAppContoller', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
-                                  'profileService',
-    function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService, profileService) {
-	
+.controller('profileController', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
+    'profileService', function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService, profileService) {
 	 /**
 	   * Profile init function
 	   * */
 	  $scope.init = function() {
-//		  if (!stateService.isLogin || stateService.isLogin === false) {
-//			  Console.log("you have logged out Yummmet, Please log in first");
-//				// TODO: error message,
-//			  return;
-//		  }
 		  getUserProfile(function() {
 			  // put your callback here
+			  console.log("enter user profile callback");
 		  });
 	  };
-	  
 	  /**
 	   * get user detailed profile
 	   * */
@@ -45,5 +36,7 @@ angular.module('profileApp', ['ngAnimate','localStore','contextStateService', 'p
 				callback && callback();
 		    })
 	    }
+	  // initial function call
+	  $scope.init();
 }]);
 

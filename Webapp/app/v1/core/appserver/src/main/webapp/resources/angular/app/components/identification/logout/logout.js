@@ -14,7 +14,7 @@ angular.module('logoutApp', ['ngAnimate','localStore','contextStateService', 'au
 	  /**
 		 * Logout function
 		 */
-	  $scope.init = function () {
+	  $scope.init = function() {
 		  console.log("entered logout function");
 		  stateService.isLogin = false;
 	      authenticationService.clearCredentials();
@@ -22,5 +22,6 @@ angular.module('logoutApp', ['ngAnimate','localStore','contextStateService', 'au
 // delete $window.sessionStorage.token;
 		  $window.location.href = '/';
 	   }
+	  $scope.init();
 }]);
 

@@ -49,7 +49,7 @@ public class UserControllerImpl implements UserController {
 	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=UserRestURIConstants.GET_USER)
-	public @ResponseBody User getUser(@RequestHeader("authorization") String userInfo){
+	public @ResponseBody User getUser(@RequestHeader("authorization") String userInfo) {
 		String userEmailAndPassword = userInfo.split(" ")[1];
 		if (userEmailAndPassword == null) {
 			//TODO: should throw errors back to front-end
