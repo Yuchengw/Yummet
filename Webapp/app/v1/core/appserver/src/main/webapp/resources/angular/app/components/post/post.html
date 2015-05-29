@@ -8,11 +8,14 @@
 		</form>
 		<ul class="unstyled">
 			<li data-ng-repeat="post in posts">
-				<!-- here should be the post comment body --> <span class="ppp">#{{post.subject}}
-					- {{post.text}}</span>
+                               <!-- here should be the post comment body --> <span class="ppp">#{{post.subject}}
+                                       - {{post.text}}</span>
+				<li data-ng-repeat="comment in post.comments">
+					<span class="ppp">#{{post.subject}} - {{post.text}}</span>
+				</li>
 				<form data-ng-submit="addPostComment()">
 					<input type="text" data-ng-model="postcommentbody" size="30"
-						placeholder="add comment here"> <input
+                                               placeholder="add comment here"> <input
 						class="btn-primary" type="submit" value="postcomment">
 				</form> <a class="btn-secondary" data-ng-click="removePost(post)">x</a>
 			</li>

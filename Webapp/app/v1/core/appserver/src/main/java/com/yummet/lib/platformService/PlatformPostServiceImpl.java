@@ -120,6 +120,7 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		return true;
 	}
 	
+	// TODO: for now size and cursor are not used
 	public List<Post> get(User user, int size, int cursor) {
 		List<EntityObject> postList = new ArrayList<EntityObject>();
 		UserObject userObject;
@@ -130,7 +131,21 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		return null;
+		return convert(postList);
+	}
+	
+	private List<Post> convert(List<EntityObject> postList) {
+		List<Post> result = new ArrayList<Post>();
+		for(EntityObject postObject : postList) {
+			Post post = new Post();
+			try {
+				copyPost((PostObject)postObject, post);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result.add(post);
+		}
+		return result;
 	}
 
 }
