@@ -60,7 +60,16 @@ public class PlatformPostServiceImpl extends PlatformPostService{
 	}
 	
 	public Post getPostByNumber(User user, int number) {
-		
+		PostObject platformPostObject = null;
+		Post post = null;
+		try {
+			platformPostObject = (PostObject) ((PlatformPostServiceProviderImpl) platformPostServiceProvider).getObject(postId);
+			post = new Post();
+			copyPost(platformPostObject, post);
+		} catch (Exception e) {
+			logger.debug("Error happens when retriving User object" + e.getStackTrace());
+		}
+		return post;
 	}
 
 	private void copyPost(PostObject platformPost, Post post) throws Exception {

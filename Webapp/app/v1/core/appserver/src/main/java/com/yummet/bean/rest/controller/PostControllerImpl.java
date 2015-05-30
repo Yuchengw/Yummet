@@ -50,7 +50,7 @@ public class PostControllerImpl implements PostController {
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=PostRestURIConstants.GET_POST)
 	public PostList getPosts(@RequestHeader("Cookie") String credentials, @RequestBody String body) {
-		// TODO Auto-generated method stub
+		Map<String, String> postInfo = parsePostRequest(body, credentials);
 		return null;
 	}
 
