@@ -2,6 +2,7 @@ package com.yummet.bridge;
 
 import com.yummet.entities.EntityObject;
 import com.yummet.entities.PostObject;
+import com.yummet.entities.UserObject;
 import com.yummet.platform.func.DmlOperationWrapper;
 
 /**
@@ -14,6 +15,7 @@ public class PlatformPostServiceProviderImpl implements PlatformServiceProvider 
 	}
 	
 	/**
+	 * TODO: should be renamed as getObjectById
 	 * */
 	public EntityObject getObject(String id) throws Exception {
 		if (id == null) {
@@ -21,6 +23,16 @@ public class PlatformPostServiceProviderImpl implements PlatformServiceProvider 
 		return new PostObject(id).load();
 	}
 	
+	public EntityObject getObjectByUser(UserObject user, int number) {
+		if (number == -1) {
+			return getObjectByUser(user);
+		}
+		return null;
+	}
+	
+	public EntityObject getObjectByUser(UserObject user) {
+		return null;
+	}
 	/**
 	 * 
 	 * */

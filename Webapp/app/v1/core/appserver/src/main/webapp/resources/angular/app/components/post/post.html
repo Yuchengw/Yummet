@@ -1,21 +1,28 @@
-<div data-ng-app="postApp">
+<div data-ng-app="postApp" data-ng-init="init()">
 	<div class="chef-post-container" data-ng-controller="postAppController">
-		<span>{{posts.length}} posts</span>
-		<form data-ng-submit="addPost()">
+		<form data-ng-submit="addProviderPost()">
 			<input type="text" data-ng-model="postbody" size="30"
-				placeholder="add new post here"> <input class="btn-primary"
-				type="submit" value="post">
+				placeholder="I would like to provide: "> <input class="btn-primary"
+				type="submit" value="Share"> 
 		</form>
-		<ul class="unstyled">
-			<li data-ng-repeat="post in posts">
-				<!-- here should be the post comment body --> <span class="ppp">#{{post.subject}}
-					- {{post.text}}</span>
-				<form data-ng-submit="addPostComment()">
-					<input type="text" data-ng-model="postcommentbody" size="30"
-						placeholder="add comment here"> <input
-						class="btn-primary" type="submit" value="postcomment">
-				</form> <a class="btn-secondary" data-ng-click="removePost(post)">x</a>
-			</li>
-		</ul>
+		<form data-ng-submit="askPost()">
+			<input type="text" data-ng-model="postbody" size="30"
+				placeholder="I wanna have: "> <input class="btn-primary"
+				type="submit" value="Wanna">
+		</form>
+		<div>
+			<ul class="col-lg1-1">
+				<li data-ng-repeat="post in posts">
+					<div class="col-xs-1">
+					<!-- here should be the post comment body --> <span class="ppp">#{{post.subject}}
+						- {{post.text}}</span>
+					</div>
+					<div class="col-sm-offset-3">
+						<div data-ng-include="'/rs/angular/app/components/post/postrecipe.html'" ></div>
+						<div data-ng-include="'/rs/angular/app/components/post/postcomment.html'" ></div>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>

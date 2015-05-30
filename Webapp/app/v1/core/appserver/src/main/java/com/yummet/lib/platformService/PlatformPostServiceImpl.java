@@ -58,6 +58,10 @@ public class PlatformPostServiceImpl extends PlatformPostService{
 		}
 		return post;
 	}
+	
+	public Post getPostByNumber(User user, int number) {
+		
+	}
 
 	private void copyPost(PostObject platformPost, Post post) throws Exception {
 		if (platformPost == null || post  == null) {

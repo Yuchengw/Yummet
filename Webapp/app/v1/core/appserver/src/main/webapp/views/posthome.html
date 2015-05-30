@@ -9,7 +9,7 @@
 
 <!--==== Bootstrap Core css ====-->
 <link rel="stylesheet" type="text/css"
-	href="/as/css/bootstrap/bootstrap.min.css"></link>
+	href="/as/css/bootstrap/bootstrap.css"></link>
 <!--==== Third Party css ====-->
 <link rel="stylesheet" type="text/css"
 	href="/as/css/other/landing-page.css"></link>
@@ -31,14 +31,13 @@
     <![endif]-->
 </head>
 <body data-ng-app="yummet">
-		<div data-ng-include="'/rs/angular/app/partials/postnavigation.html'"></div>
-		<div id="userposts" class="content-section-a">
-			<div class="container">
-				<div data-ng-include="'/rs/angular/app/components/post/post.html'"></div>
-			</div>
+	<div data-ng-include="'/rs/angular/app/partials/postnavigation.html'"></div>
+	<div id="userposts" class="content-section-a">
+		<div class="container">
+			<div data-ng-include="'/rs/angular/app/components/post/post.html'"></div>
 		</div>
-		<div data-ng-view>
-		</div>
+	</div>
+	<div data-ng-view></div>
 	<!--==== Third Party Script ====-->
 	<script src="/as/js/angular_v1.3.14//angular.js"></script>
 	<script src="/as/js/angular_v1.3.14/angular-route.js"></script>
@@ -50,16 +49,20 @@
 
 	<!--==== Yummet JS Framework Script ====-->
 	<script src="/rs/angular/app/app_config.js"></script>
-	<script src="/rs/angular/app/components/identification/common/identification_module.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/common/identification_module.js"></script>
 	<script src="/rs/angular/app/components/identification/login/login.js"></script>
-	<script src="/rs/angular/app/components/identification/logout/logout.js"></script>
-	<script src="/rs/angular/app/components/identification/signup/signup.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/logout/logout.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/signup/signup.js"></script>
 	<script src="/rs/angular/app/components/post/post.js"></script>
 	<script src="/rs/angular/app/components/profile/profile.js"></script>
 	<script src="/rs/angular/app/componenets/profile/profile.js"></script>
 	<script src="/rs/angular/app/services/context/state_service.js"></script>
 	<script src="/rs/angular/app/services/perf/localstorage_service.js"></script>
-	<script src="/rs/angular/app/services/authentication/authentication_service.js"></script>
+	<script
+		src="/rs/angular/app/services/authentication/authentication_service.js"></script>
 	<script src="/rs/angular/app/services/user/user_service.js"></script>
 	<script src="/rs/angular/app/services/post/post_service.js"></script>
 	<script src="/rs/angular/app/services/profile/profile_service.js"></script>

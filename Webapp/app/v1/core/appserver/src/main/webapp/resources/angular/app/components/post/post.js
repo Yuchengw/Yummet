@@ -11,6 +11,17 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
 .controller('postAppController', ['$scope', '$location', 'TokenStorage', 'userService', 'stateService', 'authenticationService', 'postService',
     function($scope, $location, TokenStorage, userService, stateService, authenticationService, postService) {
   $scope.posts = [];
+  
+  // initialize to load the posts, we need better handling, pre-load
+  $scope.init = function() {
+	  var credentials = authenticationService.getCredentials();
+	  if (credentials) {
+		  getUserPosts(credentials, function() {
+			 // TODO: specify your callback here 
+		  });
+	  }
+  };
+  
   $scope.addPost = function() {
 	  var credentials = authenticationService.getCredentials();
 	  var post = null;
@@ -54,8 +65,25 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
 			  }
 			  callback && callback();
 		  })
+	  } else {
+		  console.log("user credential has error");
 	  }
-	  console.log("user credential has error");
+  }
+  
+  // we need to pre-load first 10 or 8 posts, for now, I loaded all the posts people posted
+  var getUserPosts = function(userCrential, callback) {
+	  if (userCredential) {
+		  postService.get(8).then(function (response) {
+			  if (response.data) {
+				  $scope.posts.push(response.data);
+			  } else {
+				  $scope.posts.pop()
+			  }
+			  callback && callback();
+		  })
+	  } else {
+		  console.log("user credential has error");
+	  }
   }
   
 }]);

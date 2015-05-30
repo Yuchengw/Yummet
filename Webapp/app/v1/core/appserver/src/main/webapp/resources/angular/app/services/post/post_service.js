@@ -23,8 +23,8 @@
             return $http.get(options.api.base_url + '/service/post/' + id).then(handleSuccess, handleError('Error getting post by id'));
         }
         
-        function getByUsername(user) {
-            return $http.get(options.api.base_url + '/service/post/' + user).then(handleSuccess, handleError('Error getting post by username'));
+        function get(number) {
+            return $http.get(options.api.base_url + '/service/post/' + number).then(handleSuccess, handleError('Error getting post by username'));
         }
  
         function create(userCredentials, post) {

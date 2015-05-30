@@ -6,10 +6,8 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +19,6 @@ import com.google.common.collect.ImmutableMap;
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostList;
 import com.yummet.business.bean.User;
-import com.yummet.lib.objectProvider.PostCommentProvider;
 import com.yummet.lib.objectProvider.PostProvider;
 import com.yummet.lib.objectProvider.UserProvider;
 
@@ -52,7 +49,7 @@ public class PostControllerImpl implements PostController {
 	
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=PostRestURIConstants.GET_POST)
-	public PostList getPosts(@RequestBody String body) {
+	public PostList getPosts(@RequestHeader("Cookie") String credentials, @RequestBody String body) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -37,7 +37,7 @@ public class PostProvider {
 	 * 
 	 * */
 	public List<Post> get(User user, int number) {
-		return null;
+		return this.platformPostServiceImpl.getPostByNumber(user, number);
 	}
 
 	public Boolean remove(int postId) {
