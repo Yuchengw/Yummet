@@ -82,8 +82,7 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 			post = new Post();
 			copySinglePost(platformPostObject, post);
 		} catch (Exception e) {
-			logger.error("Error happens when retriving User object" + e.getStackTrace());
-					+ e.getStackTrace());
+			logger.error("Error happens when retriving post object" + e.getStackTrace());
 		}
 		return post;
 	}
@@ -93,11 +92,12 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		List<Post> posts = new ArrayList<Post>();
 		try {
 			@SuppressWarnings("unchecked")
-			List<PostObject> platformPostObjects = (List<PostObject>) ((PlatformPostServiceProviderImpl) platformPostServiceProvider)
-					.getObjectByUser(username, password, number);
+			List<PostObject> platformPostObjects = null;
+			//= (List<PostObject>) ((PlatformPostServiceProviderImpl) platformPostServiceProvider)
+			//		.getObjectByUser(username, password, number);
 			copyPosts(platformPostObjects, posts);
 		} catch (Exception e) {
-			logger.debug("Error happens when retriving User object"
+			logger.debug("Error happens when retriving post object"
 					+ e.getStackTrace());
 		}
 		return posts;
@@ -169,11 +169,7 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		List<Post> result = new ArrayList<Post>();
 		for(EntityObject postObject : postList) {
 			Post post = new Post();
-			try {
-				copyPost((PostObject)postObject, post);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			copySinglePost((PostObject)postObject, post);
 			result.add(post);
 		}
 		return result;
