@@ -42,7 +42,7 @@ public class PostList implements Serializable {
 		return Posts;
 	}
 
-	public void setUsers(List<Post> Posts) {
+	public void setPosts(List<Post> Posts) {
 		this.Posts = Posts;
 	}
 

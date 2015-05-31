@@ -1,9 +1,10 @@
 package com.yummet.business.bean;
 
 import java.util.Date;
- 
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.yummet.entities.PostObject;
 
 /**
  * @author yucheng
@@ -48,6 +49,13 @@ public class Post extends BeanObject {
 
 	public Post(String id) {
 		setId(id);
+	}
+	
+	public Post(PostObject po) {
+		setId(po.getId());
+		setSubject(po.getSubject());
+		setLocation(po.getLocation());
+		setQuantity(po.getQuantity());
 	}
 	
 	public Post() {

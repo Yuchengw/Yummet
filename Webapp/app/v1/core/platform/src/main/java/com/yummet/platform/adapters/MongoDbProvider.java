@@ -193,4 +193,10 @@ public class MongoDbProvider implements DatabaseProvider {
 		logger.debug("Calling MongoDb Exist function on record => " + record.getDbObject().toString());
 		return mongoOps.exists(query, record.getDbObject().getClass());
 	}
+
+	@Override
+	public List<EntityObject> getRecordsBasedOnQuery(EntityObject info) {
+		DBEntityObject dbEo = info.getDbObject();
+		return getRecordsBasedOnQuery(dbEo.getDbTableName(), info, info.getFieldsAndValues());
+	}
 }
