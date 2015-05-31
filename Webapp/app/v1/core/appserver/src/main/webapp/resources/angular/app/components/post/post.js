@@ -22,6 +22,16 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'userContextService', 'aut
     	  get(credentials, function() {
     		 // TODO: specify your callback here 
     	  });
+
+  $scope.getPosts = function() {
+      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
+    	  post = $scope.postbody;
+    	  create(credentials, post, function() {
+    		 // TODO: specify your callback here 
+    	  });
+      }
+  };
+
       }
   };
 
