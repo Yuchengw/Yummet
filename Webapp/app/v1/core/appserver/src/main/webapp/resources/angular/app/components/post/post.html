@@ -1,25 +1,33 @@
 <div data-ng-app="postApp" data-ng-init="init()">
 	<div class="chef-post-container" data-ng-controller="postAppController">
-		<form data-ng-submit="addProviderPost()">
-			<input type="text" data-ng-model="postbody" size="30"
-				placeholder="I would like to provide: "> <input class="btn-primary"
-				type="submit" value="Share"> 
-		</form>
-		<form data-ng-submit="askPost()">
-			<input type="text" data-ng-model="postbody" size="30"
-				placeholder="I wanna have: "> <input class="btn-primary"
-				type="submit" value="Wanna">
-		</form>
+		<input class="btn-secondary" type="button" data-ng-click="setProvide()"value="Provide"/>
+		<input class="btn-secondary" type="button" data-ng-click="setAsk()" value="Ask"/>
+		<div class="sample-show-hide" data-ng-show="isprovide" style="clear: both;">
+			<form data-ng-submit="addProviderPost()">
+				<input type="text" data-ng-model="postbody" size="30"
+					placeholder="I would like to provide: "> <input
+					class="btn-primary" type="submit" value="Share">
+			</form>
+		</div>
+		<div class="sample-show-hide" data-ng-show="isask" style="clear: both;">
+			<form data-ng-submit="askPost()">
+				<input type="text" data-ng-model="postbody" size="30"
+					placeholder="I wanna have: "> <input class="btn-primary"
+					type="submit" value="Wanna">
+			</form>
+		</div>
 		<div>
 			<ul class="col-lg1-1">
 				<li data-ng-repeat="post in posts">
 					<div class="col-xs-1">
-					<!-- here should be the post comment body --> <span class="ppp">#{{post.subject}}
-						- {{post.text}}</span>
+						<!-- here should be the post comment body -->
+						<span class="ppp">#{{post.subject}} - {{post.text}}</span>
 					</div>
 					<div class="col-sm-offset-3">
-						<div data-ng-include="'/rs/angular/app/components/post/postrecipe.html'" ></div>
-						<div data-ng-include="'/rs/angular/app/components/post/postcomment.html'" ></div>
+						<div
+							data-ng-include="'/rs/angular/app/components/post/postrecipe.html'"></div>
+						<div
+							data-ng-include="'/rs/angular/app/components/post/postcomment.html'"></div>
 					</div>
 				</li>
 			</ul>

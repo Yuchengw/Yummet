@@ -14,6 +14,8 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
   
   // initialize to load the posts, we need better handling, pre-load
   $scope.init = function() {
+	  $scope.isprovide = true;
+	  $scope.isask = false;
 	  var credentials = authenticationService.getCredentials();
 	  if (credentials) {
 		  getUserPosts(credentials, function() {
@@ -84,6 +86,17 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
 	  } else {
 		  console.log("user credential has error");
 	  }
+  }
+  
+  //============================ Animation Begin! ========================
+  $scope.setProvide = function() {
+	  $scope.isask = false;
+	  $scope.isprovide = true;
+  }
+  
+  $scope.setAsk = function() {
+	  $scope.isprovide = false;
+	  $scope.isask = true;
   }
   
 }]);

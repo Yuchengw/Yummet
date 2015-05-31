@@ -13,7 +13,7 @@
         var service = {};
  
         service.getById = getById;
-        service.getByUsername = getByUsername;
+//        service.getByUsername = getByUsername;
         service.create = create;
         service.update = update;
 //        service.remove = remove;
