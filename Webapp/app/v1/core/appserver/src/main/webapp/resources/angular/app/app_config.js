@@ -1,6 +1,6 @@
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  */
 angular.module('yummet.home',['ngRoute','signupApp'])
 .config(function($routeProvider){

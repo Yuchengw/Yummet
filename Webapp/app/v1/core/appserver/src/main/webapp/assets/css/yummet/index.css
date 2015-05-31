@@ -1,0 +1,26 @@
+.top-container {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+	color: #f8f8f8;
+	background: url(../img/homemade.jpg) no-repeat center center;
+	background-size: cover;
+}
+
+.chef-box-container {
+	background-color: #f1f1f1;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+	border: 1px solid rgba(200, 200, 200, .4);
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 36px;
+	width: 362px;
+	position: relative;
+	top: 200px;
+}
+
+.chef-box-container . .chef-post-container {
+	margin: 0 auto;
+	position: relative;
+	top: 120px;
+}
