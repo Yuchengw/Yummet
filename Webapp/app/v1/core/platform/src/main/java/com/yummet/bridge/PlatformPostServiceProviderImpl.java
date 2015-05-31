@@ -23,14 +23,14 @@ public class PlatformPostServiceProviderImpl implements PlatformServiceProvider 
 		return new PostObject(id).load();
 	}
 	
-	public EntityObject getObjectByUser(UserObject user, int number) {
+	public EntityObject getObjectByUser(String username, String password, int number) {
 		if (number == -1) {
-			return getObjectByUser(user);
+			return getObjectByUser(username, password);
 		}
 		return null;
 	}
 	
-	public EntityObject getObjectByUser(UserObject user) {
+	public EntityObject getObjectByUser(String username, String password) {
 		return null;
 	}
 	/**

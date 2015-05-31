@@ -36,8 +36,8 @@ public class PostProvider {
 	/**
 	 * 
 	 * */
-	public List<Post> get(User user, int number) {
-		return this.platformPostServiceImpl.getPostByNumber(user, number);
+	public List<Post> get(String username, String password, int number) {
+		return this.platformPostServiceImpl.getPostByNumber(username, password, number);
 	}
 
 	public Boolean remove(int postId) {

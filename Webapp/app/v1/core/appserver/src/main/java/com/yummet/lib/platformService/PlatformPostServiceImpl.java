@@ -59,11 +59,11 @@ public class PlatformPostServiceImpl extends PlatformPostService{
 		return post;
 	}
 	
-	public Post getPostByNumber(User user, int number) {
+	public Post getPostByNumber(String username, String password, int number) {
 		PostObject platformPostObject = null;
 		Post post = null;
 		try {
-			platformPostObject = (PostObject) ((PlatformPostServiceProviderImpl) platformPostServiceProvider).getObject(postId);
+			platformPostObject = (PostObject) ((PlatformPostServiceProviderImpl) platformPostServiceProvider).getObjectByUser(username, password, number);
 			post = new Post();
 			copyPost(platformPostObject, post);
 		} catch (Exception e) {
