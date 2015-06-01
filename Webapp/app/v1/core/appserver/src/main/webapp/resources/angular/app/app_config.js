@@ -2,25 +2,54 @@
  * @author yucheng
  * @since 1
  */
-angular.module('yummet.home',['ngRoute','signupApp'])
-.config(function($routeProvider){
-      $routeProvider
+var app = angular.module('yummet',['ngRoute','ngResource','signupApp','loginApp','filterApp', 'postApp', 'profileApp'])
+// need to dynamicly resolve the base url, maybe Grunt will help us?
+var options = {};
+options.api = {};
+options.api.base_url = "http://localhost:8080";
+app.config(function($routeProvider, $httpProvider){
+	$routeProvider
           .when('/login',{
-                templateUrl: '/rs/angular/app/components/identification/login/login.amher',
+                templateUrl: '/rs/angular/app/components/identification/login/login.html',
                 controller: 'loginAppContoller'
           })
           .when('/signup',{
-                templateUrl: '/rs/angular/app/components/identification/signup/signup.amher',
+                templateUrl: '/rs/angular/app/components/identification/signup/signup.html',
                 controller: 'signupAppController'
           })
+          .when('/logout', {
+        	    templateUrl: '/rs/angular/app/components/identification/logout/logout.html',
+        	    controller: 'logoutAppContoller'
+          })
           .when('/amherpost',{
-       	  	templateUrl: '/rs/angular/app/components/post/post-content.amher',
+       	  	templateUrl: '/rs/angular/app/components/post/post-content.html',
                 controller: 'postAppController'
           });
+          .otherwise({
+        	 redirectTo: '/' 
+           });
+    //$httpProvider.interceptors.push('tokenInteceptor'); 
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 })
-.controller('cfgController',function($scope){
-    /*
-	 * Here you can handle controller for specific route as well.
-	 */
-});
+.run(function($rootScope, $location, $anchorScroll, $routeParams) {
+  //when the route is changed scroll to the proper element.
+  $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+    $location.hash($routeParams.scrollTo);
+    $anchorScroll();  
+  });
+})
+.controller('configController',['$scope','$http', '$anchorScroll', '$location', function($scope, $http, $anchorScroll, $location){
+
+		$scope.init = function () {
+//	//		$http.get('/service/users/current').success(function (user) {
+//	//			if(user.username !== 'anonymousUser'){
+//	//				$scope.authenticated = true;
+//	//				$scope.username = user.username;
+//	//				
+//	//				// For display purposes only
+//	//				$scope.token = JSON.parse(atob(TokenStorage.retrieve().split('.')[0]));
+//	//			}
+//	//		});
+		};
+}]);
 

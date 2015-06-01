@@ -21,9 +21,9 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
     	  get(credentials, function() {
     		 // TODO: specify your callback here 
     	  });
+      }
+  };
 
-  $scope.getPosts = function() {
-      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
   
   // initialize to load the posts, we need better handling, pre-load
   $scope.init = function() {
@@ -41,9 +41,6 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
     	  create(credentials, post, function() {
     		 // TODO: specify your callback here 
     	  });
-      }
-  };
-
       }
   };
 
