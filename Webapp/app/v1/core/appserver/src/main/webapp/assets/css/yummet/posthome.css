@@ -1,5 +1,7 @@
-<!--css file specific to post home, including style css and animation css: most of them are in magic.css -->
-.sample-show-hide {
+
+<!--
+css file specific to post home, including style css and animation css: most of them are in magic.css -->.sample-show-hide
+	{
 	padding: 10px;
 	border: 1px solid black;
 	background: white;
@@ -14,7 +16,7 @@
 	opacity: 0;
 }
 
-#postmenu {
+#menucover {
 	width: 100px;
 	height: 100px;
 	left: 12%;
@@ -29,4 +31,11 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+#postmenu {
+	width: 30%;
+	position: relative;
+	z-index: 11;
+	height: auto;
 }
