@@ -8,6 +8,7 @@ d#This is the ignore files for github
 #================java transient files==================#
 *.class
 *.classpath
+*.project
 
 #================Mobile Tools for Java (J2ME)===============#
 .mtj.tmp/
