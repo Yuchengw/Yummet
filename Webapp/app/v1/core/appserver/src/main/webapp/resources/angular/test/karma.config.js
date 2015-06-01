@@ -4,7 +4,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '.',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -12,14 +12,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-	'../../assets/js/angular_v1.3.14/*.js', // all needed resources
-	'../**.*.js', // all logic code
+	'../../../assets/js/angular_v1.3.14/**.*.js', // all needed resources
+	'../app/**.*.js', // all logic code
+	'angular-mocks.js',
 	'**/*Test.js' // all test code
     ],
-
-
     // list of files to exclude
     exclude: [
+    '../../../assets/js/angular_v1.3.14/*.min.js', // all needed resources
     ],
 
     // preprocess matching files before serving them to the browser
@@ -46,9 +46,9 @@ module.exports = function(config) {
     autoWatch: true,
 
     // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Safari', 'Opera', 'IE', 'Firefox'],
-
+    //browsers: ['Chrome', 'Safari', 'Opera', 'IE', 'Firefox'],
+    browsers: ['Chrome'],
+    
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
