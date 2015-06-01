@@ -50,8 +50,8 @@ public class PostProvider {
 	/**
 	 * update is expensive, think before do it
 	 * */
-	public void update(Post updatePost) {
-		//TODO:
+	public Post update(Post updatePost) {
+		return this.platformPostService.updatePost(updatePost);
 	}
 
 }

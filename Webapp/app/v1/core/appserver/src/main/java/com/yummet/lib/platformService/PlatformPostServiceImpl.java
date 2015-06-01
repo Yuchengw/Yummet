@@ -17,7 +17,7 @@ import com.yummet.entities.UserObject;
 import com.yummet.platform.adapters.DatabaseProvider;
 import com.yummet.platform.adapters.MongoDbProvider;
 
-public class PlatformPostServiceImpl implements PlatformPostService{
+public class PlatformPostServiceImpl implements PlatformPostService {
 	PlatformServiceProvider platformPostServiceProvider;
 	PlatformServiceProvider platformUserServiceProvider;
 	DatabaseProvider dbProvider;
@@ -45,22 +45,28 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
 					.insertObject(newPostObject);
 		} catch (Exception e) {
-			logger.debug("there is something wrong when inserting post object" + e.getStackTrace());
+			logger.debug("there is something wrong when inserting post object"
+					+ e.getStackTrace());
 		}
 		return post;
 	}
 
 	/**
 	 * This function is used for update a post in mongodb
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 * */
 	public Post updatePost(Post post) {
 		try {
-		UserObject userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider).getObject(post.getCreator().getEmail());
-		PostObject newPostObject = new PostObject(userObject, post.getSubject(), post.getLocation(), post.getQuantity());
-		((PlatformPostServiceProviderImpl) platformPostServiceProvider).updateObject(newPostObject);
+			UserObject userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider)
+					.getObject(post.getCreator().getEmail());
+			PostObject newPostObject = new PostObject(userObject,
+					post.getSubject(), post.getLocation(), post.getQuantity());
+			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
+					.updateObject(newPostObject);
 		} catch (Exception e) {
-			logger.error("there is something wrong when updating post object" + e.getStackTrace());
+			logger.error("there is something wrong when updating post object"
+					+ e.getStackTrace());
 		}
 		return post;
 	}
@@ -78,11 +84,13 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		PostObject platformPostObject = null;
 		Post post = null;
 		try {
-			platformPostObject = (PostObject) ((PlatformPostServiceProviderImpl) platformPostServiceProvider).getObject(postId);
+			platformPostObject = (PostObject) ((PlatformPostServiceProviderImpl) platformPostServiceProvider)
+					.getObject(postId);
 			post = new Post();
 			copySinglePost(platformPostObject, post);
 		} catch (Exception e) {
-			logger.error("Error happens when retriving post object" + e.getStackTrace());
+			logger.error("Error happens when retriving post object"
+					+ e.getStackTrace());
 		}
 		return post;
 	}
@@ -92,9 +100,8 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		List<Post> posts = new ArrayList<Post>();
 		try {
 			@SuppressWarnings("unchecked")
-			List<PostObject> platformPostObjects = null;
-			//= (List<PostObject>) ((PlatformPostServiceProviderImpl) platformPostServiceProvider)
-			//		.getObjectByUser(username, password, number);
+			List<PostObject> platformPostObjects = (List<PostObject>) ((PlatformPostServiceProviderImpl) platformPostServiceProvider)
+					.getObjectByUser(username, password, number);
 			copyPosts(platformPostObjects, posts);
 		} catch (Exception e) {
 			logger.debug("Error happens when retriving post object"
@@ -103,7 +110,8 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		return posts;
 	}
 
-	private void copyPosts(List<PostObject> platformPosts, List<Post> posts) throws Exception {
+	private void copyPosts(List<PostObject> platformPosts, List<Post> posts)
+			throws Exception {
 		for (PostObject platformPost : platformPosts) {
 			Post post = new Post();
 			if (platformPost == null || post == null) {
@@ -113,18 +121,16 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 			posts.add(post);
 		}
 	}
-	
-	private void copySinglePost(PostObject platformPost, Post post ) {
+
+	private void copySinglePost(PostObject platformPost, Post post) {
 		post.setCost(platformPost.getCost());
-		post.setCommentsOrDescription(platformPost
-				.getCommentsOrDescription());
+		post.setCommentsOrDescription(platformPost.getCommentsOrDescription());
 		post.setCreatedDate(platformPost.getCreatedDate());
 		// this is too heavy... we could have a much better way to do this
 		post.setCreator(new User(platformPost.getCreator().getId(),
 				platformPost.getCreator().getFirstName(), platformPost
-						.getCreator().getLastName(), platformPost
-						.getCreator().getEmail(), platformPost.getCreator()
-						.getPassword()));
+						.getCreator().getLastName(), platformPost.getCreator()
+						.getEmail(), platformPost.getCreator().getPassword()));
 		post.setExpireDate(platformPost.getExpireDate());
 		post.setImage(platformPost.getImage());
 		post.setId(platformPost.getId());
@@ -143,20 +149,23 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 	public boolean removeById(String postId) {
 		try {
 			PostObject newPostObject = new PostObject(postId);
-			((PlatformPostServiceProviderImpl) platformPostServiceProvider).deleteObject(newPostObject);
+			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
+					.deleteObject(newPostObject);
 		} catch (Exception e) {
-			logger.error("there is something wrong when deleting post object" + e.getStackTrace());
+			logger.error("there is something wrong when deleting post object"
+					+ e.getStackTrace());
 			return false;
 		}
 		return true;
 	}
-	
+
 	// TODO: for now size and cursor are not used
 	public List<Post> get(User user, int size, int cursor) {
 		List<EntityObject> postList = new ArrayList<EntityObject>();
 		UserObject userObject;
 		try {
-			userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider).getObject(user.getEmail());
+			userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider)
+					.getObject(user.getEmail());
 			PostObject po = new PostObject(userObject, null, null, 0);
 			postList = dbProvider.getRecordsBasedOnQuery(po);
 		} catch (Exception e1) {
@@ -164,12 +173,12 @@ public class PlatformPostServiceImpl implements PlatformPostService{
 		}
 		return convert(postList);
 	}
-	
+
 	private List<Post> convert(List<EntityObject> postList) {
 		List<Post> result = new ArrayList<Post>();
-		for(EntityObject postObject : postList) {
+		for (EntityObject postObject : postList) {
 			Post post = new Post();
-			copySinglePost((PostObject)postObject, post);
+			copySinglePost((PostObject) postObject, post);
 			result.add(post);
 		}
 		return result;
