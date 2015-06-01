@@ -8,6 +8,7 @@
 (function () {
     'use strict';
     angular.module('profileContextService',[]).factory('profileService', profileService);
+    profileService.$inject = ['$http'];
     function profileService($http) {
         var service = {};
 
