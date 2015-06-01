@@ -39,6 +39,17 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 		  }
 	  };
 	  
+	  $scope.passwordStrength = function() {
+		    var size = $scope.credentials.password;
+		    if (size > 8) {
+		      $scope.strength = 'strong';
+		    } else if (size > 4) {
+		      $scope.strength = 'medium';
+		    } else {
+		      $scope.strength = 'weak';
+		    }
+	   };
+	  
 	  /**
 	   * Authenticate function used for login function
 	   * */

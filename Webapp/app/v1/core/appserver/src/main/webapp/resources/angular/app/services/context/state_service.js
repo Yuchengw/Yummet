@@ -3,11 +3,15 @@
  * @author yucheng
  * @since 1
  * */
-
-angular.module('contextStateService',[])
-.factory('stateService', function(){
-	var state = {
-		isLogin : false ,
+(function () {
+	'use strict';
+	angular.module('contextStateService',[]).factory('stateService', stateService);
+	function stateService(){
+		var service = {};
+		var state = {
+			isLogin : false ,
+		}
+		service.state = state;
+		return service;
 	}
-	return state;
-});
+})();
