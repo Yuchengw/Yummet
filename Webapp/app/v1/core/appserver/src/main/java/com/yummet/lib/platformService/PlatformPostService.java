@@ -16,6 +16,8 @@ public interface PlatformPostService extends PlatformService{
 	public Post createPost(Post post);
 	public Post getPostById(String id);
 	public boolean removeById(String id);
+	public List<Post> getPostByNumber(String username, String password,
+			int number);
 	public List<Post> get(User user, int size, int cursor);
 	public Post updatePost(Post updatePost);
 }

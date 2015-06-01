@@ -39,6 +39,10 @@ public class PostProvider {
 	/**
 	 * 
 	 * */
+	public List<Post> get(String username, String password, int number) {
+		return this.platformPostService.getPostByNumber(username, password, number);
+        }
+
 	public List<Post> get(User user, int size, int cursor) {
 		return this.platformPostService.get(user, size, cursor);
 	}

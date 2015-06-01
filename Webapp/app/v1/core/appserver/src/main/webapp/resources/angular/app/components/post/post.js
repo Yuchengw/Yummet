@@ -37,13 +37,6 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
 	  }
   };
   
-    	  post = $scope.postbody;
-    	  create(credentials, post, function() {
-    		 // TODO: specify your callback here 
-    	  });
-      }
-  };
-
   $scope.addPost = function() {
 	  var credentials = authenticationService.getCredentials();
 	  var post = null;
