@@ -35,6 +35,8 @@ public interface DatabaseProvider {
 	public List<EntityObject> getRecordsBasedOnQuery(String tableName,
 			EntityObject info, Map<String, Object> queryInfo);
 
+	public List<EntityObject> getRecordsBasedOnQuery(EntityObject info);
+	
 	/**
 	 * Insert a bulk of records to the same table name into the database
 	 * 
