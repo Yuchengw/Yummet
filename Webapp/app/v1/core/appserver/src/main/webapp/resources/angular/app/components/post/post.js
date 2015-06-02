@@ -51,7 +51,7 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
   $scope.removePost = function() {
 	  var credentials = null;
       if (stateService.isLogin && stateService.isLoging === true) {
-    	  remove(credentials, post, function() {
+		  remove(credentials, post, function() {
     		 // TODO: specify your callback here 
     	  });
       }
