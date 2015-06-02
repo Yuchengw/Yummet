@@ -21,13 +21,9 @@ app.config(function($routeProvider, $httpProvider){
         	    templateUrl: '/rs/angular/app/components/identification/logout/logout.html',
         	    controller: 'logoutAppContoller'
           })
-          .when('/amherpost',{
-       	  	templateUrl: '/rs/angular/app/components/post/post-content.html',
-                controller: 'postAppController'
-          });
           .otherwise({
         	 redirectTo: '/' 
-           });
+          });
     //$httpProvider.interceptors.push('tokenInteceptor'); 
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 })
