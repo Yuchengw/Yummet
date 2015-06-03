@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -168,4 +169,9 @@ public abstract class EntityObject implements Serializable{
 	 * @return
 	 */
 	public abstract String getDbTableName();
+
+	public Map<String, Object> getFieldsAndValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
