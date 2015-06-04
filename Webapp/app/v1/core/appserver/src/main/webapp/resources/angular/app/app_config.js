@@ -10,7 +10,8 @@ options.api.base_url = "http://localhost:8080";
 app.config(function($routeProvider, $httpProvider){
 	$routeProvider
           .when('/login',{
-                templateUrl: '/rs/angular/app/components/identification/login/login.html',
+//                templateUrl: '/rs/angular/app/components/identification/login/login.html',
+        	    templateUrl: 'modalController',
                 controller: 'loginAppController'
           })
           .when('/signup',{

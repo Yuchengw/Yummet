@@ -34,13 +34,17 @@
 </head>
 <body data-ng-app="yummet">
 	<div data-ng-controller="configController">
-		<div data-ng-include="'/rs/angular/app/partials/indexnavigation.html'"></div>
+		<div data-ng-include="'/rs/angular/app/partials/navigation/indexnavigation.html'"></div>
+		<div data-ng-include="'/rs/angular/app/partials/home/index_introducer.html'"></div>
 		<div data-ng-view>
 			<!--This DIV loads templates depending upon route.-->
 		</div>
-		<div data-ng-include="'/rs/angular/app/partials/service.html'"></div>
-		<div data-ng-include="'/rs/angular/app/partials/about.html'"></div>
+		<div data-ng-include="'/rs/angular/app/components/common/services/service.html'"></div>
+		<div data-ng-include="'/rs/angular/app/components/common/about/about.html'"></div>
+		<div data-ng-include="'/rs/angular/app/components/common/example/example.html'"></div>
 	</div>
+	
+	<div data-ng-include="'/rs/angular/app/partials/home/index_foot.html'"></div>
 
 	<!--==== Third Party Script ====-->
 	<script src="/as/js/angular_v1.3.14//angular.js"></script>

@@ -1,10 +1,11 @@
-.top-container {
-	padding-top: 50px;
-	padding-bottom: 50px;
+.indexintroducer {
 	text-align: center;
 	color: #f8f8f8;
-	background: url(../img/homemade.jpg) no-repeat center center;
-	background-size: cover;
+	background: url(../img/homemade2.jpg) no-repeat center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: conver;
 }
 
 .chef-box-container {

@@ -28,7 +28,7 @@ module.exports = function(config) {
 	'app/services/search/*.js',
 	'app/components/**/*.js', // all logic code
 	'test/angular-mocks.js',
-	'test/*Test.js' // all test code
+	'test/**/*Test.js' // all test code
     ],
     // list of files to exclude
     exclude: [
