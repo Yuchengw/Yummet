@@ -3,7 +3,7 @@
 *@since 1
 */
 angular.module('profileApp', ['ngAnimate','localStore','contextStateService', 'profileContextService', 'authenticateService'])
-.config(function($routeProvider, $httpProvider){
+.config(function($httpProvider){
 })
 .run(function(){
 })

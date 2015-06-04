@@ -1,8 +1,9 @@
 <!--==== Signup Partials ====-->
-<div class="chef-box-container">
-	<div data-ng-app="signupApp">
-		<div data-ng-controller="signupAppController">
-			<div shakeThat>
+<h4 class="modal-title"></h4>
+<div class="modal-body">
+	<div class="chef-box-container">
+		<div data-ng-app="signupApp">
+			<div data-ng-controller="signupAppController">
 				<form name="signupform" data-ng-submit="signupFormSubmit()"
 					novalidate>
 					<div class="form-group"
@@ -63,10 +64,13 @@
 							data-ng-model-options="{updateOn: 'blur'}" data-ng-minlength="6"
 							required>
 					</div>
-					<button type="submit" class="btn btn-primary btn-block">Sign
-						up</button>
+					<button type="submit" class="btn btn-primary btn-block">Signup</button>
 				</form>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-ng-click="$dismiss()">Close</button>
+	<button type="button" class="btn btn-primary" data-ng-click="$dismiss()">Save changes</button>
 </div>

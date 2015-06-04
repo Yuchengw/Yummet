@@ -3,13 +3,13 @@
 *@since 1
 */
 angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextService', 'authenticateService', 'postContextService'])
-.config(function($routeProvider, $httpProvider){
+.config(function($httpProvider){
 })
 .run(function(){
 	
 })
 .controller('postAppController', ['$scope', '$location', 'TokenStorage', 'userService', 'stateService', 'authenticationService', 'postService',
-    function($scope, $location, TokenStorage, userService, stateService, authenticationService, postService) {
+    function($scope, $location, TokenStorage, userService, stateService, authenticationService,  postService) {
   $scope.posts = [];
   $scope.step = 20;
   $scope.cursor = -1;

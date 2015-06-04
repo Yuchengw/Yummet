@@ -2,17 +2,14 @@
 *@author yucheng
 *@since 1
 */
-angular.module('loginApp', ['ui.bootstrap','ngAnimate','localStore','contextStateService', 'authenticateService'])
-.config(function(){
-	
+angular.module('loginApp', ['ui.router','ngAnimate','localStore','contextStateService', 'authenticateService'])
+.config(function($stateProvider){
 })
 .run(function(){
 	
 })
-.controller('loginAppController', ['$modal','$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
-    function($modal, $scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
-	
-	$modal.open({templateUrl: '/rs/angular/app/components/identification/login/login.html'});
+.controller('loginAppController', ['$scope','$state', '$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
+    function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
 	/**
 	   * Login function
 	   * */
