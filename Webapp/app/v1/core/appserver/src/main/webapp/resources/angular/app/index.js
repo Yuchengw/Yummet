@@ -12,7 +12,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStat
             url:'/',
             templateUrl: 'index.html',
             controller: 'indexController'
-        })
+        });
     $urlRouterProvider.otherwise('/');
 	
 	 modalStateProvider.state('index.login', {
@@ -29,10 +29,15 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStat
 .run(function($rootScope, $location) {
 
 })
-.controller('indexController',['$scope', '$state', '$http', '$anchorScroll', '$location', function($scope, $state, $http, $anchorScroll, $location){
+.controller('indexController',['$scope', '$state', '$http', '$anchorScroll', '$location', '$document', function($scope, $state, $http, $anchorScroll, $location, $document){
 
 		$scope.init = function () {
 			$scope.$state = $state;
 		};
+		
+		$scope.scrollto = function scrollTo(id) {
+			var element_to_scroll_to = document.getElementById(id);
+			element_to_scroll_to.scrollIntoView();
+		}
 }]);
 
