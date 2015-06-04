@@ -11,7 +11,7 @@ app.config(function($routeProvider, $httpProvider){
 	$routeProvider
           .when('/login',{
                 templateUrl: '/rs/angular/app/components/identification/login/login.html',
-                controller: 'loginAppContoller'
+                controller: 'loginAppController'
           })
           .when('/signup',{
                 templateUrl: '/rs/angular/app/components/identification/signup/signup.html',

@@ -21,6 +21,6 @@ d#This is the ignore files for github
 
 #======================Ignore independent eclipse settings====================#
 RemoteSystemsTempFiles/
-/**/DB/*
+DB/
 .settings/
 .metadata/

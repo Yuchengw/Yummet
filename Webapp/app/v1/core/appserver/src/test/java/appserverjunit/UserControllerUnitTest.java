@@ -1,4 +1,4 @@
-package controller;
+package appserverjunit;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.yummet.bean.rest.controller.UserControllerImpl;
 /**
- * This is strict unit test for @link{UserControllerImpl}
+ * This is strict unit test for @link{UserControllerImpl}, this should be replaced by TestNG
  * @author yucheng
  * @since 1
  * */

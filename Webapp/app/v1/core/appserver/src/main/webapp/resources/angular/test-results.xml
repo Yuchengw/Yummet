@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="Chrome 40.0.2214 (Linux 0.0.0)" package="" timestamp="2015-06-03T05:11:46" id="0" hostname="yuchengslave-slave">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (X11; Linux i686 (x86_64)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36"/>
+    </properties>
+  </testsuite>
+  <testsuite name="Chrome 40.0.2214 (Linux 0.0.0)" package="" timestamp="2015-06-03T05:11:46" id="0" hostname="yuchengslave-slave" tests="4" errors="0" failures="2" time="0.02">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (X11; Linux i686 (x86_64)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36"/>
+    </properties>
+    <testcase name="scope should be defined" time="0.008" classname="Chrome 40.0.2214 (Linux 0.0.0).load loginApp loginAppController"/>
+    <testcase name="sets the strength to &quot;strong&quot; if the password length is &gt;8 chars" time="0.005" classname="Chrome 40.0.2214 (Linux 0.0.0).load loginApp loginAppController">
+      <failure type="">TypeError: Cannot set property &apos;password&apos; of undefined
+    at Object.&lt;anonymous&gt; (/home/yucheng-slave/Yummet/Webapp/app/v1/core/appserver/src/main/webapp/resources/angular/test/loginAppControllerTest.js:41:37)
+</failure>
+    </testcase>
+    <testcase name="sets the strength to &quot;weak&quot; if the password length &lt;3 chars" time="0.004" classname="Chrome 40.0.2214 (Linux 0.0.0).load loginApp loginAppController">
+      <failure type="">TypeError: Cannot set property &apos;password&apos; of undefined
+    at Object.&lt;anonymous&gt; (/home/yucheng-slave/Yummet/Webapp/app/v1/core/appserver/src/main/webapp/resources/angular/test/loginAppControllerTest.js:47:37)
+</failure>
+    </testcase>
+    <testcase name="should assign message to hello world" time="0.003" classname="Chrome 40.0.2214 (Linux 0.0.0).load notificationApp notificationAppController"/>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>

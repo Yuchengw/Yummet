@@ -9,10 +9,9 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 .run(function(){
 	
 })
-.controller('loginAppContoller', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
+.controller('loginAppController', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
     function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
-	$scope.text='hello yummet'; 
-	$scope.password='';
+
 	/**
 	   * Login function
 	   * */
@@ -42,8 +41,7 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 	  };
 	  
 	  $scope.passwordStrength = function() {
-		  	$scope.password = $scope.credentials.password;
-		    var size = $scope.password.length;
+		    var size = $scope.credentials.password.length;
 		    if (size > 8) {
 		      $scope.strength = 'strong';
 		    } else if (size > 4) {

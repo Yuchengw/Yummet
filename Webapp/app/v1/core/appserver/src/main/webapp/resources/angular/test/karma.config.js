@@ -4,7 +4,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '.',
+    basePath: '../',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -12,10 +12,23 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-	'../../../assets/js/angular_v1.3.14/**.*.js', // all needed resources
-	'../app/**.*.js', // all logic code
-	'angular-mocks.js',
-	'**/*Test.js' // all test code
+	'../../assets/js/angular_v1.3.14/angular.js', // all needed resources
+	'../../assets/js/angular_v1.3.14/angular-loader.js',
+	'../../assets/js/angular_v1.3.14/angular-animate.js',
+	'../../assets/js/angular_v1.3.14/angular-cookies.js',
+	'../../assets/js/angular_v1.3.14/angular-route.js',
+	'app/services/user/*.js',
+	'app/services/animation/*.js',
+	'app/services/authentication/*.js',
+	'app/services/perf/*.js',
+	'app/services/context/*.js',
+	'app/services/logging/*.js',
+	'app/services/post/*.js',
+	'app/services/profile/*.js',
+	'app/services/search/*.js',
+	'app/components/**/*.js', // all logic code
+	'test/angular-mocks.js',
+	'test/*Test.js' // all test code
     ],
     // list of files to exclude
     exclude: [
@@ -30,7 +43,13 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'junit'],
+    
+    // the default configuration
+    junitReporter: {
+      outputFile: 'test-results.xml',
+      suite: ''
+    },
 
     // web server port
     port: 9876,
