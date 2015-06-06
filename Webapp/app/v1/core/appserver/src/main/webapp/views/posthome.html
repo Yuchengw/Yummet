@@ -27,20 +27,43 @@
     <![endif]-->
 </head>
 <body data-ng-app="yummet">
-	<div data-ng-include="'/rs/angular/app/partials/postnavigation.html'"></div>
-	<div id="userposts" class="content-section-a">
+	<div data-ng-include="'/rs/angular/app/partials/navigation/postnavigation.html'"></div>
+	<div id="userposts" class= "posthome-content">
+		<div class="content-section-b">
+			<h2>Welcome to Yummet!</h2>
+		</div>
 		<div class="container">
-			<div data-ng-include="'/rs/angular/app/components/post/post.html'"></div>
+			<div>
+			<!--<div data-ng-include="'/rs/angular/app/components/post/post.html'"></div> -->
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="posthomeleftpanel">
+						<div data-ng-include="'/rs/angular/app/components/post/postcreateboard.html'"></div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="posthomemainpanel">
+						<div data-ng-include="'/rs/angualr/app/components/post/post.html'"></div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="posthomerightpanel">
+						<div data-ng-include="'/rs/angular/app/components/post/posttools.html'"></div>
+					</div>
+				</div>
+			</div>
+			</div>
 		</div>
 	</div>
 	<div data-ng-view></div>
 	<!--==== Third Party Script ====-->
 	<script src="/as/js/ui/jquery.js"></script>
 	<script src="/as/js/angular_v1.3.14//angular.js"></script>
-	<script src="/as/js/angular_v1.3.14/angular-route.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-ui-router.min.js"></script>
 	<script src="/as/js/angular_v1.3.14/angular-animate.js"></script>
 	<script src="/as/js/angular_v1.3.14/angular-resource.js"></script>
 	<script src="/as/js/angular_v1.3.14/angular-cookies.js"></script>
+	<script src="/as/js/angular_v1.3.14/ui-bootstrap-tpls-0.13.0.js"></script>
 	<script src="/as/js/ui/bootstrap.min.js"></script>
 
 	<!--==== Yummet JS Framework Script ====-->
@@ -51,15 +74,15 @@
 	<script
 		src="/rs/angular/app/components/identification/signup/signup.js"></script>
 	<script src="/rs/angular/app/components/post/post.js"></script>
+	<script src="/rs/angular/app/components/post/postcreateboard.js"></script>
 	<script src="/rs/angular/app/components/profile/profile.js"></script>
-	<script src="/rs/angular/app/componenets/profile/profile.js"></script>
 	<script src="/rs/angular/app/services/context/state_service.js"></script>
 	<script src="/rs/angular/app/services/perf/localstorage_service.js"></script>
-	<script
-		src="/rs/angular/app/services/authentication/authentication_service.js"></script>
+	<script src="/rs/angular/app/services/authentication/authentication_service.js"></script>
 	<script src="/rs/angular/app/services/user/user_service.js"></script>
 	<script src="/rs/angular/app/services/post/post_service.js"></script>
 	<script src="/rs/angular/app/services/profile/profile_service.js"></script>
+	<script src="/rs/angular/app/providers/bootstrap/modal_provider.js"></script>
 	<script src="/rs/angular/app/filters/token_service.js"></script>
 	<!--==== Yummet JS UI Script ====-->
 </body>

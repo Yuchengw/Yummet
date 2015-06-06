@@ -1,7 +1,7 @@
 
 <!--
-css file specific to post home, including style css and animation css: most of them are in magic.css -->.sample-show-hide
-	{
+css file specific to post home, including style css and animation css: most of them are in magic.css 
+	 @author yucheng @since 1-->.sample-show-hide {
 	padding: 10px;
 	border: 1px solid black;
 	background: white;
@@ -38,4 +38,118 @@ css file specific to post home, including style css and animation css: most of t
 	position: relative;
 	z-index: 11;
 	height: auto;
+}
+
+.highlight {
+	padding: 9px 14px;
+	margin-bottom: 14px;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+	border-radius: 4px;
+}
+
+.posthomeleftpanel {
+	margin: 0 10px;
+	width: 250px;
+	float: left;
+	word-break: normal;
+	white-space: nowrap;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+	border-radius: 4px;
+	word-break: normal;
+}
+
+.posthomeleftpanel .postcreateboard hover {
+	background: rgba(0, 0, 0, 0.07);
+	border-color: #888;
+	color: #5f5f5f;
+	text-shadow: none;
+}
+
+.posthomeleftpanel .postcreateboard {
+	background: rgba(0, 0, 0, 0.07);
+	border-color: #888;
+	color: #5f5f5f;
+	text-shadow: none;
+	background: rgba(0, 0, 0, 0.03);
+	border: 2px dashed #bbb;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #888;
+	cursor: pointer;
+	display: block;
+	font-size: 15px;
+	font-weight: bold;
+	position: relative;
+	text-align: center;
+	text-shadow: 0 1px 1px #fff;
+	width: 150px;
+	height: 200px;
+	margin-left: 45px;
+}
+
+.postcreateboard i {
+	background: #ececec;
+	border: 1px solid #cfcfcf;
+	border-radius: 50%;
+	bottom: 50%;
+	-webkit-box-shadow: 0 0 2px #fff inset;
+	box-shadow: 0 0 2px #fff inset;
+	height: 44px;
+	left: 50%;
+	margin-left: -22px;
+	margin-bottom: -8px;
+	position: absolute;
+	width: 44px;
+}
+
+.postcreateboard i a {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: #b5b5b5;
+	display: block;
+	font-family: sans-serif;
+	font-size: 31px;
+	line-height: 31px;
+	font-style: normal;
+	position: relative;
+	top: 6px;
+	text-align: center;
+}
+
+.posthomeleftpanel postcreateoptions {
+	left: 0;
+	margin-top: 18px;
+	position: absolute;
+	font-size:10px;
+	right: 0;
+	top: 50%;
+}
+
+.posthomemainpanel {
+	padding: 0;
+	float: left;
+	margin: 0 10px;
+	width: 300px;
+	word-break: normal;
+	white-space: nowrap;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+	border-radius: 4px;
+	margin: 0 10px;
+}
+
+.posthomerightpanel {
+	padding: 0;
+	float: left;
+	margin: 0 10px;
+	width: 200px;
+	word-break: normal;
+	white-space: nowrap;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+	border-radius: 4px;
+	margin: 0 10px;
 }

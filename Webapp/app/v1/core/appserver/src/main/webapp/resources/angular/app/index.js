@@ -2,7 +2,7 @@
  * @author yucheng
  * @since 1
  */
-var app = angular.module('yummet',['ui.router','ngResource','signupApp','loginApp','filterApp', 'postApp', 'profileApp','modalStateApp'])
+var app = angular.module('yummet',['ui.router','ngResource','signupApp','loginApp','filterApp', 'postApp', 'postcreateboardApp', 'profileApp','modalStateApp'])
 // need to dynamicly resolve the base url, maybe Grunt will help us?
 var options = {};
 options.api = {};
@@ -29,7 +29,8 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStat
 .run(function($rootScope, $location) {
 
 })
-.controller('indexController',['$scope', '$state', '$http', '$anchorScroll', '$location', '$document', function($scope, $state, $http, $anchorScroll, $location, $document){
+.controller('indexController',['$scope', '$state', '$http', '$location', '$document', 
+                               function($scope, $state, $http, $location, $document){
 
 		$scope.init = function () {
 			$scope.$state = $state;

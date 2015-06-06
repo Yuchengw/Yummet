@@ -1,0 +1,64 @@
+<div class="">
+	<form class="standardForm">
+		<h2 class="createTitle">Ask for a wonderful</h2>
+		<div class="form-group">
+			<label for="postEditDescription">Description</label>
+			<textarea id="postEditDescription" class="postEditDescription"
+				placeholder="What's your post about?" name="description"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="postEditCategory">Category</label> <select
+				class="CategoriesSelect Module Select" name="category">
+				<option value="other">What kind of board is it?</option>
+				<option value="animals">Animals &amp; Pets</option>
+				<option value="architecture">Architecture</option>
+				<option value="art">Art</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="place">Map</label>
+			<div class="Checkbox Module fancyToggle styledToggle">
+				<div class="slider"></div>
+				<p class="onText status">Yes</p>
+				<p class="offText status">No</p>
+				<input class="Checkbox Module" name="layout" type="checkbox">
+			</div>
+		</div>
+		<div class="form-group">
+			<button class="Button Module btn hasText inviteButton rounded"
+				type="button">
+				<span class="buttonText">Add</span>
+			</button>
+			<div class="fillWidth">
+				<div class="Module SocialTypeaheadField TypeaheadField userSelect">
+					<input autocomplete="off" class="Input Module field" name="invite"
+						placeholder="Name or email" type="text">
+					<div class="Module Typeahead userSelect">
+						<ul class="results" data-component-type="35"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="form-group">
+		<label for="place">Members can invite others</label>
+		<div class="Checkbox Module fancyToggle styledToggle">
+			<div class="slider"></div>
+			<p class="onText status">Yes</p>
+			<p class="offText status">No</p>
+			<input class="Checkbox Module" name="layout" type="checkbox">
+		</div>
+	</div>
+  	<div class="formFooter">
+		<div class="formFooterButtons">
+			<button class=" Button Module btn cancelButton hasText rounded"
+			type="button">
+			<span class="buttonText">Cancel</span>
+			</button>
+			<button class="Button Module btn hasText primary rounded saveBoardButton"
+			type="submit">
+			<span class="buttonText">Create post</span>
+		</button>
+	</div>
+	</div>
+	</form>
+</div>

@@ -8,7 +8,7 @@ angular.module('loginApp', ['ui.router','ngAnimate','localStore','contextStateSe
 .run(function(){
 	
 })
-.controller('loginAppController', ['$scope','$state', '$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
+.controller('loginAppController', ['$scope', '$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
     function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
 	/**
 	   * Login function

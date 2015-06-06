@@ -1,0 +1,37 @@
+<div class="">
+	<div data-ng-app="postcreateboardApp" data-ng-init="init()">
+		<div data-ng-controller="postcreateboardAppController">
+			<div class="postcreateboard">
+				<i> <a data-ng-click="isCollapsed = !isCollapsed" style="text-decoration: none">+</a>
+					<div>
+					<span style="font-size:70%;">Create wonderful!</span>
+					</div>
+				</i> 	
+			</div>
+			<div class="postcreateoptions">
+				<div collapse="isCollapsed">
+					<tabset class="" justified="true"> 
+						<tab heading="make wonderful">
+							<!--<form data-ng-submit="addProviderPost()">
+								<input type="text" data-ng-model="postbody" size="30"
+									placeholder="I would like to provide: "> <input
+									class="btn-primary" type="submit" value="Share">
+							</form>-->
+							<div collapse="isCollapsed" data-ng-include="'/rs/angular/app/components/post/providerpost.html'"></div>
+						</tab> 
+						<tab heading="Ask wonderful">
+							<!-- <form data-ng-submit="askPost()">
+								<input type="text" data-ng-model="postbody" size="30"
+									placeholder="I wanna have: "> 
+								<input class="btn-primary"
+									type="submit" value="Wanna">
+							</form> -->
+							<div collapse="isCollapsed" data-ng-include="'/rs/angular/app/components/post/askpost.html'"></div>
+						</tab> 
+					</tabset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
