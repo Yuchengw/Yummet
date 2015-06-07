@@ -13,16 +13,16 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
   $scope.posts = [];
   $scope.step = 20;
   $scope.cursor = -1;
-  $scope.getPosts();
+//  $scope.getPosts();
 
-  $scope.getPosts = function() {
-	var credentials = authenticationService.getCredentials();
-      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
-    	  get(credentials, function() {
-    		 // TODO: specify your callback here 
-    	  });
-      }
-  };
+//  $scope.getPosts = function() {
+//	var credentials = authenticationService.getCredentials();
+//      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
+//    	  get(credentials, function() {
+//    		 // TODO: specify your callback here 
+//    	  });
+//      }
+//  };
 
   
   // initialize to load the posts, we need better handling, pre-load
@@ -95,7 +95,7 @@ angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextS
 	  }
   }
   
-  // we need to pre-load first 10 or 8 posts, for now, I loaded all the posts people posted
+  // we need to pre-load first 10 or 8 posts, for now.
   var getUserPosts = function(userCrential, callback) {
 	  if (userCredential) {
 		  postService.get(8).then(function (response) {

@@ -2,7 +2,7 @@
 *@author yucheng
 *@since 1
 */
-angular.module('profileApp', ['ngAnimate','localStore','contextStateService', 'profileContextService', 'authenticateService'])
+angular.module('profileApp', ['ngAnimate','localStore','contextStateService', 'profileContextService', 'authenticateService', 'postcreateboardApp'])
 .config(function($httpProvider){
 })
 .run(function(){
