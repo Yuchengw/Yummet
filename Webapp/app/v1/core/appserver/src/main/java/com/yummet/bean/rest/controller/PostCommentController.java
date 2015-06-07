@@ -12,12 +12,20 @@ import com.yummet.business.bean.PostCommentList;
  * @version 1
  * */
 public interface PostCommentController {
-	
+
 	public @ResponseBody PostComment getPostComment(@PathVariable String id);
 
-	public @ResponseBody PostComment updatePostComment(@RequestBody String body);
-	
-	public @ResponseBody PostComment addPostComment(@RequestBody String body);
+	public @ResponseBody PostCommentList getAllPostsComment(@PathVariable String postid);
 
-	public @ResponseBody PostCommentList removePostComment(@PathVariable String id);
+	public @ResponseBody PostComment updatePostComment(@PathVariable String id,
+			@RequestBody String body);
+
+	public @ResponseBody PostComment addPostComment(
+			@PathVariable String parentPostId, @PathVariable String id,
+			@RequestBody String body);
+
+	public @ResponseBody PostCommentList removePostComment(
+			@PathVariable String id);
+
+	public @ResponseBody PostComment updatePostComment(String body);
 }
