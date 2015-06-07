@@ -1,64 +1,65 @@
 <div class="">
-	<form class="standardForm">
-		<h2 class="createTitle">Ask for a wonderful</h2>
+	<form class="form">
 		<div class="form-group">
-			<label for="postEditDescription">Description</label>
-			<textarea id="postEditDescription" class="postEditDescription"
-				placeholder="What's your post about?" name="description"></textarea>
+			<label for="createpostname">Subject</label> <input type="text"
+				name="name" id="createpostname" class="form-control"
+				placeholder="E.g. “Delicious to Make" value="">
+		</div>
+		<div class="form-group">
+			<label for="createpostdescription">Description</label>
+			<textarea id="postEditDescription" class="form-control"
+				placeholder="how's your wonderful?" name="description"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputFile">Upload Image</label> <input type="file"
+				id="exampleInputFile">
+			<p class="help-block">We highly recommend high-resolution
+				pictures.</p>
 		</div>
 		<div class="form-group">
 			<label for="postEditCategory">Category</label> <select
-				class="CategoriesSelect Module Select" name="category">
-				<option value="other">What kind of board is it?</option>
-				<option value="animals">Animals &amp; Pets</option>
-				<option value="architecture">Architecture</option>
-				<option value="art">Art</option>
+				class="form-control" name="category">
+				<option value="other">Chinese North</option>
+				<option value="animals">Chinese South</option>
+				<option value="architecture">American East</option>
+				<option value="art">American West</option>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="place">Map</label>
-			<div class="Checkbox Module fancyToggle styledToggle">
-				<div class="slider"></div>
-				<p class="onText status">Yes</p>
-				<p class="offText status">No</p>
-				<input class="Checkbox Module" name="layout" type="checkbox">
+			<div class="btn-group" dropdown>
+				<button type="button" class="btn btn-danger">Map</button>
+				<button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+					<span class="caret"></span> <span class="sr-only">Split button!</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">On</a></li>
+					<li><a href="#">Off</a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="form-group">
-			<button class="Button Module btn hasText inviteButton rounded"
-				type="button">
-				<span class="buttonText">Add</span>
-			</button>
-			<div class="fillWidth">
-				<div class="Module SocialTypeaheadField TypeaheadField userSelect">
-					<input autocomplete="off" class="Input Module field" name="invite"
-						placeholder="Name or email" type="text">
-					<div class="Module Typeahead userSelect">
-						<ul class="results" data-component-type="35"></ul>
-					</div>
-				</div>
+			<label for="parnteremail">Friends Email</label> <a href="" class=""> Learn more </a> 
+			<input type="email" class="form-control" id="friendsmail" placeholder="wonderful@yummet.com">
+		</div>
+		<button type="submit" class="btn">Send invitation</button>
+		<div class="form-group">
+			<div class="btn-group" dropdown>
+				<button type="button" class="btn btn-danger">Members can
+					invite others?</button>
+				<button type="button" class="btn btn-danger dropdown-toggle"
+					dropdown-toggle>
+					<span class="caret"></span> <span class="sr-only">Split
+						button!</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Yes</a></li>
+					<li><a href="#">No</a></li>
+				</ul>
 			</div>
 		</div>
-	<div class="form-group">
-		<label for="place">Members can invite others</label>
-		<div class="Checkbox Module fancyToggle styledToggle">
-			<div class="slider"></div>
-			<p class="onText status">Yes</p>
-			<p class="offText status">No</p>
-			<input class="Checkbox Module" name="layout" type="checkbox">
+		<div class="form-group">
+		 	 <button type="submit" class="btn">Cancel</button>
+			 <button type="submit" class="btn">Create</button>
 		</div>
-	</div>
-  	<div class="formFooter">
-		<div class="formFooterButtons">
-			<button class=" Button Module btn cancelButton hasText rounded"
-			type="button">
-			<span class="buttonText">Cancel</span>
-			</button>
-			<button class="Button Module btn hasText primary rounded saveBoardButton"
-			type="submit">
-			<span class="buttonText">Create post</span>
-		</button>
-	</div>
-	</div>
 	</form>
 </div>
