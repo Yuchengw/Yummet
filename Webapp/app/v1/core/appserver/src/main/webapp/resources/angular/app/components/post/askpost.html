@@ -53,13 +53,15 @@
 			</div>
 		</div>
 		<div class="form-group">
-              <input type="text" class="form-control" datepicker-popup ng-model="askpost.startdate" is-open="common.startdateopened"  datepicker-options="common.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+			  <label for="askpoststartdate">start date: </label>
+              <input type="text" id="askpoststartdate" class="form-control" datepicker-popup ng-model="askpost.startdate" is-open="common.startdateopened"  datepicker-options="common.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openstartdate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
 		</div>
 		<div class="form-group">
-              <input type="text" class="form-control" datepicker-popup ng-model="askpost.enddate" is-open="common.enddateopened"  datepicker-options="common.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+			 <label for="askpostenddate">end date: </label>
+              <input type="text" id="askpostenddate" class="form-control" datepicker-popup ng-model="askpost.enddate" is-open="common.enddateopened"  datepicker-options="common.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openenddate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
