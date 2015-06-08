@@ -2,7 +2,7 @@
 *@author yucheng
 *@since 1
 */
-angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextService', 'authenticateService', 'postContextService'])
+angular.module('postApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextService', 'authenticateService', 'postContextService', 'postcreateboardApp'])
 .config(function($httpProvider){
 })
 .run(function(){
