@@ -43,7 +43,7 @@ public class PostCommentProvider {
 	}
 
 	public PostCommentList getAll(String postid) {
-		
+		return new PostCommentList();
 	}
 
 	public void remove(int id) {

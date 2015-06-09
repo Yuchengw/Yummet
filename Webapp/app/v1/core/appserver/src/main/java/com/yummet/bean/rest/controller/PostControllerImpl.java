@@ -24,6 +24,7 @@ import com.yummet.business.bean.PostList;
 import com.yummet.business.bean.User;
 import com.yummet.lib.objectProvider.PostProvider;
 import com.yummet.lib.objectProvider.UserProvider;
+import com.yummet.proto.PostRequest;
 
 /**
  * This class is used for Restful API User Control.
@@ -72,31 +73,37 @@ public class PostControllerImpl implements PostController {
 
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.PUT, value=PostRestURIConstants.UPDATE_POST)
-	public Post updatePost(@RequestHeader("Cookie") String credentials, @PathVariable String id, @RequestBody String body) {
+	public Post updatePost(@RequestHeader("Cookie") String credentials, @PathVariable String id, @RequestBody PostRequest body) {
 		// Check if old post exists
 		Post oldPost = postProvider.get(id);
 		if(oldPost == null) {
 			// Console log
 		}
-		Map<String, String> postInfo = parsePostRequest(body, credentials);
-		User user = userProvider.get(postInfo.get("email"), postInfo.get("password"));
+		//Map<String, String> postInfo = parsePostRequest(body, credentials);
+		User user = userProvider.get(body.getUser(), credentials);
 		if (user == null) {
 			//Console log
 		}
-		Post newPost = new Post(id, user , postInfo.get("subject"), postInfo.get("location"), 0); // put quantity as 0 for now
+		Post newPost = new Post(id, user , body.getSubject(), "", 0); // put quantity as 0 for now
 		Post updatedPost = postProvider.add(user, newPost);
 		return updatedPost;
 	}
 
 	@net.bull.javamelody.MonitoredWithSpring
+	@RequestMapping(method=RequestMethod.DELETE, value=PostRestURIConstants.DELETE_POST)
+	public void removePost(@RequestHeader("Cookie") String credentials, @PathVariable String id, @RequestBody PostRequest body) {
+		this.postProvider.remove(id);
+	}
+
+	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.POST, value=PostRestURIConstants.CREATE_POST)
-	public Post addPost(@RequestHeader("Cookie") String credentials, @RequestBody String body) {
-		Map<String, String> postInfo = parsePostRequest(body, credentials);
-		User user = userProvider.get(postInfo.get("email"), postInfo.get("password"));
+	public Post addPost(@RequestHeader("Cookie") String credentials, @RequestBody PostRequest body) {
+		//Map<String, String> postInfo = parsePostRequest(body, credentials);
+		User user = userProvider.get(body.getUser(), credentials);
 		if (user == null) {
 			//Console log
 		}
-		Post newPost = new Post(null, user , postInfo.get("subject"), postInfo.get("location"), 0); // put quantity as 0 for now
+		Post newPost = new Post(null, user , body.getSubject(), "", 0); // put quantity as 0 for now
 		Post createdPost = postProvider.add(user, newPost);
 		return createdPost;
 	}
@@ -121,12 +128,6 @@ public class PostControllerImpl implements PostController {
 			e.printStackTrace();
 		}
 		return postInfoMap;
-	}
-
-	@net.bull.javamelody.MonitoredWithSpring
-	@RequestMapping(method=RequestMethod.DELETE, value=PostRestURIConstants.DELETE_POST)
-	public void removePost(@RequestHeader("Cookie") String credentials, @PathVariable String id, @RequestBody String body) {
-		this.postProvider.remove(id);
 	}
 	
 	//TODO: the function below should be refined and move to the utilities

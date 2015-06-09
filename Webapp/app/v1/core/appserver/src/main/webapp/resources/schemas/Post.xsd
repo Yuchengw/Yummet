@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Post"
+	xmlns:tns="http://www.example.org/Post" elementFormDefault="qualified">
+	<element name="PostRequest">
+		<complexType>
+			<sequence>
+				<element name="user" type="string" />
+				<element name="subject" type="string" />
+				<element name="body" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

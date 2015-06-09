@@ -39,7 +39,7 @@ public class PlatformPostCommentServiceImpl implements PlatformPostCommentServic
 
 	@Override
 	public PostCommentList getPostCommentsById(String postid) {
-		((PlatformPostCommentServiceProviderImpl)platformPostCommentServiceProvder).
+		//((PlatformPostCommentServiceProviderImpl)platformPostCommentServiceProvder).
 		return null;
 	}
 

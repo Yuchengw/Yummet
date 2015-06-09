@@ -60,7 +60,7 @@ public class PostCommentControllerImpl implements PostCommentController {
 
 	@Override
 	public PostCommentList getAllPostsComment(@PathVariable String postid) {
-		Post this.postProvider.get(postid);
+		//Post this.postProvider.get(postid);
 		this.postCommentProvider.getAll(postid);
 		return null;
 	}
