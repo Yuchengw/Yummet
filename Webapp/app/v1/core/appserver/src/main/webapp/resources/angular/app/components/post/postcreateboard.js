@@ -18,7 +18,8 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 		$scope.isCollapsed = isCollapse;
 	}
 	 //=========================================Unique for provider post=============================================
-		$scope.providerpost = {
+		 $scope.provideposts = [];
+		 $scope.providerpost = {
 							   postsubject : '',
 							   postdescription : '',
 							   postimage : '',
@@ -27,7 +28,8 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 							   issecrete : false,
 							   couldinvite : true,
 							   startdate : '',
-							   enddate : ''
+							   enddate : '',
+							   type : 'provide'
 							  };
 	  
 	  $scope.createproviderpost = function() {
@@ -37,23 +39,46 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 			 if (providerpost && providerpost !== undefined) {
 				 if (providerpost.startdate > providerpost.enddate) {
 					 alert("start date should be before end date");
+					 return;
 				 }
+				  var credentials = authenticationService.getCredentials();
+			      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
+			    	  create(credentials, providerpost, function() {
+			    		 // TODO: specify your callback here 
+			    	  });
+			      }
 			 } 
 		 }
 	 //=========================================Unique for ask post==================================================
-		$scope.askpost = {
+		$scope.askposts = [];
+	   	$scope.askpost = {
 				  postsubject : '',
 				  postdescription : '',
 				  postimage : '',
 				  postcategory : '',
 				  usemap : true,
 				  couldinvite : true,
+				  issecrete : false,
 				  startdate : '',
-				  enddate : ''
+				  enddate : '',
+				  type: 'ask'
 				};
+		
 	  $scope.createaskpost = function() {
-		 $log.info("creating ask post");
-		 $log.info("ask post object " + $scope.askpost);
+		  	 $log.info("creating ask post");
+			 var askpost = $scope.askpost;
+			 if (askpost && askpost !== undefined) {
+				 if (askpost.startdate > askpost.enddate) {
+					 alert("start date should be before end date");
+					 return;
+				 }
+				  var credentials = authenticationService.getCredentials();
+			      if (credentials) { // TODO: add more logic here, for now, we are using persistent cookies
+			    	  create(credentials, askpost, function() {
+			    		 // TODO: specify your callback here 
+			    	  });
+			      }
+			 } 
 	 }
 	//=========================================start the ask post and provider post common stuff====================
 		 $scope.common = {};
@@ -89,4 +114,26 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 			 startingDay: 1,
 	         initDate: null
 		 };
+		 
+		 // ask post and provider post both use postservice
+		 var create = function(userCredential, post, callback) {
+			  if (userCredential) {
+				  postService.create(userCredential, post).then(function (response) {
+					  var ret = response.data;
+					  if (ret) {
+						  if (ret.type = 'ask') {
+						  		$scope.askposts.push(ret.data);
+						  } else if (ret.type = 'provide') {
+							    $scope.provideposts.push(ret.data);
+						  }
+					  } else {
+						  $scope.askposts.pop();
+						  $scope.provideposts.pop();
+					  }
+					  callback && callback();
+				  })
+			  } else {
+				  console.log("user credential has error");
+			  }
+		  }
 }]);
