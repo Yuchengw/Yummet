@@ -12,9 +12,9 @@ import com.yummet.proto.PostRequest;
 
 public interface PostController {
 
-	public @ResponseBody Post getPost(@PathVariable String id, @RequestBody String body);
+	public @ResponseBody Post getPost(@PathVariable String id);
 	
-	public @ResponseBody PostList getPosts(@PathVariable String id, @RequestParam(value="step") final String step, @RequestParam(value="cursor") final String cursor, @RequestBody String body);
+	public @ResponseBody PostList getPosts(@PathVariable String id, @RequestParam(value="step") final String step, @RequestParam(value="cursor") final String cursor);
 
 	public @ResponseBody Post addPost(@RequestHeader String credentials, @RequestBody PostRequest body);
 	
