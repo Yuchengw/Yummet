@@ -81,14 +81,11 @@ public class PostControllerImpl implements PostController {
 		}
 		//Map<String, String> postInfo = parsePostRequest(body, credentials);
 		User user = userProvider.get(body.getUser(), credentials);
-		User user = userProvider.get((String)postInfo.get("email"), (String)postInfo.get("password"));
 		if (user == null) {
 			//Console log
 		}
 		Post newPost = new Post(id, user , body.getSubject(), "", 0); // put quantity as 0 for now
-		Post newPost = new Post(id, user , (String)postInfo.get("postsubject"), (String) postInfo.get("location"), 0); // put quantity as 0 for now
-		Post updatedPost = postProvider.add(user, newPost);
-		return updatedPost;
+		return postProvider.add(user, newPost);
 	}
 
 	@net.bull.javamelody.MonitoredWithSpring
