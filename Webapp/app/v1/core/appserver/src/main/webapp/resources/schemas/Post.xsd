@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="com:yummet:appserver:Post" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="com:yummet:appserver:Post"
+           elementFormDefault="qualified"> 
+	<xs:element name="PostRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="xs:string" />
+				<xs:element name="subject" type="xs:string" />
+				<xs:element name="body" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="PostResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="postid" type="xs:string" />
+				<xs:element name="status" type="tns:PostStatus" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="PostStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="POSTED" />
+			<xs:enumeration value="INVALID" />
+			<xs:enumeration value="DELETED" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -6,6 +6,7 @@ import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostComment;
 import com.yummet.business.bean.PostCommentList;
 import com.yummet.business.bean.User;
+import com.yummet.lib.platformService.PlatformPostCommentService;
 
 /**
  * @author yucheng
@@ -14,6 +15,9 @@ import com.yummet.business.bean.User;
 public class PostCommentProvider {
 	
 	private static PostCommentList allPostComments;
+	
+	private PlatformPostCommentService platformPostCommentService;
+	
 	/**
 	 * mocking
 	 * */
@@ -29,16 +33,17 @@ public class PostCommentProvider {
 		allPostComments.add(pm2);
 	}
 
-	public void add(PostComment user) {
-		allPostComments.add(user);
+	public PostComment add(PostComment postComment) {
+		allPostComments.add(postComment);
+		return this.platformPostCommentService.createPostComment(postComment);
 	}
 
-	public PostComment get(int index) {
-		return allPostComments.get(index);
+	public PostComment get(String index) {
+		return allPostComments.get(Integer.parseInt(index));
 	}
 
-	public List<PostComment> getAll() {
-		return allPostComments.getPostComments();
+	public PostCommentList getAll(String postid) {
+		return new PostCommentList();
 	}
 
 	public void remove(int id) {

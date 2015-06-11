@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yummet.business.bean.Post;
-import com.yummet.business.bean.PostList;
 import com.yummet.business.bean.User;
 import com.yummet.entities.PostObject;
 import com.yummet.entities.UserObject;
