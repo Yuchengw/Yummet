@@ -22,15 +22,42 @@ public class PlatformUserServiceImpl extends PlatformUserService {
 	}
 	
 	/**
-	 * This function is used for get appserver user object from Platform 
+	 * this function is used for get user info from platform without password authentication,
+	 * use this with carefulness.
+	 * @param userEmail
+	 * @return User 
+	 * */
+	public User getUserByEmail(String userEmail) {
+		UserObject platformUserObject = null;
+		User user = null;
+		try {
+			platformUserObject = (UserObject) ((PlatformUserServiceProviderImpl) platformServiceProvider).getObject(userEmail);
+			if (platformUserObject != null) {
+				user = new User();
+				copyUser(platformUserObject, user);
+			} else {
+				
+			}
+		} catch (Exception e) {
+			logger.debug("Error happens when retriving User object" + e.getStackTrace());
+		}
+		return user;
+	}
+	
+	/**
+	 * This function is used for get appserver user object from Platform by email and password
 	 * */
 	public User getUserByEmailAndPassword(String userEmail, String userPassword) {
 		UserObject platformUserObject = null;
 		User user = null;
 		try {
-			platformUserObject = (UserObject) ((PlatformUserServiceProviderImpl) platformServiceProvider).getObject(userEmail);
-			user = new User();
-			copyUser(platformUserObject, user);
+			platformUserObject = (UserObject) ((PlatformUserServiceProviderImpl) platformServiceProvider).getObject(userEmail, userPassword);
+			if (platformUserObject != null) {
+				user = new User();
+				copyUser(platformUserObject, user);
+			} else {
+				
+			}
 		} catch (Exception e) {
 			logger.debug("Error happens when retriving User object" + e.getStackTrace());
 		}
@@ -41,9 +68,27 @@ public class PlatformUserServiceImpl extends PlatformUserService {
 	 * @throws Exception 
 	 * */
 	public User createUser(User user) {
+		UserObject newUserObject = null;
 		try {
-		UserObject newUserObject = new UserObject(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
-		((PlatformUserServiceProviderImpl) platformServiceProvider).insertObject(newUserObject);
+			newUserObject = new UserObject(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+			// 
+			((PlatformUserServiceProviderImpl) platformServiceProvider).insertObject(newUserObject);
+		} catch (Exception e) {
+			logger.debug("there is something wrong when inserting user object" + e.getStackTrace());
+		}
+		user.setPassword(newUserObject.getPassword());
+		return user;
+	}
+	
+	/**
+	 * This function is used for update user in mongodb
+	 * @throws Exception 
+	 * */
+	public User updateUser(User user) {
+		try {
+		//  TODO: should define the new constructor, prefer another copy helper function
+		UserObject updateUserObject = new UserObject(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+		((PlatformUserServiceProviderImpl) platformServiceProvider).updateObject(updateUserObject);
 		} catch (Exception e) {
 			logger.debug("there is something wrong when inserting user object" + e.getStackTrace());
 		}
@@ -80,10 +125,6 @@ public class PlatformUserServiceImpl extends PlatformUserService {
 	@Override
 	public PlatformServiceProvider getPlatformServiceProvider() {
 		return platformServiceProvider;
-	}
-
-	public User getUserByEmail(String email) {
-		return null;
 	}
 
 }

@@ -11,8 +11,7 @@
 			authenticationService);
 	authenticationService.$inject = [ '$http', '$cookieStore', '$rootScope',
 			'$timeout', 'userService' ];
-	function authenticationService($http, $cookieStore, $rootScope, $timeout,
-			userService) {
+	function authenticationService($http, $cookieStore, $rootScope, $timeout, userService) {
 		
 		var service = {};
 		service.setCredentials = setCredentials;

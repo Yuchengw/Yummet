@@ -1,12 +1,21 @@
-.top-container {
-	padding-top: 50px;
-	padding-bottom: 50px;
+.indexintroducer {
 	text-align: center;
 	color: #f8f8f8;
-	background: url(../img/homemade.jpg) no-repeat center center;
-	background-size: cover;
+	background: url(../img/homemade2.jpg) no-repeat center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: conver;
 }
 
+.indexfooter {
+	padding: 100px 0;
+	color: #f8f8f8;
+	background: url(../img/homemade3.jpg) no-repeat center center;
+	background-size: cover
+}
+
+}
 .chef-box-container {
 	background-color: #f1f1f1;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
@@ -14,9 +23,7 @@
 	box-sizing: border-box;
 	margin: 0 auto;
 	padding: 36px;
-	width: 362px;
 	position: relative;
-	top: 200px;
 }
 
 .chef-box-container . .chef-post-container {

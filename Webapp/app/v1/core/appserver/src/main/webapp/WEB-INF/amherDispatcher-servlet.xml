@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:p="http://www.springframework.org/schema/p" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" 
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
  	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
     http://www.springframework.org/schema/aop 
@@ -21,10 +19,10 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/rs/**" location="/resources/" />
 	<mvc:resources mapping="/vw/**" location="/views/" />
-	<mvc:resources mapping="/as/**" location="/assets/"/>
+	<mvc:resources mapping="/as/**" location="/assets/" />
 	<mvc:default-servlet-handler />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	
+
 	<!--***************************************** Aspects ***************************************************** -->
 	<bean id="logAspect" class="com.yummet.service.aop.UserControllerAOPImpl" />
 	<!-- Performance part -->
@@ -42,34 +40,37 @@
 	<!-- Let Spring be notice of Rest Controllers -->
 	<context:component-scan base-package="com.yummet" />
 	<!-- To enable @RequestMapping process on type level and method level -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
 	<!-- Restful controller: UserController's aggregate object -->
 	<bean id="userControllerImpl" class="com.yummet.bean.rest.controller.UserControllerImpl">
 		<property name="userProvider" ref="userProvider" />
 	</bean>
-	
+
 	<!-- Restful controller: PostController's aggregate object -->
 	<bean id="postControllerImpl" class="com.yummet.bean.rest.controller.PostControllerImpl">
 		<property name="postProvider" ref="postProvider" />
 		<property name="userProvider" ref="userProvider" />
 	</bean>
-	
+
 	<!-- Restful controller: ProfileController's aggregate object -->
 	<bean id="profileControllerImpl" class="com.yummet.bean.rest.controller.ProfileControllerImpl">
 		<property name="userProvider" ref="userProvider" />
 	</bean>
-	
+
 	<!-- ===========================================Add Spring Security Configuration================================== -->
-	<bean name="statelessAuthenticationSecurityConfig" class="com.yummet.web.security.StatelessAuthenticationSecurityConfig" /> 
+	<bean name="statelessAuthenticationSecurityConfig"
+		class="com.yummet.web.security.StatelessAuthenticationSecurityConfig" />
 	<!-- <bean id="PostControllerImpl" class="com.yummet.bean.rest.controller.PostControllerImpl"> 
 		<property name="postProvider" ref="postProvider" /> </bean> <bean id="PostCommentControllerImpl" 
 		class="com.yummet.bean.rest.controller.PostCommentControllerImpl"> <property 
 		name="postCommentProvider" ref="postCommentProvider" /> </bean> <bean id="OrderControllerImpl" 
 		class="com.yummet.bean.rest.controller.OrderControllerImpl"> <property name="orderProvider" 
 		ref="orderProvider" /> </bean> -->
-		
+
 	<!-- Configure bean to convert JSON to POJO and vice versa -->
 	<bean id="jsonMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
@@ -84,7 +85,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Please don't remove following beans, we may need them later:) -->
 	<!-- jave To Spring XML Bean Mapping through JaxB2Marshaller -->
 	<!-- <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> 
@@ -103,4 +104,21 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
 		/> <property name="prefix" value="/WEB-INF/views/" /> <property name="suffix" 
 		value=".html" /> </bean> </list> </property> </bean> -->
+
+	<!-- =========================Exception handling Start here========================= -->
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error/error</prop>
+				<prop key="java.lang.RuntimeException">error/error</prop>
+			</props>
+		</property>
+		<property name="statusCodes">
+			<props>
+				<prop key="error/404">404</prop>
+				<prop key="error/error">500</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

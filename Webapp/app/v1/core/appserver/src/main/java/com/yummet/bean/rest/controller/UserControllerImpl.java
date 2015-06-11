@@ -58,7 +58,7 @@ public class UserControllerImpl implements UserController {
 		try {
 			userEmailAndPassword = new String(Base64.decodeBase64(userEmailAndPassword.getBytes()), "UTF-8");
 			String[] emailAndPassword = userEmailAndPassword.split(":");
-			User e = userProvider.getUserServiceImpl().getUserByEmailAndPassword(emailAndPassword[0], emailAndPassword[1]);
+			User e = userProvider.get(emailAndPassword[0], emailAndPassword[1]);
 			return e;
 		} catch (Exception e1) {
 			// continue;

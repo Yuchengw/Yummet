@@ -81,10 +81,12 @@ public class PostControllerImpl implements PostController {
 		}
 		//Map<String, String> postInfo = parsePostRequest(body, credentials);
 		User user = userProvider.get(body.getUser(), credentials);
+		User user = userProvider.get((String)postInfo.get("email"), (String)postInfo.get("password"));
 		if (user == null) {
 			//Console log
 		}
 		Post newPost = new Post(id, user , body.getSubject(), "", 0); // put quantity as 0 for now
+		Post newPost = new Post(id, user , (String)postInfo.get("postsubject"), (String) postInfo.get("location"), 0); // put quantity as 0 for now
 		Post updatedPost = postProvider.add(user, newPost);
 		return updatedPost;
 	}
@@ -100,30 +102,46 @@ public class PostControllerImpl implements PostController {
 	public Post addPost(@RequestHeader("Cookie") String credentials, @RequestBody PostRequest body) {
 		//Map<String, String> postInfo = parsePostRequest(body, credentials);
 		User user = userProvider.get(body.getUser(), credentials);
-		if (user == null) {
-			//Console log
-		}
+//		if (user == null) {
+//			//Console log
+//		}
 		Post newPost = new Post(null, user , body.getSubject(), "", 0); // put quantity as 0 for now
-		Post createdPost = postProvider.add(user, newPost);
-		return createdPost;
+////		Post createdPost = postProvider.add(user, newPost);
+//		return createdPost;
+		return null;
 	}
 
-	private Map<String, String> parsePostRequest(String body, String credentials) {
-		String decodeMessage= URLDecoder.decode(credentials);
+	@SuppressWarnings({"rawtypes" })
+	private Map<String, Object> parsePostRequest(String body, String credentials) {
+		String decodeMessage = URLDecoder.decode(credentials);
 		decodeMessage = StringUtils.remove(decodeMessage, "yummet=");
 		JSONParser jsonParser =new JSONParser();
 		JSONObject jsonObject = null;
-		Map<String, String> postInfoMap = null;
+		Map<String, Object> postInfoMap = null;
 		try {
 			jsonObject = (JSONObject) jsonParser.parse(decodeMessage);
+			
 			String userInfos = (String) ((HashMap) jsonObject.get("currentUser")).get("authdata");
 			userInfos = new String(Base64.decodeBase64(userInfos.getBytes()), "UTF-8");
 			String[] userInfoSection = userInfos.split(":");
+			
+			jsonObject = (JSONObject) jsonParser.parse(body);
 			postInfoMap = ImmutableMap.of(
-					"email", userInfoSection[0],
-					"password", userInfoSection[1],
-					"subject", body
-					);
+				"email", userInfoSection[0],
+				"password", userInfoSection[1],
+				"postsubject", jsonObject.get("postsubject")
+			);
+			postInfoMap.put("postdescription", jsonObject.get("postdescription"));
+			postInfoMap.put("postcategory", jsonObject.get("postcategory"));
+			postInfoMap.put("usemap", jsonObject.get("usemap"));
+			postInfoMap.put("postimage", jsonObject.get("postimage"));
+			postInfoMap.put("couldinvite", jsonObject.get("couldinvite"));
+			postInfoMap.put("startdate", jsonObject.get("startdate"));
+			postInfoMap.put("enddate", jsonObject.get("enddate"));
+			postInfoMap.put("type", jsonObject.get("type"));
+			
+			// TODO: separate the provider post and ask post
+			postInfoMap.put("issecrete", jsonObject.get("issecrete"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

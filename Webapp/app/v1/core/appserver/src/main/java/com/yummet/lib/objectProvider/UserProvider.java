@@ -15,7 +15,7 @@ public class UserProvider {
 	public UserProvider() {
 		this.platformUserServiceImpl = new PlatformUserServiceImpl();
 	}
-	
+	// we should hide this, directly use provider's api to get the data for controller
 	public PlatformUserServiceImpl getUserServiceImpl() {
 		return (PlatformUserServiceImpl) this.platformUserServiceImpl;
 	}
@@ -40,13 +40,13 @@ public class UserProvider {
 	 * update is expensive, think before do it
 	 * */
 	public void update(User updateUser) {
-		//TODO:
+		this.platformUserServiceImpl.updateUser(updateUser);
 	}
 
 	/**
 	 * find user by user's name, used for spring security
 	 * */
-	public User findByUserName(String userEmail, String password) {
+	public User findByUserNameAndPassword(String userEmail, String password) {
 		return this.platformUserServiceImpl.getUserByEmailAndPassword(userEmail, password);
 	}
 }

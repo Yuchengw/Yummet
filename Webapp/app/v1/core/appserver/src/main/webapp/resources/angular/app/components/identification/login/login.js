@@ -2,16 +2,15 @@
 *@author yucheng
 *@since 1
 */
-angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'authenticateService'])
-.config(function(){
-	
+angular.module('loginApp', ['ui.router','ngAnimate','localStore','contextStateService', 'authenticateService'])
+.config(function($stateProvider){
 })
 .run(function(){
 	
 })
-.controller('loginAppContoller', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
+.controller('loginAppController', ['$scope', '$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
     function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
-	  /**
+	/**
 	   * Login function
 	   * */
 	  $scope.login = function logIn() {
@@ -40,7 +39,7 @@ angular.module('loginApp', ['ngAnimate','localStore','contextStateService', 'aut
 	  };
 	  
 	  $scope.passwordStrength = function() {
-		    var size = $scope.credentials.password;
+		    var size = $scope.credentials.password.length;
 		    if (size > 8) {
 		      $scope.strength = 'strong';
 		    } else if (size > 4) {
