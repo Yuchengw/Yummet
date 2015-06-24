@@ -1,22 +1,19 @@
 package com.yummet.bean.rest.controller;
 
-import java.security.Principal;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yummet.business.bean.User;
-import com.yummet.business.bean.UserList;
 
 public interface UserController {
 	
-	public @ResponseBody User getUser(@RequestBody String user);
+	public User getUser();
 
-	public @ResponseBody User updateUser(@RequestBody String body);
+	public ResponseEntity<String> updateUser(@RequestBody final User user);
 	
-	public @ResponseBody User addUser(@RequestBody String user);
+	public ResponseEntity<String> addUser(@RequestBody User user); 
 
-	public @ResponseBody UserList removeUser(@RequestBody String id);
+	public ResponseEntity<String> removeUser(@PathVariable User user);
 	
 }

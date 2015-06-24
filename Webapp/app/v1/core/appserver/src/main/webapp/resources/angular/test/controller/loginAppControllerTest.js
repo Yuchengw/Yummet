@@ -3,7 +3,7 @@
 describe(
 		"load loginApp",
 		function() {
-.			beforeEach(module('userContextService'));
+			beforeEach(module('userContextService'));
 			beforeEach(module('authenticateService'));
 			beforeEach(module('contextStateService'));
 			beforeEach(module("loginApp"));

@@ -28,7 +28,7 @@ public class Post extends BeanObject {
 	private int quantity;
 	private String commentsOrDescription;
 	private double cost;
-	private String image;
+	private Object image;
 	private User[] partners;
 	private String postCategory;
 	private int numberOfOrders; // TODO: more detail
@@ -115,7 +115,7 @@ public class Post extends BeanObject {
 		this.cost = cost;
 	}
 
-	public String getImage() {
+	public Object getImage() {
 		return image;
 	}
 

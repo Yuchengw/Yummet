@@ -2,6 +2,8 @@ package com.yummet.lib.objectProvider;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.yummet.business.bean.Order;
 import com.yummet.business.bean.OrderList;
 import com.yummet.business.bean.User;
@@ -10,6 +12,7 @@ import com.yummet.business.bean.User;
  * @author yucheng
  * @version 1
  * */
+@Service
 public class OrderProvider {
 
 	private static OrderList allOrders;

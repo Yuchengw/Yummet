@@ -1,5 +1,7 @@
 package com.yummet.lib.objectProvider;
 
+import org.springframework.stereotype.Service;
+
 import com.yummet.business.bean.User;
 import com.yummet.lib.platformService.PlatformUserService;
 import com.yummet.lib.platformService.PlatformUserServiceImpl;
@@ -8,6 +10,7 @@ import com.yummet.lib.platformService.PlatformUserServiceImpl;
  * @author yucheng
  * @since 1
  * */
+@Service
 public class UserProvider {
 
 	private PlatformUserServiceImpl platformUserServiceImpl;
@@ -45,8 +48,21 @@ public class UserProvider {
 
 	/**
 	 * find user by user's name, used for spring security
+	 * @param userEmail
+	 * @param userPassword
+	 * @return User
 	 * */
 	public User findByUserNameAndPassword(String userEmail, String password) {
 		return this.platformUserServiceImpl.getUserByEmailAndPassword(userEmail, password);
+	}
+	
+	/**
+	 * Check if this email has already been registered
+	 * @param email
+	 * @return true or false
+	 * */
+	public boolean exists(String email) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -1,5 +1,8 @@
 package com.yummet.business.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author yucheng
  * @version 1
@@ -14,10 +17,9 @@ public class PostComment extends BeanObject {
 	private String commentBody;
 	private String Id;
 	private Post parentPost;
-	private PostComment childComment; // TODO: is this only for child or sibling
-										// as well
+	private List<PostComment> childComments; 
+	
 	private User createdBy;
-
 
 	public PostComment(String id) {
 		this.Id = id;
@@ -27,6 +29,7 @@ public class PostComment extends BeanObject {
 	public PostComment(Post parent, String comment) {
 		setParentPost(parent);
 		setCommentBody(comment);
+		childComments = new ArrayList<PostComment>();
 	}
 
 	public PostComment(String id, Post parent, String comment) {
@@ -35,10 +38,6 @@ public class PostComment extends BeanObject {
 		setCommentBody(comment);
 	}
 	
-	// Getter and Setter
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
 	public String getId() {
 		return Id;
@@ -64,12 +63,12 @@ public class PostComment extends BeanObject {
 		this.commentBody = commentBody;
 	}
 
-	public PostComment getChildComment() {
-		return childComment;
+	public List<PostComment> getChildComments() {
+		return childComments;
 	}
 
-	public void setChildComment(PostComment childComment) {
-		this.childComment = childComment;
+	public void addChildComment(PostComment childComment) {
+		this.childComments.add(childComment);
 	}
 
 	public User getCreatedBy() {

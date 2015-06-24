@@ -2,6 +2,8 @@ package com.yummet.lib.objectProvider;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostComment;
 import com.yummet.business.bean.PostCommentList;
@@ -11,6 +13,7 @@ import com.yummet.business.bean.User;
  * @author yucheng
  * @version 1
  * */
+@Service
 public class PostCommentProvider {
 	
 	private static PostCommentList allPostComments;

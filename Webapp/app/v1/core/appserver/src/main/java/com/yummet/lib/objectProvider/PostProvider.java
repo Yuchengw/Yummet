@@ -1,13 +1,11 @@
 package com.yummet.lib.objectProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.yummet.business.bean.Post;
-import com.yummet.business.bean.PostList;
 import com.yummet.business.bean.User;
-import com.yummet.entities.PostObject;
-import com.yummet.entities.UserObject;
 import com.yummet.lib.platformService.PlatformPostService;
 import com.yummet.lib.platformService.PlatformPostServiceImpl;
 
@@ -15,6 +13,7 @@ import com.yummet.lib.platformService.PlatformPostServiceImpl;
  * @author yucheng
  * @since 1
  * */
+@Service
 public class PostProvider {
 
 	private PlatformPostService platformPostService;

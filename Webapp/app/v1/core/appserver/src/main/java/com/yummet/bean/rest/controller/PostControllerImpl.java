@@ -93,13 +93,13 @@ public class PostControllerImpl implements PostController {
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.POST, value=PostRestURIConstants.CREATE_POST)
 	public Post addPost(@RequestHeader("Cookie") String credentials, @RequestBody String body) {
-//		Map<String, Object> postInfo = parsePostRequest(body, credentials);
-//		User user = userProvider.get(postInfo.get("email"), postInfo.get("password"));
-//		if (user == null) {
-//			//Console log
-//		}
-////		Post newPost = new Post(null, user , postInfo.get("subject"), postInfo.get("location"), 0); // put quantity as 0 for now
-////		Post createdPost = postProvider.add(user, newPost);
+		Map<String, Object> postInfo = parsePostRequest(body, credentials);
+		User user = userProvider.get((String)postInfo.get("email"), (String)postInfo.get("password"));
+		if (user == null) {
+			//Console log
+		}
+//		Post newPost = new Post(null, user , postInfo.get("subject"), postInfo.get("location"), 0); // put quantity as 0 for now
+//		Post createdPost = postProvider.add(user, newPost);
 //		return createdPost;
 		return null;
 	}

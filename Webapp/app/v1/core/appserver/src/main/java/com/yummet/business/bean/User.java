@@ -1,51 +1,78 @@
 package com.yummet.business.bean;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 /**
  * @author yucheng
  * @version 1
  * */
-public class User extends BeanObject {
-	
-    private static final long serialVersionUID = -7788619177798333712L;
-    
-    private String firstName;
+public class User extends BeanObject implements UserDetails {
+
+	private static final long serialVersionUID = -7788619177798333712L;
+
+	private String id;
+	private String email;
+	private String password;
+
+	private String firstName;
 	private String lastName;
 	private String phone;
-	private double creditInfo; 
-	private double activeScore; 
-								
-	private String password;
+	private double creditInfo;
+	private double activeScore;
+
 	private String alias;
 	private String role;
-	private String id;
 	private boolean isEmailAuthorized;
-	private String email;
-	
-	public User() {}
 
-	public User(String id, String firstname, String lastname, String email, String password) {
-		// Be careful of lower and upper case 
-		super.setId(id);
-		this.firstName = firstname;
-		this.lastName = lastname;
+	private long expires;
+	private boolean accountExpired;
+	private boolean accountLocked;
+	private boolean credentialsExpired;
+	private boolean accountEnabled;
+	private String newPassword;
+
+	private Set<UserAuthority> authorities;
+
+	public User() {
+	}
+
+	public User(String email) {
 		this.email = email;
-		this.password = password;
+	}
+
+	public User(String email, Date expires) {
+		this.email = email;
+		this.expires = expires.getTime();
 	}
 	
-	// Getter and Setter
+	public User(String id, String email, String alias, String firstName, String lastName) {
+		super.setId(id);
+		this.email = email;
+		this.alias = alias;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 		super.setId(id);
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -121,8 +148,94 @@ public class User extends BeanObject {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	// Use Roles as external API
+	public Set<UserRole> getRoles() {
+		Set<UserRole> roles = EnumSet.noneOf(UserRole.class);
+		if (authorities != null) {
+			for (UserAuthority authority : authorities) {
+				roles.add(UserRole.valueOf(authority));
+			}
+		}
+		return roles;
+	}
+	
+	public void setRoles(Set<UserRole> roles) {
+		for (UserRole role : roles) {
+			grantRole(role);
+		}
+	}
+
+	public void grantRole(UserRole role) {
+		if (authorities == null) {
+			authorities = new HashSet<UserAuthority>();
+		}
+		authorities.add(role.asAuthorityFor(this));
+	}
+	
+	public void revokeRole(UserRole role) {
+		if (authorities != null) {
+			authorities.remove(role.asAuthorityFor(this));
+		}
+	}
+
+	public boolean hasRole(UserRole role) {
+		return authorities.contains(role.asAuthorityFor(this));
+	}
+		
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return !accountExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return !accountLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return !credentialsExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return !accountEnabled;
+	}
+
+	public long getExpires() {
+		return expires;
+	}
+
+	public void setExpires(long expires) {
+		this.expires = expires;
+	}
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
+	// User : <userEmail>
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + ": " + getUsername();
 	}
 }

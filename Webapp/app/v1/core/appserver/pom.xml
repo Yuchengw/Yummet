@@ -99,7 +99,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>${org.springframework.version}</version>
+			<version>3.2.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>

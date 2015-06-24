@@ -1,7 +1,6 @@
 package com.yummet.business.bean;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

@@ -1,11 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-xmlns:beans="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
-		   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		   http://www.springframework.org/schema/security
-		   http://www.springframework.org/schema/security/spring-security.xsd">
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- ====================We use java config right now=================== -->
+	<http auto-config="false" use-expressions="true" entry-point-ref="LoginUrlAuthenticationEntryPoint">
+		<intercept-url pattern="/" access="permitAll" requires-channel="any"/>
+		<intercept-url pattern="/resources/**" access="permitAll" requires-channel="any"/>
+		<intercept-url pattern="/views/**" access="permitAll" requires-channel="any"/>
+		<intercept-url pattern="/assets/**" access="permitAll" requires-channel="any"/>
+		<intercept-url pattern="/service/login" access="permitAll" method="POST" requires-channel="any"/>
+		<intercept-url pattern="/service/logout" access="permitAll" method="POST" requires-channel="any"/>
+		<intercept-url pattern="/servcie/signup" access="permitAll" method="POST" requires-channel="any"/>
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="any"/>
+		<logout logout-success-url="/login?logout" logout-url="/logout" />
+		<custom-filter before="FORM_LOGIN_FILTER" ref="statelessLoginFilter" />
+		<custom-filter before="FORM_LOGIN_FILTER" ref="statelessAuthenticationFilter" />
+	</http>
 	
+	<beans:bean id="LoginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/service/login" />
+	</beans:bean>
+	
+	<beans:bean id="userDetailsService" class="com.yummet.web.security.UserDetailsService">
+		<beans:property name="userProvider" ref="userProvider" />
+	</beans:bean>
+	
+	<beans:bean id="tokenAuthenticationService" class="com.yummet.web.security.TokenAuthenticationService">
+		<beans:constructor-arg value="yuchengYummet"/>
+	</beans:bean>
+	
+	<beans:bean id="statelessLoginFilter" class="com.yummet.web.security.StatelessLoginFilter"/>
+	<beans:bean id="statelessAuthenticationFilter" class="com.yummet.web.security.StatelessAuthenticationFilter">
+		<beans:constructor-arg ref="tokenAuthenticationService"/>
+	</beans:bean>
+	
+	<authentication-manager>
+    	<authentication-provider user-service-ref='userDetailsService'/>
+	</authentication-manager>
+
 </beans:beans>

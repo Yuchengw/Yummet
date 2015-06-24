@@ -98,7 +98,7 @@ public class PlatformUserServiceImpl extends PlatformUserService {
 	 * This is function is used for copy platformUser to a appserver user
 	 * Copy attribute one by one is ok
 	 * @param UserObject platform User object
-	 * @param User appserver User object
+	 * @param SecurityUser appserver User object
 	 * @throws Exception // should be more specific in the future
 	 * */
 	private User copyUser(UserObject platformUser, User appUser) throws Exception{
