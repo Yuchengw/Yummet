@@ -21,7 +21,7 @@ import com.yummet.business.bean.User;
 /**
  * @author yucheng
  * @since 1
- * */
+ * */ 
 class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter {
 
 	private final TokenAuthenticationService tokenAuthenticationService;
