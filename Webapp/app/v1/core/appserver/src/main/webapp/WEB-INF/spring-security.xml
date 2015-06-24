@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
   xmlns:beans="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ 		   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
            http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+           http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<!-- ====================Spring Security Configuration @author Yucheng Wang=================== -->
 	<http auto-config="false" use-expressions="true" entry-point-ref="LoginUrlAuthenticationEntryPoint">
@@ -17,8 +16,7 @@
 		<intercept-url pattern="/service/logout" access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/servcie/signup" access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="any"/>
-		<logout logout-success-url="/login?logout" logout-url="/logout" />
-		<custom-filter position="FORM_LOGIN_FILTER" ref="statelessAuthenticationFilter" />
+		<custom-filter after="CAS_FILTER" ref="statelessAuthenticationFilter" />
 		<custom-filter before="FORM_LOGIN_FILTER" ref="statelessLoginFilter" />
 	</http>
 	
