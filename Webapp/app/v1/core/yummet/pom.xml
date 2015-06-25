@@ -17,7 +17,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jetty.version>9.2.7.v20150116</jetty.version>
 		<junit.version>4.10</junit.version>
-		<org.springframework.version>4.1.6.RELEASE</org.springframework.version>
+		<org.springframework.version>4.0.0.RELEASE</org.springframework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
 		<maven.war.plugin.version>3.2</maven.war.plugin.version>

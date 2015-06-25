@@ -16,8 +16,8 @@
 		<intercept-url pattern="/service/logout" access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/servcie/signup" access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="any"/>
-		<custom-filter after="CAS_FILTER" ref="statelessAuthenticationFilter" />
-		<custom-filter before="FORM_LOGIN_FILTER" ref="statelessLoginFilter" />
+		<custom-filter before="FORM_LOGIN_FILTER" ref="defaultLoginFilter" />
+	    <custom-filter position="BASIC_AUTH_FILTER" ref="defaultAuthenticationFilter" />
 	</http>
 	
 	<beans:bean id="LoginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
@@ -36,14 +36,15 @@
     	<authentication-provider user-service-ref='userDetailsService'/>
 	</authentication-manager>
 	
-	<beans:bean id="statelessLoginFilter" class="com.yummet.web.security.StatelessLoginFilter">
-		<beans:constructor-arg name="urlMapping" value="/service/login"/>
-		<beans:constructor-arg name="tokenAuthenticationService" ref="tokenAuthenticationService"/>
-		<beans:constructor-arg name="userDetailsService" ref="userDetailsService"/>
-		<beans:constructor-arg name="authManager" ref="authenticationManager"/> 
+	<beans:bean id="defaultLoginFilter" class="com.yummet.web.security.StatelessLoginFilter">
+		<beans:constructor-arg index="0" value="/service/login"/>
+		<beans:constructor-arg index="1" ref="tokenAuthenticationService"/>
+		<beans:constructor-arg index="2" ref="userDetailsService"/>
+		<beans:constructor-arg index="3" ref="authenticationManager"/> 
 	</beans:bean>
 	
-	<beans:bean id="statelessAuthenticationFilter" class="com.yummet.web.security.StatelessAuthenticationFilter">
+	<beans:bean id="defaultAuthenticationFilter" class="com.yummet.web.security.StatelessAuthenticationFilter">
 		<beans:constructor-arg ref="tokenAuthenticationService"/>
-	</beans:bean>
+	</beans:bean> 
+	
 </beans:beans>

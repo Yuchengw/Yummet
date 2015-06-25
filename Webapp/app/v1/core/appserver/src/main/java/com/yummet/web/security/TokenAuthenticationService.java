@@ -15,7 +15,6 @@ import com.yummet.business.bean.User;
  * @author yucheng
  * @since 1
  * */
-@Service
 public class TokenAuthenticationService {
 
 	private static final String AUTH_HEADER_NAME = "X-AUTH-TOKEN";
@@ -23,7 +22,6 @@ public class TokenAuthenticationService {
 
 	private final TokenHandler tokenHandler;
 
-	@Autowired
 	public TokenAuthenticationService(@Value("${token.secret}") String secret) {
 		tokenHandler = new TokenHandler(DatatypeConverter.parseBase64Binary(secret));
 	}
