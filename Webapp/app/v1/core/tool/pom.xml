@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>yummet.ops</groupId>
+  <artifactId>coretool</artifactId>
+  <version>1.0.0</version>
+  <description>Yummet DB Tool POM for Yummet, Author:Yucheng</description>
+  
+  <parent>
+		<groupId>yummet</groupId>
+		<artifactId>core</artifactId>
+		<version>1.0.SNAPSHOT</version>
+		 <relativePath>../yummet</relativePath>
+  </parent>
+  
+  <properties>
+	 <mongo.java.driver.version>3.0.0</mongo.java.driver.version> 
+	 <maven.compiler.plugin.version>3.2</maven.compiler.plugin.version>
+  </properties>
+	
+  <dependencies>
+	<dependency>
+		<groupId>org.mongodb</groupId>
+		<artifactId>mongo-java-driver</artifactId>
+		<version>${mongo.java.driver.version}</version>
+	</dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,94 @@
+<div class="">
+	<form class="form" data-ng-submit="createproviderpost()">
+		<div class="form-group">
+			<label for="createpostname">Subject</label> 
+			<input type="text" data-ng-model="providerpost.postsubject"
+			name="postsubject" id="postsubject" class="form-control" placeholder="E.g. “Delicious to Make" >
+		</div>
+		<div class="form-group">
+			<label for="createpostdescription">Description</label>
+			<textarea data-ng-model="providerpost.postdescription" id="postEditDescription" class="form-control"
+				placeholder="how's your wonderful?" name="description"></textarea>
+		</div>
+		<div class="form-group">
+			 <div ngf-drop ngf-select ng-model="providerpost.postimage" class="dropbox"  ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" accept="image/*,application/pdf"><span>drop file here</span></div>
+    	     <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+			 <p class="help-block">We highly recommend high-resolution pictures.</p>
+		</div>
+		<div class="form-group">
+			<label for="postEditCategory">Category</label> 
+			<select data-ng-model="providerpost.postcategory" class="form-control" name="category">
+				<option value="chinanorth">Chinese North</option>
+				<option value="chinasouth">Chinese South</option>
+				<option value="americaneast">American East</option>
+				<option value="americanwest">American West</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<div class="btn-group" dropdown>
+				<button type="button" class="btn btn-danger">Map</button>
+				<button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+					<span class="caret"></span> 
+					<span class="sr-only">Splitbutton!</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="" data-ng-click="providerpost.usemap = true">On</a></li>
+					<li><a href="" data-ng-click="providerpost.usemap = false">Off</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="btn-group" dropdown>
+				<button type="button" class="btn btn-danger">Keep itsecret?</button>
+				<button type="button" class="btn btn-danger dropdown-toggle" dropdown-toggle>
+			    	<span class="caret"></span> <span class="sr-only">Split button!</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="" data-ng-click="providerpost.issecrete=true">Yes</a></li>
+					<li><a href="" data-ng-click="providerpost.issecrete=false">No</a></li>
+				</ul>
+			</div>
+			<a href="http://localhost:8080/help/post/secret" class="external learnmore"> Learn more </a>
+		</div>
+		<div class="form-group">
+			<label for="parnteremail">Partners Email</label> 
+			<a href="http://localhost:8080/help/post/partner" class="external learnmore"> Learn more </a> 
+			<input data-ng-model="providerpost.partneremail" type="email" class="form-control" id="partneremail" placeholder="wonderful@yummet.com">
+		</div>
+		<button type="submit" class="btn">Send invitation</button>
+		<div class="form-group">
+			<div class="btn-group" data-dropdown>
+				<button type="button" class="btn btn-danger">Members can invite others?</button>
+				<button type="button" class="btn btn-danger dropdown-toggle" data-dropdown-toggle>
+				<span class="caret"></span> <span class="sr-only">Split button!</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="" data-ng-click="providerpost.couldinvite=true">Yes</a></li>
+					<li><a href="" data-ng-click="providerpost.couldinvite=false">No</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="form-group">
+		      <label for="providerpoststartdate">start date: </label> 
+              <input type="text" id="providerpoststartdate" class="form-control" datepicker-popup data-ng-model="providerpost.startdate" is-open="common.startdateopened"  datepicker-options="common.dateOptions" data-ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="openstartdate($event)">
+                	<i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+		</div>
+		<div class="form-group">
+			  <label for="providerpoststartdate">end date: </label> 
+              <input type="text" id="providerpoststartdate" class="form-control" datepicker-popup  data-ng-model="providerpost.enddate" is-open="common.enddateopened"  datepicker-options="common.dateOptions"  data-ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="openenddate($event)">
+                	<i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+		</div> 
+		<div class="form-group">
+			<button  class="btn" data-ng-click="setCollapse(true)">Cancel</button>
+			 <button  type="submit" class="btn" >Create</button>
+		</div>
+	</form>
+</div>

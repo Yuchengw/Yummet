@@ -1,0 +1,10 @@
+<!--  author: yucheng @since 1 -->
+<div>
+	Post comment
+	<form data-ng-submit="addPostComment()">
+		<input type="text" data-ng-model="postcommentbody" size="30"
+			placeholder="add comment here"> <input class="btn-primary"
+			type="submit" value="postcomment">
+	</form>
+	<a class="btn-secondary" data-ng-click="removePost(post)">x</a>
+</div>

@@ -1,0 +1,70 @@
+<!--  This page should be displayed after user login successfully, this is user specfic page -->
+<!--  The post home page @author Yucheng @since 1
+ -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Yummet - Share Food With World</title>
+
+<!--==== Bootstrap Core css ====-->
+<link rel="stylesheet" type="text/css"
+	href="/as/css/bootstrap/bootstrap.css"></link>
+<!--==== Third Party css ====-->
+<link rel="stylesheet" type="text/css"
+	href="/as/css/other/landing-page.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="as/css/font-awesome/css/font-awesome.min.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"></link>
+<!--==== Yummet css====-->
+<link rel="shortcut icon" type="image/x-icon"
+	href="/as/icon/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/as/css/yummet/index.css"></link>
+<script src="/as/js/ui/jquery.js"></script>
+<!-- Accessibility Issues -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-ng-app="yummet">
+	<div data-ng-include="'/rs/angular/app/partials/navigation/postdetailnavigation.html'"></div>
+	<div id="userposts" class="content-section-a">
+		<div class="container">
+		</div>
+	</div>
+	<div data-ng-view></div>
+	<!--==== Third Party Script ====-->
+	<script src="/as/js/angular_v1.3.14//angular.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-ui-router.min.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-animate.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-resource.js"></script>
+	<script src="/as/js/angular_v1.3.14/angular-cookies.js"></script>
+	<script src="/as/js/angular_v1.3.14/ui-bootstrap-tpls-0.13.0.js"></script>
+	<script src="/as/js/ui/bootstrap.min.js"></script>
+
+	<!--==== Yummet JS Framework Script ====-->
+	<script src="/rs/angular/app/index.js"></script>
+	<script src="/rs/angular/app/components/identification/login/login.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/logout/logout.js"></script>
+	<script
+		src="/rs/angular/app/components/identification/signup/signup.js"></script>
+	<script src="/rs/angular/app/components/post/post.js"></script>
+	<script src="/rs/angular/app/components/profile/profile.js"></script>
+	<script src="/rs/angular/app/componenets/profile/profile.js"></script>
+	<script src="/rs/angular/app/services/context/state_service.js"></script>
+	<script src="/rs/angular/app/services/perf/localstorage_service.js"></script>
+	<script
+		src="/rs/angular/app/services/authentication/authentication_service.js"></script>
+	<script src="/rs/angular/app/services/user/user_service.js"></script>
+	<script src="/rs/angular/app/services/post/post_service.js"></script>
+	<script src="/rs/angular/app/services/profile/profile_service.js"></script>
+	<script src="/rs/angular/app/providers/bootstrap/modal_provider.js"></script>
+	<script src="/rs/angular/app/filters/token_service.js"></script>
+	<!--==== Yummet JS UI Script ====-->
+</body>
+</html>

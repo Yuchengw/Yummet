@@ -6,23 +6,19 @@
 	id="WebApp_ID" version="2.5">
 
 	<!-- Spring MVC set up, @author Yucheng Wang -->
-	<display-name>Amher Web Application</display-name>
+	<display-name>Yummet Web Application</display-name>
 
 	<!-- This is the basic home page, show the world, deprecate it now since we are depending on Spring -->
-	<welcome-file-list> <welcome-file>loading.html</welcome-file> </welcome-file-list>
-
+	<welcome-file-list> 
+		<welcome-file>index.html</welcome-file> 
+	</welcome-file-list>
 	<!-- The context params that read by ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/rest-context.xml</param-value>
+		<param-value>WEB-INF/rest-context.xml, WEB-INF/spring-security.xml</param-value>
 	</context-param>
 
-	<!-- This listener will load other application context file in addition 
-		to rest-servlet.xml -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
+	<!-- JavaMelody for web performance monitoring -->
 	<filter>
 		<filter-name>javamelody</filter-name>
 		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
@@ -31,6 +27,26 @@
 		<filter-name>javamelody</filter-name>
 		<url-pattern>/monitoring</url-pattern>
 	</filter-mapping>
+	
+	<!-- Security Filter chain for web Security  -->
+	<filter>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+  		<filter-name>springSecurityFilterChain</filter-name>
+  		<url-pattern>/*</url-pattern>
+  		<dispatcher>ERROR</dispatcher>
+  		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<!-- This listener will load other application context file in addition 
+		to rest-servlet.xml -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
 	<listener>
 		<listener-class>net.bull.javamelody.SessionListener</listener-class>
 	</listener>
@@ -55,4 +71,17 @@
 		</taglib>
 	</jsp-config>
 
+	<!-- =========== Error Page ========== -->
+	<servlet>
+        <servlet-name>403error</servlet-name>
+        <jsp-file>/error.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>403error</servlet-name>
+        <url-pattern>/403</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error</location>
+    </error-page>
 </web-app>
