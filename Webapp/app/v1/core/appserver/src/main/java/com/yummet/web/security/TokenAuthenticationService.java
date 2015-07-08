@@ -26,13 +26,13 @@ public class TokenAuthenticationService {
 		tokenHandler = new TokenHandler(DatatypeConverter.parseBase64Binary(secret));
 	}
 
-	public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
+	public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) throws Exception {
 		final User user = authentication.getDetails();
 		user.setExpires(System.currentTimeMillis() + TEN_DAYS);
 		response.addHeader(AUTH_HEADER_NAME, tokenHandler.createTokenForUser(user));
 	}
 
-	public Authentication getAuthentication(HttpServletRequest request) {
+	public Authentication getAuthentication(HttpServletRequest request) throws Exception {
 		final String token = request.getHeader(AUTH_HEADER_NAME);
 		if (token != null) {
 			final User user = tokenHandler.parseUserFromToken(token);

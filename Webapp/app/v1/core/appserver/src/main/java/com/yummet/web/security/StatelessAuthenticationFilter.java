@@ -28,8 +28,13 @@ class StatelessAuthenticationFilter extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException {
-		SecurityContextHolder.getContext().setAuthentication(
-				tokenAuthenticationService.getAuthentication((HttpServletRequest) req));
+		try {
+			SecurityContextHolder.getContext().setAuthentication(
+					tokenAuthenticationService.getAuthentication((HttpServletRequest) req));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		chain.doFilter(req, res); // always continue
 	}
 }
