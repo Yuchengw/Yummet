@@ -37,32 +37,14 @@ public class RestUserServiceTest extends TestCase {
 	public static Test suite() {
 		return new TestSuite(RestUserServiceTest.class);
 	}
-	
+
 	public void testUpsertAUser() {
-			String url = "http://localhost:8080/api/users/userUpsert";
-
-			Client restClient = Client.create();
-			WebResource webResource = restClient.resource(url);
-
-			String input = "{\"id\": \"1\", \"firstName\": \"Tom\",\"lastName\": \"Cruise\",\"email\": \"ycwmike@gmai.com\", \"photo\": \"Object or null (paramter decide)\", \"phone\": \"1234567\",\"creditInfo\": \"1231231\",\"activeScore\": \"123112321\",\"alias\": \"alias\",\"role\": \"admin\", \"sessionExpire\": \"2012-12-24T21:20:47.668+0000\",\"password\": \"afadsfdafa(hash value)\",\"newpassword\": \"adfafdafadfdf\"}";
-			ClientResponse resp = webResource.type("application/json").post(
-					ClientResponse.class, input);
-			if (resp.getStatus() != 201) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ resp.getStatus());
-			}
-			System.out.println("Output from Server .... \n");
-			String output = resp.getEntity(String.class);
-			System.out.println(output);
-	}
-	
-	public void testRemoveAUser() {
-//		String url = "http://localhost:8080/api/users/userDelete";
+//		String url = "http://localhost:8080/api/users/userUpsert";
 //
 //		Client restClient = Client.create();
 //		WebResource webResource = restClient.resource(url);
 //
-//		String input = "{\"id\": \"1\", \"email\": \"ycwmike@gmai.com\"}";
+//		String input = "{\"id\": \"1\", \"firstName\": \"Tom\",\"lastName\": \"Cruise\",\"email\": \"ycwmike@gmai.com\", \"photo\": \"Object or null (paramter decide)\", \"phone\": \"1234567\",\"creditInfo\": \"1231231\",\"activeScore\": \"123112321\",\"alias\": \"alias\",\"role\": \"admin\", \"sessionExpire\": \"2012-12-24T21:20:47.668+0000\",\"password\": \"afadsfdafa(hash value)\",\"newpassword\": \"adfafdafadfdf\"}";
 //		ClientResponse resp = webResource.type("application/json").post(
 //				ClientResponse.class, input);
 //		if (resp.getStatus() != 201) {
@@ -72,5 +54,42 @@ public class RestUserServiceTest extends TestCase {
 //		System.out.println("Output from Server .... \n");
 //		String output = resp.getEntity(String.class);
 //		System.out.println(output);
-}
+	}
+
+	public void testRemoveAUser() {
+		// String url = "http://localhost:8080/api/users/userDelete";
+		//
+		// Client restClient = Client.create();
+		// WebResource webResource = restClient.resource(url);
+		//
+		// String input = "{\"id\": \"1\", \"email\": \"ycwmike@gmai.com\"}";
+		// ClientResponse resp = webResource.type("application/json").post(
+		// ClientResponse.class, input);
+		// if (resp.getStatus() != 201) {
+		// throw new RuntimeException("Failed : HTTP error code : "
+		// + resp.getStatus());
+		// }
+		// System.out.println("Output from Server .... \n");
+		// String output = resp.getEntity(String.class);
+		// System.out.println(output);
+	}
+
+	public void testQueryAUser() {
+		 String url =
+		 "http://localhost:8080/api/users/userQueryx/";
+		 url += "ycwmike@gmai.com";
+		
+		 Client restClient = Client.create();
+		 WebResource webResource = restClient.resource(url);
+		
+		 ClientResponse resp = webResource.type("application/json").get(
+		 ClientResponse.class);
+		 if (resp.getStatus() != 200) {
+		 throw new RuntimeException("Failed : HTTP error code : "
+		 + resp.getStatus());
+		 }
+		 System.out.println("Output from Server .... \n");
+		 String output = resp.getEntity(String.class);
+		 System.out.println(output);
+	}
 }
