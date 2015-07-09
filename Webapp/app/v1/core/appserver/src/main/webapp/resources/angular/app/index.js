@@ -1,0 +1,44 @@
+/**
+ * @author yucheng
+ * @since 1
+ */
+var app = angular.module('yummet',['ui.router','ngResource','signupApp','loginApp','filterApp', 'postApp', 'postcreateboardApp', 'profileApp','modalStateApp', 'profileApp', 'ngFileUpload'])
+// need to dynamicly resolve the base url, maybe Grunt will help us?
+var options = {};
+options.api = {};
+options.api.base_url = "http://localhost:8080";
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStateProvider){
+	$stateProvider.state('index', {
+            url:'/',
+            templateUrl: 'index.html',
+            controller: 'indexController'
+        });
+    $urlRouterProvider.otherwise('/');
+	
+	 modalStateProvider.state('index.login', {
+	        url: '/login',
+	        templateUrl: '/rs/angular/app/components/identification/login/login.html'
+	 });
+	 modalStateProvider.state('index.signup', {
+	        url: '/signup',
+	        templateUrl: '/rs/angular/app/components/identification/signup/signup.html'
+	 });
+    //$httpProvider.interceptors.push('tokenInteceptor'); 
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+})
+.run(function($rootScope, $location) {
+
+})
+.controller('indexController',['$scope', '$state', '$http', '$location', '$document', 
+                               function($scope, $state, $http, $location, $document){
+
+		$scope.init = function () {
+			$scope.$state = $state;
+		};
+		
+		$scope.scrollto = function scrollTo(id) {
+			var element_to_scroll_to = document.getElementById(id);
+			element_to_scroll_to.scrollIntoView();
+		}
+}]);
+

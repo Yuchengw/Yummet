@@ -12,11 +12,11 @@
           http://www.springframework.org/schema/data/jpa 
           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-	<bean id="redisProvider" class="com.iamhere.cache.RedisProvider" />   
-	<bean id="redisService" class="com.iamhere.cache.RedisService"/>
-	<bean id="redisDataSource" class="com.iamhere.cache.RedisDataSourceImpl" />
-	<bean id="redisClientTemplate" class="com.iamhere.cache.RedisClientTemplate" />
-	<bean id="systemContext" class="com.iamhere.platform.adapters.SystemContext"/>
+	<bean id="redisProvider" class="com.yummet.cache.RedisProvider" />   
+	<bean id="redisService" class="com.yummet.cache.RedisService"/>
+	<bean id="redisDataSource" class="com.yummet.cache.RedisDataSourceImpl" />
+	<bean id="redisClientTemplate" class="com.yummet.cache.RedisClientTemplate" />
+	<bean id="systemContext" class="com.yummet.platform.adapters.SystemContext"/>
 	
 	<mongo:mongo host="localhost" port="27017" id="mongo" /> 
 	<!--  for defining mongo template -->
@@ -28,19 +28,19 @@
 	<!-- For consider the using of annotations fof defining Spring Bean -->
 	<context:annotation-config />
 	<!-- For defining Spring Bean -->
-	<context:component-scan base-package="com.iamhere.platform.adapters" />
+	<context:component-scan base-package="com.yummet.platform.adapters" />
 	<!-- For defining mongo repository -->
-	<mongo:repositories base-package="com.iamhere.mongodb.repositories" />	
+	<mongo:repositories base-package="com.yummet.mongodb.repositories" />	
 
 	<!-- Redis configuration -->
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
-        <property name="maxActive" value="32"></property>  
+        <!--  <property name="maxActive" value="32"></property>  -->
         <property name="maxIdle" value="6"></property>  
-        <property name="maxWait" value="15000"></property>  
+        <!--  <property name="maxWait" value="15000"></property> -->
         <property name="minEvictableIdleTimeMillis" value="300000"></property>  
         <property name="numTestsPerEvictionRun" value="3"></property>  
         <property name="timeBetweenEvictionRunsMillis" value="60000"></property>  
-        <property name="whenExhaustedAction" value="1"></property>  
+        <!--  <property name="whenExhaustedAction" value="1"></property>  -->
         <property name="testOnBorrow" value="true"></property>  
     </bean>  
     <!-- ShardedJedisPool v.s. JedisPool 一个是分片形式，可以连接有主备的redis服务端，一个是单个的 -->
@@ -58,7 +58,7 @@
 					<constructor-arg value="127.0.0.1" />
 					<constructor-arg type="int" value="6379" />
 					<constructor-arg value="instance:01" />
-					<property name="password" value="amer0501"></property>  
+					<property name="password" value="amer0501"></property> 
 				</bean>
 			</list>
 		</constructor-arg>
