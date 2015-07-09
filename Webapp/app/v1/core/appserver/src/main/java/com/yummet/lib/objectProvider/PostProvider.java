@@ -16,10 +16,13 @@ import com.yummet.lib.platformService.PlatformPostServiceImpl;
  * @since 1
  * */
 public class PostProvider {
+	private PostProviderStub postProviderStub;
 
 	private PlatformPostService platformPostService;
 	
 	public PostProvider() {
+		// TODO stub helper, should be removed
+		this.postProviderStub = new PostProviderStub();
 		this.platformPostService = new PlatformPostServiceImpl();
 	}
 	
@@ -44,7 +47,9 @@ public class PostProvider {
         }
 
 	public List<Post> get(User user, int size, int cursor) {
-		return this.platformPostService.get(user, size, cursor);
+		return postProviderStub.get(size, cursor);
+		
+		//return this.platformPostService.get(user, size, cursor);
 	}
 
 	public Boolean remove(String postId) {

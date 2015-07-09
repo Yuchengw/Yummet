@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="com:yummet:appserver:Post"
+	xmlns:tns="com:yummet:appserver:Post" elementFormDefault="qualified">
+	<complexType name="PostRequest">
+		<sequence>
+			<element name="user" type="string" />
+			<element name="subject" type="string" />
+			<element name="body" type="string"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Post">
+		<sequence>
+			<element name="user" type="string" />
+			<element name="id" type="string" />
+			<element name="subject" type="string" />
+			<element name="body" type="string"/>
+		</sequence>
+	</complexType>
+
+	<element name="PostList">
+		<complexType>
+			<sequence>
+				<element name="post_list" type="tns:Post" minOccurs="1" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+</schema> 
