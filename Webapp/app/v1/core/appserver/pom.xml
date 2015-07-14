@@ -130,6 +130,30 @@
 					<stopPort>9999</stopPort>
 				</configuration>
 			</plugin>
+	                <plugin>
+	                    <groupId>org.jvnet.jaxb2.maven2</groupId>
+	                    <artifactId>maven-jaxb2-plugin</artifactId>
+	                    <version>0.12.3</version>
+	                    <configuration>
+	                        <schemaDirectory>src/main/webapp/resources/schemas</schemaDirectory>
+	                        <generateDirectory>target/generated-sources</generateDirectory>
+	                        <verbose>true</verbose>
+	                        <debug>true</debug>
+	                        <encoding>UTF-8</encoding>
+	                        <forceRegenerate>true</forceRegenerate>
+	                        <removeOldOutput>true</removeOldOutput>
+	                        <!-- bindingDirectory>src/main/resources/schema-bindings</bindingDirectory-->
+	                        <generatePackage>com.yummet.proto</generatePackage>
+	                    </configuration>
+	                    <executions>
+	                        <execution>
+	                            <id>generate</id>
+	                            <goals>
+	                                <goal>generate</goal>
+	                            </goals>
+	                        </execution>
+	                    </executions>
+	                </plugin>
 		</plugins>
 	</build>
 </project>

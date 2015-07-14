@@ -19,18 +19,23 @@
 //        service.remove = remove;
         return service;
   
-        function getById(id) {
-            return $http.get(options.api.base_url + '/service/post/' + id).then(handleSuccess, handleError('Error getting post by id'));
+        function getById(postid) {
+            return $http.get(options.api.base_url + '/service/post/' + postid).then(handleSuccess, handleError('Error getting post by id'));
         }
         
-        function get(number) {
-            return $http.get(options.api.base_url + '/service/posts/' + number).then(handleSuccess, handleError('Error getting post by username'));
+        function get(userid, number) {
+            // stub
+            return $http.get(options.api.base_url + '/service/post/10').then(handleSuccess, handleError('Error creating post'));
+            //return $http.get(options.api.base_url + '/service/posts/' + userid + '/10/0').then(handleSuccess, handleError('Error creating post'));
+
+            //return $http.get(options.api.base_url + '/service/posts/' + userid, {
+            //					params: {
+            //							step: number
+            //							}
+       	    //	    				}).then(handleSuccess, handleError('Error getting post by username'));
         }
 
         function create(userCredentials, post) {
-//        	var headers = user ? {authorization : "Basic "
-//		        + btoa(user.username + ":" + user.email + ":" + user.password)
-//		    } : {};
         	// TODO: We could do something here for credentials here in frontend in the future, for now, let server deal with these stuff.
             return $http.post(options.api.base_url + '/service/post/create/', post).then(handleSuccess, handleError('Error creating post'));
         }
