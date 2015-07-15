@@ -1,5 +1,7 @@
 package com.yummet.enums;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents the visibility for a certain post:
  * 1. Public: Everyone can see the post
@@ -8,7 +10,9 @@ package com.yummet.enums;
  *
  */
 public enum PostVisibilityEnum {
+	@SerializedName("public")
 	PUBLIC("Public", "p"), 
+	@SerializedName("private")
 	PRIVATE("Private", "r");
 
 	private String apiValue;

@@ -1,5 +1,7 @@
 package com.yummet.enums;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents the order status for all the posts:
  * 1. Open: The post is just created and food is available 
@@ -10,8 +12,14 @@ package com.yummet.enums;
  *
  */
 public enum PostStatus {
-	OPEN("Open", "o"), CLOSE("Close", "c"), EXPIRE("Expire", "e"), REMOVED(
-			"Removed", "r");
+	@SerializedName("open")
+	OPEN("Open", "o"), 
+	@SerializedName("close")
+	CLOSE("Close", "c"), 
+	@SerializedName("expire")
+	EXPIRE("Expire", "e"), 
+	@SerializedName("removed")
+	REMOVED("Removed", "r");
 
 	private String apiValue;
 	private String dbValue;

@@ -60,6 +60,9 @@ public abstract class PostObject extends EntityObject {
 
 	public PostObject(String id) {
 		setId(id);
+		setPostCategory("Food");
+		// Post visibility by default is Public
+		setVisibility(PostVisibilityEnum.PUBLIC);
 	}
 
 	/* Getters and Setters */

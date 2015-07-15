@@ -8,14 +8,14 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-public class RestPostServiceTest extends TestCase {
+public class RestCommentServiceTest extends TestCase {
 	/**
 	 * Create the test case
 	 *
 	 * @param testName
 	 *            name of the test case
 	 */
-	public RestPostServiceTest(String testName) {
+	public RestCommentServiceTest(String testName) {
 		super(testName);
 	}
 
@@ -23,7 +23,7 @@ public class RestPostServiceTest extends TestCase {
 	 * @return the suite of tests being tested
 	 */
 	public static Test suite() {
-		return new TestSuite(RestPostServiceTest.class);
+		return new TestSuite(RestCommentServiceTest.class);
 	}
 
 	public void testUpsertAProvidePost() {

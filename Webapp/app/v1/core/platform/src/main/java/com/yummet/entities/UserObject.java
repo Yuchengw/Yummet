@@ -40,7 +40,7 @@ public class UserObject extends EntityObject {
 	private String role;
 	private boolean isEmailAuthorized;
 	private DateTime sessionExpire;
-	
+
 	// Related Object information which is relationship information in the
 	// Relational DB
 	private Set<String> createdPosts;
@@ -49,7 +49,7 @@ public class UserObject extends EntityObject {
 
 	public UserObject() {
 	}
-	
+
 	public UserObject(String firstName, String lastName, String email,
 			String password) {
 		// TODO: Assume caller will give no-null-empty values
@@ -66,7 +66,7 @@ public class UserObject extends EntityObject {
 		setId(id);
 		setEmail(email);
 	}
-	
+
 	public UserObject(String email) {
 		setEmail(email);
 	}
@@ -152,11 +152,11 @@ public class UserObject extends EntityObject {
 	public void setEmailAuthorized(boolean isEmailAuthorized) {
 		this.isEmailAuthorized = isEmailAuthorized;
 	}
-	
+
 	public void setSessionExpire(DateTime sessionExpire) {
 		this.sessionExpire = sessionExpire;
 	}
-	
+
 	public DateTime getSessionExpire() {
 		return sessionExpire;
 	}
@@ -164,65 +164,69 @@ public class UserObject extends EntityObject {
 	public void setCreatedPosts(Set<String> posts) {
 		createdPosts = posts;
 	}
-	
+
 	public Set<String> getCreatedPosts() {
 		return createdPosts;
 	}
-	
+
 	public void setCommentedPosts(Set<String> posts) {
 		commentedPosts = posts;
 	}
-	
+
 	public Set<String> getCommentedPosts() {
 		return commentedPosts;
 	}
-	
-	 /**
+
+	/**
 	 * When a user create a post, we add the postId to the User
+	 * 
 	 * @param postId
 	 */
-	 public void addCreatedPosts(String postId) {
-	 if (createdPosts == null) {
-	 createdPosts = new HashSet<String>();
-	 }
-	 createdPosts.add(postId);
-	 relatedInforIsUpdated = true;
-	 }
-	
-	 /**
+	public void addCreatedPosts(String postId) {
+		if (createdPosts == null) {
+			createdPosts = new HashSet<String>();
+		}
+		createdPosts.add(postId);
+		relatedInforIsUpdated = true;
+	}
+
+	/**
 	 * When a user remove a post, we remove the postId from the User
+	 * 
 	 * @param postId
 	 */
-	 public void removeCreatedPosts(String postId) {
-	 if (createdPosts != null) {
-	 createdPosts.remove(postId);
-	 relatedInforIsUpdated = true;
-	 }
-	 }
-	
-	 /**
+	public void removeCreatedPosts(String postId) {
+		if (createdPosts != null) {
+			createdPosts.remove(postId);
+			relatedInforIsUpdated = true;
+		}
+	}
+
+	/**
 	 * When a user comment a post, we add the postId to the User
+	 * 
 	 * @param postId
 	 */
-	 public void addCommentedPosts(String postId) {
-	 if (commentedPosts == null) {
-	 commentedPosts = new HashSet<String>();
-	 }
-	 commentedPosts.add(postId);
-	 relatedInforIsUpdated = true;
-	 }
-	
-	 /**
+	public void addCommentedPosts(String postId) {
+		if (commentedPosts == null) {
+			commentedPosts = new HashSet<String>();
+		}
+		commentedPosts.add(postId);
+		relatedInforIsUpdated = true;
+	}
+
+	/**
 	 * When a user comment a post, we remove the postId from the User
+	 * 
 	 * @param postId
 	 */
-	 public void removeCommentedPosts(String postId) {
-	 if (commentedPosts != null) {
-	 commentedPosts.remove(postId);
-	 relatedInforIsUpdated = true;
-	 }
-	 }
-	
+	public void removeCommentedPosts(String postId) {
+		if (commentedPosts != null) {
+			commentedPosts.remove(postId);
+			relatedInforIsUpdated = true;
+		}
+	}
+
 	/**
 	 * Check if the same email address has been used by others
 	 * 
@@ -235,15 +239,14 @@ public class UserObject extends EntityObject {
 		maps.put("Email", getEmail());
 		boolean isExist = false;
 		try {
-			isExist = dbContext.exists("Users", maps, 
-					this);
-		} catch( Exception e) {
+			isExist = dbContext.exists("Users", maps, this);
+		} catch (Exception e) {
 			isExist = false;
-		} 
+		}
 		// Todo update cache
 		return isExist;
 	}
-	
+
 	/**
 	 * Verify if the current user already exists in the db
 	 * 
@@ -281,7 +284,7 @@ public class UserObject extends EntityObject {
 		if (TextUtil.isNullOrEmpty(getAlias())) {
 			dml.addError("Alias cannot be empty!");
 		}
-		
+
 		// The default role information is normal user
 		if (TextUtil.isNullOrEmpty(getRole())) {
 			setRole("normal");
@@ -315,21 +318,20 @@ public class UserObject extends EntityObject {
 				+ ", lastname=" + lastName + ", phone=" + phone + ", password="
 				+ password + ", alias=" + alias + ", role=" + role + "]";
 	}
-	
-//	TODO:
-//	@Override
-//	public void saveHook_Validate(DmlValidationHandler dml) {
-//		boolean exists = isEmailUsed();
-//		if (exists && dml.getDmlType() == DMLEvents.CREATE) {
-//			dml.addError("The email is already used!");
-//		}
-//	}
-	
 
-	
+	// TODO:
+	// @Override
+	// public void saveHook_Validate(DmlValidationHandler dml) {
+	// boolean exists = isEmailUsed();
+	// if (exists && dml.getDmlType() == DMLEvents.CREATE) {
+	// dml.addError("The email is already used!");
+	// }
+	// }
+
 	@Override
 	public Map<String, Object> getFieldsAndValues() {
-		Map<String, Object> values = new HashMap<String, Object>();;
+		Map<String, Object> values = new HashMap<String, Object>();
+		;
 		values.put("email", email);
 		return values;
 	}
