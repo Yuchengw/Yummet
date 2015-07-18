@@ -4,26 +4,27 @@
  * */
 (function () {
 	'use strict';
-	angular.module('localStore', []).factory('TokenStorage', TokenStorage);
+	angular.module('localStore', ['ngCookies']).factory('TokenStorage', TokenStorage);
+	TokenStorage.$inject = [ '$http', '$cookieStore'];
 	
-	function TokenStorage() {
+	function TokenStorage($http, $cookieStore) {
 		var service = {};
-		var storageKey = 'yummet_auth_token';
+		var storageKey = 'yummet_x_csrf_token';
 		service.store = store;
 		service.retrieve = retrieve;
 		service.clear = clear;
 		return service;
 		
 		function store(token) {
-			return localStorage.setItem(storageKey, token);
+			return $cookieStore.put(storageKey, token);
 		}
 	
 		function retrieve() {
-			return localStorage.getItem(storageKey);
+			return $cookieStore.get(storageKey);
 		}
 		
 		function clear() {
-			return localStorage.removeItem(storageKey);
+			return $cookieStore.remove(storageKey);
 		}
 	}
 })();

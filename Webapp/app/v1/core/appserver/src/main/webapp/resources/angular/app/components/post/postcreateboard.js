@@ -5,6 +5,7 @@
 */
 angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'userContextService', 'authenticateService', 'postContextService', 'ui.bootstrap','ngFileUpload'])
 .config(function($httpProvider){
+	
 })
 .run(function(){
 	
@@ -38,7 +39,7 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 			 var providerpost = $scope.providerpost;
 			 if (providerpost && providerpost !== undefined) {
 				 if (providerpost.startdate > providerpost.enddate) {
-					 alert("start date should be before end date");
+					 $log.error("start date should be before end date");
 					 return;
 				 }
 				  var credentials = authenticationService.getCredentials();
@@ -133,7 +134,7 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 					  callback && callback();
 				  })
 			  } else {
-				  console.log("user credential has error");
+				  $log.error("user credential has error");
 			  }
 		  }
 }]);

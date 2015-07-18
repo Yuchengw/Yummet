@@ -27,7 +27,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 		if (user == null) {
 			throw new UsernameNotFoundException("user not found");
 		}
-		detailsChecker.check(user);
+//		detailsChecker.check(user); // TODO: we needs a custom detailsChecker
 		return user;
 	}
 	

@@ -15,6 +15,7 @@ angular.module('loginApp', ['ui.router','ngAnimate','localStore','contextStateSe
 	   * Login function
 	   * */
 	  $scope.login = function logIn() {
+		  // TODO: refresh will break this, need to use cookie or send it to server 
 		  if (stateService.isLogin && stateService.isLogin === true) {
 			  $log.warn("you already in Yummmet, Please log out first");
 			  $location.path("/");
@@ -37,21 +38,19 @@ angular.module('loginApp', ['ui.router','ngAnimate','localStore','contextStateSe
 	   * Authenticate function used for login function
 	   * */
 	  var loginAuthenticate = function(credentials, callback) {
-		  authenticationService.login(credentials)
-//		  .then(
-//			function(user){
-//			   if (user.email) {
-//			      $log.info("user login successfully");
-//			      alert("Hello " + user.email);
-//			      TokenStorage.store(headers('X-AUTH-TOKEN'));
-//			   	  stateService.isLogin = true;
-//			   } else {
-//				  stateService.isLogin = false;
-//			   }
-//			}, function () {
-//		    });
-		   stateService.isLogin = false;
-		   callback && callback();
+		  authenticationService.login(credentials).then(
+		      function(res) {
+		    	  if (res) {
+		    		  stateService.isLogin = true;
+		    	  } else if (res.success === false){
+		    		  stateService.isLogin = false;
+		    	  }
+				  callback && callback();
+		      }, function(error) {
+		    	  stateService.isLogin = false;
+		    	  $log.info(error);
+				  callback && callback();
+		      });
 	    }
 }]);
 

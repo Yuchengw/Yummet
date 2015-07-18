@@ -7,44 +7,62 @@
 
 (function () {
     'use strict';
-    angular.module('postContextService',[]).factory('postService', postService);
-    postService.$inject = ['$http'];
-    function postService($http) {
+    angular.module('postContextService',['localStore']).factory('postService', postService);
+    postService.$inject = ['$http','TokenStorage'];
+    function postService($http, TokenStorage, $log) {
         var service = {};
  
         service.getById = getById;
-//        service.getByUsername = getByUsername;
         service.create = create;
         service.update = update;
-//        service.remove = remove;
+//      service.remove = remove;
+//      service.getByUsername = getByUsername;
         return service;
   
+        /*****************************************Business code start here*********************************/
         function getById(id) {
-            return $http.get(options.api.base_url + '/service/post/' + id).then(handleSuccess, handleError('Error getting post by id'));
+        	if (verifyAuth() === true) {
+                return $http.get(options.api.base_url + '/service/post/' + id).then(handleSuccess, handleError('Error getting post by id'));
+        	} else {
+        		return {sucess: false, message: "getId needs cookie also!"};
+        	} 
         }
         
         function get(number) {
-            return $http.get(options.api.base_url + '/service/posts/' + number).then(handleSuccess, handleError('Error getting post by username'));
+        	if (verifyAuth().success === true) {
+        		return $http.get(options.api.base_url + '/service/posts/' + number).then(handleSuccess, handleError('Error getting post by username'));
+        	} else {
+        		return {sucess: false, message: "you think get posts don't need local credential?"};
+        	}
         }
 
         function create(userCredentials, post) {
-//        	var headers = user ? {authorization : "Basic "
-//		        + btoa(user.username + ":" + user.email + ":" + user.password)
-//		    } : {};
-        	// TODO: We could do something here for credentials here in frontend in the future, for now, let server deal with these stuff.
-            return $http.post(options.api.base_url + '/service/post/create/', post).then(handleSuccess, handleError('Error creating post'));
+        	if (verifyAuth().sucesss === true) {
+        		return $http.post(options.api.base_url + '/service/post/create/', post).then(handleSuccess, handleError('Error creating post'));
+        	} else {
+        		return {sucess: false, message: "create post definite need local credentials, give me some."};
+        	}
         }
  
         function update(post) {
-            return $http.put(options.api.base_url + '/service/post/update/' + post.id, post).then(handleSuccess, handleError('Error updating post'));
+        	if (verifyAuth().sucesss === true) {
+        		return $http.put(options.api.base_url + '/service/post/update/' + post.id, post).then(handleSuccess, handleError('Error updating post'));
+        	} else {
+        		return {sucess: false, message: "update post needs local credentails."}
+        	}
         }
  
         function remove(userCredential, post) {
-            return $http.delete(options.api.base_url + '/service/post/delete/' + post.id).then(handleSuccess, handleError('Error deleting post'));
+        	if (verifyAuth().success === true) {
+        		return $http.delete(options.api.base_url + '/service/post/delete/' + post.id).then(handleSuccess, handleError('Error deleting post'));
+        	} else {
+        		return {success: false, message: "are you kidding? delete post without basic credentials?"};
+        	}
         }
         
         // private self-defined functions
         function handleSuccess(data) {
+        	// TODO: could do better here
             return data;
         }
  
@@ -53,6 +71,17 @@
                 return { success: false, message: error };
             };
         }
+        
+        function verifyAuth() {
+        	var localCred = TokenStorage.retrieve();
+        	if (!localCred) {
+        		$log.warn("local credential info is missing");
+                return false;
+        	}
+    		$log.info("prepare to shoot server");
+        	return true;
+        }
     }
- 
+    
+    /*************************************Helper funciion start here********************************/
 })();

@@ -37,8 +37,9 @@
 	<filter-mapping>
   		<filter-name>springSecurityFilterChain</filter-name>
   		<url-pattern>/*</url-pattern>
-  		<dispatcher>ERROR</dispatcher>
+  		<!--<dispatcher>ERROR</dispatcher> -->
   		<dispatcher>REQUEST</dispatcher>
+  		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	
 	<!-- This listener will load other application context file in addition 
