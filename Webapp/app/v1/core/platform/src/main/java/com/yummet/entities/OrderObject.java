@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import com.yummet.enums.OrderStatus;
 import com.yummet.mongodb.entities.DBEntityObject;
 import com.yummet.mongodb.entities.DBOrderObject;
+import com.yummet.platform.func.DmlOperationWrapper;
 import com.yummet.platform.func.DmlValidationHandler;
 import com.yummet.utilities.TextUtil;
 
@@ -35,10 +36,6 @@ public class OrderObject extends EntityObject {
 		setBuyer(buyer);
 	}
 	
-	public OrderObject(DBOrderObject db) {
-		reloadAllFieldInformationFromDbObject(db);
-	}
-
 	public OrderObject(String id) {
 		setId(id);
 	}
@@ -127,78 +124,59 @@ public class OrderObject extends EntityObject {
 	/*===================== Override super method =============================*/
 	@Override
 	public void saveHook_Validate(DmlValidationHandler dml) {
-		if (getseller() == null) {
-			dml.addError("Order seller is not set!");
-		}
-		if (getbuyer() == null) {
-			dml.addError("Order buyer is not set!");
-		}
-		if (getParentPost() == null) {
-			dml.addError("Parent post is forget to set!");
-		} else {
-			if (getParentPost().getType() != PostObject.PROVIDE) {
-				dml.addError("The order can only happen on provide type of post!");
-			}
-		}
-		
-		// The default status of the order is Open
-		if(status == null) {
-			setStatus(OrderStatus.OPEN);
-		}
-		super.saveHook_Validate(dml);
+//		if (getseller() == null) {
+//			dml.addError("Order seller is not set!");
+//		}
+//		if (getbuyer() == null) {
+//			dml.addError("Order buyer is not set!");
+//		}
+//		if (getParentPost() == null) {
+//			dml.addError("Parent post is forget to set!");
+//		} else {
+//			if (getParentPost().getType() != PostObject.PROVIDE) {
+//				dml.addError("The order can only happen on provide type of post!");
+//			}
+//		}
+//		
+//		// The default status of the order is Open
+//		if(status == null) {
+//			setStatus(OrderStatus.OPEN);
+//		}
+//		super.saveHook_Validate(dml);
 	}
 
-	@Override
-	public DBEntityObject getDbObject() {
-		DBOrderObject dbOrder = new DBOrderObject();
-		dbOrder.setJiaWithEntity(seller);
-		dbOrder.setYiWithEntity(buyer);
-		dbOrder.setSuccess(isSuccess);
-		dbOrder.setTransactionDateTime(transactionDateTime);
-		dbOrder.setParentPostWithEntity(parentPost);
-		dbOrder.setThirdPartyInfo(thirdPartyInfo);
-		dbOrder.setActualCost(actualCost);
-		dbOrder.setQuantity(quantity);
-		dbOrder.setScore(score);
-		dbOrder.setStatus(status.getDbValue());
-		dbOrder.setCreatedDate(getCreatedDate());
-		dbOrder.setLastModifiedDate(getLastModifiedDate());
-		if (!TextUtil.isNullOrEmpty(getId())) {
-			dbOrder.setId(getId());
-		}
-		return dbOrder;
-	}
-
-	@Override
-	public void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject) {
-		DBOrderObject dbOrder = (DBOrderObject) dbObject;
-		setId(dbOrder.getId());
-		setCreatedDate(dbOrder.getCreatedDate());
-		setLastModifiedDate(dbOrder.getLastModifiedDate());
-		setActualCost(dbOrder.getActualCost());
-		setSeller(new UserObject(dbOrder.getSeller().toString()));
-		setBuyer(new UserObject(dbOrder.getBuyer().toString()));
-		setParentPost(new PostObject(dbOrder.getParentPost().toString()));
-		setQuantity(dbOrder.getQuantity());
-		setScore(dbOrder.getScore());
-		setSuccess(dbOrder.isSuccess());
-		setThirdPartyInfo(dbOrder.getThirdPartyInfo());
-		setTransactionDateTime(dbOrder.getTransactionDateTime());
-		setStatus(OrderStatus.fromDbValue(dbOrder.getStatus()));
-	}
-	
 	public OrderObject load() throws Exception {
 		return (OrderObject) super.load();
 	}
 
 	@Override
-	public Class<?> getDbClass() {
-		return DBOrderObject.class;
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringUpdate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringRemove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRelatedInfoUpdate() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public String getDbTableName() {
-		return new DBOrderObject().getDbTableName();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

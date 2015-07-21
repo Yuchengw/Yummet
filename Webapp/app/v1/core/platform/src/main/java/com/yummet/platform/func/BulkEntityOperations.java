@@ -79,8 +79,7 @@ public class BulkEntityOperations {
 		if (!needLoadFromDb.isEmpty()) {
 			DatabaseProvider dbContext = SystemContext.getContext();
 			for (EntityObject eo : needLoadFromDb) {
-				DBEntityObject dbEo = eo.getDbObject();
-				List<EntityObject> queryResults = dbContext.getRecordsBasedOnQuery(dbEo.getDbTableName(), eo, dbEo.getFieldsAndValues());
+				List<EntityObject> queryResults = dbContext.getRecordsBasedOnQuery(eo.getDbTableName(), eo, eo.getFieldsAndValues());
 				// TODO the return result should be greater 1 or exactly 1?
 				if (queryResults != null && queryResults.size() > 0) {
 					logger.debug("The query returns more than 1 result. And we will only get the first one. <==");
@@ -118,12 +117,11 @@ public class BulkEntityOperations {
 		// TODO: hash against the entity to make bulk really happens
 		for (EntityObject eo : afterFirstValidationObjects) {
 			try {
-				DBEntityObject dbEo = eo.getDbObject();
-				dbContext.saveRecords(dbEo.getDbTableName(),new EntityObject[] { eo });
+				dbContext.saveRecords(eo.getDbTableName(), new EntityObject[] { eo });
 				logger.debug("Save succeeds. <==");
 				// reload does not required for MongoDb as id will be already in
 				// the eo
-				eo.setId(dbEo.getId());
+				eo.setId(eo.getId());
 				logger.debug("Saved record id is ==> " + eo.getId());
 				// Save or update the cache
 				boolean cacheResult = cacheContext.saveRecords(new EntityObject[] { eo });
@@ -172,8 +170,7 @@ public class BulkEntityOperations {
 		DatabaseProvider dbContext = SystemContext.getContext();
 		for (EntityObject eo : entityObjects) {
 			try {
-				DBEntityObject dbEo = eo.getDbObject();
-				dbContext.removeRecords(dbEo.getDbTableName(), new EntityObject[] { eo });
+				dbContext.removeRecords(eo.getDbTableName(), new EntityObject[] { eo });
 			} catch (Exception e) {
 				logger.debug("remove Objects failed "  + e.getStackTrace());
 				return false;

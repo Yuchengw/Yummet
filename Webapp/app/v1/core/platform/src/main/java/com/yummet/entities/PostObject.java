@@ -1,48 +1,54 @@
 package com.yummet.entities;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.joda.time.DateTime;
 
 import com.yummet.enums.PostStatus;
 import com.yummet.enums.PostVisibilityEnum;
-import com.yummet.mongodb.entities.DBEntityObject;
-import com.yummet.mongodb.entities.DBPostObject;
+import com.yummet.platform.func.DmlOperationWrapper;
 import com.yummet.platform.func.DmlValidationHandler;
 import com.yummet.utilities.TextUtil;
 
 /**
  * Platform entity for the Post
+ * 
  * @author Jessica
  * @version 1
  *
  */
-public class PostObject extends EntityObject {
-	private static final long serialVersionUID = -6011241820070393955L;  
-	// Final static constant for different post types
-	public final static String REQUEST = "REQUEST";
-	public final static String PROVIDE = "PROVIDE";
-	
+public abstract class PostObject extends EntityObject {
+	private static final long serialVersionUID = -6011241820070393955L;
+
 	// private fields
-	private String subject;
-	private String location;
-	private RecurEventInfo period;
-	private int quantity;
-	private String commentsOrDescription;
-	private double cost;
-	private String image;
-	private UserObject[] partners;
-	private String postCategory;
-	private PostStatus status;
-	private PostVisibilityEnum visibility;
-	private int numberOfOrders; // TODO: more detail
-	private int numberOfLikes;
-	private UserObject creator;
-	private UserObject lastModifiedBy;
-	private String type;
-	private Date expireDate;
+	protected String subject;
+	protected String location;
+	protected RecurEventInfo period;
+	protected int quantity;
+	protected String commentsOrDescription;
+	protected double cost;
+	protected String image;
+	protected UserObject[] partners;
+	protected String postCategory;
+	protected PostStatus status;
+	protected PostVisibilityEnum visibility;
+	protected int numberOfOrders; // TODO: more detail
+	protected int numberOfLikes;
+	protected UserObject creator;
+	protected UserObject lastModifiedBy;
+	protected DateTime expireDate;
+
+	// Related Object information which is relationship information in the
+	// Relational DB
+	protected Set<String> postComments;
+	protected boolean postCommentsNumberIsChanged = false;
+
+	public PostObject() {
+	}
 	
-	public PostObject(UserObject creator, String subject, String location, int quantity) {
+	public PostObject(UserObject creator, String subject, String location,
+			int quantity) {
 		setCreator(creator);
 		setSubject(subject);
 		setLocation(location);
@@ -51,16 +57,20 @@ public class PostObject extends EntityObject {
 		// Post visibility by default is Public
 		setVisibility(PostVisibilityEnum.PUBLIC);
 	}
-	
-	public PostObject(DBPostObject db) {
-		reloadAllFieldInformationFromDbObject(db);
-	}
 
 	public PostObject(String id) {
 		setId(id);
+		setPostCategory("Food");
+		// Post visibility by default is Public
+		setVisibility(PostVisibilityEnum.PUBLIC);
 	}
 
 	/* Getters and Setters */
+	public void setId(String id) {
+		super.setId(id);
+		setCacheKey(id);
+	}
+	
 	public String getSubject() {
 		return subject;
 	}
@@ -148,7 +158,7 @@ public class PostObject extends EntityObject {
 	public void setVisibility(PostVisibilityEnum visibility) {
 		this.visibility = visibility;
 	}
-	
+
 	public int getNumberOfOrders() {
 		return numberOfOrders;
 	}
@@ -173,22 +183,14 @@ public class PostObject extends EntityObject {
 		this.creator = creator;
 	}
 
-	public String getType()  {
-		return type;
-	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public Date getExpireDate() {
+	public DateTime getExpireDate() {
 		return expireDate;
 	}
 
-	public void setExpireDate(Date expireDate) {
+	public void setExpireDate(DateTime expireDate) {
 		this.expireDate = expireDate;
 	}
-	
+
 	public UserObject getLastModifiedBy() {
 		return lastModifiedBy;
 	}
@@ -197,115 +199,105 @@ public class PostObject extends EntityObject {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
+	/**
+	 * When a user create a post comments, we add the postCommentId to the Post
+	 * 
+	 * @param postId
+	 */
+	public void addPostComments(String postId) {
+		if (postComments == null) {
+			postComments = new HashSet<String>();
+		}
+		postComments.add(postId);
+		postCommentsNumberIsChanged = true;
+	}
+
+	/**
+	 * When a user remove a post comments, we remove the postCommentId from the
+	 * Post
+	 * 
+	 * @param postId
+	 */
+	public void removePostComments(String postId) {
+		if (postComments != null) {
+			postComments.remove(postId);
+			postCommentsNumberIsChanged = true;
+		}
+	}
+
+	/* Getters and Setters */
+	public void setPostComments(Set<String> posts) {
+		postComments = posts;
+	}
+
+	public Set<String> getPostComments() {
+		return postComments;
+	}
+
 	@Override
 	public void saveHook_Validate(DmlValidationHandler dml) {
 		// cost should be greater than or equal to 0
 		if (TextUtil.isNullOrEmpty(getSubject())) {
 			dml.addError("The subject is not set!");
 		}
-		// Comment this out first since they are not needed for now
-//		if (TextUtil.isNullOrEmpty(getLocation())) {
-//			dml.addError("The location is not set!");
-//		}
-//		if (getQuantity() < 0) {
-//			dml.addError("The quntity cannot be negative!");
-//		}
-//		if (getCost() < 0) {
-//			dml.addError("The cost cannot be negative number!");
-//		}
-//		if (TextUtil.isNullOrEmpty(getType())) {
-//			dml.addError("The post type is not set!");
-//		}
-		
+		if (TextUtil.isNullOrEmpty(getLocation())) {
+			dml.addError("The location is not set!");
+		}
+		if (getQuantity() < 0) {
+			dml.addError("The quntity cannot be negative!");
+		}
+		if (getCost() < 0) {
+			dml.addError("The cost cannot be negative number!");
+		}
 		if (getPartners() != null) {
-			for (UserObject partner: getPartners()) {
+			for (UserObject partner : getPartners()) {
 				if (partner == null) {
 					dml.addError("One of the partner is not set!");
 					break;
 				}
 			}
 		}
-		
+
 		if (getCreator() == null) {
 			dml.addError("Post creator is not set!");
 		}
-//		if (getLastModifiedBy() == null) {
-//			dml.addError("Post last modify by is not set!");
-//		}
-//		
+		if (getLastModifiedBy() == null) {
+			dml.addError("Post last modify by is not set!");
+		}
+		
 		// the post default category is food
 		if (TextUtil.isNullOrEmpty(getPostCategory())) {
 			setPostCategory("Food");
 		}
 		super.saveHook_Validate(dml);
 	}
-
+	
 	@Override
-	public DBEntityObject getDbObject() {
-		DBPostObject dbPost = new DBPostObject();
-		dbPost.setSubject(subject);
-		dbPost.setLocation(location);
-		dbPost.setPeriod(period);
-		dbPost.setQuantity(quantity);
-		dbPost.setCommentsOrDescription(commentsOrDescription);
-		dbPost.setCost(cost);
-		dbPost.setImage(image);
-		dbPost.setPartners(partners);
-		dbPost.setPostCategory(postCategory);
-//		dbPost.setStatus(status.getDbValue()); // BUG:
-//		dbPost.setVisibility(visibility.getDbValue());
-		dbPost.setNumberOfOrders(numberOfOrders);
-		dbPost.setNumberOfLikes(numberOfLikes);
-		dbPost.setCreatorWithEntity(creator);
-		dbPost.setType(type);
-		dbPost.setExpireDate(expireDate);
-		dbPost.setLastModifiedByWithEntity(lastModifiedBy);
-		dbPost.setCreatedDate(getCreatedDate());
-		dbPost.setLastModifiedDate(getLastModifiedDate());
-		
-		if (!TextUtil.isNullOrEmpty(getId())) {
-			dbPost.setId(getId());
-		}
-		return dbPost;
-	}
-
-	@Override
-	public void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject) {
-		DBPostObject dbPost = (DBPostObject) dbObject;
-		setCommentsOrDescription(dbPost.getCommentsOrDescription());
-		setCost(dbPost.getCost());
-		setCreatedDate(dbPost.getCreatedDate());
-		setCreator(new UserObject(dbPost.getCreator())); // TODO: Verify
-		setExpireDate(dbPost.getExpireDate());
-		setId(dbPost.getId());
-		setImage(dbPost.getImage());
-		setLastModifiedBy(new UserObject(dbPost.getLastModifiedBy())); // TODO: Verify
-		setLastModifiedDate(dbPost.getLastModifiedDate());
-		setLocation(dbPost.getLocation());
-		setNumberOfLikes(dbPost.getNumberOfLikes());
-		setNumberOfOrders(dbPost.getNumberOfOrders());
-		setPeriod(dbPost.getPeriod());
-		// TODO
-		setPartners(null);
-		setPostCategory(dbPost.getPostCategory());
-		setQuantity(dbPost.getQuantity());
-		setStatus(PostStatus.fromDbValue(dbPost.getStatus()));
-		setVisibility(PostVisibilityEnum.fromDbValue(dbPost.getVisibility()));
-		setSubject(dbPost.getSubject());
-		setType(dbPost.getType());
-	}
-
 	public PostObject load() throws Exception {
 		return (PostObject) super.load();
 	}
 
 	@Override
-	public Class<?> getDbClass() {
-		return DBPostObject.class;
+	public String toString() {
+		return  "Post [id=" + getId() + ", subject=" + subject + ", location=" + location +  "]";
+	}
+	
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringUpdate() {
+		creator.addCreatedPosts(getId());
+		return creator.save();
 	}
 
 	@Override
-	public String getDbTableName() {
-		return new DBPostObject().getDbTableName();
+	public boolean isRelatedInfoUpdate() {
+		return postCommentsNumberIsChanged;
+	}
+
+	@Override
+	public DmlOperationWrapper saveRelatedInfoDuringRemove() {
+//		TODO
+//		creator.removeCreatedPosts(getId());
+//		return creator.save();
+		return null;
 	}
 }

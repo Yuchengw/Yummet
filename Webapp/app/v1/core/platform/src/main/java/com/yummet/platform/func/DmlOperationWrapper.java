@@ -80,4 +80,16 @@ public class DmlOperationWrapper {
 		handler.addError(errorMessage);
 		hasError = true;
 	}
+	
+	/**
+	 * Return all the error messages for the certain entity
+	 * @param eo
+	 * @return
+	 */
+	public String getAllErrorsOnEntity(EntityObject eo) {
+		if (isBulkSuccess()) {
+			return null;
+		} 
+		return this.validationHandlers.get(eo).getErrorMessages();
+	}
 }

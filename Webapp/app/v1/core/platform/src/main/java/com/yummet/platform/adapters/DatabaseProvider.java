@@ -12,6 +12,8 @@ import com.yummet.entities.EntityObject;
  * @version 1
  */
 public interface DatabaseProvider {
+	
+	public Object getDbThread();
 	/**
 	 * Get all the records for a certain table and map all the information in @EntityObject
 	 * format

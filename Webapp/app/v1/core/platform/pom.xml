@@ -7,14 +7,14 @@
 	<version>1.0.SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<description>Platform POM for Yummet, Author:Yucheng</description>
-	
+
 	<parent>
 		<groupId>yummet</groupId>
 		<artifactId>core</artifactId>
 		<version>1.0.SNAPSHOT</version>
 		<relativePath>../yummet</relativePath>
 	</parent>
-	
+
 	<properties>
 		<!-- Generic properties -->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -24,6 +24,47 @@
 	</properties>
 
 	<dependencies>
+		<!-- Rest API Implementation for Platform -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20141113</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fatboyindustrial.gson-jodatime-serialisers</groupId>
+			<artifactId>gson-jodatime-serialisers</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-all</artifactId>
+			<version>3.3.1</version>
+		</dependency>
 		<!-- Spring Data Mongo Support -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -63,7 +104,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.14.v20131031</version>
+				<!-- version>8.1.14.v20131031</version -->
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopKey>stop</stopKey>

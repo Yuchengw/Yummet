@@ -20,9 +20,9 @@ import org.slf4j.Logger;
 
 /**
  * @author yucheng
- * @since 1
+ * @vesion 1
  * */
-//@Repository("redisClientTemplate")
+@Repository("redisClientTemplate")
 public class RedisClientTemplate {
 	// TODO
     private static final Logger log = (Logger) LoggerFactory.getLogger(RedisClientTemplate.class);

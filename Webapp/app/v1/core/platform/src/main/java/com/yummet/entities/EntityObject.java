@@ -2,14 +2,13 @@ package com.yummet.entities;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
 
 import com.yummet.enums.DMLEvents;
-import com.yummet.mongodb.entities.DBEntityObject;
 import com.yummet.platform.func.BulkEntityOperations;
 import com.yummet.platform.func.DmlOperationWrapper;
 import com.yummet.platform.func.DmlValidationHandler;
@@ -24,13 +23,11 @@ import com.yummet.platform.func.DmlValidationHandler;
  *
  */
 public abstract class EntityObject implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6011241820070393952L;  
+	@Id
 	private String id;
-	private Date createdDate;
-	private Date lastModifiedDate;
+	private DateTime createdDate;
+	private DateTime lastModifiedDate;
 	private String cacheKey;	// The cache identifier for the cache management system
 
 	// Primary getter and setters
@@ -50,22 +47,49 @@ public abstract class EntityObject implements Serializable{
 		this.cacheKey = cacheKey;
 	}
 
-	public Date getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getLastModifiedDate() {
+	public DateTime getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 
-	public void setLastModifiedDate(Date lastModifiedDate) {
+	public void setLastModifiedDate(DateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
+//	/**
+//	 * Return the field information to a map so that mongodb can easily understand it
+//	 * @return
+//	 */
+//	public Map<String, Object> getFieldsAndValues() {
+//		Map<String, Object> maps = new HashMap<String, Object>();
+//		maps.put("id", getId());
+//		return maps;
+//	}
+//	
+//	/**
+//	 * Db validation for the mongodb
+//	 * @param dml
+//	 */
+//	public abstract void saveHook_Validate(DmlValidationHandler dml);
+//
+//	/**
+//	 * Return the mongo db collection name for the given entity object
+//	 * @return
+//	 */
+//	public abstract String getDbTableName();
+
+	/**
+	 * Return the string representation of the object
+	 */
+	public abstract String toString();
+	
 	/**
 	 * Save the current entity object and return DmlOperationWrapper with error
 	 * If the current object is new, the save mode will be Create so that we
@@ -80,8 +104,11 @@ public abstract class EntityObject implements Serializable{
 		if (isNew()) {
 			dmlType = DMLEvents.CREATE;
 		}
-		return BulkEntityOperations.bulkSave(Collections.singletonList(this),
-				dmlType);
+		DmlOperationWrapper dmlResult = BulkEntityOperations.bulkSave(
+				Collections.singletonList(this), dmlType);
+		// TODO: how to use the return result
+		saveRelatedInfoDuringUpdate();
+		return dmlResult;
 	}
 
 	/**
@@ -112,7 +139,9 @@ public abstract class EntityObject implements Serializable{
 	 * @return
 	 */
 	public boolean remove() {
-		return BulkEntityOperations.bulkRemove(Collections.singletonList(this));
+		boolean removeResult = BulkEntityOperations.bulkRemove(Collections.singletonList(this));
+		saveRelatedInfoDuringRemove();
+		return removeResult;
 	}
 
 	/**
@@ -123,16 +152,20 @@ public abstract class EntityObject implements Serializable{
 	 * @param dml
 	 */
 	public void saveHook_Validate(DmlValidationHandler dml) {
-		// TODO: validate parent and child comment exists
-		DBEntityObject dbObj = getDbObject();
-		dbObj.saveHook_Validate(dml);
+//		// TODO: validate parent and child comment exists
+//		DBEntityObject dbObj = getDbObject();
+//		dbObj.saveHook_Validate(dml);
 
-		Date now = new Date();
+		DateTime now = new DateTime();
 		if (dml.getDmlType() == DMLEvents.CREATE) {
 			setCreatedDate(now);
 			setLastModifiedDate(now);
 		} else {
-			setLastModifiedDate(now);
+			if (!isRelatedInfoUpdate()) {
+				// if it is update, the created date information should already
+				// be there
+				setLastModifiedDate(now);
+			}
 		}
 	}
 
@@ -145,25 +178,25 @@ public abstract class EntityObject implements Serializable{
 		return getId() == null || getId().isEmpty() || getCreatedDate() == null;
 	}
 
-	/**
-	 * Get the db object information matched current entity object
-	 * 
-	 * @return
-	 */
-	public abstract DBEntityObject getDbObject();
+//	/**
+//	 * Get the db object information matched current entity object
+//	 * 
+//	 * @return
+//	 */
+//	public abstract DBEntityObject getDbObject();
 
-	/**
-	 * Reload all the entity field information from db object. No db access is
-	 * required is for this step.
-	 */
-	public abstract void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject);
-	
-	/**
-	 * Get the db class for the current object
-	 * @return
-	 */
-	public abstract Class<?> getDbClass();
+//	/**
+//	 * Reload all the entity field information from db object. No db access is
+//	 * required is for this step.
+//	 */
+//	public abstract void reloadAllFieldInformationFromDbObject(DBEntityObject dbObject);
 
+//	/**
+//	 * Get the db class for the current object
+//	 * @return
+//	 */
+//	public abstract Class<?> getDbClass();
+//
 	/**
 	 * Get the db table name
 	 * @return
@@ -174,4 +207,25 @@ public abstract class EntityObject implements Serializable{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * Cascade update the parent object information when the current object information is updated
+	 * 
+	 * @return
+	 */
+	public abstract DmlOperationWrapper saveRelatedInfoDuringUpdate();
+	
+	/**
+	 * Cascade update the parent object information when the current object will be removed
+	 * 
+	 * @return
+	 */
+	public abstract DmlOperationWrapper saveRelatedInfoDuringRemove();
+
+	/**
+	 * Return true if parent object needs update
+	 * 
+	 * @return
+	 */
+	public abstract boolean isRelatedInfoUpdate();
 }

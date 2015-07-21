@@ -1,6 +1,5 @@
 package com.yummet.platform.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.yummet.entities.EntityObject;
-import com.yummet.entities.PostComment;
-import com.yummet.entities.PostObject;
-import com.yummet.entities.UserObject;
 import com.yummet.mongodb.YummetMongoConfig;
-import com.yummet.mongodb.entities.DBEntityObject;
-import com.yummet.mongodb.entities.DBPostComment;
-import com.yummet.mongodb.entities.DBPostObject;
-import com.yummet.mongodb.entities.DBUserObject;
 import com.yummet.utilities.LogUtil;
 
 import org.slf4j.Logger;
@@ -30,9 +22,6 @@ import org.slf4j.Logger;
  * @version 1
  */
 public class MongoDbProvider implements DatabaseProvider {
-	
-	@SuppressWarnings("deprecation")
-	public RegistrationBean registrationBean;
 	// Auto threadsafe singleton pattern
 	private static final MongoTemplate mongoOps = (MongoTemplate) new AnnotationConfigApplicationContext(YummetMongoConfig.class)
 													.getBean("mongoTemplate");
@@ -41,29 +30,17 @@ public class MongoDbProvider implements DatabaseProvider {
 	public MongoDbProvider() {
 	}
 	
+	
+	public Object getDbThread() {
+		return mongoOps;
+	}
 	/**
 	 * 
 	 * */
 	@SuppressWarnings("unchecked")
 	public List<EntityObject> getAllTableRecords(String tableName, EntityObject info) {
-		List<EntityObject> records = new ArrayList<EntityObject>();
-		List<DBEntityObject> dbRecords = (List<DBEntityObject>) mongoOps.findAll(info.getDbObject().getClass());
-		// UserDAO userDaoImpl = (UserDAO) context.getBean("userDaoImpl");
-		for (DBEntityObject dbObject : dbRecords) {
-			EntityObject obj = null;
-			if (dbObject instanceof DBUserObject) {
-				DBUserObject dbUser = (DBUserObject) dbObject;
-				obj = new UserObject(dbUser);
-			} else if (dbObject instanceof DBPostObject) {
-				DBPostObject dbPost = (DBPostObject) dbObject;
-				obj = new PostObject(dbPost);
-			} else if (dbObject instanceof DBPostComment) {
-				DBPostComment dbComment = (DBPostComment) dbObject;
-				obj = new PostComment(dbComment);
-			}
-			records.add(obj);
-		}
-		return records;
+		List<EntityObject> dbRecords = (List<EntityObject>) mongoOps.findAll(info.getClass());
+		return dbRecords;
 	}
 
 	/**
@@ -71,27 +48,11 @@ public class MongoDbProvider implements DatabaseProvider {
 	 * */
 	@SuppressWarnings("unchecked")
 	public List<EntityObject> getRecordsBasedOnQuery(String tableName, EntityObject info, Map<String, Object> queryInfo) {
-		List<EntityObject> records = new ArrayList<EntityObject>();
 		Query query = createQueryBasedOnMap(queryInfo);
-		List<DBEntityObject> dbRecords = (List<DBEntityObject>) mongoOps.find(query, info.getDbObject().getClass());
-
-		for (DBEntityObject dbObject : dbRecords) {
-			EntityObject obj = null;
-			if (dbObject instanceof DBUserObject) {
-				DBUserObject dbUser = (DBUserObject) dbObject;
-				obj = new UserObject(dbUser);
-			} else if (dbObject instanceof DBPostObject) {
-				DBPostObject dbPost = (DBPostObject) dbObject;
-				obj = new PostObject(dbPost);
-			} else if (dbObject instanceof DBPostComment) {
-				DBPostComment dbComment = (DBPostComment) dbObject;
-				obj = new PostComment(dbComment);
-			}
-			records.add(obj);
-		}
-		return records;
+		List<EntityObject> dbRecords = (List<EntityObject>) mongoOps.find(query, info.getClass());
+		return dbRecords;
 	}
-
+	
 	/**
 	 * Create the query object with the map query Info
 	 * 
@@ -127,9 +88,9 @@ public class MongoDbProvider implements DatabaseProvider {
 		int numberOfRecordsSaved = 0;
 		logger.debug("Start saving " + records.length + " records => ");
 		for (EntityObject record : records) {
-			mongoOps.save(record.getDbObject());
+			mongoOps.save(record);
 			numberOfRecordsSaved++;
-			logger.debug("Saving " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
+			logger.debug("Saving " + numberOfRecordsSaved + " => " + record.toString());
 			// TODO: how to make bulk happen
 		}
 		assert (numberOfRecordsSaved == records.length);
@@ -145,9 +106,9 @@ public class MongoDbProvider implements DatabaseProvider {
 		int numberOfRecordsSaved = 0;
 		logger.debug("Start inserting " + records.length + " records => ");
 		for (EntityObject record : records) {
-			mongoOps.save(record.getDbObject());
+			mongoOps.save(record);
 			numberOfRecordsSaved++;
-			logger.debug("Inserting " + numberOfRecordsSaved + " => " + record.getDbObject().toString());
+			logger.debug("Inserting " + numberOfRecordsSaved + " => " + record.toString());
 			// TODO: how to make bulk happen
 		}
 		assert (numberOfRecordsSaved == records.length);
@@ -164,10 +125,10 @@ public class MongoDbProvider implements DatabaseProvider {
 		int numberOfRecordsSaved = 0;
 		logger.debug("Start removing " + records.length + " records => ");
 		for (EntityObject record : records) {
-			mongoOps.remove(record.getDbObject());
+			mongoOps.remove(record);
 			numberOfRecordsSaved++;
 			logger.debug("Removing " + numberOfRecordsSaved + " => "
-							+ record.getDbObject().toString());
+							+ record.toString());
 		}
 		// As remove is using filters on the object all fields, we need either
 		// pass in the whole object matching information or switch the passin
@@ -190,13 +151,12 @@ public class MongoDbProvider implements DatabaseProvider {
 	 * */
 	public boolean exists(String tablename, Map<String, Object> queryInfo, EntityObject record) throws Exception {
 		Query query = createQueryBasedOnMap(queryInfo);
-		logger.debug("Calling MongoDb Exist function on record => " + record.getDbObject().toString());
-		return mongoOps.exists(query, record.getDbObject().getClass());
+		logger.debug("Calling MongoDb Exist function on record => " + record.toString());
+		return mongoOps.exists(query, record.getClass());
 	}
 
 	@Override
 	public List<EntityObject> getRecordsBasedOnQuery(EntityObject info) {
-		DBEntityObject dbEo = info.getDbObject();
-		return getRecordsBasedOnQuery(dbEo.getDbTableName(), info, info.getFieldsAndValues());
+		return getRecordsBasedOnQuery(info.getDbTableName(), info, info.getFieldsAndValues());
 	}
 }

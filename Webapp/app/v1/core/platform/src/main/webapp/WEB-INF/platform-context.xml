@@ -58,7 +58,7 @@
 					<constructor-arg value="127.0.0.1" />
 					<constructor-arg type="int" value="6379" />
 					<constructor-arg value="instance:01" />
-					<!-- <property name="password" value="amer0501"></property>  -->
+					<property name="password" value="amer0501"></property> 
 				</bean>
 			</list>
 		</constructor-arg>

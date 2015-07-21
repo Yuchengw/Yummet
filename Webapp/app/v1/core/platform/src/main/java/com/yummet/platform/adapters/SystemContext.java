@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContextAware;
 
 import com.yummet.cache.CacheManager;
 import com.yummet.cache.RedisDataSourceCacheManager;
-import com.yummet.cache.RedisProvider;
 
 /**
  * Provide System context information for the app and platform
