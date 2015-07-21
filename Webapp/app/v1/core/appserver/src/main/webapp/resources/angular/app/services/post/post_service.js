@@ -8,7 +8,7 @@
 (function () {
     'use strict';
     angular.module('postContextService',['localStore']).factory('postService', postService);
-    postService.$inject = ['$http','TokenStorage'];
+    postService.$inject = ['$http','TokenStorage','$log'];
     function postService($http, TokenStorage, $log) {
         var service = {};
  
@@ -29,7 +29,7 @@
         }
         
         function get(number) {
-        	if (verifyAuth().success === true) {
+        	if (verifyAuth() === true) {
         		return $http.get(options.api.base_url + '/service/posts/' + number).then(handleSuccess, handleError('Error getting post by username'));
         	} else {
         		return {sucess: false, message: "you think get posts don't need local credential?"};
@@ -37,7 +37,7 @@
         }
 
         function create(userCredentials, post) {
-        	if (verifyAuth().sucesss === true) {
+        	if (verifyAuth() === true) {
         		return $http.post(options.api.base_url + '/service/post/create/', post).then(handleSuccess, handleError('Error creating post'));
         	} else {
         		return {sucess: false, message: "create post definite need local credentials, give me some."};
@@ -45,7 +45,7 @@
         }
  
         function update(post) {
-        	if (verifyAuth().sucesss === true) {
+        	if (verifyAuth() === true) {
         		return $http.put(options.api.base_url + '/service/post/update/' + post.id, post).then(handleSuccess, handleError('Error updating post'));
         	} else {
         		return {sucess: false, message: "update post needs local credentails."}
@@ -53,7 +53,7 @@
         }
  
         function remove(userCredential, post) {
-        	if (verifyAuth().success === true) {
+        	if (verifyAuth() === true) {
         		return $http.delete(options.api.base_url + '/service/post/delete/' + post.id).then(handleSuccess, handleError('Error deleting post'));
         	} else {
         		return {success: false, message: "are you kidding? delete post without basic credentials?"};

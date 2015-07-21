@@ -14,7 +14,7 @@
 		<intercept-url pattern="/resources/**" access="permitAll" requires-channel="any"/>
 		<intercept-url pattern="/views/**" access="permitAll" requires-channel="any"/>
 		<intercept-url pattern="/assets/**" access="permitAll" requires-channel="any"/>
-		<intercept-url pattern="/service/login"   access="permitAll" requires-channel="any"/>
+		<intercept-url pattern="/service/login"   access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/service/logout"  access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/service/signup"  access="permitAll" method="POST" requires-channel="any"/>
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="any"/>

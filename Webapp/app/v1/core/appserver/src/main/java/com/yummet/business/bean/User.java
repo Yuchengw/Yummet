@@ -9,10 +9,13 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author yucheng
  * @version 1
  * */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends BeanObject implements UserDetails {
 
 	private static final long serialVersionUID = -7788619177798333712L;
@@ -32,10 +35,13 @@ public class User extends BeanObject implements UserDetails {
 	private boolean isEmailAuthorized;
 
 	private long expires;
-	private boolean accountExpired;
-	private boolean accountLocked;
-	private boolean credentialsExpired;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
 	private boolean accountEnabled;
+	
+	private boolean enabled;
+
 	private String newPassword;
 
 	private Set<UserAuthority> authorities;
@@ -199,22 +205,22 @@ public class User extends BeanObject implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return !accountExpired;
+		return accountNonExpired;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return !accountLocked;
+		return accountNonLocked;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return !credentialsExpired;
+		return credentialsNonExpired;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return !accountEnabled;
+		return accountEnabled;
 	}
 
 	public long getExpires() {
@@ -231,6 +237,30 @@ public class User extends BeanObject implements UserDetails {
 
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+	
+	public boolean isAccountEnabled() {
+		return accountEnabled;
+	}
+
+	public void setAccountEnabled(boolean accountEnabled) {
+		this.accountEnabled = accountEnabled;
+	}
+	
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
 	}
 	
 	// User : <userEmail>

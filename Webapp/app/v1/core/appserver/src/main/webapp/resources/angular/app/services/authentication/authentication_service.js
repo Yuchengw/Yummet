@@ -24,7 +24,7 @@
 		/**************************************business function start here*************************/
 		// TODO: should separate login service with credential service? it's hard to tell.
 		function login(credentials) {
-		    return $http.post(options.api.base_url + '/service/login', {email: credentials.email, password: credentials.password }).then(handleSuccess, handleError('Error login'));
+		    return $http.post(options.api.base_url + '/service/login', {email: credentials.email, password: credentials.password }).then(handleSuccess, handleError);
         }
 		
 		// handle login successful
@@ -42,9 +42,9 @@
 
 	    // handle login failure
 	    function handleError(error) {
-	    	$log.warn("user login failed");
+   		 	$log.error(error);
 	        return function () {
-	            return { success: false, message: error };
+	            return { success: false, message: "Something wrong happend when log in" };
 	        };
 	    }
 	    

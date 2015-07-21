@@ -27,6 +27,12 @@ public class UserDetailsService implements org.springframework.security.core.use
 		if (user == null) {
 			throw new UsernameNotFoundException("user not found");
 		}
+		// for debug usage: TODO: add Testing context if neccessary
+		user.setAccountNonExpired(true);
+		user.setAccountEnabled(true);
+		user.setAccountNonLocked(true);
+		user.setEnabled(true);
+		user.setCredentialsNonExpired(true);
 //		detailsChecker.check(user); // TODO: we needs a custom detailsChecker
 		return user;
 	}

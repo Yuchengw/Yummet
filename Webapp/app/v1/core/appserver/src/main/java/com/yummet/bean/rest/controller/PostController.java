@@ -13,11 +13,11 @@ public interface PostController {
 
 	public @ResponseBody Post getPost(@PathVariable String id, @RequestBody String body);
 	
-	public @ResponseBody PostList getPosts(@PathVariable String id, @RequestParam(value="step") final String step, @RequestParam(value="cursor") final String cursor, @RequestBody String body);
+	public @ResponseBody PostList getPosts(@PathVariable String id, @RequestParam(value="step") final String step, @RequestParam(value="cursor") final String cursor, @RequestBody String body) throws Exception;
 
-	public @ResponseBody Post addPost(@RequestHeader String credentials, @RequestBody String body);
+	public @ResponseBody Post addPost(@RequestBody String body) throws Exception;
 	
-	public @ResponseBody Post updatePost(@RequestHeader String credentials, @PathVariable String id, @RequestBody String body);
+	public @ResponseBody Post updatePost(@PathVariable String id, @RequestBody String body) throws Exception;
 
-	public @ResponseBody void removePost(@RequestHeader String credentials, @PathVariable String id, @RequestBody String body);
+	public @ResponseBody void removePost(@PathVariable String id, @RequestBody String body);
 }

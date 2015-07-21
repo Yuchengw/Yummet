@@ -3,8 +3,8 @@
  * @author yucheng
  * @since 1
  * */
-angular.module('filterApp',['localStore'])
-.factory('tokenInterceptor',['$q', '$location', 'TokenStorage', function ($q,  $location, TokenStorage) {
+angular.module('filterApp',['localStore','contextStateService'])
+.factory('tokenInterceptor',['$q', '$location', 'TokenStorage', 'stateService', function ($q,  $location, TokenStorage, stateService) {
 	
 	/*************************logic part start here********************************/
     return {
@@ -17,10 +17,9 @@ angular.module('filterApp',['localStore'])
             return config;
         },
         
-        responseError: function(error) {
+        responseError: function(rejection) {
         	if (rejection != null && rejection.status === 401 && (TokenStorage.retrieve() || stateService.isLogin)) {
                  TokenStorage().clear();
-                 stateService.isAuthenticated = false;
             }
             return $q.reject(rejection);
 		},
@@ -36,6 +35,3 @@ angular.module('filterApp',['localStore'])
 }]);
 
 /*************************************Helper function start here****************************************/
-	var generateRandomCSRFToken = function (a) {
-		return a?(a^Math.random()*16>>a/4).toString(16):([1e16]+1e16).replace(/[01]/g,b)
-	}

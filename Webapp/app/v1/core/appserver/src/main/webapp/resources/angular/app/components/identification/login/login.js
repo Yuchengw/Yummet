@@ -42,7 +42,7 @@ angular.module('loginApp', ['ui.router','ngAnimate','localStore','contextStateSe
 		      function(res) {
 		    	  if (res) {
 		    		  stateService.isLogin = true;
-		    	  } else if (res.success === false){
+		    	  } else {
 		    		  stateService.isLogin = false;
 		    	  }
 				  callback && callback();

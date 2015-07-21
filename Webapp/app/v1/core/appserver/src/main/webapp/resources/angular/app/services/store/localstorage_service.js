@@ -5,9 +5,9 @@
 (function () {
 	'use strict';
 	angular.module('localStore', ['ngCookies']).factory('TokenStorage', TokenStorage);
-	TokenStorage.$inject = [ '$http', '$cookieStore'];
+	TokenStorage.$inject = ['$cookieStore'];
 	
-	function TokenStorage($http, $cookieStore) {
+	function TokenStorage($cookieStore) {
 		var service = {};
 		var storageKey = 'yummet_x_csrf_token';
 		service.store = store;

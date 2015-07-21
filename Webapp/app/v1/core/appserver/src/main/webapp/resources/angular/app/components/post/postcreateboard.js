@@ -21,15 +21,15 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 	 //=========================================Unique for provider post=============================================
 		 $scope.provideposts = [];
 		 $scope.providerpost = {
-							   postsubject : '',
-							   postdescription : '',
-							   postimage : '',
-							   postcategory : '',
-							   usemap : true,
-							   issecrete : false,
-							   couldinvite : true,
-							   startdate : '',
-							   enddate : '',
+							   subject : '',
+							   commentsOrDescription : '',
+							   image : '',
+							   postCategory : '',
+							   useMap : true,
+							   isSecret : false,
+							   couldInvite : true,
+							   startDate : '',
+							   endDate : '',
 							   type : 'provide'
 							  };
 	  
@@ -53,15 +53,15 @@ angular.module('postcreateboardApp', ['ngAnimate', 'localStore', 'logoutApp', 'u
 	 //=========================================Unique for ask post==================================================
 		$scope.askposts = [];
 	   	$scope.askpost = {
-				  postsubject : '',
-				  postdescription : '',
-				  postimage : '',
-				  postcategory : '',
-				  usemap : true,
-				  couldinvite : true,
-				  issecrete : false,
-				  startdate : '',
-				  enddate : '',
+				  subject : '',
+				  commentsOrDescription : '',
+				  image : '',
+				  postCategory : '',
+				  useMap : true,
+				  couldInvite : true,
+				  isSecret : false,
+				  startDate : '',
+				  expireDate : '',
 				  type: 'ask'
 				};
 		

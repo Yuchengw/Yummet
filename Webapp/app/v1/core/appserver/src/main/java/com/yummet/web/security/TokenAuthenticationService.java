@@ -18,7 +18,7 @@ import com.yummet.business.bean.User;
 public class TokenAuthenticationService {
 
 	private static final String AUTH_HEADER_NAME = "X-CSRF-TOKEN";
-	private static final long TEN_DAYS = 1000 * 60 * 60 * 24 * 10;
+	private static final long TEN_DAYS = 1000 * 60 * 60 * 24 * 100;
 
 	private final TokenHandler tokenHandler;
 

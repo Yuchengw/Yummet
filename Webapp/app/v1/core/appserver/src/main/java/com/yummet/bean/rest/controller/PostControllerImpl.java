@@ -1,5 +1,6 @@
 package com.yummet.bean.rest.controller;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostList;
@@ -59,11 +65,12 @@ public class PostControllerImpl implements PostController {
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.GET, value=PostRestURIConstants.GET_POSTS)
 	public PostList getPosts(@PathVariable final String id, @RequestParam(value="step") final String step,
-			@RequestParam(value="cursor") final String cursor, String body) {
+			@RequestParam(value="cursor") final String cursor, String body) throws Exception {
 		PostList postList = new PostList();
 		User user = userProvider.get(id);
+		Authentication userContext = SecurityContextHolder.getContext().getAuthentication();
 		if (user == null) {
-			//Console log
+			throw new Exception("user object not find: " + userContext.getName());
 		}
 		List<Post> posts = postProvider.get(user, Integer.parseInt(step), Integer.parseInt(cursor));
 		postList.setPosts(posts);
@@ -72,78 +79,49 @@ public class PostControllerImpl implements PostController {
 
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.PUT, value=PostRestURIConstants.UPDATE_POST)
-	public Post updatePost(@RequestHeader("Cookie") String credentials, @PathVariable String id, @RequestBody String body) {
+	public Post updatePost(@PathVariable String id, @RequestBody String body) throws Exception {
 		// Check if old post exists
 		Post oldPost = postProvider.get(id);
 		if(oldPost == null) {
-			// Console log
+			throw new Exception("Post does not exist: " + id);
 		}
-		Map<String, Object> postInfo = parsePostRequest(body, credentials);
-		// TODO: finish the password encryption
-		User user = userProvider.get((String)postInfo.get("email"), (String)postInfo.get("password"));
+		Authentication userContext = SecurityContextHolder.getContext().getAuthentication();
+		User user = userProvider.get(userContext.getName());
 		if (user == null) {
-			//Console log
+			throw new Exception("user object not find: " + userContext.getName());
 		}
 		// TODO: specify the location
-		Post newPost = new Post(id, user , (String)postInfo.get("postsubject"), (String) postInfo.get("location"), 0); // put quantity as 0 for now
+		Post newPost = new ObjectMapper().readValue(body, Post.class);
+		newPost.setId(id);
 		Post updatedPost = postProvider.add(user, newPost);
 		return updatedPost;
 	}
 
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.POST, value=PostRestURIConstants.CREATE_POST)
-	public Post addPost(@RequestHeader("Cookie") String credentials, @RequestBody String body) {
-		Map<String, Object> postInfo = parsePostRequest(body, credentials);
-		User user = userProvider.get((String)postInfo.get("email"), (String)postInfo.get("password"));
+	public Post addPost(@RequestBody String body) throws Exception {
+		Authentication userContext = SecurityContextHolder.getContext().getAuthentication();
+		User user = userProvider.get(userContext.getName());
 		if (user == null) {
-			//Console log
+			throw new Exception("user object not find: " + userContext.getName());
 		}
-//		Post newPost = new Post(null, user , postInfo.get("subject"), postInfo.get("location"), 0); // put quantity as 0 for now
-//		Post createdPost = postProvider.add(user, newPost);
-//		return createdPost;
-		return null;
-	}
-
-	@SuppressWarnings({"rawtypes" })
-	private Map<String, Object> parsePostRequest(String body, String credentials) {
-		String decodeMessage = URLDecoder.decode(credentials);
-		decodeMessage = StringUtils.remove(decodeMessage, "yummet=");
-		JSONParser jsonParser =new JSONParser();
-		JSONObject jsonObject = null;
-		Map<String, Object> postInfoMap = null;
+		Post newPost = null;
 		try {
-			jsonObject = (JSONObject) jsonParser.parse(decodeMessage);
-			
-			String userInfos = (String) ((HashMap) jsonObject.get("currentUser")).get("authdata");
-			userInfos = new String(Base64.decodeBase64(userInfos.getBytes()), "UTF-8");
-			String[] userInfoSection = userInfos.split(":");
-			
-			jsonObject = (JSONObject) jsonParser.parse(body);
-			postInfoMap = ImmutableMap.of(
-				"email", userInfoSection[0],
-				"password", userInfoSection[1],
-				"postsubject", jsonObject.get("postsubject")
-			);
-			postInfoMap.put("postdescription", jsonObject.get("postdescription"));
-			postInfoMap.put("postcategory", jsonObject.get("postcategory"));
-			postInfoMap.put("usemap", jsonObject.get("usemap"));
-			postInfoMap.put("postimage", jsonObject.get("postimage"));
-			postInfoMap.put("couldinvite", jsonObject.get("couldinvite"));
-			postInfoMap.put("startdate", jsonObject.get("startdate"));
-			postInfoMap.put("enddate", jsonObject.get("enddate"));
-			postInfoMap.put("type", jsonObject.get("type"));
-			
-			// TODO: separate the provider post and ask post
-			postInfoMap.put("issecrete", jsonObject.get("issecrete"));
-		} catch (Exception e) {
+			newPost = new ObjectMapper().readValue(body, Post.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return postInfoMap;
+		Post createdPost = postProvider.add(user, newPost);
+		return createdPost;
 	}
 
 	@net.bull.javamelody.MonitoredWithSpring
 	@RequestMapping(method=RequestMethod.DELETE, value=PostRestURIConstants.DELETE_POST)
-	public void removePost(@RequestHeader("Cookie") String credentials, @PathVariable String id, @RequestBody String body) {
+	public void removePost(@PathVariable String id, @RequestBody String body) {
 		this.postProvider.remove(id);
 	}
 	

@@ -9,19 +9,17 @@ angular.module('logoutApp', ['ngAnimate','localStore','contextStateService', 'au
 .run(function(){
 	
 })
-.controller('logoutAppContoller', ['$scope','$location', '$http', '$window', 'TokenStorage','stateService', 'authenticationService',
-    function($scope, $location, $http, $window, TokenStorage, stateService, authenticationService) {
-	  /**
-		 * Logout function
-		 */
-	  $scope.init = function() {
-		  console.log("entered logout function");
+.controller('logoutAppContoller', ['$scope','$location', '$http', '$window', '$log', 'TokenStorage','stateService', 'authenticationService',
+    function($scope, $location, $http, $window, $log, TokenStorage, stateService, authenticationService) {
+
+	   $scope.init = function() {
+		  $log.info("proceding with logout function");
 		  stateService.isLogin = false;
 	      authenticationService.clearCredentials();
-// TokenStorage.clear();
-// delete $window.sessionStorage.token;
 		  $window.location.href = '/';
+// 		  delete $window.sessionStorage.token;
 	   }
-	  $scope.init();
+	   
+	   $scope.init();
 }]);
 

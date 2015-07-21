@@ -2,18 +2,20 @@
  * @author yucheng
  * @since 1
  */
-var app = angular.module('yummet',['ui.router','ngResource','signupApp','loginApp','filterApp', 'postApp', 'postcreateboardApp', 'profileApp','modalStateApp', 'profileApp', 'ngFileUpload', 'localStore', 'authenticateService', 'spring-security-csrf-token-interceptor'])
+
+var app = angular.module('yummet',['ui.router','ngResource','signupApp','loginApp', 'logoutApp', 'filterApp', 'postnavigationApp', 'postApp', 'postcreateboardApp', 'profileApp','modalStateApp', 'profileApp', 'ngFileUpload', 'localStore', 'authenticateService'])
 //TODO: need find a better way to put this
 var options = {};
 options.api = {};
 options.api.base_url = "http://localhost:8080";
 
-app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStateProvider, csrfProvider){
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStateProvider){
 	$stateProvider.state('index', {
             url:'/',
             templateUrl: 'index.html',
             controller: 'indexController'
         });
+	
     $urlRouterProvider.otherwise('/');
 	modalStateProvider.state('index.login', {
 	        url: '/login',
@@ -23,16 +25,6 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, modalStat
 	        url: '/signup',
 	        templateUrl: '/rs/angular/app/components/identification/signup/signup.html',
 	 });
-	
-	// optional configurations
-//    csrfProvider.config({
-//        url: '/',
-//        maxRetries: 3,
-//        csrfHttpType: 'post',
-//        csrfTokenHeader: 'X-CSRF-TOKEN',
-//        httpTypes: ['PUT', 'POST', 'DELETE'] //CSRF token will be added only to these method types 
-//    });
-//	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 	
     $httpProvider.interceptors.push('tokenInterceptor');
 })
