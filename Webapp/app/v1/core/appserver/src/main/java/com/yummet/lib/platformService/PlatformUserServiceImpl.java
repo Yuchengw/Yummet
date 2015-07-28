@@ -108,8 +108,8 @@ public class PlatformUserServiceImpl extends PlatformUserService {
 		appUser.setEmail(platformUser.getEmail());
 		appUser.setFirstName(platformUser.getFirstName());
 		appUser.setLastName(platformUser.getLastName());
-		appUser.setCreatedDate(platformUser.getCreatedDate());
-		appUser.setLastModifiedDate(platformUser.getLastModifiedDate());
+		appUser.setCreatedDate(platformUser.getCreatedDate().toDate()); // TODO
+		appUser.setLastModifiedDate(platformUser.getLastModifiedDate().toDate());
 		appUser.setAlias(platformUser.getAlias());
 		appUser.setId(platformUser.getId());
 		appUser.setCreditInfo(platformUser.getCreditInfo());

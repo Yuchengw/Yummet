@@ -13,6 +13,7 @@ import com.yummet.business.bean.Post;
 import com.yummet.business.bean.User;
 import com.yummet.entities.EntityObject;
 import com.yummet.entities.PostObject;
+import com.yummet.entities.ProvidePostObject;
 import com.yummet.entities.UserObject;
 import com.yummet.platform.adapters.DatabaseProvider;
 import com.yummet.platform.adapters.MongoDbProvider;
@@ -40,7 +41,8 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 		try {
 			UserObject userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider)
 					.getObject(post.getCreator().getEmail());
-			PostObject newPostObject = new PostObject(userObject,
+			PostObject newPostObject = //TODO:
+					new ProvidePostObject(userObject,
 					post.getSubject(), post.getLocation(), post.getQuantity());
 			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
 					.insertObject(newPostObject);
@@ -60,7 +62,7 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 		try {
 			UserObject userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider)
 					.getObject(post.getCreator().getEmail());
-			PostObject newPostObject = new PostObject(userObject,
+			PostObject newPostObject = new ProvidePostObject(userObject,
 					post.getSubject(), post.getLocation(), post.getQuantity());
 			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
 					.updateObject(newPostObject);
@@ -125,22 +127,22 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 	private void copySinglePost(PostObject platformPost, Post post) {
 		post.setCost(platformPost.getCost());
 		post.setCommentsOrDescription(platformPost.getCommentsOrDescription());
-		post.setCreatedDate(platformPost.getCreatedDate());
+		post.setCreatedDate(platformPost.getCreatedDate().toDate());
 		// this is too heavy... we could have a much better way to do this
 		post.setCreator(new User(platformPost.getCreator().getId(),
 				platformPost.getCreator().getFirstName(), platformPost
 						.getCreator().getLastName(), platformPost.getCreator()
 						.getEmail(), platformPost.getCreator().getPassword()));
-		post.setExpireDate(platformPost.getExpireDate());
+		post.setExpireDate(platformPost.getExpireDate().toDate());
 		post.setImage(platformPost.getImage());
 		post.setId(platformPost.getId());
 		// post.setLastModifiedBy(platformPost.getLastModifiedBy());
-		post.setLastModifiedDate(platformPost.getLastModifiedDate());
+		post.setLastModifiedDate(platformPost.getLastModifiedDate().toDate());
 		post.setLocation(platformPost.getLocation());
 		post.setNumberOfLikes(platformPost.getNumberOfLikes());
 		post.setNumberOfOrders(platformPost.getNumberOfOrders());
 		post.setSubject(platformPost.getSubject());
-		post.setType(platformPost.getType());
+//		post.setType(platformPost.getType()); // TODO
 		post.setPostCategory(platformPost.getPostCategory());
 		post.setQuantity(platformPost.getQuantity());
 		// post.setPartners(platformPost.getPartners());
@@ -148,7 +150,7 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 
 	public boolean removeById(String postId) {
 		try {
-			PostObject newPostObject = new PostObject(postId);
+			PostObject newPostObject = new ProvidePostObject(postId);
 			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
 					.deleteObject(newPostObject);
 		} catch (Exception e) {
@@ -166,7 +168,7 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 		try {
 			userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider)
 					.getObject(user.getEmail());
-			PostObject po = new PostObject(userObject, null, null, 0);
+			PostObject po = new ProvidePostObject(userObject, null, null, 0);
 			postList = dbProvider.getRecordsBasedOnQuery(po);
 		} catch (Exception e1) {
 			e1.printStackTrace();
