@@ -1,4 +1,4 @@
-package com.iamhere.main_platform;
+package com.yummet.main_platform;
 
 //import com.iamhere.cache.CacheManager;
 //import com.iamhere.entities.UserObject;

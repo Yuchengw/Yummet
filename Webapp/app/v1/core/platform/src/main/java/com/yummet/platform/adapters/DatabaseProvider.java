@@ -9,7 +9,7 @@ import com.yummet.entities.EntityObject;
  * Database provider for the whole system
  * 
  * @author Jessica
- * @version 1
+ * @since 1
  */
 public interface DatabaseProvider {
 	

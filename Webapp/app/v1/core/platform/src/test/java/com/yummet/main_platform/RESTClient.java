@@ -1,4 +1,4 @@
-package com.iamhere.main_platform;
+package com.yummet.main_platform;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

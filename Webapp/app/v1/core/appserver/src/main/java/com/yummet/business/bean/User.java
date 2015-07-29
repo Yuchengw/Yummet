@@ -7,9 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.yummet.web.security.UserAuthentication;
+import com.yummet.web.security.UserDetailsService;
 
 /**
  * @author yucheng
@@ -267,5 +270,20 @@ public class User extends BeanObject implements UserDetails {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + ": " + getUsername();
+	}
+	
+	public static User getInstance() {
+		return getInstance(false);
+	}
+	
+	public static User getInstance(boolean allowInactiveUser) {
+		// TODO: need to add cache for better performance.
+		UserAuthentication userAuth = (UserAuthentication) SecurityContextHolder.getContext().getAuthentication();
+		if (userAuth == null) {
+			//TODO: add proper exception;
+		}
+		UserDetailsService userDetailsService = new UserDetailsService();
+		User user = userDetailsService.loadUserByUsername(userAuth.getName());
+		return user;
 	}
 }

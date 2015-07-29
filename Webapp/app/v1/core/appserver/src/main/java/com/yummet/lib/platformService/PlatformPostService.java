@@ -2,6 +2,8 @@ package com.yummet.lib.platformService;
 
 import java.util.List;
 
+import com.yummet.api.rest.AppRestPostClientImpl;
+import com.yummet.api.rest.AppRestUserClientImpl;
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.User;
 
@@ -11,13 +13,13 @@ import com.yummet.business.bean.User;
  * @author yucheng
  * @version 1
  * */
-public interface PlatformPostService extends PlatformService{
+public abstract class PlatformPostService implements PlatformService{
 
-	public Post createPost(Post post);
-	public Post getPostById(String id);
-	public boolean removeById(String id);
-	public List<Post> getPostByNumber(String username, String password,
-			int number);
-	public List<Post> get(User user, int size, int cursor);
-	public Post updatePost(Post updatePost);
+	public AppRestPostClientImpl getPostRestClient() {
+		return new AppRestPostClientImpl(Post.class);
+	}	
+	
+	public AppRestUserClientImpl getUserRestClient() {
+		return new AppRestUserClientImpl(User.class);
+	}
 }

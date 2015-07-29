@@ -10,7 +10,7 @@ import com.yummet.cache.RedisDataSourceCacheManager;
 /**
  * Provide System context information for the app and platform
  * @author jassica
- * @version 1
+ * @since 1
  */
 public class SystemContext implements ApplicationContextAware {
 	

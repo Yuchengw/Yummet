@@ -18,7 +18,7 @@ import com.yummet.enums.PostVisibilityEnum;
  * The Util class to convert between json string and the object
  * 
  * @author jassica
- *
+ * @since 1
  */
 public class JsonUtil {
 	/**

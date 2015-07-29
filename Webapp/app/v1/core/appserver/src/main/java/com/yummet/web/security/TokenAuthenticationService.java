@@ -21,7 +21,7 @@ public class TokenAuthenticationService {
 	private static final long TEN_DAYS = 1000 * 60 * 60 * 24 * 100;
 
 	private final TokenHandler tokenHandler;
-
+	
 	public TokenAuthenticationService(@Value("${token.secret}") String secret) {
 		tokenHandler = new TokenHandler(DatatypeConverter.parseBase64Binary(secret));
 	}

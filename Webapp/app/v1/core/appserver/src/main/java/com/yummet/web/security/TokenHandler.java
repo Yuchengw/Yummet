@@ -24,9 +24,15 @@ public final class TokenHandler {
 	private static final String HMAC_ALGO = "HmacSHA256";
 	private static final String SEPARATOR = ".";
 	private static final String SEPARATOR_SPLITTER = "\\.";
+	private static final String SECRETE_RECIPE = "yuchengYummet";
+
 
 	private final Mac hmac;
 
+	public TokenHandler() {
+		this(DatatypeConverter.parseBase64Binary(SECRETE_RECIPE));
+	}
+	
 	public TokenHandler(byte[] secretKey) {
 		try {
 			hmac = Mac.getInstance(HMAC_ALGO);

@@ -17,18 +17,12 @@ import com.yummet.entities.UserObject;
 import com.yummet.platform.adapters.DatabaseProvider;
 import com.yummet.platform.adapters.MongoDbProvider;
 
-public class PlatformPostServiceImpl implements PlatformPostService {
-	PlatformServiceProvider platformPostServiceProvider;
-	PlatformServiceProvider platformUserServiceProvider;
-	DatabaseProvider dbProvider;
+public class PlatformPostServiceImpl extends PlatformPostService {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(PlatformPostServiceImpl.class);
 
 	public PlatformPostServiceImpl() {
-		platformPostServiceProvider = new PlatformPostServiceProviderImpl();
-		platformUserServiceProvider = new PlatformUserServiceProviderImpl();
-		dbProvider = new MongoDbProvider();
 	}
 
 	/**
@@ -37,13 +31,11 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 	 * @throws Exception
 	 * */
 	public Post createPost(Post post) {
+		Post createdPost = null;
 		try {
-			UserObject userObject = (UserObject) ((PlatformUserServiceProviderImpl) platformUserServiceProvider)
-					.getObject(post.getCreator().getEmail());
-			PostObject newPostObject = new PostObject(userObject,
-					post.getSubject(), post.getLocation(), post.getQuantity());
-			((PlatformPostServiceProviderImpl) platformPostServiceProvider)
-					.insertObject(newPostObject);
+			User user = (User)getUserRestClient().getUserByEmail(post.getCreator().getEmail());
+			post.setCreator(user);
+			createPost = (Post)getPostRestClient().
 		} catch (Exception e) {
 			logger.debug("there is something wrong when inserting post object"
 					+ e.getStackTrace());
@@ -110,18 +102,6 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 		return posts;
 	}
 
-	private void copyPosts(List<PostObject> platformPosts, List<Post> posts)
-			throws Exception {
-		for (PostObject platformPost : platformPosts) {
-			Post post = new Post();
-			if (platformPost == null || post == null) {
-				throw new Exception("Can't copy"); // should be more specific
-			}
-			copySinglePost(platformPost, post);
-			posts.add(post);
-		}
-	}
-
 	private void copySinglePost(PostObject platformPost, Post post) {
 		post.setCost(platformPost.getCost());
 		post.setCommentsOrDescription(platformPost.getCommentsOrDescription());
@@ -159,7 +139,6 @@ public class PlatformPostServiceImpl implements PlatformPostService {
 		return true;
 	}
 
-	// TODO: for now size and cursor are not used
 	public List<Post> get(User user, int size, int cursor) {
 		List<EntityObject> postList = new ArrayList<EntityObject>();
 		UserObject userObject;

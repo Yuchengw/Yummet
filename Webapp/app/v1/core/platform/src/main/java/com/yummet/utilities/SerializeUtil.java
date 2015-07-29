@@ -2,6 +2,7 @@ package com.yummet.utilities;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -10,7 +11,7 @@ import com.yummet.entities.EntityObject;
 /**
  * Serialize the entity object and deserialize
  * @author jassica
- *
+ * @since 1
  */
 public class SerializeUtil {
 
@@ -18,6 +19,7 @@ public class SerializeUtil {
 	 * Serialize the whole object to the bytes
 	 * @param object
 	 * @return
+	 * @throws IOException 
 	 */
 	public static byte[] serialize(EntityObject object) {
 		ObjectOutputStream oos = null;
@@ -27,9 +29,12 @@ public class SerializeUtil {
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(object);
 			byte[] bytes = baos.toByteArray();
+			baos.close();
+			oos.close();
 			return bytes;
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
 		}
 		return null;
 	}
@@ -44,8 +49,11 @@ public class SerializeUtil {
 		try {
 			bais = new ByteArrayInputStream(bytes);
 			ObjectInputStream ois = new ObjectInputStream(bais);
-			return (EntityObject)ois.readObject();
+			EntityObject ret = (EntityObject)ois.readObject();
+			bais.close();
+			ois.close();
 		} catch (Exception e) {
+		} finally {
 		}
 		return null;
 

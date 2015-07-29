@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * Yummet Redis java configuration
  * 
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 @Configuration
 public class YummetRedisConfig {

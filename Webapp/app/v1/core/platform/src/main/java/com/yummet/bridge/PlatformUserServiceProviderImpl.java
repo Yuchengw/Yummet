@@ -30,7 +30,7 @@ import com.yummet.utilities.JsonUtil;
  * @author jassica
  * @since 2
  * */
-@Path("/users")
+@Path("/platformservice/v1/users")
 public class PlatformUserServiceProviderImpl implements PlatformServiceProvider {
 
 	public PlatformUserServiceProviderImpl() {
@@ -138,9 +138,7 @@ public class PlatformUserServiceProviderImpl implements PlatformServiceProvider 
 	@POST
 	@Path("/userDelete")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteObject(InputStream incomingData) {// @PathParam("email")
-															// String userEmail)
-															// {
+	public Response deleteObject(InputStream incomingData) {
 		JsonUtil jsonHelper = new JsonUtil();
 		StringBuilder inputStr = jsonHelper
 				.convertJsonStringToStringBuilder(incomingData);

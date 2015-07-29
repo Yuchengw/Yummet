@@ -12,7 +12,7 @@ import com.mongodb.MongoClient;
 /**
  * This is the java style configuration for Mongotemplate
  * @author Yucheng
- * @version 1
+ * @since 1
  * */
 @Configuration
 public class YummetMongoConfig {
