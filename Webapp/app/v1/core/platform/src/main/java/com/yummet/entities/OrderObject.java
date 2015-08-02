@@ -1,46 +1,46 @@
 package com.yummet.entities;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.yummet.enums.OrderStatus;
-import com.yummet.mongodb.entities.DBEntityObject;
-import com.yummet.mongodb.entities.DBOrderObject;
 import com.yummet.platform.func.DmlOperationWrapper;
 import com.yummet.platform.func.DmlValidationHandler;
-import com.yummet.utilities.TextUtil;
 
 /**
  * Platform entity for the orders
+ * 
  * @author Jessica
  * @version 1
  *
  */
+@Document(collection = "Orders")
 public class OrderObject extends EntityObject {
-	private static final long serialVersionUID = -6011241820070393954L;  
+	private static final long serialVersionUID = -6011241820070393954L;
 	private UserObject seller;
 	private UserObject buyer;
 	private boolean isSuccess;
 	private DateTime transactionDateTime;
-	private PostObject parentPost;
+	private String parentPost;
 	private String thirdPartyInfo;
-	private double actualCost; 
-	private int quantity; 
-	private double score;	
+	private double actualCost;
+	private int quantity;
+	private double score;
 	private OrderStatus status;
+
+	/* ===================== Constructors ============================= */
+	public OrderObject() {}
 	
-	/*===================== Constructors =============================*/
-	public OrderObject(UserObject seller, UserObject buyer)  {
+	public OrderObject(UserObject seller, UserObject buyer) {
 		setSeller(seller);
 		setBuyer(buyer);
 	}
-	
+
 	public OrderObject(String id) {
 		setId(id);
 	}
 
-	/*===================== Setters and Getters  =============================*/
+	/* ===================== Setters and Getters ============================= */
 	public UserObject getseller() {
 		return seller;
 	}
@@ -73,11 +73,11 @@ public class OrderObject extends EntityObject {
 		this.transactionDateTime = transactionDateTime;
 	}
 
-	public PostObject getParentPost() {
+	public String getParentPost() {
 		return parentPost;
 	}
 
-	public void setParentPost(PostObject parentPost) {
+	public void setParentPost(String parentPost) {
 		this.parentPost = parentPost;
 	}
 
@@ -112,7 +112,7 @@ public class OrderObject extends EntityObject {
 	public void setScore(double score) {
 		this.score = score;
 	}
-	
+
 	public OrderStatus getStatus() {
 		return status;
 	}
@@ -120,29 +120,30 @@ public class OrderObject extends EntityObject {
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
-	
-	/*===================== Override super method =============================*/
+
+	/* ===================== Override super method ============================= */
 	@Override
 	public void saveHook_Validate(DmlValidationHandler dml) {
-//		if (getseller() == null) {
-//			dml.addError("Order seller is not set!");
-//		}
-//		if (getbuyer() == null) {
-//			dml.addError("Order buyer is not set!");
-//		}
-//		if (getParentPost() == null) {
-//			dml.addError("Parent post is forget to set!");
-//		} else {
-//			if (getParentPost().getType() != PostObject.PROVIDE) {
-//				dml.addError("The order can only happen on provide type of post!");
-//			}
-//		}
-//		
-//		// The default status of the order is Open
-//		if(status == null) {
-//			setStatus(OrderStatus.OPEN);
-//		}
-//		super.saveHook_Validate(dml);
+		if (getseller() == null) {
+			dml.addError("Order seller is not set!");
+		}
+		if (getbuyer() == null) {
+			dml.addError("Order buyer is not set!");
+		}
+		if (getParentPost() == null) {
+			dml.addError("Parent post is forget to set!");
+		}
+		// The default status of the order is Open
+		if (status == null) {
+			setStatus(OrderStatus.OPEN);
+		}
+		super.saveHook_Validate(dml);
+	}
+
+	@Override
+	public void setId(String id) {
+		super.setId(id);
+		setCacheKey(id);
 	}
 
 	public OrderObject load() throws Exception {
@@ -151,8 +152,10 @@ public class OrderObject extends EntityObject {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "OrderInfo is [id=" + getId() + ", transaction datetime ="
+				+ getTransactionDateTime() + ", parentPost = "
+				+ getParentPost() + ", actualCost = " + getActualCost()
+				+ ", quantity = " + getQuantity() + ", score = " + getScore() +  "]";
 	}
 
 	@Override
@@ -175,9 +178,7 @@ public class OrderObject extends EntityObject {
 
 	@Override
 	public String getDbTableName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Orders";
 	}
 
-	
 }

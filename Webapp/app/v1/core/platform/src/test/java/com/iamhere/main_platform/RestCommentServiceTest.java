@@ -26,36 +26,16 @@ public class RestCommentServiceTest extends TestCase {
 		return new TestSuite(RestCommentServiceTest.class);
 	}
 
-	public void testUpsertAProvidePost() {
-		String url = "http://localhost:8080/api/posts/providePostUpsert";
-
-		Client restClient = Client.create();
-		WebResource webResource = restClient.resource(url);
-
-		String input = "{ \"subject\": \"Test Food Post\","
-				+ "\"creator\":{\"id\":\"1\",\"email\": \"ycwmike@gmai.com\" }, \"lastModifiedBy\":{\"id\":\"1\",\"email\": \"ycwmike@gmai.com\" },  "
-				+ "\"location\": \"San Francisco\",\"quantity\": \"7\",\"commentsOrDescription\": \"Test Food\", "
-				+ "\"cost\": \"10.09\", \"postCategory\": \"Food\",\"status\": \"open\",\"visibility\": \"public\", "
-				+ "\"expireDate\": \"2012-12-24T21:20:47.668+0000\"}";
-		ClientResponse resp = webResource.type("application/json").post(
-				ClientResponse.class, input);
-		if (resp.getStatus() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : "
-					+ resp.getStatus());
-		}
-		System.out.println("Output from Server .... \n");
-		String output = resp.getEntity(String.class);
-		System.out.println(output);
-	}
-	
-	public void testGetProvidePostById() {
-//		String url = "http://localhost:8080/api/posts/providePostQueryx/559cab35e221fd52ee2670fd";
+	public void testUpsertAPostComment() {
+//		String url = "http://localhost:8080/api/postcomments/commentUpsert";
 //
 //		Client restClient = Client.create();
 //		WebResource webResource = restClient.resource(url);
 //
-//		ClientResponse resp = webResource.type("application/json").get(
-//				ClientResponse.class);
+//		String input = "{ \"commentBody\": \"Test Food Post\","
+//				+ "\"createdBy\":{\"id\":\"1\",\"email\": \"ycwmike@gmai.com\" }, \"parentPost\":\"55a5e14ee221fd37a55413cc\"}";
+//		ClientResponse resp = webResource.type("application/json").post(
+//				ClientResponse.class, input);
 //		if (resp.getStatus() != 200) {
 //			throw new RuntimeException("Failed : HTTP error code : "
 //					+ resp.getStatus());
@@ -63,6 +43,23 @@ public class RestCommentServiceTest extends TestCase {
 //		System.out.println("Output from Server .... \n");
 //		String output = resp.getEntity(String.class);
 //		System.out.println(output);
+	}
+	
+	public void testGetProvidePostById() {
+		String url = "http://localhost:8080/api/postcomments/commentQueryx/55af15b0e221fd03bdfe143c";
+
+		Client restClient = Client.create();
+		WebResource webResource = restClient.resource(url);
+
+		ClientResponse resp = webResource.type("application/json").get(
+				ClientResponse.class);
+		if (resp.getStatus() != 200) {
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ resp.getStatus());
+		}
+		System.out.println("Output from Server .... \n");
+		String output = resp.getEntity(String.class);
+		System.out.println(output);
 	}
 	
 	public void testGetProvidePostsByUsers() {
@@ -84,21 +81,21 @@ public class RestCommentServiceTest extends TestCase {
 	}
 
 	public void testRemoveAProvidePost() {
-//		String url = "http://localhost:8080/api/posts/providePostDelete";
-//
-//		Client restClient = Client.create();
-//		WebResource webResource = restClient.resource(url);
-//
-//		String input = "{\"id\": \"559ca4ece221fd52ee8f36da\"}";
-//		ClientResponse resp = webResource.type("application/json").post(
-//				ClientResponse.class, input);
-//		if (resp.getStatus() != 200) {
-//			throw new RuntimeException("Failed : HTTP error code : "
-//					+ resp.getStatus());
-//		}
-//		System.out.println("Output from Server .... \n");
-//		String output = resp.getEntity(String.class);
-//		System.out.println(output);
+		String url = "http://localhost:8080/api/postcomments/commentDelete";
+
+		Client restClient = Client.create();
+		WebResource webResource = restClient.resource(url);
+
+		String input = "{\"id\": \"55af15b0e221fd03bdfe143c\"}";
+		ClientResponse resp = webResource.type("application/json").post(
+				ClientResponse.class, input);
+		if (resp.getStatus() != 200) {
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ resp.getStatus());
+		}
+		System.out.println("Output from Server .... \n");
+		String output = resp.getEntity(String.class);
+		System.out.println(output);
 	}
 
 }

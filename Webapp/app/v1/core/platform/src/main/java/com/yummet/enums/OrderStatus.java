@@ -1,5 +1,7 @@
 package com.yummet.enums;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents the order status for all the orders:
  * 1. Open: The order is just created and bargain is not done 
@@ -11,7 +13,16 @@ package com.yummet.enums;
  *
  */
 public enum OrderStatus {
-	OPEN("Open", "o"), UNDERSHIP("UnderShip", "u"), CLOSE("Close", "c"), INPROGRESS("InProgress", "i"), REMOVED("Remove", "r");
+	@SerializedName("open")
+	OPEN("Open", "o"), 
+	@SerializedName("shipped")
+	UNDERSHIP("UnderShip", "u"), 
+	@SerializedName("close")
+	CLOSE("Close", "c"), 
+	@SerializedName("inprogress")
+	INPROGRESS("InProgress", "i"), 
+	@SerializedName("removed")
+	REMOVED("Remove", "r");
 
 	private String apiValue;
 	private String dbValue;

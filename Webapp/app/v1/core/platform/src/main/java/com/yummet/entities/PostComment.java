@@ -14,7 +14,7 @@ import com.yummet.platform.func.DmlValidationHandler;
 @Document(collection = "PostComments")
 public class PostComment extends EntityObject {
 	private static final long serialVersionUID = -6011241820070393956L;
-	private PostObject parentPost;
+	private String parentPost;
 	// TODO: to keep it simple now and not consider the rendering
 	private String commentBody;
 	private PostComment childComment; // TODO: is this only for child or sibling
@@ -22,7 +22,7 @@ public class PostComment extends EntityObject {
 	private UserObject createdBy;
 
 	/* ===================== Constructors ============================= */
-	public PostComment(PostObject parent, String comment) {
+	public PostComment(String parent, String comment) {
 		setParentPost(parent);
 		setCommentBody(comment);
 	}
@@ -35,11 +35,11 @@ public class PostComment extends EntityObject {
 	}
 
 	/* ===================== Setters and Getters ============================= */
-	public PostObject getParentPost() {
+	public String getParentPost() {
 		return parentPost;
 	}
 
-	public void setParentPost(PostObject parentPost) {
+	public void setParentPost(String parentPost) {
 		this.parentPost = parentPost;
 	}
 
