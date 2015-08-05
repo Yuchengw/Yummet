@@ -11,7 +11,6 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 import com.yummet.api.config.ApiProtocol;
-import com.yummet.api.config.ApiVersion;
 
 public interface RestApiUtil {
 

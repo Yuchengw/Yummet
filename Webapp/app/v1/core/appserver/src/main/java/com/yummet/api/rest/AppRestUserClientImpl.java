@@ -33,6 +33,7 @@ public class AppRestUserClientImpl extends RestClient {
 		return user;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public User deleteUser(User deleteUser) {
 		User returnUser = (User) doPost(REST_USER_PREFIX + "/userDelete", deleteUser);
 		return returnUser;

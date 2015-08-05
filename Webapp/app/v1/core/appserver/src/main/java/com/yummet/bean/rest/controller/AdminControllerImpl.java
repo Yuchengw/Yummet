@@ -12,6 +12,10 @@ import com.yummet.business.bean.User;
 import com.yummet.business.bean.UserRole;
 import com.yummet.lib.objectProvider.UserProvider;
 
+/**
+ * @author yucheng
+ * @since 1
+ * */
 @Controller
 public class AdminControllerImpl implements AdminController{
 	

@@ -1,22 +1,13 @@
 package com.yummet.bean.rest.controller;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableMap;
 import com.yummet.business.bean.Post;
 import com.yummet.business.bean.PostList;
 import com.yummet.business.bean.User;
@@ -72,7 +62,7 @@ public class PostControllerImpl implements PostController {
 		if (user == null) {
 			throw new Exception("user object not find: " + userContext.getName());
 		}
-		List<Post> posts = postProvider.get(user, Integer.parseInt(step), Integer.parseInt(cursor));
+		List<Post> posts = postProvider.get(user.getEmail(), Integer.parseInt(step), Integer.parseInt(cursor));
 		postList.setPosts(posts);
 		return postList;
 	}
@@ -90,10 +80,9 @@ public class PostControllerImpl implements PostController {
 		if (user == null) {
 			throw new Exception("user object not find: " + userContext.getName());
 		}
-		// TODO: specify the location
 		Post newPost = new ObjectMapper().readValue(body, Post.class);
 		newPost.setId(id);
-		Post updatedPost = postProvider.add(user, newPost);
+		Post updatedPost = postProvider.update(user, newPost);
 		return updatedPost;
 	}
 
@@ -124,7 +113,4 @@ public class PostControllerImpl implements PostController {
 	public void removePost(@PathVariable String id, @RequestBody String body) {
 		this.postProvider.remove(id);
 	}
-	
-	//TODO: the function below should be refined and move to the utilities
-	
 }

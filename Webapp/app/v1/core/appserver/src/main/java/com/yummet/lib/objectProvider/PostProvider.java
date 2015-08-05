@@ -16,7 +16,7 @@ import com.yummet.lib.platformService.PlatformPostServiceImpl;
 @Service
 public class PostProvider {
 
-	private PlatformPostService platformPostService;
+	private PlatformPostServiceImpl platformPostService;
 	
 	public PostProvider() {
 		this.platformPostService = new PlatformPostServiceImpl();
@@ -30,7 +30,10 @@ public class PostProvider {
 		post.setCreator(user);
 		return this.platformPostService.createPost(post);
 	}
-
+	
+	/**
+	 * 
+	 * */
 	public Post get(String postId) {
 		return this.platformPostService.getPostById(postId);
 	}
@@ -38,13 +41,9 @@ public class PostProvider {
 	/**
 	 * 
 	 * */
-	public List<Post> get(String username, String password, int number) {
-		return this.platformPostService.getPostByNumber(username, password, number);
+	public List<Post> get(String userEmail, int startIndex, int number) {
+		return this.platformPostService.getPostByNumber(userEmail, startIndex, number);
         }
-
-	public List<Post> get(User user, int size, int cursor) {
-		return this.platformPostService.get(user, size, cursor);
-	}
 
 	public Boolean remove(String postId) {
 		return (Boolean) this.platformPostService.removeById(postId);
@@ -53,7 +52,8 @@ public class PostProvider {
 	/**
 	 * update is expensive, think before do it
 	 * */
-	public Post update(Post updatePost) {
+	public Post update(User user, Post updatePost) {
+		updatePost.setCreator(user);
 		return this.platformPostService.updatePost(updatePost);
 	}
 

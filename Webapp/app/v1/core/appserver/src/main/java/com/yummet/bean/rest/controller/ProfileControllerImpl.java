@@ -20,6 +20,10 @@ import com.yummet.business.bean.Post;
 import com.yummet.business.bean.User;
 import com.yummet.lib.objectProvider.UserProvider;
 
+/**
+ * @author yucheng
+ * @since 1
+ * */
 @Controller
 public class ProfileControllerImpl implements ProfileController {
 	

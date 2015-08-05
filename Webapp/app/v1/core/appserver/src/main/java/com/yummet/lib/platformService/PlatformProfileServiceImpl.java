@@ -1,5 +1,9 @@
 package com.yummet.lib.platformService;
 
-public class PlatformProfileServiceImpl extends PlatformProfileService {
+/**
+ * @author yucheng
+ * @since 1
+ * */
+public class PlatformProfileServiceImpl extends PlatformProfileService implements PlatformProfileServiceConstants{
 
 }

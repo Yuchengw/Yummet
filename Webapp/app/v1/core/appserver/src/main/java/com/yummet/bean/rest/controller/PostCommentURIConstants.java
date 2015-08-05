@@ -2,7 +2,7 @@ package com.yummet.bean.rest.controller;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public class PostCommentURIConstants {
 	public static final String DUMMY_POSTCOMMENT = "/postcomment/dummy";

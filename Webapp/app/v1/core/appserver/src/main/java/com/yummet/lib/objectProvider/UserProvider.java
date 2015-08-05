@@ -26,10 +26,6 @@ public class UserProvider {
 	public User add(User user) {
 		return this.platformUserServiceImpl.createUser(user);
 	}
-
-	public User get(String email, String password) {
-		return this.platformUserServiceImpl.getUserByEmailAndPassword(email, password);
-	}
 	
 	public User get(String email) {
 		return this.platformUserServiceImpl.getUserByEmail(email);

@@ -9,7 +9,7 @@ import com.yummet.business.bean.OrderList;
  * This class is used for Restful API User Control.
  * 
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 @Controller
 public class OrderControllerImpl implements OrderController {

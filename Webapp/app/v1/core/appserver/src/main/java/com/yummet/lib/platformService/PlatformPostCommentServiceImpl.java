@@ -9,14 +9,8 @@ import com.yummet.bridge.PlatformServiceProvider;
  * @author yucheng
  * @since 1
  * */
-public class PlatformPostCommentServiceImpl extends PlatformPostCommentService{
+public class PlatformPostCommentServiceImpl extends PlatformPostCommentService implements PlatformPostCommentServiceConstants{
 	PlatformServiceProvider platformPostCommentServiceProvder;
 	private static final Logger logger = LoggerFactory.getLogger(PlatformPostCommentServiceImpl.class);
-	
-	@Override
-	public PlatformServiceProvider getPlatformServiceProvider() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

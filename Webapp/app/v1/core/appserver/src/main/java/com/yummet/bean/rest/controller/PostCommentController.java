@@ -9,7 +9,7 @@ import com.yummet.business.bean.PostCommentList;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public interface PostCommentController {
 	

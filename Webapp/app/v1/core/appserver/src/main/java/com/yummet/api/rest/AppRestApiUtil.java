@@ -2,7 +2,6 @@ package com.yummet.api.rest;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -14,7 +13,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.yummet.api.config.ApiProtocol;
-import com.yummet.api.config.ApiVersion;
 import com.yummet.api.util.UserApiUtil;
 import com.yummet.shared.util.HttpUtils;
 import com.yummet.system.context.YummetContext;

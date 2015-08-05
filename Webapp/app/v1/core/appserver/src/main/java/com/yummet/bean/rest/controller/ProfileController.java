@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yummet.business.bean.User;
 
+/**
+ * @author yucheng
+ * @since 1
+ * */
 public interface ProfileController {
 	public @ResponseBody User getProfile(@RequestHeader String userInfo);
 	public @ResponseBody User updateProfile(@RequestHeader String userInfo, @RequestBody String updateInfo);

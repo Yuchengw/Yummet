@@ -1,17 +1,13 @@
 package com.yummet.api.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.yummet.bridge.PlatformPostServiceProviderImpl;
-import com.yummet.bridge.PlatformServiceProvider;
-import com.yummet.bridge.PlatformUserServiceProviderImpl;
 import com.yummet.business.bean.Post;
-import com.yummet.business.bean.User;
-import com.yummet.entities.EntityObject;
-import com.yummet.entities.PostObject;
-import com.yummet.entities.UserObject;
 
+/**
+ * @author yucheng
+ * @since 1
+ * */
 @SuppressWarnings("rawtypes")
 public class AppRestPostClientImpl extends RestClient {
 
@@ -39,6 +35,7 @@ public class AppRestPostClientImpl extends RestClient {
 	 * 
 	 * @throws Exception
 	 * */
+	@SuppressWarnings("unchecked")
 	public Post updatePost(Post p) {
 		Post post = (Post) doPost(REST_POST_PREFIX + "/providePostUpsert", p);
 		return post;

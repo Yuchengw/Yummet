@@ -63,6 +63,7 @@ public abstract class RestClient<INPUT extends Object, OUTPUT extends Object> im
 		return execute(method);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private OUTPUT execute(HttpMethod method) {
 		try {
 			method = applyHeaders(method);

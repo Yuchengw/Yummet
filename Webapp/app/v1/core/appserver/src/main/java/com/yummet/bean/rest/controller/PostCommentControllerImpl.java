@@ -11,7 +11,7 @@ import com.yummet.lib.objectProvider.PostCommentProvider;
  * This class is used for Restful API User Control.
  * 
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 @Controller
 public class PostCommentControllerImpl implements PostCommentController {

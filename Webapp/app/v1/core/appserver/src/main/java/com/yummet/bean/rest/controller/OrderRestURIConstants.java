@@ -2,7 +2,7 @@ package com.yummet.bean.rest.controller;
 
 /**
  * @author yucheng
- * @version 1
+ * @since 1
  * */
 public class OrderRestURIConstants {
 	public static final String DUMMY_ORDER = "/order/dummy";

@@ -1,11 +1,9 @@
 package com.yummet.lib.platformService;
 
-import com.yummet.bridge.PlatformServiceProvider;
-
-public class PlatformOrderServiceImpl extends PlatformOrderService {
-
-	public PlatformServiceProvider getPlatformServiceProvider() {
-		return null;
-	}
+/**
+ * @author yucheng
+ * @since 1
+ * */
+public class PlatformOrderServiceImpl extends PlatformOrderService implements PlatformOrderServiceConstants{
 
 }
