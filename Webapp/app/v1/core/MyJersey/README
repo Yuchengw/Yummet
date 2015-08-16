@@ -1,0 +1,26 @@
+MyJersey project is created so we can quickly prototype Jersey base REST API.
+
+To server to purpose of variety of consumers (web, mobile), RESTful APIs and standardize 
+message encoding is a must. Jersey based REST API and JSON encoded message like good choice.
+
+The prototype system setup:
+1. setup mongodb:
+   . download mongodb-osx-x86_64-3.0.3.tar
+   . <untar it>
+   . <create the mongo data directory {/path/to/mongoData}>
+   . mongod --dbpath {/path/to/mongoData}
+2. MyJersey project cant be run out of Jetty:
+   mvn clean install jetty:run
+3. MyJersey contains the Prototypes and test, as listed in section AsOf20150525.
+4. also a sample Java program under src/test/java, RESTClient.java for prototyping consuming REST in java.    
+   
+   
+Prototype List:
+AsOf20150525
+------------
+API					Test
+----				-----
+/userCreatex		http://localhost:8080/MyJersey/addUserForm.html
+/userQueryx			http://localhost:8080/MyJersey/rest/userQueryx
+/userLoginx			http://localhost:8080/MyJersey/loginUserForm.html
+/userQueryx/{email}	http://localhost:8080/MyJersey/rest/userQueryx/<substr in your email>
