@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5" -->
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<!-- Spring MVC set up, @author Yucheng Wang @author Jassica -->
+	<display-name>This is Yummet Platform. It is a web service.</display-name>
+
+	<!-- This is the basic home page, show the world, deprecate it now since 
+		we are depending on Spring -->
+	<welcome-file-list>
+		<welcome-file>welcome_to_platform.html</welcome-file >
+		<!-- welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file-->
+	</welcome-file-list>
+
+	<!-- The context params that read by ContextLoaderListener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/platform-context.xml</param-value>
+	</context-param>
+
+	<!-- This listener will load other application context file in addition 
+		to rest-servlet.xml -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>javamelody</filter-name>
+		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>javamelody</filter-name>
+		<url-pattern>/monitoring</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>net.bull.javamelody.SessionListener</listener-class>
+	</listener>
+
+	<!-- Restful service request Dispatcher -->
+	<servlet>
+		<!-- servlet-name>YummetPlatformDispatcher</servlet-name> <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class -->
+		<servlet-name>Jersey Web Application</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<!--  init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>my.example.rest</param-value>
+		</init-param-->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- servlet mapping -->
+	<servlet-mapping>
+		<servlet-name>Jersey Web Application</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- temporarily used for testing purpose -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/tags/c.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+</web-app>

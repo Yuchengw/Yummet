@@ -1,0 +1,58 @@
+<!--==== Login Partials ====-->
+<div data-ng-controller="loginAppController">
+	<h4 class="modal-title">
+		<ul class="list-inline intro-social-buttons">
+			<li><button
+					href="/oauth_connect?service=google&amp;from=google_signup"
+					class="btn icon-btn btn-block btn-large row-space-1 btn-google">
+					<span class="icon-container"> <i
+						class="icon icon-google-plus"></i>
+					</span> <span class="text-container"> Log in with Google </span>
+				</button></li>
+			<li><button href="https://www.facebook.com/v2.0/dialog/oauth"
+					class="fb-button fb-blue btn icon-btn btn-block btn-large row-space-1 btn-facebook"
+					data-populate_uri=""
+					data-redirect_uri="localhost:8080/authenticate">
+					<span class="icon-container"> <i class="icon icon-facebook"></i>
+					</span> <span class="text-container"> Log in with Facebook </span>
+				</button></li>
+			<li><button href=""
+					class="fb-button fb-blue btn icon-btn btn-block btn-large row-space-1 btn-facebook"
+					data-action="twitter-auth" data-action-source="nav_signup"
+					title="Connect with Twitter"
+					data-redirect="localhost:8080/authenticate">
+					<span class="icon icon--twitter"></span><span
+						class="button-label--twitter">Sign in with Twitter</span>
+				</button></li>
+		</ul>
+	</h4>
+	<div class="modal-body">
+		<div class="chef-box-container">
+			<div data-ng-app="loginApp">
+				<form name="form" data-ng-submit="login()" novalidate>
+					<div class="form-group"
+						data-ng-class="{'has-error': form.email.$invalid && submitted}">
+						<label for="email" class="control-label">Email</label> <input
+							type="email" class="form-control" id="email" name="email"
+							placeholder="Email" data-ng-model="credentials.email"
+							data-ng-model-options="{updateOn: 'blur'}" required>
+					</div>
+					<div class="form-group"
+						data-ng-class="{'has-error': form.password.$invalid && submitted}">
+						<label for="password" class="control-label">Password</label> <input
+							type="password" class="form-control" id="password"
+							name="password" placeholder="Password"
+							data-ng-model="credentials.password"
+							data-ng-model-options="{updateOn: 'blur'}" required>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-ng-click="$dismiss()">Close</button>
+	<button type="button" class="btn btn-primary" data-ng-click="$dismiss()">Save changes</button>
+</div>
+</div>
