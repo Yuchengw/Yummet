@@ -11,15 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
 
-import org.joda.time.DateTime;
-import org.json.JSONObject;
-
-import com.fatboyindustrial.gsonjodatime.Converters;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.yummet.entities.UserObject;
-import com.yummet.platform.func.DmlOperationWrapper;
-import com.yummet.utilities.JsonUtil;
 
 /**
  * Platform provide the services for the user object
@@ -31,7 +23,8 @@ import com.yummet.utilities.JsonUtil;
  * @since 2
  * */
 @Path("/users")
-public class PlatformUserServiceProviderImpl implements PlatformServiceProvider {
+public class PlatformUserServiceProviderImpl extends
+BasePlatformServiceProvider<UserObject> implements PlatformServiceProvider {
 
 	public PlatformUserServiceProviderImpl() {
 	}
@@ -110,22 +103,7 @@ public class PlatformUserServiceProviderImpl implements PlatformServiceProvider 
 	 * @throws Exception
 	 */
 	protected Response upsertUser(InputStream incomingData) throws Exception {
-		JsonUtil jsonHelper = new JsonUtil();
-		StringBuilder inputStr = jsonHelper
-				.convertJsonStringToStringBuilder(incomingData);
-		// Get the user Object from the input string
-		// Get all the detail information for the object
-		Gson gson = jsonHelper.getStandardGsonForPlatformObject();
-		UserObject userInfo = gson.fromJson(inputStr.toString(),
-				UserObject.class);
-		DmlOperationWrapper dmlOperationState = userInfo.save();
-		if (!dmlOperationState.isBulkSuccess()) {
-			dmlOperationState.toString();
-			return Response.status(400)
-					.entity(dmlOperationState.getAllErrorsOnEntity(userInfo))
-					.build();
-		}
-		return Response.status(200).entity(userInfo.toString()).build();
+		return upsertObject(incomingData, UserObject.class);
 	}
 
 	/**
@@ -134,32 +112,15 @@ public class PlatformUserServiceProviderImpl implements PlatformServiceProvider 
 	 * 
 	 * @param incomingData
 	 * @return
+	 * @throws Exception 
 	 */
 	@POST
 	@Path("/userDelete")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteObject(InputStream incomingData) {// @PathParam("email")
+	public Response deleteObject(InputStream incomingData) throws Exception {// @PathParam("email")
 															// String userEmail)
 															// {
-		JsonUtil jsonHelper = new JsonUtil();
-		StringBuilder inputStr = jsonHelper
-				.convertJsonStringToStringBuilder(incomingData);
-		JSONObject jsonObj = new JSONObject(inputStr.toString());
-		String userId = null;
-		try {
-			userId = jsonObj.getString("id");
-		} catch (Exception e) {
-			return Response.status(400).entity("The user email is required")
-					.build();
-		}
-		UserObject userInfo = new UserObject(userId, null);
-		boolean isRemoved = userInfo.remove();
-		if (isRemoved) {
-			return Response.status(200).entity("Removing user successfully")
-					.build();
-		} else {
-			return Response.status(400).entity("Removing user fails").build();
-		}
+		return deleteObject(incomingData, "id", UserObject.class);
 	}
 
 }

@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import com.yummet.cache.CacheManager;
 import com.yummet.entities.EntityObject;
 import com.yummet.enums.DMLEvents;
-import com.yummet.mongodb.entities.DBEntityObject;
 import com.yummet.platform.adapters.DatabaseProvider;
 import com.yummet.platform.adapters.SystemContext;
 import com.yummet.utilities.LogUtil;
@@ -168,9 +167,20 @@ public class BulkEntityOperations {
 			return true;
 		}
 		DatabaseProvider dbContext = SystemContext.getContext();
+		CacheManager cacheContext = SystemContext.getCacheContext();
 		for (EntityObject eo : entityObjects) {
 			try {
 				dbContext.removeRecords(eo.getDbTableName(), new EntityObject[] { eo });
+				// TODO: use mongodb template to know if remove succeeds
+				// verify if the remove succeeds from db query and
+				List<EntityObject> queryResults = dbContext.getRecordsBasedOnQuery(eo);
+				if (queryResults == null || queryResults.size() == 0) {
+					logger.debug("remove Objects succeeds ");
+					//  Save or update the cache
+					cacheContext.delete(eo);
+				} else {
+					logger.debug("remove Objects failed at db level");
+				}
 			} catch (Exception e) {
 				logger.debug("remove Objects failed "  + e.getStackTrace());
 				return false;

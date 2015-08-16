@@ -33,7 +33,8 @@ public class RestCommentServiceTest extends TestCase {
 //		WebResource webResource = restClient.resource(url);
 //
 //		String input = "{ \"commentBody\": \"Test Food Post\","
-//				+ "\"createdBy\":{\"id\":\"1\",\"email\": \"ycwmike@gmai.com\" }, \"parentPost\":\"55a5e14ee221fd37a55413cc\"}";
+//				+ "\"createdBy\":{\"id\":\"1\",\"email\": \"ycwmike@gmai.com\" }, \"parentPost\":\"55a5e14ee221fd37a55413cc\","
+//				+ "\"parentPostType\":\"P\"}";
 //		ClientResponse resp = webResource.type("application/json").post(
 //				ClientResponse.class, input);
 //		if (resp.getStatus() != 200) {
@@ -46,25 +47,7 @@ public class RestCommentServiceTest extends TestCase {
 	}
 	
 	public void testGetProvidePostById() {
-		String url = "http://localhost:8080/api/postcomments/commentQueryx/55af15b0e221fd03bdfe143c";
-
-		Client restClient = Client.create();
-		WebResource webResource = restClient.resource(url);
-
-		ClientResponse resp = webResource.type("application/json").get(
-				ClientResponse.class);
-		if (resp.getStatus() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : "
-					+ resp.getStatus());
-		}
-		System.out.println("Output from Server .... \n");
-		String output = resp.getEntity(String.class);
-		System.out.println(output);
-	}
-	
-	public void testGetProvidePostsByUsers() {
-//		String url = "http://localhost:8080/api/posts/providePostLimitQuery/";
-//		url += "ycwmike@gmai.com/0/3";
+//		String url = "http://localhost:8080/api/postcomments/commentQueryx/55d011a7e221fd123a3461cf";
 //
 //		Client restClient = Client.create();
 //		WebResource webResource = restClient.resource(url);
@@ -79,14 +62,14 @@ public class RestCommentServiceTest extends TestCase {
 //		String output = resp.getEntity(String.class);
 //		System.out.println(output);
 	}
-
+	
 	public void testRemoveAProvidePost() {
 		String url = "http://localhost:8080/api/postcomments/commentDelete";
 
 		Client restClient = Client.create();
 		WebResource webResource = restClient.resource(url);
 
-		String input = "{\"id\": \"55af15b0e221fd03bdfe143c\"}";
+		String input = "{\"id\": \"55d011a7e221fd123a3461cf\"}";
 		ClientResponse resp = webResource.type("application/json").post(
 				ClientResponse.class, input);
 		if (resp.getStatus() != 200) {

@@ -1,5 +1,6 @@
 package com.yummet.entities;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,19 +30,22 @@ public abstract class PostObject extends EntityObject {
 	protected String commentsOrDescription;
 	protected double cost;
 	protected String image;
-	protected UserObject[] partners;
 	protected String postCategory;
 	protected PostStatus status;
 	protected PostVisibilityEnum visibility;
 	protected int numberOfOrders; // TODO: more detail
 	protected int numberOfLikes;
-	protected UserObject creator;
-	protected UserObject lastModifiedBy;
 	protected DateTime expireDate;
 
 	// Related Object information which is relationship information in the
 	// Relational DB
-	protected Set<String> postComments;
+	protected UserObject creator;
+	protected UserObject lastModifiedBy;
+	protected UserObject[] partners;
+	protected HashMap<String, String> postComments; // postcommentId with commenter
+	protected HashMap<String, String> likesInfo; // userId with username
+	protected HashMap<String, String> ordersInfo; // orderId with buyerId
+	
 	protected boolean postCommentsNumberIsChanged = false;
 
 	public PostObject() {
@@ -204,11 +208,11 @@ public abstract class PostObject extends EntityObject {
 	 * 
 	 * @param postId
 	 */
-	public void addPostComments(String postId) {
+	public void addPostComment(String postId, String userId) {
 		if (postComments == null) {
-			postComments = new HashSet<String>();
+			postComments = new HashMap<String, String>();
 		}
-		postComments.add(postId);
+		postComments.put(postId, userId);
 		postCommentsNumberIsChanged = true;
 	}
 
@@ -218,20 +222,80 @@ public abstract class PostObject extends EntityObject {
 	 * 
 	 * @param postId
 	 */
-	public void removePostComments(String postId) {
+	public void removePostComment(String postId) {
 		if (postComments != null) {
 			postComments.remove(postId);
 			postCommentsNumberIsChanged = true;
 		}
 	}
+	
+	/**
+	 * When a user likes the post, we add the like information to the post
+	 * @param userId
+	 * @param username
+	 */
+	public void addLike(String userId,  String username) {
+		if (likesInfo == null) {
+			likesInfo = new HashMap<String, String>();
+		}
+		likesInfo.put(userId, username);
+	}
 
+	/**
+	 * When a user revoke the like, we need to remove the information from the post
+	 * @param userId
+	 */
+	public void removeLike(String userId) {
+		if (likesInfo != null) {
+			likesInfo.remove(userId);
+		}
+	}
+
+	/**
+	 * When there is a order happens to the post, add the information to the post
+	 * @param orderId
+	 * @param userId
+	 */
+	public void addOrder(String orderId,  String userId) {
+		if (ordersInfo == null) {
+			ordersInfo = new HashMap<String, String>();
+		}
+		ordersInfo.put(orderId, userId);
+	}
+
+	/**
+	 * When the order is canceled, remove the information from the post
+	 * @param orderId
+	 */
+	public void removeOrder(String orderId) {
+		if (ordersInfo != null) {
+			ordersInfo.remove(orderId);
+		}
+	}
+	
 	/* Getters and Setters */
-	public void setPostComments(Set<String> posts) {
+	public void setPostComments(HashMap<String, String> posts) {
 		postComments = posts;
 	}
 
-	public Set<String> getPostComments() {
+	public HashMap<String, String> getPostComments() {
 		return postComments;
+	}
+	
+	public void setLikesInfo(HashMap<String, String> likes) {
+		likesInfo = likes;
+	}
+
+	public HashMap<String, String> getLikesInfo() {
+		return likesInfo;
+	}
+	
+	public void setOrdersInfo(HashMap<String, String> orders) {
+		ordersInfo = orders;
+	}
+
+	public HashMap<String, String> getOrdersInfo() {
+		return ordersInfo;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.yummet.entities;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -204,8 +205,9 @@ public abstract class EntityObject implements Serializable{
 	public abstract String getDbTableName();
 
 	public Map<String, Object> getFieldsAndValues() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("_id", getId());
+		return values;
 	}
 	
 	/**

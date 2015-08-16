@@ -62,4 +62,35 @@ public abstract class BasePlatformServiceProvider<T extends EntityObject>{
 		}
 		return Response.status(200).entity(order.toString()).build();
 	}
+	
+	/**
+	 * Generic method to remove a platform entity from db
+	 * @param incomingData
+	 * @param primaryKey
+	 * @param clazz
+	 * @return
+	 * @throws Exception
+	 */
+	protected Response deleteObject(InputStream incomingData, String primaryKey, Class<T> clazz) throws Exception {
+		JsonUtil jsonHelper = new JsonUtil();
+		StringBuilder inputStr = jsonHelper
+				.convertJsonStringToStringBuilder(incomingData);
+		JSONObject jsonObj = new JSONObject(inputStr.toString());
+		String id = null;
+		try {
+			id = jsonObj.getString(primaryKey);
+		} catch (Exception e) {
+			return Response.status(400).entity("The " + primaryKey + " is required")
+					.build();
+		}
+		T result = clazz.newInstance();
+		result.setId(id);
+		boolean isRemoved = result.load().remove();
+		if (isRemoved) {
+			return Response.status(200).entity("Removing successfully")
+					.build();
+		} else {
+			return Response.status(400).entity("Removing fails").build();
+		}
+	}
 }
